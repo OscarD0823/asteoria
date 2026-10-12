@@ -1,0 +1,59 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "types": [
+      "vite/client",
+      "node"
+    ],
+    "paths": {
+      "@prisma/core/*": [
+        "./src/*"
+      ],
+      "@prisma/pdf/*": [
+        "./.prisma/apps/pdf/src/*"
+      ],
+      "@prisma/writer/*": [
+        "./.prisma/apps/writer/src/*"
+      ],
+      "@prisma/sheets/*": [
+        "./.prisma/apps/sheets/src/*"
+      ],
+      "@prisma/slides/*": [
+        "./.prisma/apps/slides/src/*"
+      ],
+      "@prisma/data/*": [
+        "./.prisma/apps/data/src/*"
+      ],
+      "@prisma/publisher/*": [
+        "./.prisma/apps/publisher/src/*"
+      ],
+      "@prisma/active-app": [
+        "./src/PrismaRouter.tsx"
+      ]
+    },
+    "allowJs": true
+  },
+  "include": [
+    "src",
+    "tests",
+    "vite.config.ts",
+    ".prisma/apps/*/src",
+    ".prisma/apps/*/tests",
+    "scripts/workspace-core.mjs",
+    "scripts/build-provenance.mjs"
+  ]
+}

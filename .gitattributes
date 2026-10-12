@@ -1,0 +1,8 @@
+* text=auto
+# Keep verified upstream assets byte-identical on every platform.
+public/fonts/** -text
+public/third-party/** -text
+public/spelling/** -text
+public/unicode/** -text
+public/ocr/** -text
+vendor/** -text

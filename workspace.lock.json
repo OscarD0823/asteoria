@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "root": "OscarD0823/prisma",
+  "apps": {
+    "pdf": {
+      "repository": "OscarD0823/prisma-pdf",
+      "commit": "6168c9bdfcfe1fdb2a776c43aac460e16def808f"
+    },
+    "writer": {
+      "repository": "OscarD0823/prisma-writer",
+      "commit": "31f2f7779ac5b84e7fd280db2994db37e153c9d1"
+    },
+    "sheets": {
+      "repository": "OscarD0823/prisma-sheets",
+      "commit": "a379e39c56dd1d8561bd02327961376e5aadfadf"
+    },
+    "slides": {
+      "repository": "OscarD0823/prisma-slides",
+      "commit": "167a45435ef24eb4a83b3d4eb890a038eb9df158"
+    },
+    "data": {
+      "repository": "OscarD0823/prisma-data",
+      "commit": "115100f7b6a22383d0c06dd9b5d9de6491801a01"
+    },
+    "publisher": {
+      "repository": "OscarD0823/prisma-publisher",
+      "commit": "55cbfd078488a98cc13788e88e67b16810c67b84"
+    }
+  }
+}

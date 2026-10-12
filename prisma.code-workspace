@@ -1,0 +1,43 @@
+{
+  "folders": [
+    {
+      "name": "Prisma · entorno y núcleo",
+      "path": "."
+    },
+    {
+      "name": "Prisma Pdf",
+      "path": ".prisma/apps/pdf"
+    },
+    {
+      "name": "Prisma Writer",
+      "path": ".prisma/apps/writer"
+    },
+    {
+      "name": "Prisma Sheets",
+      "path": ".prisma/apps/sheets"
+    },
+    {
+      "name": "Prisma Slides",
+      "path": ".prisma/apps/slides"
+    },
+    {
+      "name": "Prisma Data",
+      "path": ".prisma/apps/data"
+    },
+    {
+      "name": "Prisma Publisher",
+      "path": ".prisma/apps/publisher"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.prisma": true
+    },
+    "search.exclude": {
+      "**/dist*": true,
+      "**/node_modules": true
+    },
+    "typescript.tsdk": "node_modules/typescript/lib"
+  }
+}
