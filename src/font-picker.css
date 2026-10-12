@@ -16,4 +16,5 @@
 .index-actions button{padding:5px 9px;font:11px PrismaSans,Arial,sans-serif;color:#6f638d;background:#f7f5fd;border:1px solid #e8e2f3;border-radius:6px;}
 @media print{.index-actions{display:none;}}
 .device-fonts-panel{border:1px solid #ddd9eb;border-radius:10px;padding:10px 12px;margin:12px 0;background:#faf9fd;font-size:12px;}
+.font-modal-shade .font-library{overflow-y:auto!important;}
 .device-fonts-panel summary{font-weight:700;cursor:pointer;}.device-fonts-panel p{margin:8px 0;line-height:1.5;}.device-fonts-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:6px;max-height:210px;overflow:auto;margin:10px 0;}.device-fonts-list button{text-align:left;font-size:15px;white-space:normal;}.device-fonts-panel small{display:block;line-height:1.5;}
