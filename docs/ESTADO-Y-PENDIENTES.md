@@ -1,6 +1,6 @@
 # Estado y pendientes de Prisma — 12 de octubre de 2026
 
-Revisión del chat «Crear Suite Ofimática Web» y del código real. El conector devuelve las preguntas del chat, pero sus respuestas son referencias internas sin texto; este informe no es una transcripción de sus recomendaciones.
+Revisión del chat «Crear Suite Ofimática Web» y del código real. Se recuperó la auditoría completa mediante el enlace compartido. Sus 130 puntos están registrados individualmente en [COMPROBACIONES.md](COMPROBACIONES.md) y [auditoria-prisma.json](auditoria-prisma.json). Se conserva su orden; primero se trabaja en FNT-001, fuentes reales del PC, y no se inicia el siguiente punto mientras siga abierto.
 
 ## Resuelto ahora
 
@@ -9,7 +9,7 @@ Revisión del chat «Crear Suite Ofimática Web» y del código real. El conecto
 - Entrada de compilación por aplicación y carga diferida de editores.
 - Commits fijados, validación de propietarios, procedencia de las compilaciones y actualización periódica al cambiar sus dependencias.
 - Conservación de URLs, identificadores y enlaces de los instaladores.
-- Búsqueda de fuentes instaladas mediante permiso del navegador y lectura de la familia seleccionada. Alternativa TTF/OTF en móviles y navegadores sin Local Font Access. Biblioteca local compartida y uso de las fuentes seleccionadas al exportar.
+- Código para buscar fuentes instaladas, leer la familia elegida e importar TTF/OTF/TTC. Se comprobaron 225 familias y 488 caras reales mediante Chromium en una sesión temporal de integración, con 17 variantes de Arial, Calibri, Times New Roman, Cambria y Cambria Math. Los bytes de esas 17 caras coinciden en las exportaciones PDF y DOCX; XLSX/PPTX mantienen nombres y estilos. FNT-001 continúa abierto: falta completar las pruebas de interfaz, permisos de la aplicación instalada, guardado sin conexión, publicación de instaladores y Android en emulador. Las fuentes variables y los formatos o permisos no compatibles muestran el motivo; no se anuncia acceso universal a cualquier fuente.
 
 ## Compatibilidad con Office: pendientes
 

@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
-import {listInstalledFonts,installedFamilies,installedFontFiles,supportsInstalledFonts,importDeviceFonts,deviceFonts} from '../src/device-fonts';
+import {listInstalledFonts,installedFamilies,installedFontFiles,supportsInstalledFonts,importDeviceFonts,deviceFonts,findDeviceFont} from '../src/device-fonts';
 import {IDBFactory} from 'fake-indexeddb';
 import {SheetsBook} from '@prisma/sheets/sheets-core';
 import {sheetFlow} from '@prisma/sheets/sheets-document';
@@ -12,15 +12,29 @@ test('las fuentes instaladas se enumeran sin leer sus archivos y admiten cancela
  await assert.rejects(listInstalledFonts(),{name:'NotAllowedError'});
  delete (window as any).queryLocalFonts;assert.equal(supportsInstalledFonts(),false);await assert.rejects(listInstalledFonts(),/TTF/);
 });
+test('desktop consent is requested before enumeration and cancel does not read Windows fonts',async()=>{
+ let enumerations=0,consents=0,allow=false;
+ Object.assign(globalThis,{window:{prismaDesktop:{fonts:{requestAccess:async()=>{consents++;return allow;}}},queryLocalFonts:()=>{enumerations++;return Promise.resolve([]);}}});
+ await assert.rejects(listInstalledFonts(),{name:'NotAllowedError'});assert.equal(enumerations,0);
+ allow=true;assert.deepEqual(await listInstalledFonts(),[]);assert.equal(enumerations,1);assert.equal(consents,2);
+});
 test('una fuente del dispositivo se guarda localmente y acompaña el documento enviado al exportador de Sheets',async()=>{
  class TestFace{async load(){return this;}}
  Object.assign(globalThis,{indexedDB:new IDBFactory(),window:new EventTarget(),document:{fonts:new Set()},FontFace:TestFace});
  const bytes=fs.readFileSync('public/fonts/LiberationSerif-Regular.ttf');
  const imported=await importDeviceFonts([new File([bytes],'MiFuente.ttf')]);
  assert.equal(deviceFonts().length,1);
+ assert.equal(findDeviceFont('  LIBERATION   SERIF  ')?.hash,imported[0].hash);
  const stored=await loadOfficeFile('prisma-device-fonts-v1');assert.ok(stored&&stored.product==='fonts');
  const book=new SheetsBook();book.sheet('Hoja1').getCell('A1').value='Una fuente local';book.sheet('Hoja1').getCell('A1').font={name:imported[0].label};
  const flow=sheetFlow(book,'Hoja1');assert.equal(flow.fonts?.length,1);assert.equal(flow.fonts?.[0].hash,imported[0].hash);book.destroy();
+});
+test('failed styles are reported instead of silently claiming a complete family',async()=>{
+ const bytes=fs.readFileSync('public/fonts/LiberationSerif-Regular.ttf');
+ const source=[{family:'Liberation Serif',fullName:'Liberation Serif',postscriptName:'LiberationSerif',style:'Regular',blob:async()=>new Blob([bytes])},{family:'Liberation Serif',fullName:'Liberation Serif Italic',postscriptName:'LiberationSerif-Italic',style:'Italic',blob:async()=>{throw Error('No disponible');}}];
+ const result=await installedFontFiles(source,'  LIBERATION SERIF ');
+ assert.equal(result.fonts.length,1);assert.match(result.warnings[0],/Italic: No disponible/);
+ assert.equal(installedFamilies([...source,{...source[0],family:' LIBERATION SERIF '}]).length,1);
 });
 test('solo se leen los estilos de la familia elegida y se verifican sus permisos de incrustación',async()=>{
  const bytes=fs.readFileSync('public/fonts/LiberationSerif-Regular.ttf');let chosen=0,other=0;

@@ -1,4 +1,5 @@
 import type { FontFamily, FontStyle } from "./fonts";
+import {fontCollectionFaces} from './font-collection';
 export type LocalFont = {
   value: string;
   label: string;
@@ -74,7 +75,21 @@ const hash = async (bytes: Uint8Array) =>
   )
     .map((v) => v.toString(16).padStart(2, "0"))
     .join("");
-export async function importLocalFont(bytes: Uint8Array): Promise<LocalFont> {
+export async function importLocalFont(bytes: Uint8Array, selected?: {postscriptName?: string; family?: string}): Promise<LocalFont> {
+  const candidates = fontCollectionFaces(bytes);
+  if (candidates.length > 1) {
+    if (!selected?.postscriptName && !selected?.family)
+      throw Error('Esta colección contiene varias familias. Impórtala desde la biblioteca para elegir sus fuentes.');
+    const kit = (await import('@pdf-lib/fontkit')).default;
+    const normalize = (name: string) => name.normalize('NFC').trim().toLocaleLowerCase('en');
+    const found = candidates.find(face => {
+      const font = kit.create(face) as {postscriptName?: string; familyName?: string};
+      return selected.postscriptName ? font.postscriptName === selected.postscriptName :
+        normalize(font.familyName ?? '') === normalize(selected.family!);
+    });
+    if (!found) throw Error('La colección no contiene la fuente seleccionada.');
+    bytes = found;
+  } else bytes = candidates[0];
   const policy = fontEmbeddingPolicy(bytes);
   const fontkit = await import("@pdf-lib/fontkit");
   const font = fontkit.default.create(bytes) as {
@@ -106,6 +121,9 @@ export async function importLocalFont(bytes: Uint8Array): Promise<LocalFont> {
     hash: await hash(bytes),
     ...policy,
   };
+}
+export async function importLocalFonts(bytes: Uint8Array): Promise<LocalFont[]> {
+  return Promise.all(fontCollectionFaces(bytes).map(face => importLocalFont(face)));
 }
 export function localFontFamilies(fonts: LocalFont[] = []): FontFamily[] {
   return [

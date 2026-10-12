@@ -150,11 +150,18 @@ app.whenReady().then(() => {
     if (!url.startsWith("prisma://app/")) event.preventDefault();
   });
   let localFontsAllowed=false;
+  let fontPermissionRequest;
+  const requestFontAccess=()=>fontPermissionRequest??=(dialog.showMessageBox(window,{type:'question',title:'Fuentes del dispositivo',message:'¿Permitir que Prisma muestre tus fuentes instaladas?',detail:'Los archivos de las fuentes seleccionadas se usarán localmente. No se envían a un servidor.',buttons:['Permitir','Cancelar'],defaultId:1,cancelId:1}).then(result=>{localFontsAllowed=result.response===0;return localFontsAllowed;}).catch(()=>false).finally(()=>{fontPermissionRequest=undefined;}));
+  ipcMain.handle('prisma-fonts-authorize',event=>{
+    validEngineOrigin(event);
+    if(event.senderFrame!==window?.webContents.mainFrame)throw Error('La lectura de fuentes solo se permite desde el editor.');
+    return localFontsAllowed||requestFontAccess();
+  });
   session.defaultSession.setPermissionCheckHandler((webContents,permission,origin,details)=>permission==='local-fonts'&&localFontsAllowed&&webContents===window?.webContents&&['prisma://app','prisma://app/'].includes(origin)&&details.isMainFrame===true);
   session.defaultSession.setPermissionRequestHandler(
     (webContents, permission, callback, details) => {
       if(permission!=='local-fonts'||webContents!==window?.webContents||!webContents.getURL().startsWith('prisma://app/')||details.isMainFrame===false||!String(details.requestingUrl??webContents.getURL()).startsWith('prisma://app/')){callback(false);return;}
-      void dialog.showMessageBox(window,{type:'question',title:'Fuentes del dispositivo',message:'¿Permitir que Prisma muestre tus fuentes instaladas?',detail:'Los archivos de las fuentes seleccionadas se usarán localmente. No se envían a un servidor.',buttons:['Permitir','Cancelar'],defaultId:1,cancelId:1}).then(result=>{localFontsAllowed=result.response===0;callback(localFontsAllowed);}).catch(()=>callback(false));
+      void requestFontAccess().then(callback).catch(()=>callback(false));
     },
   );
   session.defaultSession.on("will-download", (_event, item) =>

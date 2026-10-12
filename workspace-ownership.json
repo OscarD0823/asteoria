@@ -156,6 +156,7 @@
     "update-core.ts": "core",
     "upstream-types.d.ts": "core",
     "publication-templates.ts": "publisher",
-    "device-fonts.ts": "core"
+    "device-fonts.ts": "core",
+    "font-collection.ts": "core"
   }
 }

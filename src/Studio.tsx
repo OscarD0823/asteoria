@@ -100,7 +100,7 @@ import type { TextPreparation, Inspection } from "@prisma/pdf/native";
 import type { RichNode } from "@prisma/writer/flow";
 import { FontPicker } from "./FontPicker";
 import {
-  importLocalFont,
+  importLocalFonts,
   validateLocalFonts,
   mountLocalFonts,
 } from "./local-fonts";
@@ -283,16 +283,17 @@ export default function Studio() {
   async function importFonts(files: File[]) {
     const fonts = [...(state.current.fonts ?? [])];
     for (const file of files) {
-      if (file.size > 8 * 1024 * 1024)
-        throw new Error("Elige fuentes TTF u OTF de hasta 8 MB por archivo.");
-      const face = await importLocalFont(
+      if (file.size > 32 * 1024 * 1024)
+        throw new Error("Elige TTF / OTF de hasta 8 MB por cara o colecciones TTC de hasta 32 MB.");
+      for (const face of await importLocalFonts(
         new Uint8Array(await file.arrayBuffer()),
-      );
+      )) {
       const index = fonts.findIndex(
         (f) => f.value === face.value && f.style === face.style,
       );
       if (index >= 0) fonts[index] = face;
       else fonts.push(face);
+      }
     }
     await validateLocalFonts(fonts);
     commit({ ...state.current, fonts });
@@ -588,7 +589,8 @@ export default function Studio() {
             ? await importOfficeDocx(new Uint8Array(await f.arrayBuffer()))
             : { flow: importText(await f.text()), warnings: [] };
           const name = f.name.replace(/\.[^.]+$/, "");
-          next = { ...emptyWorkspace(), name, flow: imported.flow };
+          const {fonts: importedFonts,...flow}=imported.flow;
+          next = { ...emptyWorkspace(), name, flow, fonts: importedFonts };
           await enter(next);
           inform(
             imported.warnings.length

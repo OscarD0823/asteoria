@@ -1,0 +1,1362 @@
+{
+  "version": 1,
+  "source": "https://chatgpt.com/share/6acd06a0-bec4-83e9-bccf-68cec5cae0be",
+  "sourceDate": "2026-10-12",
+  "note": "Resúmenes de los 130 puntos originales; sourceIndex conserva su posición. No son una certificación de compatibilidad.",
+  "order": "fuentes-pc, después orden original del chat",
+  "mobileValidation": "emulador Android; pruebas físicas identificadas por separado",
+  "active": "FNT-001",
+  "prerequisites": [
+    {
+      "id": "FNT-001",
+      "description": "Fuentes reales instaladas en el PC: seleccionar, editar, guardar, reabrir y exportar.",
+      "status": "en curso",
+      "acceptance": [
+        "Enumeración web real y permitir/cancelar/reintentar",
+        "Enumeración en Prisma Windows instalado",
+        "Variantes Arial, Calibri, Times New Roman y Cambria/Cambria Math",
+        "Nombres reales en DOCX/XLSX/PPTX y archivos reales incrustados en PDF",
+        "Guardado, reapertura y funcionamiento sin conexión",
+        "APK comprobada en emulador Android",
+        "Web y programas afectados publicados e instalados"
+      ],
+      "evidence": [
+        {
+          "type": "pruebas automatizadas",
+          "result": "9 pruebas específicas superadas; aún no cierran el punto",
+          "files": [
+            "tests/font-collection.test.ts",
+            "tests/device-fonts.test.ts",
+            "tests/office-fonts.test.ts"
+          ]
+        },
+        {
+          "type": "integración real",
+          "result": "225 familias / 488 caras de Windows. 17 variantes originales coinciden por SHA-256 en PDF y DOCX; XLSX/PPTX conservan nombres y estilos.",
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Exportaciones.json",
+          "limitation": "Consentimiento controlado en una sesión temporal de Electron; interfaz instalada y Android pendientes."
+        }
+      ],
+      "blockedReason": "La automatización de Windows se detuvo al no poder determinar la URL del navegador con suficiente confianza. No repetir control de Windows en el mismo turno."
+    }
+  ],
+  "items": [
+    {
+      "id": "AUD-001",
+      "sourceIndex": 1,
+      "area": "PDF: conservación y edición",
+      "priority": "P0",
+      "description": "Evitar reconstrucciones innecesarias cuando no hay cambios reales.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-002",
+      "sourceIndex": 2,
+      "area": "PDF: conservación y edición",
+      "priority": "P0",
+      "description": "Conservar formularios, anotaciones, vínculos, marcadores, adjuntos, metadatos y firmas al modificar PDF.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-003",
+      "sourceIndex": 3,
+      "area": "PDF: conservación y edición",
+      "priority": "P0",
+      "description": "Detectar firmas digitales y evitar invalidarlas silenciosamente.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-004",
+      "sourceIndex": 4,
+      "area": "PDF: conservación y edición",
+      "priority": "P0",
+      "description": "Sustituir texto existente conservando su apariencia.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-005",
+      "sourceIndex": 5,
+      "area": "PDF: conservación y edición",
+      "priority": "P0",
+      "description": "Evitar daños en texto cercano, superpuesto, girado, tablas y columnas.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-006",
+      "sourceIndex": 6,
+      "area": "PDF: conservación y edición",
+      "priority": "P0",
+      "description": "Proteger formularios interactivos y explicar cualquier aplanamiento.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-007",
+      "sourceIndex": 7,
+      "area": "PDF: conservación y edición",
+      "priority": "P1",
+      "description": "Editar párrafos completos con varios estilos y redistribución.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-008",
+      "sourceIndex": 8,
+      "area": "PDF: conservación y edición",
+      "priority": "P1",
+      "description": "Exportar resaltados, subrayados y dibujos como anotaciones PDF nativas.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-009",
+      "sourceIndex": 9,
+      "area": "PDF: conservación y edición",
+      "priority": "P1",
+      "description": "Investigar y comprobar guardado incremental.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-010",
+      "sourceIndex": 10,
+      "area": "PDF: conservación y edición",
+      "priority": "P1",
+      "description": "Recuperar el original y la última versión válida cuando falla una exportación.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-011",
+      "sourceIndex": 11,
+      "area": "PDF: herramientas",
+      "priority": "P0",
+      "description": "Editar texto conservando fuente, posición, espaciado, interletraje, alineación, tamaño, color y saltos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-012",
+      "sourceIndex": 12,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Detectar párrafos y columnas sin tapar otros elementos al añadir texto.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-013",
+      "sourceIndex": 13,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Recortar, sustituir, girar, alinear, distribuir y ajustar opacidad y superposición de imágenes.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-014",
+      "sourceIndex": 14,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Comentarios PDF nativos con respuestas, autor, fechas y estados.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-015",
+      "sourceIndex": 15,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Sellos personalizados, fechas y sellos propios.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-016",
+      "sourceIndex": 16,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Crear, editar, mover y eliminar marcadores compatibles con Acrobat.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-017",
+      "sourceIndex": 17,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Crear y conservar enlaces a páginas, archivos y direcciones web.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-018",
+      "sourceIndex": 18,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Crear campos de formulario, listas, casillas, botones y validaciones.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-019",
+      "sourceIndex": 19,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Manejar o advertir sobre XFA y campos especiales no admitidos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-020",
+      "sourceIndex": 20,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Abrir con contraseña válida y conservar permisos y protección.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-021",
+      "sourceIndex": 21,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Firmas digitales auténticas: certificados, validación y PAdES.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-022",
+      "sourceIndex": 22,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Redacción efectiva y comprobación de que el contenido no puede recuperarse.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-023",
+      "sourceIndex": 23,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Comparar texto, imágenes y diseño de dos PDF.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-024",
+      "sourceIndex": 24,
+      "area": "PDF: herramientas",
+      "priority": "P1",
+      "description": "Etiquetas de página, números Bates, encabezados y pies por rangos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-025",
+      "sourceIndex": 25,
+      "area": "PDF: herramientas",
+      "priority": "P2",
+      "description": "Administrar adjuntos y portafolios PDF.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-026",
+      "sourceIndex": 26,
+      "area": "PDF: herramientas",
+      "priority": "P2",
+      "description": "Gestionar capas PDF y su visibilidad.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-027",
+      "sourceIndex": 27,
+      "area": "PDF: herramientas",
+      "priority": "P2",
+      "description": "Generar y validar PDF/A, PDF/UA y PDF/X.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-028",
+      "sourceIndex": 28,
+      "area": "OCR",
+      "priority": "P1",
+      "description": "Ampliar idiomas y detectar el idioma automáticamente.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-029",
+      "sourceIndex": 29,
+      "area": "OCR",
+      "priority": "P1",
+      "description": "Reconstruir tablas, columnas y párrafos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-030",
+      "sourceIndex": 30,
+      "area": "OCR",
+      "priority": "P1",
+      "description": "Corregir rotaciones e inclinación antes de reconocer.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-031",
+      "sourceIndex": 31,
+      "area": "OCR",
+      "priority": "P1",
+      "description": "Procesar documentos extensos por lotes con memoria limitada.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-032",
+      "sourceIndex": 32,
+      "area": "OCR",
+      "priority": "P1",
+      "description": "Corregir el texto OCR junto a la imagen original.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-033",
+      "sourceIndex": 33,
+      "area": "OCR",
+      "priority": "P1",
+      "description": "Conservar el orden de lectura al exportar escaneos a Word.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-034",
+      "sourceIndex": 34,
+      "area": "OCR",
+      "priority": "P2",
+      "description": "Reconocer formularios, casillas y tablas complejas.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-035",
+      "sourceIndex": 35,
+      "area": "OCR",
+      "priority": "P2",
+      "description": "Reconocer escritura manuscrita mediante un motor local.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-036",
+      "sourceIndex": 36,
+      "area": "Herramientas comunes",
+      "priority": "P0",
+      "description": "Abrir, Guardar y Guardar como directamente en archivos locales.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-037",
+      "sourceIndex": 37,
+      "area": "Herramientas comunes",
+      "priority": "P0",
+      "description": "Atajos Ctrl+S/O/P/Z/Y/F, F2 y propios de cada editor.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-038",
+      "sourceIndex": 38,
+      "area": "Herramientas comunes",
+      "priority": "P0",
+      "description": "Selección precisa con ratón, teclado, tacto y múltiples objetos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-039",
+      "sourceIndex": 39,
+      "area": "Herramientas comunes",
+      "priority": "P0",
+      "description": "Copiar y pegar texto enriquecido, tablas, formatos e imágenes entre Office y Prisma.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-040",
+      "sourceIndex": 40,
+      "area": "Herramientas comunes",
+      "priority": "P1",
+      "description": "Menús contextuales pertinentes para cada selección.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-041",
+      "sourceIndex": 41,
+      "area": "Herramientas comunes",
+      "priority": "P1",
+      "description": "Herramientas contextuales para imágenes y tablas.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-042",
+      "sourceIndex": 42,
+      "area": "Herramientas comunes",
+      "priority": "P1",
+      "description": "Portapapeles entre Writer, Sheets y Slides.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-043",
+      "sourceIndex": 43,
+      "area": "Herramientas comunes",
+      "priority": "P1",
+      "description": "Pegado especial de valores, formato, texto, imágenes y vínculos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-044",
+      "sourceIndex": 44,
+      "area": "Herramientas comunes",
+      "priority": "P1",
+      "description": "Recuperación automática tras cierre inesperado o falta de batería.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-045",
+      "sourceIndex": 45,
+      "area": "Herramientas comunes",
+      "priority": "P1",
+      "description": "Historial de versiones locales.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-046",
+      "sourceIndex": 46,
+      "area": "Herramientas comunes",
+      "priority": "P1",
+      "description": "Reglas, guías, cuadrículas y medidas predecibles.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-047",
+      "sourceIndex": 47,
+      "area": "Herramientas comunes",
+      "priority": "P1",
+      "description": "Zoom porcentual, ajustar al ancho/página y desplazamiento continuo.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-048",
+      "sourceIndex": 48,
+      "area": "Herramientas comunes",
+      "priority": "P1",
+      "description": "Arrastrar archivos, imágenes, tablas, páginas, diapositivas y elementos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-049",
+      "sourceIndex": 49,
+      "area": "Herramientas comunes",
+      "priority": "P1",
+      "description": "Buscar comandos por su nombre o finalidad.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-050",
+      "sourceIndex": 50,
+      "area": "Herramientas comunes",
+      "priority": "P1",
+      "description": "Accesibilidad por teclado, lectores de pantalla, contraste, foco y áreas táctiles.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-051",
+      "sourceIndex": 51,
+      "area": "Herramientas comunes",
+      "priority": "P2",
+      "description": "Personalizar barras, atajos, cinta, temas y preferencias.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-052",
+      "sourceIndex": 52,
+      "area": "Herramientas comunes",
+      "priority": "P2",
+      "description": "Gestos móviles de selección, desplazamiento, zoom y control de objetos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-053",
+      "sourceIndex": 53,
+      "area": "Writer",
+      "priority": "P0",
+      "description": "Paginación equivalente a Word: líneas, tablas, saltos, encabezados y pies.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-054",
+      "sourceIndex": 54,
+      "area": "Writer",
+      "priority": "P0",
+      "description": "Fuentes y métricas: originales, interlineado, kerning, ligaduras y sustituciones conocidas.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-055",
+      "sourceIndex": 55,
+      "area": "Writer",
+      "priority": "P1",
+      "description": "Control de cambios con inserciones, eliminaciones, aceptar y rechazar.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-056",
+      "sourceIndex": 56,
+      "area": "Writer",
+      "priority": "P1",
+      "description": "Comparar y combinar versiones de documentos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-057",
+      "sourceIndex": 57,
+      "area": "Writer",
+      "priority": "P1",
+      "description": "Tablas con fórmulas, encabezados repetidos, bordes, división y autoajuste.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-058",
+      "sourceIndex": 58,
+      "area": "Writer",
+      "priority": "P1",
+      "description": "Imágenes delante/detrás del texto y ajuste cuadrado, estrecho, superior e inferior.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-059",
+      "sourceIndex": 59,
+      "area": "Writer",
+      "priority": "P1",
+      "description": "Campos dinámicos, referencias cruzadas, propiedades, índices y numeración.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-060",
+      "sourceIndex": 60,
+      "area": "Writer",
+      "priority": "P1",
+      "description": "Notas al pie y al final con edición y paginación equivalentes.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-061",
+      "sourceIndex": 61,
+      "area": "Writer",
+      "priority": "P1",
+      "description": "Ecuaciones editables interoperables mediante OMML.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-062",
+      "sourceIndex": 62,
+      "area": "Writer",
+      "priority": "P1",
+      "description": "Listas y numeración DOCX nativas.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-063",
+      "sourceIndex": 63,
+      "area": "Writer",
+      "priority": "P1",
+      "description": "Controles de contenido, desplegables, casillas y campos rellenables.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-064",
+      "sourceIndex": 64,
+      "area": "Writer",
+      "priority": "P1",
+      "description": "Combinar correspondencia, cartas y etiquetas con hojas de cálculo.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-065",
+      "sourceIndex": 65,
+      "area": "Writer",
+      "priority": "P1",
+      "description": "Corrección gramatical, concordancia, puntuación y estilo local.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-066",
+      "sourceIndex": 66,
+      "area": "Writer",
+      "priority": "P2",
+      "description": "Intercambiar bibliografía editable con Word.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-067",
+      "sourceIndex": 67,
+      "area": "Writer",
+      "priority": "P2",
+      "description": "Estilos jerárquicos/vinculados y plantillas DOTX.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-068",
+      "sourceIndex": 68,
+      "area": "Sheets",
+      "priority": "P0",
+      "description": "Hojas grandes y libros complejos con renderizado virtualizado.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-069",
+      "sourceIndex": 69,
+      "area": "Sheets",
+      "priority": "P0",
+      "description": "Fórmulas, datos, errores, fechas y resultados equivalentes a Excel.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-070",
+      "sourceIndex": 70,
+      "area": "Sheets",
+      "priority": "P0",
+      "description": "Matrices dinámicas, derrames, referencias estructuradas y funciones modernas.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-071",
+      "sourceIndex": 71,
+      "area": "Sheets",
+      "priority": "P1",
+      "description": "Gráficos nativos editables de barras, líneas, sectores, dispersión y combinados.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-072",
+      "sourceIndex": 72,
+      "area": "Sheets",
+      "priority": "P1",
+      "description": "Tablas y gráficos dinámicos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-073",
+      "sourceIndex": 73,
+      "area": "Sheets",
+      "priority": "P1",
+      "description": "Tablas estructuradas con filtros, totales, estilos y referencias.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-074",
+      "sourceIndex": 74,
+      "area": "Sheets",
+      "priority": "P1",
+      "description": "Formato condicional con barras, escalas, fórmulas e iconos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-075",
+      "sourceIndex": 75,
+      "area": "Sheets",
+      "priority": "P1",
+      "description": "Validación de datos, mensajes y listas.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-076",
+      "sourceIndex": 76,
+      "area": "Sheets",
+      "priority": "P1",
+      "description": "Autorrelleno de fórmulas, series, fechas y patrones.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-077",
+      "sourceIndex": 77,
+      "area": "Sheets",
+      "priority": "P1",
+      "description": "Ordenamiento y filtrado multicriterio y por formato.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-078",
+      "sourceIndex": 78,
+      "area": "Sheets",
+      "priority": "P1",
+      "description": "Nombres definidos y referencias externas.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-079",
+      "sourceIndex": 79,
+      "area": "Sheets",
+      "priority": "P1",
+      "description": "Conservar y posteriormente editar tablas y conexiones Power Query localmente.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-080",
+      "sourceIndex": 80,
+      "area": "Sheets",
+      "priority": "P1",
+      "description": "Buscar objetivo, escenarios y resolución de problemas.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-081",
+      "sourceIndex": 81,
+      "area": "Sheets",
+      "priority": "P1",
+      "description": "Áreas de impresión, títulos repetidos, saltos y escalado.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-082",
+      "sourceIndex": 82,
+      "area": "Sheets",
+      "priority": "P1",
+      "description": "Libros protegidos y respeto de permisos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-083",
+      "sourceIndex": 83,
+      "area": "Sheets",
+      "priority": "P2",
+      "description": "Conservar VBA y automatización local con autorización.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-084",
+      "sourceIndex": 84,
+      "area": "Slides",
+      "priority": "P0",
+      "description": "Representación PPTX precisa en textos, objetos, tamaños, colores y posiciones.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-085",
+      "sourceIndex": 85,
+      "area": "Slides",
+      "priority": "P1",
+      "description": "Patrones, diseños heredados, marcadores de posición y temas.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-086",
+      "sourceIndex": 86,
+      "area": "Slides",
+      "priority": "P1",
+      "description": "Animaciones de entrada, énfasis, salida y trayectorias con tiempos y desencadenadores.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-087",
+      "sourceIndex": 87,
+      "area": "Slides",
+      "priority": "P1",
+      "description": "Transiciones avanzadas representables localmente.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-088",
+      "sourceIndex": 88,
+      "area": "Slides",
+      "priority": "P1",
+      "description": "Agrupar, desagrupar, alinear y distribuir objetos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-089",
+      "sourceIndex": 89,
+      "area": "Slides",
+      "priority": "P1",
+      "description": "SmartArt editable: organigramas, procesos, ciclos y jerarquías.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-090",
+      "sourceIndex": 90,
+      "area": "Slides",
+      "priority": "P1",
+      "description": "Gráficos vinculados a hojas de cálculo.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-091",
+      "sourceIndex": 91,
+      "area": "Slides",
+      "priority": "P1",
+      "description": "Insertar, reproducir y conservar audio y vídeo.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-092",
+      "sourceIndex": 92,
+      "area": "Slides",
+      "priority": "P1",
+      "description": "Notas y vista del presentador.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-093",
+      "sourceIndex": 93,
+      "area": "Slides",
+      "priority": "P1",
+      "description": "Grabar narración y tiempos de presentación.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-094",
+      "sourceIndex": 94,
+      "area": "Slides",
+      "priority": "P1",
+      "description": "PDF vectorial con texto seleccionable.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-095",
+      "sourceIndex": 95,
+      "area": "Slides",
+      "priority": "P2",
+      "description": "Plantillas POTX y diseños empresariales.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-096",
+      "sourceIndex": 96,
+      "area": "Data",
+      "priority": "P0",
+      "description": "Importar y exportar ACCDB/MDB conservando la información.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-097",
+      "sourceIndex": 97,
+      "area": "Data",
+      "priority": "P1",
+      "description": "Diseñador de formularios y controles.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-098",
+      "sourceIndex": 98,
+      "area": "Data",
+      "priority": "P1",
+      "description": "Diseñador de informes imprimibles.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-099",
+      "sourceIndex": 99,
+      "area": "Data",
+      "priority": "P1",
+      "description": "Relaciones e integridad referencial comparables a Access.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-100",
+      "sourceIndex": 100,
+      "area": "Data",
+      "priority": "P1",
+      "description": "Consultas Access y conversión controlada a SQLite.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-101",
+      "sourceIndex": 101,
+      "area": "Data",
+      "priority": "P2",
+      "description": "Módulos y macros con ejecución local segura compatible.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-102",
+      "sourceIndex": 102,
+      "area": "Publisher",
+      "priority": "P0",
+      "description": "Lectura y conversión real del formato PUB.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-103",
+      "sourceIndex": 103,
+      "area": "Publisher",
+      "priority": "P1",
+      "description": "Marcos de texto enlazados entre páginas.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-104",
+      "sourceIndex": 104,
+      "area": "Publisher",
+      "priority": "P1",
+      "description": "Páginas maestras y plantillas editoriales.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-105",
+      "sourceIndex": 105,
+      "area": "Publisher",
+      "priority": "P1",
+      "description": "Imposición para impresión comercial.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-106",
+      "sourceIndex": 106,
+      "area": "Publisher",
+      "priority": "P1",
+      "description": "Sangrados, marcas de corte, color y exportación profesional.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-107",
+      "sourceIndex": 107,
+      "area": "Arquitectura compartida",
+      "priority": "P1",
+      "description": "Prisma File Engine: abrir, guardar, recuperar y gestionar documentos locales.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-108",
+      "sourceIndex": 108,
+      "area": "Arquitectura compartida",
+      "priority": "P1",
+      "description": "Prisma Compatibility Engine: importar, exportar y preservar componentes desconocidos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-109",
+      "sourceIndex": 109,
+      "area": "Arquitectura compartida",
+      "priority": "P1",
+      "description": "Prisma Rendering Engine: fuentes, colores, métricas, imágenes y paginación.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-110",
+      "sourceIndex": 110,
+      "area": "Arquitectura compartida",
+      "priority": "P1",
+      "description": "Prisma Clipboard Engine: portapapeles interno y externo.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-111",
+      "sourceIndex": 111,
+      "area": "Arquitectura compartida",
+      "priority": "P1",
+      "description": "Prisma History Engine: deshacer, rehacer, recuperación y versiones.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-112",
+      "sourceIndex": 112,
+      "area": "Arquitectura compartida",
+      "priority": "P1",
+      "description": "Prisma Printing Engine: vista previa, papel, márgenes, escalado y PDF vectorial.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-113",
+      "sourceIndex": 113,
+      "area": "Arquitectura compartida",
+      "priority": "P1",
+      "description": "Prisma UI System: cinta, menús, ventanas y paneles consistentes.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-114",
+      "sourceIndex": 114,
+      "area": "Arquitectura compartida",
+      "priority": "P1",
+      "description": "Prisma Diagnostics: detectar incompatibilidad y avisar antes de guardar.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-115",
+      "sourceIndex": 115,
+      "area": "Arquitectura compartida",
+      "priority": "P1",
+      "description": "Prisma Plugin API: extensiones locales.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-116",
+      "sourceIndex": 116,
+      "area": "Arquitectura compartida",
+      "priority": "P1",
+      "description": "Prisma Security Engine: permisos, macros, archivos, cifrado y protección.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-117",
+      "sourceIndex": 117,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Abrir documentos creados en Office.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-118",
+      "sourceIndex": 118,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Comparar la apariencia Office/Prisma.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-119",
+      "sourceIndex": 119,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Editar y guardar con Prisma.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-120",
+      "sourceIndex": 120,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Reabrir con Office.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-121",
+      "sourceIndex": 121,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Comprobar objetos, fórmulas, notas, estilos y metadatos conservados.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-122",
+      "sourceIndex": 122,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Repetir el ciclo Office → Prisma → Office varias veces.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-123",
+      "sourceIndex": 123,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Comparar resultados de fórmulas con Excel.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-124",
+      "sourceIndex": 124,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Comparar posiciones y apariencia PowerPoint/Slides.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-125",
+      "sourceIndex": 125,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Conservar íntegro un PDF no modificado.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-126",
+      "sourceIndex": 126,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Verificar formularios, vínculos, firmas y anotaciones tras editar PDF.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-127",
+      "sourceIndex": 127,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Comprobar eliminación efectiva de contenido redactado.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-128",
+      "sourceIndex": 128,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Archivos grandes, dañados, protegidos y con elementos desconocidos.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-129",
+      "sourceIndex": 129,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Windows, Android, navegadores y dispositivos de distintas capacidades.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    },
+    {
+      "id": "AUD-130",
+      "sourceIndex": 130,
+      "area": "Pruebas generales",
+      "priority": "P1",
+      "description": "Detectar errores de memoria, cierres y pérdida de archivos locales.",
+      "status": "pendiente",
+      "acceptance": [],
+      "evidence": []
+    }
+  ],
+  "additional": [
+    {
+      "id": "EXT-001",
+      "description": "Dominio y respaldo/migración entre orígenes",
+      "status": "pendiente"
+    },
+    {
+      "id": "EXT-002",
+      "description": "Donaciones voluntarias con URL real del autor",
+      "status": "pendiente"
+    },
+    {
+      "id": "EXT-003",
+      "description": "Preparar expediente de autoría y registro del software",
+      "status": "pendiente"
+    }
+  ]
+}

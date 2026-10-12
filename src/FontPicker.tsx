@@ -4,7 +4,7 @@ import { fontFamilies } from "./fonts";
 import { localFontFamilies, type LocalFont } from "./local-fonts";
 import { readPreference, writePreference } from "./preferences";
 import './font-picker.css';
-import {useDeviceFonts,deviceFonts,listInstalledFonts,installedFamilies,installedFontFiles,importDeviceFonts,fontFiles,type InstalledFont} from './device-fonts';
+import {useDeviceFonts,deviceFonts,listInstalledFonts,installedFamilies,installedFontFiles,importDeviceFonts,fontFiles,normalizeFontName,type InstalledFont} from './device-fonts';
 const essentials = [
   ["Arial · 11 pt", "Arimo", "Arimo"],
   ["Calibri · 11 pt", "Carlito", "Carlito"],
@@ -57,6 +57,7 @@ export function FontPicker({
   const [position,setPosition]=useState({left:16,top:80,width:320});
   const personal=useDeviceFonts();
   const [installed,setInstalled]=useState<InstalledFont[]>([]),[sourceMessage,setSourceMessage]=useState('');
+  const [installedLimit,setInstalledLimit]=useState(60);
   const local=[...new Map([...personal,...fonts].map(f=>[f.value+':'+f.style,f])).values()];
   const families = [
       ...fontFamilies.filter((f) => f.file || f.styles),
@@ -85,9 +86,11 @@ export function FontPicker({
     )
     .sort((a, b) => a.label.localeCompare(b.label, "es"));
   const aliases:Record<string,string>={Arimo:'Arial',PrismaSans:'Arial',Carlito:'Calibri',PrismaSerif:'Times New Roman',Gelasio:'Georgia',PrismaMono:'Courier New'};
+  const installedShown=installedFamilies(installed).filter(name=>filter(name).includes(filter(query)));
   const popular=[value,...recent,...favorites,'Carlito','Arimo','PrismaSerif','Gelasio','NotoSans','NotoSerif','PrismaMono','LatinModernRoman'];
   const suggestions=query.trim()?families.filter(f=>filter(f.label+' '+(aliases[f.value]??'')).includes(filter(query))).sort((a,b)=>a.label.localeCompare(b.label,'es')).slice(0,40):[...new Set(popular)].map(value=>families.find(f=>f.value===value)).filter((f):f is typeof families[number]=>!!f).slice(0,16);
   useEffect(()=>setActive(0),[query,quick]);
+  useEffect(()=>setInstalledLimit(60),[query,installed]);
   useEffect(()=>{
     if(!quick)return;
     const place=()=>{const rect=button.current?.getBoundingClientRect();if(!rect)return;const width=Math.min(360,innerWidth-24);setPosition({width,left:Math.max(12,Math.min(rect.left,innerWidth-width-12)),top:Math.max(12,Math.min(rect.bottom+7,innerHeight-Math.min(480,innerHeight*.7)-12))});};
@@ -282,7 +285,8 @@ export function FontPicker({
                 </p>
                 <div>
                   {essentials.map(([label, preferred, alternate]) => {
-                    const font =
+                    const original=label.split(' · ')[0];
+                    const font = families.find(f=>f.value.startsWith('local-')&&normalizeFontName(f.label)===normalizeFontName(original)) ??
                       families.find((f) => f.value === preferred) ??
                       families.find((f) => f.label === alternate);
                     return font ? (
@@ -298,7 +302,7 @@ export function FontPicker({
                         }}
                       >
                         {label}
-                        <small>Alternativa: {font.label}</small>
+                        <small>{font.value.startsWith('local-')?'Fuente del dispositivo':'Alternativa: '+font.label}</small>
                       </button>
                     ) : null;
                   })}
@@ -318,20 +322,20 @@ export function FontPicker({
               </details>}
               <details className="device-fonts-panel" open={installed.length>0}>
                 <summary>Fuentes del dispositivo</summary>
-                <p>Busca las fuentes instaladas en tu equipo o elige archivos TTF / OTF. Se leen localmente.</p>
+                <p>Busca las fuentes instaladas en tu equipo o importa TTF / OTF y colecciones TTC. Se leen localmente.</p>
                 <button disabled={loading} onClick={async()=>{
                   setLoading(true);setSourceMessage('');
                   try{const fonts=await listInstalledFonts();setInstalled(fonts);setSourceMessage(installedFamilies(fonts).length+' familias encontradas. Selecciona una para usarla.');}
-                  catch(error){setSourceMessage(error instanceof Error?error.message:String(error));}
+                  catch(error){setSourceMessage(error instanceof DOMException&&error.name==='NotAllowedError'?'No se concedió permiso para leer las fuentes. Puedes volver a intentarlo o importar los archivos.':error instanceof Error?error.message:String(error));}
                   finally{setLoading(false);}
                 }}>Buscar fuentes instaladas</button>
                 {sourceMessage&&<p role="status">{sourceMessage}</p>}
-                {installed.length>0&&<div className="device-fonts-list">{installedFamilies(installed).filter(name=>filter(name).includes(filter(query))).slice(0,60).map(family=><button disabled={loading} key={family} style={{fontFamily:JSON.stringify(family)+',serif'}} onClick={async()=>{
+                {installed.length>0&&<div className="device-fonts-list" aria-label="Fuentes instaladas" onScroll={event=>{const list=event.currentTarget;if(list.scrollTop+list.clientHeight>=list.scrollHeight-80)setInstalledLimit(limit=>Math.min(installedShown.length,limit+60));}}>{installedShown.slice(0,installedLimit).map(family=><button disabled={loading} key={family} style={{fontFamily:JSON.stringify(family)+',serif'}} onClick={async()=>{
                   setLoading(true);
-                  try{const selected=await installedFontFiles(installed,family);if(onImport)await onImport(selected.files);else await importDeviceFonts(selected.files);onChange(selected.fonts[0].value);setOpen(false);setQuick(false);}
+                  try{const selected=await installedFontFiles(installed,family);if(onImport)await onImport(selected.files);else await importDeviceFonts(selected.files);onChange(selected.fonts[0].value);if(selected.warnings.length)setSourceMessage('Se aplicó '+family+'. Algunas variantes no están disponibles: '+selected.warnings.join(' · '));else{setOpen(false);setQuick(false);}}
                   catch(error){onError(error);}finally{setLoading(false);}
                 }}>{family}</button>)}</div>}
-                {installed.length>0&&<small>Usa el buscador de arriba para filtrar. Solo se leen los archivos de la familia que selecciones.</small>}
+                {installed.length>0&&<small>{installedShown.length} familias coinciden. Desplázate para verlas todas o usa el buscador. Solo se leen los archivos de la familia que selecciones.</small>}
               </details>
               <div
                 className={"font-catalog font-catalog-" + view}
@@ -410,7 +414,7 @@ export function FontPicker({
                   disabled={loading}
                   onClick={() => fileInput.current?.click()}
                 >
-                  {loading ? "Leyendo fuentes…" : "Importar TTF / OTF"}
+                  {loading ? "Leyendo fuentes…" : "Importar TTF / OTF / TTC"}
                 </button>}
                 <small>{onImport?'Se guardan en este proyecto.':'Se guardan en este dispositivo.'} Sin subirlas a ningún servidor.</small>
               </footer>
@@ -418,7 +422,7 @@ export function FontPicker({
                 type="file"
                 hidden
                 multiple
-                accept=".ttf,.otf"
+                accept=".ttf,.otf,.ttc,.otc"
                 ref={fileInput}
                 onChange={async (e) => {
                   const files = Array.from(e.target.files ?? []);
