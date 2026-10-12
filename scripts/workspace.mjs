@@ -3,6 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {appKinds,appPath,assertKind,publicationTargets,validateOwnership,fingerprint} from './workspace-core.mjs';
+import {pushSourceRevision} from './publish-source.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 process.chdir(root);
 const command=process.argv[2]??'status',args=process.argv.slice(3);
@@ -67,13 +68,12 @@ else if(command==='stamp'){
  for(const kind of appKinds){
   const dir=appPath(root,kind);
   if(git(dir,'status','--porcelain'))throw Error('Primero confirma los cambios de '+kind+' con git commit.');
-  const branch=git(dir,'branch','--show-current');if(!branch)throw Error('Publica desde una rama de '+kind+'.');
   const commit=git(dir,'rev-parse','HEAD');
-  if((!selected.length||selected.includes(kind))&&commit!==lock.apps[kind].commit){run('git',['push','origin',branch],dir);lock.apps[kind].commit=commit;changed.push(kind);}
+  if((!selected.length||selected.includes(kind))&&commit!==lock.apps[kind].commit){console.log(pushSourceRevision(dir));lock.apps[kind].commit=commit;changed.push(kind);}
  }
  if(changed.length){fs.writeFileSync(lockFile,JSON.stringify(lock,null,2)+'\n');run('git',['add','workspace.lock.json']);run('git',['commit','-m','Actualizar aplicaciones: '+changed.join(', ')]);}
  if(git(root,'status','--porcelain'))throw Error('Primero confirma los cambios del núcleo con git commit.');
- run('git',['push','origin','HEAD']);
+ console.log(pushSourceRevision(root));
  const targets=publicationTargets(selected.includes('prisma')||!selected.length?['prisma']:selected);
  run(process.execPath,['scripts/publish-pages.mjs',...targets]);
  console.log('La versión general y las independientes usarán los mismos módulos.');

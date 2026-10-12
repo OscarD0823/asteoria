@@ -39,6 +39,8 @@ Cada versión suelta tiene una entrada exclusiva. Prisma carga el editor solicit
 
 El comando sube Sheets, actualiza su commit fijado, sube Prisma y solicita ambas publicaciones. Si modificas el núcleo, confírmalo y ejecuta `pnpm workspace:publish prisma`: solicita las siete publicaciones. Requiere Git y GitHub CLI autenticados; no guarda credenciales en el código.
 
+Se publica la revisión confirmada en la rama `main` del repositorio correspondiente, también si empezaste desde el commit fijado por `sync`. No se fuerza una actualización ni se sobrescriben cambios remotos divergentes: Git detiene la publicación hasta resolverlos.
+
 Un push directo publica el programa. Las páginas comprueban cambios cada 15 minutos: Prisma recoge cambios de los editores y estos recogen cambios de sus dependencias. GitHub puede retrasar las ejecuciones programadas. Se comparan commits antes de descargar dependencias y compilar. `workspace-build.json` registra la procedencia y huella de los módulos utilizados.
 
 ## Distribución
