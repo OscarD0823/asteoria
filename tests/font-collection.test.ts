@@ -54,3 +54,11 @@ test('extracting a collection never bypasses an individual face embedding restri
   for(let i=0;i<view.getUint16(4);i++){const record=12+i*16;if(view.getUint32(record)===0x4f532f32)view.setUint16(view.getUint32(record+8)+8,2);}
   await assert.rejects(importLocalFonts(collection([restricted])),/permisos/);
 });
+test('collection expansion is bounded before duplicated tables or many faces exhaust memory',()=>{
+ const bytes=new Uint8Array(6*1024*1024),view=new DataView(bytes.buffer);
+ view.setUint32(0,0x74746366);view.setUint32(4,0x00010000);view.setUint32(8,1);view.setUint32(12,16);
+ view.setUint32(16,0x00010000);view.setUint16(20,2);
+ for(const [record,tag]of [[28,0x68656164],[44,0x4f532f32]]){view.setUint32(record,tag);view.setUint32(record+8,60);view.setUint32(record+12,5*1024*1024);}
+ assert.throws(()=>fontCollectionFaces(bytes),/supera 8 MB/);
+ assert.throws(()=>fontCollectionFaces(collection(Array.from({length:64},()=>regular))),/24 MB/);
+});

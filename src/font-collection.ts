@@ -23,6 +23,7 @@ export function fontCollectionFaces(bytes: Uint8Array): Uint8Array[] {
   const version = view.getUint32(4), count = view.getUint32(8);
   if (![0x00010000, 0x00020000].includes(version) || count < 1 || count > 64 || 12 + count * 4 > bytes.length)
     throw Error('La colección de fuentes no es válida.');
+  let expanded = 0;
   return Array.from({length: count}, (_, index) => {
     const directory = view.getUint32(12 + index * 4);
     if (directory + 12 > bytes.length) throw Error('La colección de fuentes está incompleta.');
@@ -30,17 +31,24 @@ export function fontCollectionFaces(bytes: Uint8Array): Uint8Array[] {
     if (![0x00010000, 0x4f54544f].includes(signature) || tableCount < 1 || tableCount > 4096 || directory + 12 + tableCount * 16 > bytes.length)
       throw Error('La colección contiene una cara no compatible.');
     const tables: {tag: number; bytes: Uint8Array}[] = [], seen = new Set<number>();
+    let faceLength = 12 + tableCount * 16;
     for (let i = 0; i < tableCount; i++) {
       const record = directory + 12 + i * 16, tag = view.getUint32(record),
         offset = view.getUint32(record + 8), length = view.getUint32(record + 12);
       if (offset + length > bytes.length || seen.has(tag)) throw Error('La colección contiene tablas inválidas.');
       seen.add(tag);
       // A digital signature of the collection cannot authenticate the extracted file.
-      if (tag !== DSIG) tables.push({tag, bytes: bytes.slice(offset, offset + length)});
+      if (tag !== DSIG) {
+        faceLength += align(length);
+        if (faceLength > MAX_FONT_FILE_BYTES) throw Error('Una cara de la colección supera 8 MB.');
+        tables.push({tag, bytes: bytes.slice(offset, offset + length)});
+      }
     }
     tables.sort((a,b) => a.tag - b.tag);
     const length = 12 + tables.length * 16 + tables.reduce((sum, table) => sum + align(table.bytes.length), 0);
     if (length > MAX_FONT_FILE_BYTES) throw Error('Una cara de la colección supera 8 MB.');
+    expanded += length;
+    if (expanded > 24 * 1024 * 1024) throw Error('Las caras de la colección superan los 24 MB del proyecto.');
     const output = new Uint8Array(length), out = new DataView(output.buffer), power = Math.floor(Math.log2(tables.length));
     out.setUint32(0, signature); out.setUint16(4, tables.length);
     out.setUint16(6, 2 ** power * 16); out.setUint16(8, power);
