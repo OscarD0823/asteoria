@@ -114,10 +114,16 @@
             "tests/dependency-security.test.mjs",
             "docs/FUENTES-SUITE.md"
           ]
+        },
+        {
+          "type": "Entrega Windows/Android de toda la suite",
+          "result": "PDF 6.6.1, Writer 1.6.4, Sheets 0.6.1, Slides/Data/Publisher 0.3.2 y Prisma 1.2.2 compilados. Los siete Windows están instalados en D:\\Prisma, con perfiles respaldados, SHA-256 del paquete instalado igual al compilado y arranque sin errores. Las siete APK conservan el certificado anterior, sus identificadores y versiones. Word conserva 4/4 archivos Arial originales; PDF incrusta el original por SHA-256 y mantiene tildes, ñ y €. Las seis interfaces de Prisma reconocen la familia importada en Data. 165 pruebas superadas.",
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-todas-2026-10-13\\Entrega\\Entrega-suite-fonts.json",
+          "limitation": "Comprobación web por importación real de archivos del PC; no certifica el permiso visual de Chrome/Edge. APK nuevas no probadas físicamente. Núcleo compilado cf705e518a8ac3cbbb491692304047e7c82d348f."
         }
       ],
       "remaining": [
-        "Permitir, cancelar y reintentar en la interfaz de Chrome/Edge: el navegador conectado es el integrado en Codex y no expone el diálogo de Local Font Access. El control nativo de Edge se detuvo porque no pudo verificar la URL actual; no se ha completado esta prueba ni se ha sorteado esa restricción."
+        "Permitir, cancelar y reintentar en Chrome/Edge. El control nativo de ambos navegadores se detuvo al no poder verificar su URL actual. La autorización del usuario está concedida; la limitación restante es de la herramienta. No se ha sorteado esta restricción."
       ]
     }
   ],
