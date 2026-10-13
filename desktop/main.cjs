@@ -131,7 +131,7 @@ app.whenReady().then(() => {
       console.error("Desktop load failed:", code, description);
       app.exit(1);
     });
-    window.webContents.on("console-message", (_event, details) => {
+    window.webContents.on("console-message", (details) => {
       if (details.level === "error"){
         rendererFailed=true;console.error("Renderer:", details.message);
       }
