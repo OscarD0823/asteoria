@@ -252,9 +252,9 @@ export function FontPicker({
                   <option value="local">Mis fuentes</option>
                 </select>
               </div>
-              <details className="font-library-options" open={libraryOptionsOpen} onToggle={event=>setLibraryOptionsOpen(event.currentTarget.open)}>
-              <summary>Vista previa y fuentes del dispositivo</summary>
-              <div className="font-library-options-body">
+              <div className="font-library-options">
+              <button className="font-library-options-toggle" aria-expanded={libraryOptionsOpen} aria-controls={quickId+'-options'} onClick={()=>setLibraryOptionsOpen(value=>!value)}><span aria-hidden="true">{libraryOptionsOpen?'▾':'▸'}</span> Vista previa y fuentes del dispositivo</button>
+              {libraryOptionsOpen&&<div className="font-library-options-body" id={quickId+'-options'}>
               <div className="font-preview-controls">
                 <input
                   aria-label="Texto de vista previa de fuentes"
@@ -365,8 +365,8 @@ export function FontPicker({
                 }}>{family}</button>)}</div>}
                 {installed.length>0&&<small>{installedShown.length} familias coinciden. Desplázate para verlas todas o usa el buscador. Solo se leen los archivos de la familia que selecciones.</small>}
               </details>
+              </div>}
               </div>
-              </details>
               <div
                 className={"font-catalog font-catalog-" + view}
                 role="group"
