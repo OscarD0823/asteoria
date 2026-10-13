@@ -1655,7 +1655,7 @@ export default function Studio() {
         ref={openInput}
         hidden
         type="file"
-        accept=".pdf,.docx,.docm,.txt,.prisma,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        accept=".pdf,.docx,.docm,.txt,.prisma,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.prisma.project+json,application/json,application/octet-stream"
         multiple
         onChange={(e) => void openFiles(e.target.files)}
       />
