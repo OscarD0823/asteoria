@@ -89,6 +89,21 @@
           "type": "Celular físico final 1.6.2",
           "result": "Samsung SM-S721B, Android 16 API 36, APK publicada 1.6.2: originales esenciales al inicio; búsqueda, importación y primera fila completas con teclado visible. Calibri aplicada, texto editado, proyecto guardado y reabierto en la interfaz real. Proyecto y PDF exportados conservan 17/17 variantes originales por SHA-256. PDF de una página revisado mediante extracción de texto y renderizado Poppler, con tildes, ñ y €. No se cambió la conectividad ni se afirma una prueba sin conexión física.",
           "privateReport": "D:\\PDF\\Pruebas\\Fuentes-Celular-2026-10-13\\Writer-Celular-1.6.2-prueba-final.json"
+        },
+        {
+          "type": "Fuentes detectadas en lista 1.6.3 / 1.2.1",
+          "result": "Writer 1.6.3 y Writer dentro de Prisma 1.2.1, con perfiles aislados: 225 familias reales del PC y 320 entradas en la biblioteca. Arial, Calibri, Times New Roman, Cambria, Georgia y Courier New al inicio. Enumeración sin leer archivos; seleccionar Arial lee únicamente sus cuatro variantes. Writer aplicó Arial al texto seleccionado y guardó el proyecto local. 158 pruebas superadas. Ambos programas Windows instalados en D:\\Prisma, perfiles respaldados, paquete idéntico al compilado y arranque sin errores. APK con identificadores propios y certificado existente.",
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Metadatos-Writer-Prisma-2026-10-13.json",
+          "limitation": "Consentimiento controlado en estos ensayos; permiso visual de Chrome/Edge pendiente. Las APK nuevas no se declaran probadas en un celular físico; la prueba física completada corresponde a Writer 1.6.2."
+        },
+        {
+          "type": "Entregas publicadas Writer 1.6.3 / Prisma 1.2.1",
+          "result": "Los ocho archivos públicos (EXE, APK, código fuente y sumas para cada producto) coinciden por tamaño y SHA-256 con los archivos locales. Ambas versiones de Windows instaladas y verificadas. APK con el certificado existente; no se declara una prueba física de estas nuevas versiones. Núcleo de los paquetes e2fbaf8f88ededa935bdf60320215266c4ddbfc1. La auditoría posterior se publica en el mismo repositorio general.",
+          "urls": [
+            "https://github.com/OscarD0823/prisma-pdf/releases/tag/writer-v1.6.3",
+            "https://github.com/OscarD0823/prisma-pdf/releases/tag/prisma-v1.2.1"
+          ],
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Entrega"
         }
       ],
       "remaining": [

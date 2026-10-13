@@ -1,4 +1,4 @@
-# Fuentes de Writer 1.6.2
+# Fuentes de Writer 1.6.3 y Prisma 1.2.1
 
 - La biblioteca muestra una lista, con nombre, muestra, procedencia y favoritas. En pantallas pequeñas la búsqueda, los resultados y la importación permanecen accesibles con el teclado. La muestra completa está en las opciones de vista previa.
 - Arial, Calibri, Times New Roman, Cambria, Georgia, Courier New y Aptos originales tienen prioridad cuando están leídos en este dispositivo o incluidos en el proyecto. Enumerar una fuente instalada no equivale a importar sus archivos.
@@ -19,7 +19,11 @@ FNT-001 sigue abierto: falta comprobar permitir, cancelar y reintentar en la int
 
 Writer 1.6.3 y Prisma 1.2.1 incorporan las familias detectadas al selector principal, a la biblioteca y a los accesos académicos. Arial, Calibri y las demás esenciales detectadas aparecen al principio aunque sus archivos aún no se hayan importado. Elegir una lee sus variantes disponibles y guarda la identidad de la fuente real; el identificador temporal de descubrimiento nunca se aplica al documento. Las fuentes del proyecto tienen prioridad sobre la copia detectada de una misma familia. Las categorías de Arial, Calibri, Aptos y Courier New se conservan al importarlas.
 
-Se superaron 158 pruebas de funciones y del entorno. La integración de esta mejora con fuentes reales del PC, sus paquetes nativos y su publicación se registra en la auditoría después de comprobarlos; no se presenta esta sección como cierre del permiso de Chrome/Edge.
+Se superaron 158 pruebas de funciones y del entorno. En las interfaces nativas de Writer 1.6.3 y Writer dentro de Prisma 1.2.1, dos perfiles de prueba aislados detectaron 225 familias reales del PC. La biblioteca pasó de 95 a 320 familias y el selector rápido colocó Arial, Calibri, Times New Roman, Cambria, Georgia y Courier New al principio. Enumerar no leyó archivos; seleccionar Arial leyó únicamente sus cuatro variantes. En Writer se aplicó Arial a una muestra con tildes, ñ, € y números y se guardó en la biblioteca local. Estos ensayos emplean consentimiento controlado, y no cierran la prueba del diálogo real de Chrome/Edge.
+
+Ambas versiones están instaladas en `D:\Prisma`, con perfiles respaldados, registro correcto, paquete instalado idéntico al compilado y arranque sin errores. Las compilaciones Android conservan los identificadores y el certificado existente; las nuevas APK no se presentan como probadas físicamente. La prueba completa en el Samsung descrita antes corresponde a Writer 1.6.2. Código de los paquetes: núcleo `e2fbaf8f88ededa935bdf60320215266c4ddbfc1`, Writer `6e5133681c1ff2fbad73ec5a6fc6405c9f4a01ea`.
+
+Las entregas [Writer 1.6.3](https://github.com/OscarD0823/prisma-pdf/releases/tag/writer-v1.6.3) y [Prisma 1.2.1](https://github.com/OscarD0823/prisma-pdf/releases/tag/prisma-v1.2.1) incluyen Windows, Android, código fuente y sumas. Los tamaños y SHA-256 de los ocho archivos coinciden con GitHub. Se mantienen las descargas centralizadas existentes y las identidades separadas de cada producto. Las fuentes privadas y los documentos de prueba quedan fuera del código publicado.
 
 La entrega [Writer 1.6.2](https://github.com/OscarD0823/prisma-pdf/releases/tag/writer-v1.6.2) ya está publicada con EXE, APK, código fuente y sumas. Los tamaños y SHA-256 de los cuatro archivos coinciden con GitHub. Windows está instalado en `D:\Prisma\Prisma Writer` y pasó el arranque de prueba; el paquete instalado coincide con el compilado. La APK final está instalada en el Samsung con el certificado existente y completó la prueba física descrita arriba. El desbloqueo lo realizó el usuario; no se introdujo ni sorteó su PIN.
 

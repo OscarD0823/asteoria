@@ -6,6 +6,8 @@ El 13 de octubre se comprobó Writer en un Samsung SM-S721B físico: abrió el D
 
 Las solicitudes de modificar definiciones de estilos como en Word y abrir archivos desde el sistema están registradas fuera de los 130 puntos originales. Se mantiene el orden solicitado.
 
+Writer 1.6.3 y Prisma 1.2.1 añaden las familias instaladas detectadas a la lista principal, aunque todavía no se hayan importado sus archivos. Sus interfaces nativas se comprobaron con 225 familias reales del PC: esenciales al principio, enumeración sin lectura de archivos y elección de Arial con lectura de sus cuatro variantes. Los dos programas están actualizados en `D:\Prisma` y superaron el arranque de prueba; las APK compilan con el certificado existente. Se superaron 158 pruebas. El consentimiento de estos dos ensayos fue controlado en perfiles aislados; no sustituye el permiso real pendiente de Chrome/Edge ni la prueba física anterior de Writer 1.6.2.
+
 Writer 1.6.2 está [publicado para Windows y Android](https://github.com/OscarD0823/prisma-pdf/releases/tag/writer-v1.6.2), con código fuente y cuatro sumas verificadas frente a GitHub. Está instalado en Windows (arranque comprobado) y en el Samsung físico (prueba final completada). FNT-001 continúa abierto únicamente por el permiso visual de Chrome/Edge. La revisión de GitHub detectó además [siete alertas de dependencias](DEPENDENCIAS-PENDIENTES.md), que permanecen abiertas y registradas para su corrección.
 
 ## Resuelto ahora
