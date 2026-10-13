@@ -55,6 +55,8 @@ export function FontPicker({
     button = useRef<HTMLButtonElement>(null);
   const quickPanel=useRef<HTMLDivElement>(null),quickSearch=useRef<HTMLInputElement>(null),quickId=useId();
   const [position,setPosition]=useState({left:16,top:80,width:320,maxHeight:480});
+  const [libraryViewport,setLibraryViewport]=useState({left:0,top:0,width:0,height:0,compact:false});
+  const [libraryOptionsOpen,setLibraryOptionsOpen]=useState(true);
   const personal=useDeviceFonts();
   const [installed,setInstalled]=useState<InstalledFont[]>([]),[sourceMessage,setSourceMessage]=useState('');
   const [installedLimit,setInstalledLimit]=useState(60);
@@ -107,6 +109,19 @@ export function FontPicker({
     return()=>{document.removeEventListener('pointerdown',outside);window.removeEventListener('resize',place);window.visualViewport?.removeEventListener('resize',place);window.visualViewport?.removeEventListener('scroll',place);};
   },[quick]);
   useEffect(()=>{if(quick)document.getElementById(quickId+'-'+active)?.scrollIntoView({block:'nearest'});},[active,quick,quickId]);
+  useEffect(()=>{
+    if(!open)return;
+    let first=true;
+    const place=()=>{
+      const viewport=window.visualViewport;
+      const width=Math.min(innerWidth,viewport?.width??innerWidth),height=Math.min(innerHeight,viewport?.height??innerHeight);
+      const compact=width<=700||height<600;
+      setLibraryViewport({left:viewport?.offsetLeft??0,top:viewport?.offsetTop??0,width,height,compact});
+      if(first){setLibraryOptionsOpen(!compact);first=false;}
+    };
+    place();window.addEventListener('resize',place);window.visualViewport?.addEventListener('resize',place);window.visualViewport?.addEventListener('scroll',place);
+    return()=>{window.removeEventListener('resize',place);window.visualViewport?.removeEventListener('resize',place);window.visualViewport?.removeEventListener('scroll',place);};
+  },[open]);
   useEffect(() => {
     if (!open&&!quick) return;
     if(open)searchInput.current?.focus();
@@ -163,12 +178,15 @@ export function FontPicker({
         createPortal(
           <div
             className="modal-shade font-modal-shade"
+            style={libraryViewport.width?{inset:'auto',left:libraryViewport.left,top:libraryViewport.top,width:libraryViewport.width,height:libraryViewport.height}:undefined}
             onMouseDown={(e) => {
               if (e.target === e.currentTarget) setOpen(false);
             }}
           >
             <section
               className="modal font-library"
+              data-compact={libraryViewport.compact||undefined}
+              style={{'--font-visible-height':libraryViewport.height+'px'} as import('react').CSSProperties}
               role="dialog"
               aria-modal="true"
               aria-labelledby="font-library-title"
@@ -176,9 +194,9 @@ export function FontPicker({
                 if (e.key !== "Tab") return;
                 const items = Array.from(
                   e.currentTarget.querySelectorAll<HTMLElement>(
-                    "button:not(:disabled),input:not([hidden]):not([type=hidden]),select,a[href]",
+                    "button:not(:disabled),input:not([hidden]):not([type=hidden]),select,a[href],summary",
                   ),
-                );
+                ).filter(item=>item.getClientRects().length>0);
                 if (e.shiftKey && document.activeElement === items[0]) {
                   e.preventDefault();
                   items.at(-1)?.focus();
@@ -203,7 +221,7 @@ export function FontPicker({
                   ✕
                 </button>
               </header>
-              <p>
+              <p className="font-library-description">
                 {
                   families.filter(
                     (f) => f.styles || f.file || f.value.startsWith("local-"),
@@ -234,6 +252,9 @@ export function FontPicker({
                   <option value="local">Mis fuentes</option>
                 </select>
               </div>
+              <details className="font-library-options" open={libraryOptionsOpen} onToggle={event=>setLibraryOptionsOpen(event.currentTarget.open)}>
+              <summary>Vista previa y fuentes del dispositivo</summary>
+              <div className="font-library-options-body">
               <div className="font-preview-controls">
                 <input
                   aria-label="Texto de vista previa de fuentes"
@@ -343,6 +364,8 @@ export function FontPicker({
                   catch(error){onError(error);}finally{setLoading(false);}
                 }}>{family}</button>)}</div>}
                 {installed.length>0&&<small>{installedShown.length} familias coinciden. Desplázate para verlas todas o usa el buscador. Solo se leen los archivos de la familia que selecciones.</small>}
+              </details>
+              </div>
               </details>
               <div
                 className={"font-catalog font-catalog-" + view}

@@ -17,5 +17,26 @@
 .index-actions button{padding:5px 9px;font:11px PrismaSans,Arial,sans-serif;color:#6f638d;background:#f7f5fd;border:1px solid #e8e2f3;border-radius:6px;}
 @media print{.index-actions{display:none;}}
 .device-fonts-panel{border:1px solid #ddd9eb;border-radius:10px;padding:10px 12px;margin:12px 0;background:#faf9fd;font-size:12px;}
-.font-modal-shade .font-library{overflow-y:auto!important;}
+.font-modal-shade{padding:12px;box-sizing:border-box;}
+.font-modal-shade .font-library{width:min(1050px,100%);max-width:1050px;height:min(860px,100%);max-height:100%;overflow:hidden!important;display:flex;flex-direction:column;min-height:0;box-sizing:border-box;}
+.font-library>header,.font-library>.font-search,.font-library>.font-library-description,.font-library>footer{flex-shrink:0;}
+.font-library>.font-catalog{min-height:0;flex:1 1 0;overflow:auto;overscroll-behavior:contain;}
+.font-library-options{flex:0 0 auto;min-height:0;max-height:max(96px,calc(var(--font-visible-height,700px)*.35));overflow:auto;margin:8px 0;border:1px solid #e4e6ef;border-radius:9px;background:#fafbfe;}
+.font-library-options>summary{cursor:pointer;font-size:12px;font-weight:600;padding:10px 12px;}
+.font-library-options-body{padding:0 12px 8px;}
+.font-library-options-body>.device-fonts-panel{margin:8px 0;}
+.font-library-options-body>.essential-fonts{margin:6px 0!important;}
+.font-library[data-compact]{padding:12px!important;}
+.font-library[data-compact]>header{margin:0 0 8px;align-items:center;}
+.font-library[data-compact]>header small{display:none;}
+.font-library[data-compact]>header h2{font-size:20px;margin:0;line-height:1.2;}
+.font-library[data-compact]>header>button{width:40px;min-width:40px;height:40px;padding:0;}
+.font-library[data-compact]>.font-library-description{display:none;}
+.font-library[data-compact]>.font-search{display:grid;grid-template-columns:minmax(0,1fr) minmax(100px,.65fr);gap:8px;margin:0;}
+.font-library[data-compact]>.font-search>input,.font-library[data-compact]>.font-search>select{width:100%;min-width:0;min-height:40px;padding:8px;font-size:13px;}
+.font-library[data-compact]>.font-library-options>summary{font-size:11px;padding:8px;}
+.font-library[data-compact]>footer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;padding-top:8px;}
+.font-library[data-compact]>footer .font-result-count{margin:0;font-size:11px;}
+.font-library[data-compact]>footer .font-result-count>small,.font-library[data-compact]>footer>small{display:none;}
+.font-library[data-compact]>footer>button{font-size:11px;padding:8px;min-height:40px;}
 .device-fonts-panel summary{font-weight:700;cursor:pointer;}.device-fonts-panel p{margin:8px 0;line-height:1.5;}.device-fonts-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:6px;max-height:210px;overflow:auto;margin:10px 0;}.device-fonts-list button{text-align:left;font-size:15px;white-space:normal;}.device-fonts-panel small{display:block;line-height:1.5;}

@@ -705,7 +705,7 @@ tr.editor-page-gap {
     padding: 12px !important;
   }
   .font-card span {
-    font-size: 20px !important;
+    font-size: 20px;
     min-height: 65px;
   }
   .font-card strong {
