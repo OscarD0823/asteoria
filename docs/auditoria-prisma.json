@@ -78,11 +78,17 @@
             "docs/FUENTES-WRITER.md"
           ],
           "privateReport": "D:\\PDF\\Pruebas\\Fuentes-Celular-2026-10-13\\Writer-lista-web-1.6.2.json"
+        },
+        {
+          "type": "Entrega publicada 1.6.2",
+          "result": "EXE, APK, código fuente y sumas publicados; los cuatro tamaños y SHA-256 de GitHub coinciden con los archivos locales. Windows 1.6.2 instalado en D:\\Prisma\\Prisma Writer, paquete instalado idéntico al compilado y arranque sin errores. APK 1.6.2 instalada en el Samsung físico con el mismo certificado; la interfaz final sigue pendiente porque el teléfono quedó bloqueado. 155 pruebas de funciones superadas.",
+          "url": "https://github.com/OscarD0823/prisma-pdf/releases/tag/writer-v1.6.2",
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Entrega\\Publicacion-Writer-1.6.2.json"
         }
       ],
       "remaining": [
         "Permitir, cancelar y reintentar en la interfaz de Chrome/Edge: el navegador conectado es el integrado en Codex y no expone el diálogo de Local Font Access. El control nativo de Edge se detuvo porque no pudo verificar la URL actual; no se ha completado esta prueba ni se ha sorteado esa restricción.",
-        "Repetir en el teléfono físico la biblioteca final 1.6.2 y exportar/revisar PDF desde esa versión; el dispositivo se desconectó durante la sesión."
+        "Repetir en el Samsung físico la biblioteca final 1.6.2 y exportar/revisar PDF: la APK final está instalada, pero el teléfono quedó bloqueado. Se necesita que el usuario lo desbloquee; no se intentó introducir ni sortear el PIN."
       ]
     }
   ],
@@ -1415,6 +1421,14 @@
       "id": "EXT-002",
       "description": "Abrir archivos desde el sistema con cada aplicación independiente y Prisma; asociaciones Windows, Android y web instalada para formatos realmente admitidos.",
       "status": "pendiente"
+    },
+    {
+      "id": "EXT-003",
+      "description": "Corregir y verificar las siete alertas de dependencias detectadas en GitHub (nanoid, image-size y sprintf-js), sin ocultar los avisos ni romper sus consumidores.",
+      "status": "pendiente",
+      "evidence": [
+        "docs/DEPENDENCIAS-PENDIENTES.md"
+      ]
     }
   ]
 }

@@ -6,6 +6,8 @@ El 13 de octubre se comprobó Writer en un Samsung SM-S721B físico: abrió el D
 
 Las solicitudes de modificar definiciones de estilos como en Word y abrir archivos desde el sistema están registradas fuera de los 130 puntos originales. Se mantiene el orden solicitado.
 
+Writer 1.6.2 está [publicado para Windows y Android](https://github.com/OscarD0823/prisma-pdf/releases/tag/writer-v1.6.2), con código fuente y cuatro sumas verificadas frente a GitHub. Está instalado en Windows (arranque comprobado) y en el Samsung físico. La repetición final del celular espera a que el usuario lo desbloquee. La revisión de GitHub detectó además [siete alertas de dependencias](DEPENDENCIAS-PENDIENTES.md), que permanecen abiertas y registradas para su corrección.
+
 ## Resuelto ahora
 
 - Código propio en seis repositorios y un entorno común en `prisma`.
