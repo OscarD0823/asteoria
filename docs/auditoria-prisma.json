@@ -1413,17 +1413,17 @@
   ],
   "additionalRequests": [
     {
-      "id": "EXT-001",
+      "id": "REQ-20261013-001",
       "description": "Vista y modificación persistente de definiciones de estilos de párrafo, incluidos títulos, con compatibilidad Word.",
       "status": "pendiente"
     },
     {
-      "id": "EXT-002",
+      "id": "REQ-20261013-002",
       "description": "Abrir archivos desde el sistema con cada aplicación independiente y Prisma; asociaciones Windows, Android y web instalada para formatos realmente admitidos.",
       "status": "pendiente"
     },
     {
-      "id": "EXT-003",
+      "id": "REQ-20261013-003",
       "description": "Corregir y verificar las siete alertas de dependencias detectadas en GitHub (nanoid, image-size y sprintf-js), sin ocultar los avisos ni romper sus consumidores.",
       "status": "pendiente",
       "evidence": [
