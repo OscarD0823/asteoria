@@ -30,6 +30,10 @@ public class LocalDocumentExportTest {
     assertFalse(LocalDocumentExport.localProvider("com.google.android.apps.docs.storage"));
     assertFalse(LocalDocumentExport.localProvider(null));
   }
+  @Test public void portableProjectsKeepTheirOwnFileExtension(){
+    assertEquals("application/vnd.prisma.project+json",LocalDocumentExport.mimeFor("Documento.PRISMA","application/json"));
+    assertEquals("application/pdf",LocalDocumentExport.mimeFor("Documento.pdf","application/pdf"));
+  }
   private static void remove(File file) throws Exception {
     if(file.isDirectory())for(File child:file.listFiles())remove(child);
     Files.deleteIfExists(file.toPath());

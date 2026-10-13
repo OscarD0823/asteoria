@@ -3,6 +3,7 @@ package com.oscard.prismapdf;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Locale;
 
 final class LocalDocumentExport {
   static File source(File cache, String uri) throws Exception {
@@ -15,5 +16,10 @@ final class LocalDocumentExport {
   }
   static boolean localProvider(String authority){
     return "com.android.externalstorage.documents".equals(authority)||"com.android.providers.downloads.documents".equals(authority)||"com.android.providers.media.documents".equals(authority);
+  }
+  static String mimeFor(String name,String requested){
+    // DocumentsProvider appends the registered extension for application/json.
+    // Prisma projects need their own MIME type to retain the portable extension.
+    return name.toLowerCase(Locale.ROOT).endsWith(".prisma")?"application/vnd.prisma.project+json":requested;
   }
 }

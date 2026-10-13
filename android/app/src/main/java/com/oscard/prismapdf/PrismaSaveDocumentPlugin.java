@@ -25,7 +25,7 @@ public class PrismaSaveDocumentPlugin extends Plugin {
       if(name.isEmpty()||name.length()>200)throw new IllegalArgumentException("Nombre de archivo no válido.");
       String mime=call.getString("mime","application/octet-stream");
       if(!mime.matches("[a-zA-Z0-9.+-]+/[a-zA-Z0-9.+-]+"))throw new IllegalArgumentException("Formato de archivo no válido.");
-      Intent intent=new Intent(Intent.ACTION_CREATE_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType(mime).putExtra(Intent.EXTRA_TITLE,name);
+      Intent intent=new Intent(Intent.ACTION_CREATE_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType(LocalDocumentExport.mimeFor(name,mime)).putExtra(Intent.EXTRA_TITLE,name);
       if(Build.VERSION.SDK_INT>=26)intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI,DocumentsContract.buildDocumentUri("com.android.externalstorage.documents","primary:Download"));
       getActivity().runOnUiThread(()->{
         try{startActivityForResult(call,intent,"savedDocument");}
