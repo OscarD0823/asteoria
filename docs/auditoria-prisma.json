@@ -36,12 +36,17 @@
           "type": "integración real",
           "result": "225 familias / 488 caras de Windows. 17 variantes originales coinciden por SHA-256 en PDF y DOCX; XLSX/PPTX conservan nombres y estilos.",
           "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Exportaciones.json",
-          "limitation": "Consentimiento controlado en una sesión temporal de Electron; diálogo visual y permiso en Chrome/Edge pendientes."
+          "limitation": "Consentimiento controlado en este ensayo temporal de Electron; el diálogo visual de Windows se comprobó en un ensayo separado. El permiso en Chrome/Edge sigue pendiente."
         },
         {
           "type": "Windows instalado",
           "result": "Writer 1.6.1 instalado en D:\\Prisma\\Prisma Writer. Paquete SHA-256 idéntico al comprobado. 225 familias / 488 caras; 17 variantes montadas y restauradas con peticiones externas bloqueadas. Cancelar y reintentar superados con respuestas controladas al diálogo.",
           "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Fuentes-Windows-instalado.json"
+        },
+        {
+          "type": "Diálogo visual de Windows",
+          "result": "Clics reales en el código instalado de Writer 1.6.1, con perfil de prueba aislado y sin respuestas simuladas: cancelar muestra el aviso, reintentar vuelve a abrir el diálogo y permitir enumera 225 familias. Arial se aplica al editor; Calibri y Times New Roman aparecen en las búsquedas de Fuentes instaladas. El perfil ya contenía las fuentes de la prueba de integración; la enumeración y el consentimiento visual se comprobaron de nuevo.",
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Writer-Windows-permiso-visual.json"
         },
         {
           "type": "Interfaz web",
@@ -61,8 +66,7 @@
         }
       ],
       "remaining": [
-        "Diálogo visual de acceso a las fuentes en Prisma Windows: las pruebas de integración usan respuestas controladas; la automatización visual no se completó y se detuvo con Escape.",
-        "Permitir, cancelar y reintentar en la interfaz de Chrome/Edge: el navegador conectado es el integrado en Codex y no expone el diálogo de Local Font Access."
+        "Permitir, cancelar y reintentar en la interfaz de Chrome/Edge: el navegador conectado es el integrado en Codex y no expone el diálogo de Local Font Access. El control nativo de Edge se detuvo porque no pudo verificar la URL actual; no se ha completado esta prueba ni se ha sorteado esa restricción."
       ]
     }
   ],

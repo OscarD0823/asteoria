@@ -1,4 +1,4 @@
-# Estado y pendientes de Prisma — 12 de octubre de 2026
+# Estado y pendientes de Prisma — 13 de octubre de 2026
 
 Revisión del chat «Crear Suite Ofimática Web» y del código real. Se recuperó la auditoría completa mediante el enlace compartido. Sus 130 puntos están registrados individualmente en [COMPROBACIONES.md](COMPROBACIONES.md) y [auditoria-prisma.json](auditoria-prisma.json). Se conserva su orden; primero se trabaja en FNT-001, fuentes reales del PC, y no se inicia el siguiente punto mientras siga abierto.
 
@@ -9,7 +9,7 @@ Revisión del chat «Crear Suite Ofimática Web» y del código real. Se recuper
 - Entrada de compilación por aplicación y carga diferida de editores.
 - Commits fijados, validación de propietarios, procedencia de las compilaciones y actualización periódica al cambiar sus dependencias.
 - Conservación de URLs, identificadores y enlaces de los instaladores.
-- Código para buscar fuentes instaladas, leer la familia elegida e importar TTF/OTF/TTC. Se comprobaron 225 familias y 488 caras reales mediante Chromium en una sesión temporal de integración, con 17 variantes de Arial, Calibri, Times New Roman, Cambria y Cambria Math. Los bytes de esas 17 caras coinciden en las exportaciones PDF y DOCX; XLSX/PPTX mantienen nombres y estilos. FNT-001 continúa abierto: falta completar las pruebas de interfaz, permisos de la aplicación instalada, guardado sin conexión, publicación de instaladores y Android en emulador. Las fuentes variables y los formatos o permisos no compatibles muestran el motivo; no se anuncia acceso universal a cualquier fuente.
+- Código para buscar fuentes instaladas, leer la familia elegida e importar TTF/OTF/TTC. Se comprobaron 225 familias y 488 caras reales mediante Chromium, con 17 variantes de Arial, Calibri, Times New Roman, Cambria y Cambria Math. Los bytes de esas 17 caras coinciden en las exportaciones PDF y DOCX; XLSX/PPTX mantienen nombres y estilos. Writer 1.6.1 está publicado e instalado en Windows; Android se comprobó en emulador, incluido guardar y reabrir sin conexión. El diálogo real de Windows superó cancelar, reintentar y permitir; detectó 225 familias y se aplicó Arial. FNT-001 continúa abierto por la interacción de permisos en Chrome/Edge: el navegador integrado no expone el diálogo y el control nativo de Edge no pudo verificar su URL. Las fuentes variables y los formatos o permisos no compatibles muestran el motivo; no se anuncia acceso universal a cualquier fuente.
 
 ## Compatibilidad con Office: pendientes
 
