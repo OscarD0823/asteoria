@@ -4,6 +4,8 @@ Fuente: [Crear Suite Ofimática Web](https://chatgpt.com/share/6acd06a0-bec4-83e
 
 Estado inicial: **FNT-001 — fuentes reales del PC, en curso**. Los 130 puntos del chat están pendientes de comprobación individual. Tener código o conservar un componente de Office no demuestra equivalencia de edición.
 
+Alcance activo solicitado: **Prisma Writer**, el reemplazo de Word. Se termina FNT-001 en Writer y después se aborda AUD-053, paginación, seguido de los demás puntos de Writer en su orden original. Los puntos de las otras aplicaciones conservan sus identificadores y su estado pendiente. Solo Writer recibe esta nueva versión de los instaladores mientras se comprueba el punto actual.
+
 Un solo punto activo: reproducir → revisar → corregir → probar → publicar y verificar → cerrar. No se abre el siguiente mientras falte un criterio del actual. Una dependencia externa mantiene el punto abierto; no se omite. Windows y web se prueban realmente; Android en emulador. La prueba física se documenta por separado.
 
 Cada entrada de [auditoria-prisma.json](auditoria-prisma.json) conserva un identificador y su posición en la fuente. Los títulos siguientes son resúmenes; la descripción completa permanece en el chat enlazado. Los criterios y evidencias se completan al trabajar cada punto.

@@ -3,7 +3,9 @@
   "source": "https://chatgpt.com/share/6acd06a0-bec4-83e9-bccf-68cec5cae0be",
   "sourceDate": "2026-10-12",
   "note": "Resúmenes de los 130 puntos originales; sourceIndex conserva su posición. No son una certificación de compatibilidad.",
-  "order": "fuentes-pc, después orden original del chat",
+  "order": "fuentes-pc, después puntos de Writer en el orden original del chat; las demás aplicaciones quedan pendientes",
+  "activeProduct": "writer",
+  "nextAfterPrerequisite": "AUD-053",
   "mobileValidation": "emulador Android; pruebas físicas identificadas por separado",
   "active": "FNT-001",
   "prerequisites": [
@@ -34,10 +36,23 @@
           "type": "integración real",
           "result": "225 familias / 488 caras de Windows. 17 variantes originales coinciden por SHA-256 en PDF y DOCX; XLSX/PPTX conservan nombres y estilos.",
           "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Exportaciones.json",
-          "limitation": "Consentimiento controlado en una sesión temporal de Electron; interfaz instalada y Android pendientes."
+          "limitation": "Consentimiento controlado en una sesión temporal de Electron; diálogo visual y permiso en Chrome/Edge pendientes."
+        },
+        {
+          "type": "Windows instalado",
+          "result": "Writer 1.6.1 instalado en D:\\Prisma\\Prisma Writer. Paquete SHA-256 idéntico al comprobado. 225 familias / 488 caras; 17 variantes montadas y restauradas con peticiones externas bloqueadas. Cancelar y reintentar superados con respuestas controladas al diálogo.",
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Fuentes-Windows-instalado.json"
+        },
+        {
+          "type": "Interfaz web",
+          "result": "Importación real de DOCX, edición, guardado y exportación desde la web: 17/17 originales coinciden en PDF y proyecto; las 21 partes de fuentes del DOCX permanecen intactas. Incluye cuatro variantes de la fuente predeterminada del documento.",
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Writer-web-resultados.json"
+        },
+        {
+          "type": "Android en curso",
+          "result": "APK firmada con el certificado existente, instalada en emulador API 35. DOCX abierto y Arial original visible. Detectado y corregido recorte del selector de fuentes con teclado; falta comprobar la APK reconstruida y la reapertura sin conexión."
         }
-      ],
-      "blockedReason": "La automatización de Windows se detuvo al no poder determinar la URL del navegador con suficiente confianza. No repetir control de Windows en el mismo turno."
+      ]
     }
   ],
   "items": [

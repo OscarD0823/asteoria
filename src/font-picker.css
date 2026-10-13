@@ -2,7 +2,8 @@
 .font-quick-search{display:grid;gap:7px;font-size:12px;font-weight:700;}
 .font-quick-search input{font-weight:400;font-size:13px;width:100%;padding:10px 11px;min-height:40px;border:1px solid #dce1ed;border-radius:8px;background:#fafbfe;}
 .font-quick-heading{font-size:10px;color:#838b9d;margin:13px 6px 7px;}
-.font-quick-list{overflow:auto;max-height:min(350px,45dvh);min-height:55px;}
+.font-quick-list{overflow:auto;max-height:min(350px,45dvh);min-height:0;flex:1 1 auto;}
+.font-quick-panel>.font-quick-search,.font-quick-panel>.font-quick-heading,.font-quick-panel>.font-quick-more{flex-shrink:0;}
 .font-quick-list>button{display:flex;align-items:center;gap:12px;padding:9px 11px;text-align:left;width:100%;border:0;border-radius:7px;background:#fff;white-space:normal;min-height:45px;}
 .font-quick-list>button:hover,.font-quick-list>.font-quick-active{background:#f0edfb;}
 .font-quick-list>button[aria-selected=true]{color:#6250bb;}

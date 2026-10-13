@@ -54,7 +54,7 @@ export function FontPicker({
     searchInput = useRef<HTMLInputElement>(null),
     button = useRef<HTMLButtonElement>(null);
   const quickPanel=useRef<HTMLDivElement>(null),quickSearch=useRef<HTMLInputElement>(null),quickId=useId();
-  const [position,setPosition]=useState({left:16,top:80,width:320});
+  const [position,setPosition]=useState({left:16,top:80,width:320,maxHeight:480});
   const personal=useDeviceFonts();
   const [installed,setInstalled]=useState<InstalledFont[]>([]),[sourceMessage,setSourceMessage]=useState('');
   const [installedLimit,setInstalledLimit]=useState(60);
@@ -93,11 +93,18 @@ export function FontPicker({
   useEffect(()=>setInstalledLimit(60),[query,installed]);
   useEffect(()=>{
     if(!quick)return;
-    const place=()=>{const rect=button.current?.getBoundingClientRect();if(!rect)return;const width=Math.min(360,innerWidth-24);setPosition({width,left:Math.max(12,Math.min(rect.left,innerWidth-width-12)),top:Math.max(12,Math.min(rect.bottom+7,innerHeight-Math.min(480,innerHeight*.7)-12))});};
+    const place=()=>{
+      const rect=button.current?.getBoundingClientRect();if(!rect)return;
+      const viewport=window.visualViewport,left=viewport?.offsetLeft??0,top=viewport?.offsetTop??0;
+      const visibleWidth=Math.min(innerWidth,viewport?.width??innerWidth),visibleHeight=Math.min(innerHeight,viewport?.height??innerHeight);
+      const width=Math.max(0,Math.min(360,visibleWidth-24));
+      const panelTop=Math.max(top+12,Math.min(rect.bottom+7,top+visibleHeight-Math.min(480,visibleHeight*.7)-12));
+      setPosition({width,left:Math.max(left+12,Math.min(rect.left,left+visibleWidth-width-12)),top:panelTop,maxHeight:Math.max(0,top+visibleHeight-panelTop-12)});
+    };
     place();quickSearch.current?.focus();
     const outside=(event:PointerEvent)=>{if(event.target instanceof Node&&!quickPanel.current?.contains(event.target)&&!button.current?.contains(event.target))setQuick(false);};
-    document.addEventListener('pointerdown',outside);window.addEventListener('resize',place);
-    return()=>{document.removeEventListener('pointerdown',outside);window.removeEventListener('resize',place);};
+    document.addEventListener('pointerdown',outside);window.addEventListener('resize',place);window.visualViewport?.addEventListener('resize',place);window.visualViewport?.addEventListener('scroll',place);
+    return()=>{document.removeEventListener('pointerdown',outside);window.removeEventListener('resize',place);window.visualViewport?.removeEventListener('resize',place);window.visualViewport?.removeEventListener('scroll',place);};
   },[quick]);
   useEffect(()=>{if(quick)document.getElementById(quickId+'-'+active)?.scrollIntoView({block:'nearest'});},[active,quick,quickId]);
   useEffect(() => {
