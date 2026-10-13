@@ -4,7 +4,7 @@ directories:
   output: release-slides
 extraMetadata:
   name: prisma-slides
-  version: 0.3.1
+  version: 0.3.2
   prismaProduct: slides
 files:
   - dist-slides/**/*

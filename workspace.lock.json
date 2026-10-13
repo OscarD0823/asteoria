@@ -12,15 +12,15 @@
     },
     "sheets": {
       "repository": "OscarD0823/prisma-sheets",
-      "commit": "a379e39c56dd1d8561bd02327961376e5aadfadf"
+      "commit": "fe52467df5da83bf86c91b034cdccf5f974e1e8f"
     },
     "slides": {
       "repository": "OscarD0823/prisma-slides",
-      "commit": "167a45435ef24eb4a83b3d4eb890a038eb9df158"
+      "commit": "6c3975dfd969a3e65f48a58feb7a17b7a7bc2011"
     },
     "data": {
       "repository": "OscarD0823/prisma-data",
-      "commit": "115100f7b6a22383d0c06dd9b5d9de6491801a01"
+      "commit": "82a89f64b5ed43df74c3f6aee4bfdcd491ff69d6"
     },
     "publisher": {
       "repository": "OscarD0823/prisma-publisher",

@@ -1,11 +1,11 @@
 {
-  "version": "6.6.0",
-  "releaseUrl": "https://github.com/OscarD0823/prisma-pdf/releases/tag/v6.6.0",
-  "androidUrl": "https://github.com/OscarD0823/prisma-pdf/releases/download/v6.6.0/Prisma-PDF-6.6.0-Android.apk",
-  "windowsUrl": "https://github.com/OscarD0823/prisma-pdf/releases/download/v6.6.0/Prisma-PDF-6.6.0-Windows-Setup.exe",
+  "version": "6.6.1",
+  "releaseUrl": "https://github.com/OscarD0823/prisma-pdf/releases/tag/v6.6.1",
+  "androidUrl": "https://github.com/OscarD0823/prisma-pdf/releases/download/v6.6.1/Prisma-PDF-6.6.1-Android.apk",
+  "windowsUrl": "https://github.com/OscarD0823/prisma-pdf/releases/download/v6.6.1/Prisma-PDF-6.6.1-Windows-Setup.exe",
   "features": [
-    "Índices importados de Word con navegación y actualización",
-    "Selector de fuentes con búsqueda rápida y alternativas a fuentes de Office",
-    "Exportación DOCX, ODT, RTF y PDF"
+    "Fuentes reales del dispositivo con variantes y biblioteca en lista",
+    "Nombres de Office al exportar y fuentes reales en PDF",
+    "Dependencias de ortografía actualizadas; once diccionarios locales"
   ]
 }

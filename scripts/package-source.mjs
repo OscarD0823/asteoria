@@ -31,6 +31,7 @@ const files = [
   "workspace-source.json",
   "pnpm-lock.yaml",
   "pnpm-workspace.yaml",
+  "patches",
   "tsconfig.json",
   "vite.config.ts",
   "index.html",

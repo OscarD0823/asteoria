@@ -104,6 +104,16 @@
             "https://github.com/OscarD0823/prisma-pdf/releases/tag/prisma-v1.2.1"
           ],
           "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Entrega"
+        },
+        {
+          "type": "Fuentes de toda la suite, 13 de octubre de 2026",
+          "result": "Prisma Data incorpora el selector compartido y conserva Arial al guardar/reabrir y exportar XLSX. Sheets exporta Arial en XLSX. Slides y Publisher conservan fuente, tamaño y negrita/cursiva de las tablas tras editar celdas y exportar PPTX; SVG de Publisher incrusta la variante Arial cursiva original por SHA-256. 165 pruebas superadas, incluidas cinco de dependencias. Comprobación por importación real de cuatro archivos Arial del PC; no certifica Local Font Access en Chrome/Edge.",
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-todas-2026-10-13\\Exportaciones-web.json",
+          "files": [
+            "tests/suite-fonts.test.ts",
+            "tests/dependency-security.test.mjs",
+            "docs/FUENTES-SUITE.md"
+          ]
         }
       ],
       "remaining": [

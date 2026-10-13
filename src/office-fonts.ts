@@ -1,5 +1,6 @@
 import { fontFamilies, fontCss } from "./fonts";
 import {findDeviceFont} from './device-fonts';
+import {officeFontName} from './font-policy';
 const alternatives: Record<string, string> = {
   arial: "Arimo", calibri: "Carlito", cambria: "Caladea",
   "times new roman": "PrismaSerif", "courier new": "PrismaMono", georgia: "Gelasio",
@@ -16,4 +17,11 @@ export function officeFontCss(name = "Calibri") {
   const family = resolveOfficeFont(name);
   // Unknown Office fonts retain their name; CSS can use a font installed by the user.
   return family ? fontCss(family.value) : `${JSON.stringify(name)}, ${fontCss("Carlito")}`;
+}
+/** A selector supplies the real local ID; Office files retain the requested public family name. */
+export function selectedOfficeFontName(value:string):string {
+  if(value.startsWith('installed:'))throw new Error('Primero importa la familia instalada que deseas usar.');
+  const local=findDeviceFont(value);
+  if(local)return local.label;
+  return officeFontName(value,fontFamilies.find(font=>font.value===value)?.label??value);
 }

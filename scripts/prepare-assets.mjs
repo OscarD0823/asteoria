@@ -19,7 +19,15 @@ const appVersion=products[kind].version;
 const releaseTag =
   (kind==='pdf'?'v':kind+'-v')+appVersion;
 const assetName=products[kind].name.replace(' ','-');
-const suiteFeatures={prisma:['Índices de Word con enlaces y botón Actualizar tabla','Fórmulas encadenadas de Excel y macros VBA de celdas desde archivos BAS','Selector de fuentes con búsqueda rápida y biblioteca completa'],pdf:['Índices importados de Word con navegación y actualización','Selector de fuentes con búsqueda rápida y alternativas a fuentes de Office','Exportación DOCX, ODT, RTF y PDF'],writer:['Tablas de contenido de Word con enlaces a títulos y botón Actualizar tabla','Selector de fuentes con búsqueda rápida, recientes y biblioteca completa','Conservación DOCX/DOCM y exportación a Word y PDF'],sheets:['LET, nombres definidos y cálculos encadenados comparados con Excel','Macros VBA de celdas desde BAS con vista previa y deshacer','Correcciones de fechas ISO, constantes lógicas y redondeos de Excel'],slides:['Selector de fuentes con búsqueda rápida y biblioteca completa','Conservación PPTX/PPTM y corrector en varios idiomas','Exportación PPTX, PDF y SVG'],data:['Macros Prisma y SQL con transacciones locales','Tablas, registros y relaciones SQLite','Exportación SQLite, CSV, JSON y XLSX'],publisher:['Selector de fuentes con búsqueda rápida y biblioteca completa','Plantillas, macros locales y corrector en varios idiomas','Exportación PPTX, PDF y SVG']};
+const suiteFeatures={
+ prisma:['Fuentes del dispositivo en las seis aplicaciones; originales esenciales al inicio','Formato de texto de tablas en Slides y Publisher','Fuentes de Data conservadas al exportar Excel y actualización de dependencias'],
+ pdf:['Fuentes reales del dispositivo con variantes y biblioteca en lista','Nombres de Office al exportar y fuentes reales en PDF','Dependencias de ortografía actualizadas; once diccionarios locales'],
+ writer:['Fuentes reales del dispositivo con originales esenciales al inicio','Nombres de Office al exportar y fuentes reales en PDF','Dependencias de ortografía actualizadas; once diccionarios locales'],
+ sheets:['Fuentes originales del dispositivo y nombres de Office en XLSX','Alternativas disponibles si falta la fuente solicitada','Dependencias actualizadas y conservación de fórmulas y macros'],
+ slides:['Fuentes originales del dispositivo y nombres conservados en PPTX','Tipo de letra, tamaño y estilo en tablas; se conservan al editar texto','Dependencias de exportación y ortografía actualizadas'],
+ data:['Selector de fuentes del dispositivo para la vista de datos','Fuente conservada en XLSX sin perder negrita ni valores','Guardado de la preferencia de fuente y dependencias actualizadas'],
+ publisher:['Fuentes originales del dispositivo y nombres conservados en PPTX','Tipo de letra, tamaño y estilo en tablas; se conservan al editar texto','Dependencias de exportación y ortografía actualizadas']
+};
 const release = "https://github.com/OscarD0823/prisma-pdf/releases/";
 writeFileSync(
   "public/version.json",

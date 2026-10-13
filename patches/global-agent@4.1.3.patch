@@ -1,0 +1,46 @@
+diff --git a/dist/classes/Agent.js b/dist/classes/Agent.js
+index 4a31fe58d6b2226252e8f130486f7a865b7c7aa8..57144bd105c97eb568eb0e5ae9a619d0f2dab82e 100644
+--- a/dist/classes/Agent.js
++++ b/dist/classes/Agent.js
+@@ -153,7 +153,7 @@ class Agent {
+         // > are also accepted:
+         // >   ca, cert, ciphers, clientCertEngine, crl, dhparam, ecdhCurve, honorCipherOrder,
+         // >   key, passphrase, pfx, rejectUnauthorized, secureOptions, secureProtocol, servername, sessionIdContext.
+-        if (configuration.secureEndpoint) {
++        if (configuration.secureEndpoint || this.protocol === 'https:') {
+             // Determine servername - Node.js doesn't allow IP addresses as servername
+             const host = (_f = configuration.servername) !== null && _f !== void 0 ? _f : connectionConfiguration.host;
+             const servername = net_1.default.isIP(host) ? undefined : host;
+diff --git a/dist/classes/HttpsProxyAgent.js b/dist/classes/HttpsProxyAgent.js
+index 180cbc2b9365d7d0ac025764deb588b8686c0682..c0030a740223b505bab1655ef1aa458372a8f330 100644
+--- a/dist/classes/HttpsProxyAgent.js
++++ b/dist/classes/HttpsProxyAgent.js
+@@ -31,6 +31,7 @@ class HttpsProxyAgent extends Agent_1.default {
+             }
+             const secureSocket = tls_1.default.connect({
+                 ...configuration.tls,
++                host: configuration.host,
+                 socket,
+             });
+             callback(null, secureSocket);
+diff --git a/dist/utilities/isUrlMatchingNoProxy.js b/dist/utilities/isUrlMatchingNoProxy.js
+index aa12b457de0ed9268b86cb30c0d191b26119b592..e80301fc968e0707b038f5a1a36bf879d1600058 100644
+--- a/dist/utilities/isUrlMatchingNoProxy.js
++++ b/dist/utilities/isUrlMatchingNoProxy.js
+@@ -7,6 +7,7 @@ const matcher_1 = __importDefault(require("matcher"));
+ const errors_1 = require("../errors");
+ exports.default = (subjectUrl, noProxy) => {
+     const subjectUrlTokens = new URL(subjectUrl);
++    const subjectPort = subjectUrlTokens.port || (subjectUrlTokens.protocol === 'https:' ? '443' : subjectUrlTokens.protocol === 'http:' ? '80' : '');
+     const rules = noProxy.split(/[\s,]+/).filter(Boolean);
+     for (const rule of rules) {
+         const ruleMatch = rule
+@@ -19,7 +20,7 @@ exports.default = (subjectUrl, noProxy) => {
+             throw new errors_1.UnexpectedStateError('NO_PROXY entry pattern must include hostname. Use * to match any hostname.');
+         }
+         const hostnameIsMatch = matcher_1.default.isMatch(subjectUrlTokens.hostname, ruleMatch.groups.hostname);
+-        if (hostnameIsMatch && (!ruleMatch.groups || !ruleMatch.groups.port || subjectUrlTokens.port && subjectUrlTokens.port === ruleMatch.groups.port)) {
++        if (hostnameIsMatch && (!ruleMatch.groups.port || subjectPort === ruleMatch.groups.port)) {
+             return true;
+         }
+     }
