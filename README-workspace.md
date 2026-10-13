@@ -53,6 +53,8 @@ La biblioteca ofrece **Buscar fuentes instaladas**. En navegadores que implement
 
 Los navegadores móviles y otros navegadores sin esa API permiten elegir TTF/OTF y colecciones TTC/OTC mediante **Importar**. Cambria y Cambria Math se extraen como caras independientes conservando tablas y métricas. Writer recupera las fuentes incrustadas autorizadas de un DOCX y las guarda con el proyecto. El código de Windows solicita confirmación local mediante el preload antes de enumerar; esta mejora requiere un instalador nuevo para llegar a las aplicaciones ya instaladas. Se mantienen la validación, los límites de tamaño y los permisos de incrustación. Las variantes que no pueden utilizarse muestran su motivo. No se afirma acceso automático a todas las fuentes del celular.
 
+Writer 1.6.1 incorpora estas correcciones en los paquetes de Windows y Android. El selector se ajusta al espacio visible cuando aparece el teclado. Android permite guardar los archivos en una carpeta del dispositivo mediante su selector de documentos y conserva la extensión `.prisma`; el selector de apertura admite los proyectos que proceden de las versiones web y de Windows.
+
 La revisión secuencial está en [COMPROBACIONES.md](docs/COMPROBACIONES.md). FNT-001 sigue abierto hasta completar los criterios de web, Windows y Android emulado; las pruebas de integración de fuentes usan archivos reales del dispositivo y permanecen fuera del repositorio público.
 
 El código descargable incluye los módulos de las seis aplicaciones, sus commits y `workspace-source.json`. Se puede reconstruir sin historia de Git. No se empaquetan documentos privados, cachés personales ni claves. Esta reorganización no cambia IndexedDB, los perfiles nativos ni el procesamiento local de documentos.

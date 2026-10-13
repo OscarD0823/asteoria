@@ -49,9 +49,15 @@
           "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Writer-web-resultados.json"
         },
         {
-          "type": "Android en curso",
-          "result": "APK firmada con el certificado existente, instalada en emulador API 35. DOCX abierto y Arial original visible. Detectado y corregido recorte del selector de fuentes con teclado; falta comprobar la APK reconstruida y la reapertura sin conexión."
+          "type": "Android comprobado en emulador",
+          "result": "APK 1.6.1 firmada con el certificado existente. Biblioteca accesible con teclado; selección de Calibri, edición y reapertura de .prisma desde Descargas con modo avión. Proyecto y PDF exportados conservan las 17 variantes originales por SHA-256. Cinco pruebas Java del guardado local superadas. No se ha comprobado un teléfono físico.",
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Writer-Android-guardado-resultados.json"
         }
+      ],
+      "remaining": [
+        "Diálogo visual de acceso a las fuentes en Prisma Windows: las pruebas de integración usan respuestas controladas; la automatización visual no se completó y se detuvo con Escape.",
+        "Permitir, cancelar y reintentar en la interfaz de Chrome/Edge: el navegador conectado es el integrado en Codex y no expone el diálogo de Local Font Access.",
+        "Publicar y comprobar Writer 1.6.1 en web y descargas."
       ]
     }
   ],
