@@ -60,6 +60,7 @@ export function FontPicker({
   const personal=useDeviceFonts();
   const [installed,setInstalled]=useState<InstalledFont[]>([]),[sourceMessage,setSourceMessage]=useState('');
   const [installedLimit,setInstalledLimit]=useState(60);
+  const [catalogLimit,setCatalogLimit]=useState(20);
   const local=[...new Map([...personal,...fonts].map(f=>[f.value+':'+f.style,f])).values()];
   const families = [
       ...fontFamilies.filter((f) => f.file || f.styles),
@@ -93,6 +94,7 @@ export function FontPicker({
   const suggestions=query.trim()?families.filter(f=>filter(f.label+' '+(aliases[f.value]??'')).includes(filter(query))).sort((a,b)=>a.label.localeCompare(b.label,'es')).slice(0,40):[...new Set(popular)].map(value=>families.find(f=>f.value===value)).filter((f):f is typeof families[number]=>!!f).slice(0,16);
   useEffect(()=>setActive(0),[query,quick]);
   useEffect(()=>setInstalledLimit(60),[query,installed]);
+  useEffect(()=>setCatalogLimit(20),[query,category,open]);
   useEffect(()=>{
     if(!quick)return;
     const place=()=>{
@@ -371,8 +373,9 @@ export function FontPicker({
                 className={"font-catalog font-catalog-" + view}
                 role="group"
                 aria-label="Fuentes disponibles"
+                onScroll={event=>{const catalog=event.currentTarget;if(libraryViewport.compact&&catalog.scrollTop+catalog.clientHeight>=catalog.scrollHeight-80)setCatalogLimit(limit=>Math.min(shown.length,limit+20));}}
               >
-                {shown.map((f) => (
+                {(libraryViewport.compact?shown.slice(0,catalogLimit):shown).map((f) => (
                   <div
                     className={
                       "font-card " + (f.value === value ? "selected" : "")
