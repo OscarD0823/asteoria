@@ -15,6 +15,12 @@ En la interfaz web de desarrollo se verificaron las primeras filas sin recortes 
 
 FNT-001 sigue abierto: falta comprobar permitir, cancelar y reintentar en la interfaz de Chrome/Edge. La verificación visual de Windows y los ensayos de emulador se documentan por separado en la auditoría. No se afirma que todos los navegadores o celulares permitan enumerar fuentes del sistema.
 
+## Descubrimiento antes de importar
+
+Writer 1.6.3 y Prisma 1.2.1 incorporan las familias detectadas al selector principal, a la biblioteca y a los accesos académicos. Arial, Calibri y las demás esenciales detectadas aparecen al principio aunque sus archivos aún no se hayan importado. Elegir una lee sus variantes disponibles y guarda la identidad de la fuente real; el identificador temporal de descubrimiento nunca se aplica al documento. Las fuentes del proyecto tienen prioridad sobre la copia detectada de una misma familia. Las categorías de Arial, Calibri, Aptos y Courier New se conservan al importarlas.
+
+Se superaron 158 pruebas de funciones y del entorno. La integración de esta mejora con fuentes reales del PC, sus paquetes nativos y su publicación se registra en la auditoría después de comprobarlos; no se presenta esta sección como cierre del permiso de Chrome/Edge.
+
 La entrega [Writer 1.6.2](https://github.com/OscarD0823/prisma-pdf/releases/tag/writer-v1.6.2) ya está publicada con EXE, APK, código fuente y sumas. Los tamaños y SHA-256 de los cuatro archivos coinciden con GitHub. Windows está instalado en `D:\Prisma\Prisma Writer` y pasó el arranque de prueba; el paquete instalado coincide con el compilado. La APK final está instalada en el Samsung con el certificado existente y completó la prueba física descrita arriba. El desbloqueo lo realizó el usuario; no se introdujo ni sorteó su PIN.
 
 La edición de definiciones de estilos de párrafo y las asociaciones para abrir archivos desde Windows/Android están registradas como solicitudes adicionales pendientes. También se registraron [siete alertas de dependencias](DEPENDENCIAS-PENDIENTES.md) encontradas al revisar GitHub. Se conserva la instrucción de completar un punto antes de pasar al siguiente.

@@ -4,8 +4,9 @@ import { fontFamilies } from "./fonts";
 import { localFontFamilies, type LocalFont } from "./local-fonts";
 import { readPreference, writePreference } from "./preferences";
 import {essentialFontNames, essentialFontRank, officeFontNames} from './font-policy';
+import {fontChoices} from './font-choices';
 import './font-picker.css';
-import {useDeviceFonts,deviceFonts,listInstalledFonts,installedFamilies,installedFontFiles,importDeviceFonts,fontFiles,normalizeFontName,type InstalledFont} from './device-fonts';
+import {useDeviceFonts,useInstalledFonts,deviceFonts,listInstalledFonts,installedFamilies,installedFontFiles,importDeviceFonts,fontFiles,normalizeFontName} from './device-fonts';
 const essentials = [
   ["Arial · 11 pt", "Arimo", "Arimo"],
   ["Calibri · 11 pt", "Carlito", "Carlito"],
@@ -58,14 +59,12 @@ export function FontPicker({
   const [libraryViewport,setLibraryViewport]=useState({left:0,top:0,width:0,height:0,compact:false});
   const [libraryOptionsOpen,setLibraryOptionsOpen]=useState(true);
   const personal=useDeviceFonts();
-  const [installed,setInstalled]=useState<InstalledFont[]>([]),[sourceMessage,setSourceMessage]=useState('');
+  const installed=useInstalledFonts();
+  const [sourceMessage,setSourceMessage]=useState('');
   const [installedLimit,setInstalledLimit]=useState(60);
   const [catalogLimit,setCatalogLimit]=useState(20);
   const local=[...new Map([...personal,...fonts].map(f=>[f.value+':'+f.style,f])).values()];
-  const families = [...new Map([
-      ...fontFamilies.filter((f) => f.file || f.styles),
-      ...localFontFamilies(local),
-    ].map(font=>[font.value,font])).values()],
+  const families = fontChoices(local,installed),
     selected = [...fontFamilies, ...localFontFamilies(local)].find(
       (f) => f.value === value,
     );
@@ -83,14 +82,14 @@ export function FontPicker({
             : category === "recent"
               ? recent.includes(f.value)
               : category === "local"
-                ? f.value.startsWith("local-")
+                ? f.value.startsWith("local-")||!!f.installedFamily
                 : f.category === category)) &&
         filter(f.label+' '+(officeFontNames[f.value]??'')).includes(filter(query)),
     )
     .sort((a, b) => essentialFontRank(a)-essentialFontRank(b)||a.label.localeCompare(b.label, "es"));
   const aliases=officeFontNames;
   const installedShown=installedFamilies(installed).filter(name=>filter(name).includes(filter(query)));
-  const originals=essentialFontNames.map(name=>families.find(font=>font.value.startsWith('local-')&&normalizeFontName(font.label)===normalizeFontName(name))?.value).filter((font):font is string=>!!font);
+  const originals=essentialFontNames.map(name=>families.find(font=>(font.value.startsWith('local-')||!!font.installedFamily)&&normalizeFontName(font.label)===normalizeFontName(name))?.value).filter((font):font is string=>!!font);
   const popular=[...originals,value,...recent,...favorites,'Carlito','Arimo','PrismaSerif','Gelasio','NotoSans','NotoSerif','PrismaMono','LatinModernRoman'];
   const suggestions=query.trim()?families.filter(f=>filter(f.label+' '+(aliases[f.value]??'')).includes(filter(query))).sort((a,b)=>a.label.localeCompare(b.label,'es')).slice(0,40):[...new Set(popular)].map(value=>families.find(f=>f.value===value)).filter((f):f is typeof families[number]=>!!f).slice(0,16);
   useEffect(()=>setActive(0),[query,quick]);
@@ -142,18 +141,29 @@ export function FontPicker({
     return () => window.removeEventListener("keydown", key, true);
   }, [open,quick]);
   const prepareFont=async(font:string)=>{
+    const source=families.find(choice=>choice.value===font)?.installedFamily;
+    if(source){
+      const selected=await installedFontFiles(installed,source);
+      if(onImport)await onImport(selected.files);else await importDeviceFonts(selected.files);
+      return {value:selected.fonts[0].value,warnings:selected.warnings,label:source};
+    }
     const stored=deviceFonts().filter(f=>f.value===font&&!fonts.some(used=>used.value===f.value&&used.style===f.style&&used.hash===f.hash));
     if(onImport&&stored.length)await onImport(fontFiles(stored));
+    return {value:font,warnings:[] as string[],label:families.find(choice=>choice.value===font)?.label??font};
   };
   const choose = async (font: string) => {
     if(loading)return;
     setLoading(true);
     try{
-    await prepareFont(font);
+    const requested=font;
+    const prepared=await prepareFont(font);
+    font=prepared.value;
+    if(requested!==font&&favorites.includes(requested)){const next=favorites.map(value=>value===requested?font:value);setFavorites([...new Set(next)]);writePreference('favorite-fonts',[...new Set(next)]);}
     const next = [font, ...recent.filter((f) => f !== font)].slice(0, 12);
     setRecent(next);
     writePreference("recent-fonts", next);
     onChange(font);
+    if(prepared.warnings.length)onError(new Error('Se aplicó '+prepared.label+'. Algunas variantes no están disponibles: '+prepared.warnings.join(' · ')));
     setOpen(false);
     setQuick(false);
     button.current?.focus();
@@ -177,7 +187,7 @@ export function FontPicker({
           if(event.key==='Enter'&&suggestions[active]){event.preventDefault();choose(suggestions[active].value);}
         }}/></label>
         <small className="font-quick-heading">{query?'Resultados':'Esenciales y usadas recientemente'}</small>
-        <div id={quickId} className="font-quick-list" role="listbox" aria-label="Fuentes sugeridas">{suggestions.map((font,index)=><button key={font.value} id={quickId+'-'+index} role="option" aria-selected={font.value===value} className={index===active?'font-quick-active':''} tabIndex={-1} onMouseDown={event=>event.preventDefault()} onClick={()=>choose(font.value)}><span><b>{font.label}</b>{aliases[font.value]&&<small>Alternativa a {aliases[font.value]}</small>}</span><span className="font-quick-sample" style={{fontFamily:font.css}}>Aa</span>{font.value===value&&<span aria-hidden="true">✓</span>}</button>)}</div>
+        <div id={quickId} className="font-quick-list" role="listbox" aria-label="Fuentes sugeridas">{suggestions.map((font,index)=><button key={font.value} id={quickId+'-'+index} role="option" aria-selected={font.value===value} className={index===active?'font-quick-active':''} tabIndex={-1} onMouseDown={event=>event.preventDefault()} onClick={()=>choose(font.value)}><span><b>{font.label}</b>{font.installedFamily?<small>Instalada en este equipo</small>:aliases[font.value]&&<small>Alternativa a {aliases[font.value]}</small>}</span><span className="font-quick-sample" style={{fontFamily:font.css}}>Aa</span>{font.value===value&&<span aria-hidden="true">✓</span>}</button>)}</div>
         {!suggestions.length&&<p>No hay fuentes con ese nombre.</p>}
         <button className="font-quick-more" onClick={()=>{setQuick(false);setCategory('all');setOpen(true);}}>Biblioteca completa y vista previa <span>→</span></button>
       </div>,document.body)}
@@ -308,7 +318,7 @@ export function FontPicker({
                 <div>
                   {essentials.map(([label, preferred, alternate]) => {
                     const original=label.split(' · ')[0];
-                    const font = families.find(f=>f.value.startsWith('local-')&&normalizeFontName(f.label)===normalizeFontName(original)) ??
+                    const font = families.find(f=>(f.value.startsWith('local-')||!!f.installedFamily)&&normalizeFontName(f.label)===normalizeFontName(original)) ??
                       families.find((f) => f.value === preferred) ??
                       families.find((f) => f.label === alternate);
                     return font ? (
@@ -318,18 +328,19 @@ export function FontPicker({
                         onClick={async() => {
                           setLoading(true);
                           try{
-                          await prepareFont(font.value);
+                          const prepared=await prepareFont(font.value);
                           onAcademicFont(
-                            font.value,
+                            prepared.value,
                             Number(label.match(/(\d+) pt/)?.[1] ?? 12),
                           );
+                          if(prepared.warnings.length)onError(new Error('Se aplicó '+prepared.label+'. Algunas variantes no están disponibles: '+prepared.warnings.join(' · ')));
                           setOpen(false);
                           button.current?.focus();
                           }catch(error){onError(error);}finally{setLoading(false);}
                         }}
                       >
                         {label}
-                        <small>{font.value.startsWith('local-')?'Fuente del dispositivo':'Alternativa: '+font.label}</small>
+                        <small>{font.value.startsWith('local-')||font.installedFamily?'Fuente del dispositivo':'Alternativa: '+font.label}</small>
                       </button>
                     ) : null;
                   })}
@@ -352,7 +363,7 @@ export function FontPicker({
                 <p>Busca las fuentes instaladas en tu equipo o importa TTF / OTF y colecciones TTC. Se leen localmente.</p>
                 <button disabled={loading} onClick={async()=>{
                   setLoading(true);setSourceMessage('');
-                  try{const fonts=await listInstalledFonts();setInstalled(fonts);setSourceMessage(installedFamilies(fonts).length+' familias encontradas. Selecciona una para usarla.');}
+                  try{const fonts=await listInstalledFonts();setSourceMessage(installedFamilies(fonts).length+' familias encontradas. Ya aparecen en la lista de fuentes. Selecciona una para usarla.');}
                   catch(error){setSourceMessage(error instanceof DOMException&&error.name==='NotAllowedError'?'No se concedió permiso para leer las fuentes. Puedes volver a intentarlo o importar los archivos.':error instanceof Error?error.message:String(error));}
                   finally{setLoading(false);}
                 }}>Buscar fuentes instaladas</button>
@@ -399,7 +410,7 @@ export function FontPicker({
                         {sample || "Aa Bb Cc · ÁÉÍÓÚ ñ 123"}
                       </span>
                       <small>
-                        {f.value.startsWith("local-")
+                        {f.installedFamily?'Instalada en este equipo · se lee al seleccionarla':f.value.startsWith("local-")
                           ? (onImport?"Fuente personal · incluida en el proyecto":"Fuente personal · guardada en este dispositivo")
                           : aliases[f.value] ? 'Alternativa a '+aliases[f.value] : f.category === "serif"
                             ? "Serif"

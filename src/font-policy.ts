@@ -20,5 +20,5 @@ export function officeFontName(family:string,actualName:string):string {
 }
 export function essentialFontRank(font:{value:string;label:string}):number {
   const index=essentialFontNames.findIndex(name=>key(name)===key(font.label));
-  return index>=0&&font.value.startsWith('local-')?index:essentialFontNames.length;
+  return index>=0&&(font.value.startsWith('local-')||font.value.startsWith('installed:'))?index:essentialFontNames.length;
 }

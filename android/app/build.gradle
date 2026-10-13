@@ -29,8 +29,8 @@ android {
         writer {
             dimension 'product'
             applicationId 'com.oscard.prismawriter'
-            versionCode 10602
-            versionName '1.6.2'
+            versionCode 10603
+            versionName '1.6.3'
             resValue 'string', 'app_name', 'Prisma Writer'
             resValue 'string', 'title_activity_main', 'Prisma Writer'
         }
@@ -69,8 +69,8 @@ android {
         prisma {
             dimension 'product'
             applicationId 'com.oscard.prisma'
-            versionCode 10200
-            versionName '1.2.0'
+            versionCode 10201
+            versionName '1.2.1'
             resValue 'string', 'app_name', 'Prisma'
             resValue 'string', 'title_activity_main', 'Prisma'
         }

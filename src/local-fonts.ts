@@ -126,6 +126,7 @@ export async function importLocalFonts(bytes: Uint8Array): Promise<LocalFont[]> 
   return Promise.all(fontCollectionFaces(bytes).map(face => importLocalFont(face)));
 }
 export function localFontFamilies(fonts: LocalFont[] = []): FontFamily[] {
+  const categories:Record<string,FontFamily['category']>={arial:'sans-serif',calibri:'sans-serif',aptos:'sans-serif',cambria:'serif',georgia:'serif','times new roman':'serif','courier new':'monospace'};
   return [
     ...new Map(
       fonts.map((font) => [
@@ -133,8 +134,8 @@ export function localFontFamilies(fonts: LocalFont[] = []): FontFamily[] {
         {
           value: font.value,
           label: font.label,
-          css: font.value + ", serif",
-          category: "serif" as const,
+          css: font.value + ", " + (categories[font.label.toLocaleLowerCase('en')]??'serif'),
+          category: categories[font.label.toLocaleLowerCase('en')]??'serif' as const,
         },
       ]),
     ).values(),

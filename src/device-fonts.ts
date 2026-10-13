@@ -7,6 +7,7 @@ export type InstalledFont={family:string;fullName:string;postscriptName:string;s
 type FontWindow=Window & {queryLocalFonts?:()=>Promise<InstalledFont[]>;prismaDesktop?:{fonts?:{requestAccess:()=>Promise<boolean>}}};
 let current:LocalFont[]=[],cleanup:(()=>void)|undefined,initializing:Promise<void>|undefined;
 let installed:InstalledFont[]=[];
+const installedEvent='prisma-installed-fonts';
 /** Metadata from a successful user-authorized enumeration in this session. No font bytes are read here. */
 export const knownInstalledFonts=()=>installed;
 const event='prisma-device-fonts',id='prisma-device-fonts-v1';
@@ -28,7 +29,7 @@ export async function listInstalledFonts():Promise<InstalledFont[]>{
  // so the first permission request keeps the user's click.
  const request=(window as FontWindow).queryLocalFonts!();
  let timer:ReturnType<typeof setTimeout>|undefined;
- try{installed=await Promise.race([request,new Promise<InstalledFont[]>((_,reject)=>{timer=setTimeout(()=>reject(new Error('El navegador aún espera el permiso para leer fuentes. Puedes volver a intentarlo o importar archivos TTF / OTF.')),30_000);})]);return installed;}
+ try{installed=await Promise.race([request,new Promise<InstalledFont[]>((_,reject)=>{timer=setTimeout(()=>reject(new Error('El navegador aún espera el permiso para leer fuentes. Puedes volver a intentarlo o importar archivos TTF / OTF.')),30_000);})]);window.dispatchEvent?.(new Event(installedEvent));return installed;}
  finally{if(timer)clearTimeout(timer);}
 }
 export function fontFiles(fonts:LocalFont[]){return fonts.map(font=>new File([decodeFont(font.bytes).buffer as ArrayBuffer],font.label+'-'+font.style+'.'+(decodeFont(font.bytes)[0]===0x4f?'otf':'ttf'),{type:'application/octet-stream'}));}
@@ -69,5 +70,10 @@ export async function installedFontFiles(available:InstalledFont[],family:string
 export function useDeviceFonts(){
  const[fonts,setFonts]=useState(current);
  useEffect(()=>{const update=()=>setFonts([...current]);window.addEventListener(event,update);void initializeDeviceFonts().then(update);return()=>window.removeEventListener(event,update);},[]);
+ return fonts;
+}
+export function useInstalledFonts(){
+ const [fonts,setFonts]=useState(installed);
+ useEffect(()=>{const update=()=>setFonts([...installed]);window.addEventListener(installedEvent,update);return()=>window.removeEventListener(installedEvent,update);},[]);
  return fonts;
 }
