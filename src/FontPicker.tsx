@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { fontFamilies } from "./fonts";
 import { localFontFamilies, type LocalFont } from "./local-fonts";
 import { readPreference, writePreference } from "./preferences";
+import {essentialFontNames, essentialFontRank, officeFontNames} from './font-policy';
 import './font-picker.css';
 import {useDeviceFonts,deviceFonts,listInstalledFonts,installedFamilies,installedFontFiles,importDeviceFonts,fontFiles,normalizeFontName,type InstalledFont} from './device-fonts';
 const essentials = [
@@ -47,7 +48,6 @@ export function FontPicker({
   );
   const [previewSize, setPreviewSize] = useState(24);
   const [preview, setPreview] = useState(value);
-  const [view, setView] = useState<"grid" | "list">("list");
   const [bold, setBold] = useState(false),
     [italic, setItalic] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null),
@@ -62,10 +62,10 @@ export function FontPicker({
   const [installedLimit,setInstalledLimit]=useState(60);
   const [catalogLimit,setCatalogLimit]=useState(20);
   const local=[...new Map([...personal,...fonts].map(f=>[f.value+':'+f.style,f])).values()];
-  const families = [
+  const families = [...new Map([
       ...fontFamilies.filter((f) => f.file || f.styles),
       ...localFontFamilies(local),
-    ],
+    ].map(font=>[font.value,font])).values()],
     selected = [...fontFamilies, ...localFontFamilies(local)].find(
       (f) => f.value === value,
     );
@@ -85,14 +85,16 @@ export function FontPicker({
               : category === "local"
                 ? f.value.startsWith("local-")
                 : f.category === category)) &&
-        filter(f.label).includes(filter(query)),
+        filter(f.label+' '+(officeFontNames[f.value]??'')).includes(filter(query)),
     )
-    .sort((a, b) => a.label.localeCompare(b.label, "es"));
-  const aliases:Record<string,string>={Arimo:'Arial',PrismaSans:'Arial',Carlito:'Calibri',PrismaSerif:'Times New Roman',Gelasio:'Georgia',PrismaMono:'Courier New'};
+    .sort((a, b) => essentialFontRank(a)-essentialFontRank(b)||a.label.localeCompare(b.label, "es"));
+  const aliases=officeFontNames;
   const installedShown=installedFamilies(installed).filter(name=>filter(name).includes(filter(query)));
-  const popular=[value,...recent,...favorites,'Carlito','Arimo','PrismaSerif','Gelasio','NotoSans','NotoSerif','PrismaMono','LatinModernRoman'];
+  const originals=essentialFontNames.map(name=>families.find(font=>font.value.startsWith('local-')&&normalizeFontName(font.label)===normalizeFontName(name))?.value).filter((font):font is string=>!!font);
+  const popular=[...originals,value,...recent,...favorites,'Carlito','Arimo','PrismaSerif','Gelasio','NotoSans','NotoSerif','PrismaMono','LatinModernRoman'];
   const suggestions=query.trim()?families.filter(f=>filter(f.label+' '+(aliases[f.value]??'')).includes(filter(query))).sort((a,b)=>a.label.localeCompare(b.label,'es')).slice(0,40):[...new Set(popular)].map(value=>families.find(f=>f.value===value)).filter((f):f is typeof families[number]=>!!f).slice(0,16);
   useEffect(()=>setActive(0),[query,quick]);
+  useEffect(()=>{if(!open)setPreview(value);},[value,open]);
   useEffect(()=>setInstalledLimit(60),[query,installed]);
   useEffect(()=>setCatalogLimit(20),[query,category,open]);
   useEffect(()=>{
@@ -139,12 +141,15 @@ export function FontPicker({
     window.addEventListener("keydown", key, true);
     return () => window.removeEventListener("keydown", key, true);
   }, [open,quick]);
+  const prepareFont=async(font:string)=>{
+    const stored=deviceFonts().filter(f=>f.value===font&&!fonts.some(used=>used.value===f.value&&used.style===f.style&&used.hash===f.hash));
+    if(onImport&&stored.length)await onImport(fontFiles(stored));
+  };
   const choose = async (font: string) => {
     if(loading)return;
     setLoading(true);
     try{
-    const stored=deviceFonts().filter(f=>f.value===font&&!fonts.some(used=>used.value===f.value&&used.style===f.style&&used.hash===f.hash));
-    if(onImport&&stored.length)await onImport(fontFiles(stored));
+    await prepareFont(font);
     const next = [font, ...recent.filter((f) => f !== font)].slice(0, 12);
     setRecent(next);
     writePreference("recent-fonts", next);
@@ -290,28 +295,15 @@ export function FontPicker({
                 >
                   <i>I</i>
                 </button>
-                <button
-                  aria-label="Vista en tarjetas"
-                  aria-pressed={view === "grid"}
-                  onClick={() => setView("grid")}
-                >
-                  ▦
-                </button>
-                <button
-                  aria-label="Vista en lista"
-                  aria-pressed={view === "list"}
-                  onClick={() => setView("list")}
-                >
-                  ☷
-                </button>
               </div>
+              <div className="font-full-preview" style={{fontFamily:families.find(font=>font.value===preview)?.css,fontSize:previewSize,fontWeight:bold?700:400,fontStyle:italic?'italic':'normal'}}>{sample||'Aa Bb Cc · ÁÉÍÓÚ ñ 123'}</div>
               {onAcademicFont && <details className="essential-fonts">
                 <summary>Fuentes para entregas académicas</summary>
                 <p>
                   APA permite varias fuentes legibles. IEEE suele usar Times New
                   Roman según la plantilla. Estos accesos eligen alternativas
-                  libres; importa el archivo original si tu institución exige la
-                  tipografía exacta.
+                  disponibles originales cuando se han leído en este dispositivo
+                  o incluido en el proyecto; en su ausencia usan alternativas libres.
                 </p>
                 <div>
                   {essentials.map(([label, preferred, alternate]) => {
@@ -322,13 +314,18 @@ export function FontPicker({
                     return font ? (
                       <button
                         key={label}
-                        onClick={() => {
+                        disabled={loading}
+                        onClick={async() => {
+                          setLoading(true);
+                          try{
+                          await prepareFont(font.value);
                           onAcademicFont(
                             font.value,
                             Number(label.match(/(\d+) pt/)?.[1] ?? 12),
                           );
                           setOpen(false);
                           button.current?.focus();
+                          }catch(error){onError(error);}finally{setLoading(false);}
                         }}
                       >
                         {label}
@@ -370,7 +367,7 @@ export function FontPicker({
               </div>}
               </div>
               <div
-                className={"font-catalog font-catalog-" + view}
+                className="font-catalog font-catalog-list"
                 role="group"
                 aria-label="Fuentes disponibles"
                 onScroll={event=>{const catalog=event.currentTarget;if(libraryViewport.compact&&catalog.scrollTop+catalog.clientHeight>=catalog.scrollHeight-80)setCatalogLimit(limit=>Math.min(shown.length,limit+20));}}
@@ -390,7 +387,7 @@ export function FontPicker({
                       onFocus={() => setPreview(f.value)}
                       onMouseEnter={() => setPreview(f.value)}
                     >
-                      <strong>{f.label}</strong>
+                      <strong style={{fontFamily:f.css}}>{f.label}</strong>
                       <span
                         style={{
                           fontFamily: f.css,
@@ -404,7 +401,7 @@ export function FontPicker({
                       <small>
                         {f.value.startsWith("local-")
                           ? (onImport?"Fuente personal · incluida en el proyecto":"Fuente personal · guardada en este dispositivo")
-                          : f.category === "serif"
+                          : aliases[f.value] ? 'Alternativa a '+aliases[f.value] : f.category === "serif"
                             ? "Serif"
                             : f.category === "monospace"
                               ? "Monoespaciada"
@@ -439,7 +436,7 @@ export function FontPicker({
                   {families.find((f) => f.value === preview)?.label ??
                     selected?.label}
                   <small>
-                    Selecciona una tarjeta para aplicar. Las estrellas guardan
+                    Selecciona una fuente para aplicar. Las estrellas guardan
                     tus favoritas.
                   </small>
                 </span>

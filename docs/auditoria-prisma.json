@@ -6,7 +6,7 @@
   "order": "fuentes-pc, después puntos de Writer en el orden original del chat; las demás aplicaciones quedan pendientes",
   "activeProduct": "writer",
   "nextAfterPrerequisite": "AUD-053",
-  "mobileValidation": "emulador Android; pruebas físicas identificadas por separado",
+  "mobileValidation": "Emulador Android y Samsung SM-S721B físico; las versiones y limitaciones se identifican por separado.",
   "active": "FNT-001",
   "prerequisites": [
     {
@@ -63,10 +63,26 @@
           "result": "Writer 1.6.1 para Windows y Android publicado con código fuente completo y SHA-256 coincidente con los archivos locales. Windows instalado en D:\\Prisma\\Prisma Writer. Web 1.6.1 y los siete sitios verificados; documentos y fuentes privadas fuera de la entrega.",
           "url": "https://github.com/OscarD0823/prisma-pdf/releases/tag/writer-v1.6.1",
           "website": "https://oscard0823.github.io/prisma-writer/"
+        },
+        {
+          "type": "Celular físico",
+          "result": "Samsung SM-S721B, Android 16 API 36: Writer 1.6.1 abrió el DOCX, aplicó Calibri, editó texto y exportó un proyecto con 17/17 originales coincidentes por SHA-256. Las APK de prueba 1.6.2 reabrieron el proyecto conservando texto y fuentes. El teléfono se desconectó antes del ensayo final de la lista corregida y su exportación PDF. No se comprobó modo sin conexión en el teléfono físico.",
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-Celular-2026-10-13\\Writer-Celular-1.6.1.resultados.json"
+        },
+        {
+          "type": "Lista y política de fuentes 1.6.2",
+          "result": "Biblioteca solo en lista. Comprobación web con viewport 411 × 479 sin filas recortadas; Arial, Calibri, Times New Roman y Cambria originales al inicio. APA aplica Times New Roman original. Pruebas de nombres solicitados de Office, alternativas reales incrustadas y reapertura/reconstrucción DOCX.",
+          "files": [
+            "src/font-policy.ts",
+            "tests/font-policy.test.ts",
+            "docs/FUENTES-WRITER.md"
+          ],
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-Celular-2026-10-13\\Writer-lista-web-1.6.2.json"
         }
       ],
       "remaining": [
-        "Permitir, cancelar y reintentar en la interfaz de Chrome/Edge: el navegador conectado es el integrado en Codex y no expone el diálogo de Local Font Access. El control nativo de Edge se detuvo porque no pudo verificar la URL actual; no se ha completado esta prueba ni se ha sorteado esa restricción."
+        "Permitir, cancelar y reintentar en la interfaz de Chrome/Edge: el navegador conectado es el integrado en Codex y no expone el diálogo de Local Font Access. El control nativo de Edge se detuvo porque no pudo verificar la URL actual; no se ha completado esta prueba ni se ha sorteado esa restricción.",
+        "Repetir en el teléfono físico la biblioteca final 1.6.2 y exportar/revisar PDF desde esa versión; el dispositivo se desconectó durante la sesión."
       ]
     }
   ],
@@ -1386,6 +1402,18 @@
     {
       "id": "EXT-003",
       "description": "Preparar expediente de autoría y registro del software",
+      "status": "pendiente"
+    }
+  ],
+  "additionalRequests": [
+    {
+      "id": "EXT-001",
+      "description": "Vista y modificación persistente de definiciones de estilos de párrafo, incluidos títulos, con compatibilidad Word.",
+      "status": "pendiente"
+    },
+    {
+      "id": "EXT-002",
+      "description": "Abrir archivos desde el sistema con cada aplicación independiente y Prisma; asociaciones Windows, Android y web instalada para formatos realmente admitidos.",
       "status": "pendiente"
     }
   ]

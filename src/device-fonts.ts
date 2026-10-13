@@ -6,6 +6,9 @@ import {loadOfficeFile,saveOfficeFile} from './office-storage';
 export type InstalledFont={family:string;fullName:string;postscriptName:string;style:string;blob:()=>Promise<Blob>};
 type FontWindow=Window & {queryLocalFonts?:()=>Promise<InstalledFont[]>;prismaDesktop?:{fonts?:{requestAccess:()=>Promise<boolean>}}};
 let current:LocalFont[]=[],cleanup:(()=>void)|undefined,initializing:Promise<void>|undefined;
+let installed:InstalledFont[]=[];
+/** Metadata from a successful user-authorized enumeration in this session. No font bytes are read here. */
+export const knownInstalledFonts=()=>installed;
 const event='prisma-device-fonts',id='prisma-device-fonts-v1';
 export const deviceFonts=()=>current;
 export const normalizeFontName=(name:string)=>name.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('en');
@@ -25,7 +28,7 @@ export async function listInstalledFonts():Promise<InstalledFont[]>{
  // so the first permission request keeps the user's click.
  const request=(window as FontWindow).queryLocalFonts!();
  let timer:ReturnType<typeof setTimeout>|undefined;
- try{return await Promise.race([request,new Promise<InstalledFont[]>((_,reject)=>{timer=setTimeout(()=>reject(new Error('El navegador aún espera el permiso para leer fuentes. Puedes volver a intentarlo o importar archivos TTF / OTF.')),30_000);})]);}
+ try{installed=await Promise.race([request,new Promise<InstalledFont[]>((_,reject)=>{timer=setTimeout(()=>reject(new Error('El navegador aún espera el permiso para leer fuentes. Puedes volver a intentarlo o importar archivos TTF / OTF.')),30_000);})]);return installed;}
  finally{if(timer)clearTimeout(timer);}
 }
 export function fontFiles(fonts:LocalFont[]){return fonts.map(font=>new File([decodeFont(font.bytes).buffer as ArrayBuffer],font.label+'-'+font.style+'.'+(decodeFont(font.bytes)[0]===0x4f?'otf':'ttf'),{type:'application/octet-stream'}));}

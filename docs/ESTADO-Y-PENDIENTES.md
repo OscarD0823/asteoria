@@ -2,6 +2,10 @@
 
 Revisión del chat «Crear Suite Ofimática Web» y del código real. Se recuperó la auditoría completa mediante el enlace compartido. Sus 130 puntos están registrados individualmente en [COMPROBACIONES.md](COMPROBACIONES.md) y [auditoria-prisma.json](auditoria-prisma.json). Se conserva su orden; primero se trabaja en FNT-001, fuentes reales del PC, y no se inicia el siguiente punto mientras siga abierto.
 
+El 13 de octubre se comprobó Writer en un Samsung SM-S721B físico: abrió el DOCX con fuentes originales, permitió editar y guardó un proyecto con 17/17 variantes idénticas. Las actualizaciones de prueba conservaron ese proyecto. Writer 1.6.2 añade biblioteca solo en lista, originales esenciales al inicio, preferencia por originales al aplicar formatos académicos y nombres de Office en DOCX con alternativas reales declaradas. La lista final se verificó en la interfaz web con espacio de pantalla móvil. El teléfono se desconectó antes de la repetición final y exportación PDF física; esa parte sigue pendiente. Detalles en [FUENTES-WRITER.md](FUENTES-WRITER.md).
+
+Las solicitudes de modificar definiciones de estilos como en Word y abrir archivos desde el sistema están registradas fuera de los 130 puntos originales. Se mantiene el orden solicitado.
+
 ## Resuelto ahora
 
 - Código propio en seis repositorios y un entorno común en `prisma`.

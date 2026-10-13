@@ -1420,6 +1420,7 @@ export default function Studio() {
             content,
             flow.references ?? [],
             flow.academicStyle ?? "free",
+            state.current.fonts,
           ),
         },
       });
@@ -2520,10 +2521,12 @@ export default function Studio() {
             <WordTools
               tab={tab}
               flow={workspace.flow}
+              fonts={workspace.fonts}
               editor={rich}
               layout={currentLayout}
               onFlow={(flow) => {
-                commit({ ...state.current, flow });
+                const fonts=[...new Map([...(state.current.fonts??[]),...(flow.fonts??[])].map(font=>[font.value+':'+font.style,font])).values()];
+                commit({ ...state.current, fonts, flow:{...flow,fonts} });
                 setView("write");
               }}
               onLayout={(next) => {
@@ -2843,6 +2846,7 @@ export default function Studio() {
                               content,
                               state.current.flow!.references ?? [],
                               state.current.flow!.academicStyle ?? "free",
+                              state.current.fonts,
                             ),
                           },
                         },
