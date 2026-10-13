@@ -81,14 +81,18 @@
         },
         {
           "type": "Entrega publicada 1.6.2",
-          "result": "EXE, APK, código fuente y sumas publicados; los cuatro tamaños y SHA-256 de GitHub coinciden con los archivos locales. Windows 1.6.2 instalado en D:\\Prisma\\Prisma Writer, paquete instalado idéntico al compilado y arranque sin errores. APK 1.6.2 instalada en el Samsung físico con el mismo certificado; la interfaz final sigue pendiente porque el teléfono quedó bloqueado. 155 pruebas de funciones superadas.",
+          "result": "EXE, APK, código fuente y sumas publicados; los cuatro tamaños y SHA-256 de GitHub coinciden con los archivos locales. Windows 1.6.2 instalado en D:\\Prisma\\Prisma Writer, paquete instalado idéntico al compilado y arranque sin errores. APK 1.6.2 instalada en el Samsung físico con el mismo certificado; la prueba física final de interfaz, edición, guardado, reapertura y PDF quedó completada después del desbloqueo del usuario. 155 pruebas de funciones superadas.",
           "url": "https://github.com/OscarD0823/prisma-pdf/releases/tag/writer-v1.6.2",
           "privateReport": "D:\\PDF\\Pruebas\\Fuentes-PC-2026-10-12\\Entrega\\Publicacion-Writer-1.6.2.json"
+        },
+        {
+          "type": "Celular físico final 1.6.2",
+          "result": "Samsung SM-S721B, Android 16 API 36, APK publicada 1.6.2: originales esenciales al inicio; búsqueda, importación y primera fila completas con teclado visible. Calibri aplicada, texto editado, proyecto guardado y reabierto en la interfaz real. Proyecto y PDF exportados conservan 17/17 variantes originales por SHA-256. PDF de una página revisado mediante extracción de texto y renderizado Poppler, con tildes, ñ y €. No se cambió la conectividad ni se afirma una prueba sin conexión física.",
+          "privateReport": "D:\\PDF\\Pruebas\\Fuentes-Celular-2026-10-13\\Writer-Celular-1.6.2-prueba-final.json"
         }
       ],
       "remaining": [
-        "Permitir, cancelar y reintentar en la interfaz de Chrome/Edge: el navegador conectado es el integrado en Codex y no expone el diálogo de Local Font Access. El control nativo de Edge se detuvo porque no pudo verificar la URL actual; no se ha completado esta prueba ni se ha sorteado esa restricción.",
-        "Repetir en el Samsung físico la biblioteca final 1.6.2 y exportar/revisar PDF: la APK final está instalada, pero el teléfono quedó bloqueado. Se necesita que el usuario lo desbloquee; no se intentó introducir ni sortear el PIN."
+        "Permitir, cancelar y reintentar en la interfaz de Chrome/Edge: el navegador conectado es el integrado en Codex y no expone el diálogo de Local Font Access. El control nativo de Edge se detuvo porque no pudo verificar la URL actual; no se ha completado esta prueba ni se ha sorteado esa restricción."
       ]
     }
   ],
