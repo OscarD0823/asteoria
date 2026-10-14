@@ -7,6 +7,8 @@ dist-data/
 dist-publisher/
 dist-site/
 dist-prisma/
+dist-arquitectura/
+release-arquitectura/
 .openai/
 public/pdfjs/
 public/engine/

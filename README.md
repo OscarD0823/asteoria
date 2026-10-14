@@ -17,6 +17,8 @@ Este repositorio contiene el entorno común y el panel general. Cada editor tien
 
 La suite y los programas sueltos usan los mismos módulos. Una función se programa una vez. [Preparar el entorno y publicar](README-workspace.md).
 
+[Prisma Arquitectura](https://oscard0823.github.io/prisma-arquitectura/) permite crear planos y editar mobiliario en 3D, recorrer los espacios, ajustar las luces y exportar renders PNG y PDF a escala. [Windows instalable y portátil](https://github.com/OscarD0823/prisma-arquitectura/releases/latest). La fuente canónica está en `src/architecture`; la [distribución independiente](https://github.com/OscarD0823/prisma-arquitectura) se genera desde el mismo código. `pnpm dev:architecture` usa el puerto 4196; `pnpm build:architecture` genera `dist-arquitectura`, y `pnpm desktop:architecture` genera Windows. [Análisis de Pascal, alcance y desarrollo](docs/ANALISIS-PASCAL-Y-PRISMA-ARQUITECTURA.md).
+
 
 ```powershell
 node scripts/workspace.mjs sync

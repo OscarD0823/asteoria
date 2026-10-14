@@ -5,6 +5,7 @@ import {resolve} from 'node:path';
 import {realpathSync} from 'node:fs';
 import {activeEntry,moduleAliases} from './scripts/workspace-core.mjs';
 import {provenancePlugin} from './scripts/build-provenance.mjs';
+const architectureStandalone = process.env.VITE_ARCHITECTURE_STANDALONE === '1';
 // Older Hunspell bindings call nanoid's CommonJS export. Make that import
 // explicit for Rollup, including the separately compiled spelling worker.
 const proofingInterop = () => ({
@@ -17,6 +18,7 @@ const proofingInterop = () => ({
   },
 });
 export default defineConfig({
+  publicDir: architectureStandalone ? false : 'public',
   resolve: {alias: {'@prisma/active-app':activeEntry(process.cwd(),process.env.VITE_PRODUCT??'pdf'),...moduleAliases(process.cwd())}},
   plugins: [
     react(),
@@ -25,6 +27,7 @@ export default defineConfig({
     {
       name: "prisma-product",
       transformIndexHtml(html) {
+        if (architectureStandalone) return html;
         const kind=process.env.VITE_PRODUCT as keyof typeof products;
         const canonical='https://oscard0823.github.io/'+(products[kind]??products.pdf).siteSlug+'/';
         html=html.replace('<head>','<head>\n    <link rel="canonical" href="'+canonical+'" />');
@@ -46,8 +49,8 @@ export default defineConfig({
     },
   ],
   base: "./",
-  server: {fs:{allow:[process.cwd(),...Object.values(moduleAliases(process.cwd())).map(dir=>realpathSync(dir)),realpathSync('node_modules')]},watch: {ignored: ["**/dist/**", "**/dist-*/**", "**/release*/**", "**/qa/**", "**/android/**"]}},
+  server: {fs:{allow:[process.cwd(),...Object.values(moduleAliases(process.cwd())).map(dir=>realpathSync(dir)),realpathSync('node_modules')]},watch: {ignored: ["**/dist/**", "**/dist-*/**", "**/release*/**", "**/qa/**", "**/android/**", "**/.prisma/architecture-source/**"]}},
   optimizeDeps: { entries: ["index.html"] },
   worker: { format: "es", plugins:()=>[proofingInterop()] },
-  build: { chunkSizeWarningLimit: 1800 },
+  build: { chunkSizeWarningLimit: 1800, ...(architectureStandalone ? {rollupOptions:{input:resolve('arquitectura.html')}} : {}) },
 });

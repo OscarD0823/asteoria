@@ -102,6 +102,7 @@ for (const dependency of [
   "react",
   "react-dom",
   "lucide-react",
+  "three",
   "@capacitor/core",
   "@capacitor/android",
   "@capacitor/filesystem",
