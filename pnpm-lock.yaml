@@ -243,6 +243,22 @@ importers:
         specifier: ^7.0.4
         version: 7.3.7(@types/node@22.20.5)(jiti@2.7.0)(tsx@4.23.15)
 
+  .prisma/apps/architecture: {}
+
+  .prisma/apps/data: {}
+
+  .prisma/apps/pdf: {}
+
+  .prisma/apps/publisher: {}
+
+  .prisma/apps/sheets: {}
+
+  .prisma/apps/slides: {}
+
+  .prisma/apps/stories: {}
+
+  .prisma/apps/writer: {}
+
 packages:
 
   '@babel/code-frame@7.29.7':

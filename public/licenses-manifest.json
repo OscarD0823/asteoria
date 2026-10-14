@@ -51,7 +51,7 @@
     },
     "prisma": {
       "name": "ASTEORIA",
-      "version": "2.0.1",
+      "version": "2.0.2",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria"
     }

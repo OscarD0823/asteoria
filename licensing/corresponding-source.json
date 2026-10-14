@@ -1,0 +1,6 @@
+{
+  "sourceUrl": "https://github.com/OscarD0823/asteoria/releases/download/v2.0.1/ASTEORIA-2.0.1-Corresponding-Source.tar.gz",
+  "assetName": "ASTEORIA-2.0.1-Corresponding-Source.tar.gz",
+  "engines": {"mupdf": "1.28.1", "hyperformula": "3.5.0", "hunspell-asm": "4.0.2", "hunspell": "1.6.2", "citeproc": "2.4.63"},
+  "note": "Fuente y recetas de componentes fijados, reutilizable mientras se conserven estas versiones. El código propio tiene su archivo Source por entrega."
+}

@@ -4,7 +4,7 @@ directories:
   output: release-prisma
 extraMetadata:
   name: asteoria-prisma
-  version: 2.0.1
+  version: 2.0.2
   prismaProduct: prisma
 files:
   - dist-prisma/**/*
