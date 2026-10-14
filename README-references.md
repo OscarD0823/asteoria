@@ -10,7 +10,7 @@ Entrega 6.3 / Writer 1.3 / Sheets 0.3, con primeras versiones de Slides, Data y 
 
 - Instalación independiente de PDF, Writer y Sheets, captura temprana del diálogo del navegador, instrucciones para los sistemas de destino e iconos adaptables e iOS.
 - Caché de recursos esenciales primero; biblioteca opcional con descarga completa, progreso real, errores y reintentos. Las actualizaciones reutilizan hashes y recursos presentes. Los documentos quedan fuera de esa caché.
-- Biblioteca compartida de fuentes en Sheets con búsqueda, categorías, favoritas, recientes y vista previa; correspondencias de fuentes de Office para pantalla y PDF y conservación del nombre en XLSX.
+- Biblioteca compartida de fuentes en Sheets con búsqueda, categorías, favoritas, recientes y vista previa; correspondencias de fuentes de OOXML para pantalla y PDF y conservación del nombre en XLSX.
 - Diccionario personal local con términos y definiciones, consulta, edición, eliminación, importación/exportación y aceptación por el corrector. La búsqueda tolera tildes, mientras el corrector distingue las palabras acentuadas.
 
 ## Comparación
@@ -18,8 +18,8 @@ Entrega 6.3 / Writer 1.3 / Sheets 0.3, con primeras versiones de Slides, Data y 
 | Referencia | Funciones o arquitectura observadas | Aplicación en Prisma y alcance |
 | --- | --- | --- |
 | [genspark-ai/genoffice](https://github.com/genspark-ai/genoffice) | Edición local de OOXML y conservación de partes sin cambios; CLI y motores de documentos. | Referencia funcional. Desde 6.4 se sustituyó el código incorporado por motores propios DOCX/PPTX y renderer propio. |
-| [ONLYOFFICE/DocumentServer](https://github.com/ONLYOFFICE/DocumentServer) | Suite de documentos, hojas y presentaciones con interfaz de cinta y formatos Office. | Conector de disponibilidad de Docs local y conversión opcional por Document Builder instalado. La sesión completa de edición de Docs sigue pendiente. |
-| [Euro-Office/DocumentServer](https://github.com/Euro-Office/DocumentServer) | Suite derivada con motores, interfaz web y editores de escritorio en repositorios separados. | Conector de disponibilidad del servidor local; todavía no se incorpora una sesión completa de sus editores. |
+| [ONLYOFFICE/DocumentServer](https://github.com/ONLYOFFICE/DocumentServer) | Suite de documentos, hojas y presentaciones con interfaz de cinta y formatos OOXML. | Conector de disponibilidad de Docs local y conversión opcional por Document Builder instalado. La sesión completa de edición de Docs sigue pendiente. |
+| [Euro-OOXML/DocumentServer](https://github.com/Euro-Office/DocumentServer) | Suite derivada con motores, interfaz web y editores de escritorio en repositorios separados. | Conector de disponibilidad del servidor local; todavía no se incorpora una sesión completa de sus editores. |
 | [Stirling-Tools/Stirling-PDF](https://github.com/Stirling-Tools/Stirling-PDF) | Herramientas PDF y flujos de procesamiento; ediciones web, servidor y escritorio. | Conector local de comprobación y compresión PDF por API. Servicio opcional, no incluido ni instalado automáticamente. |
 | [word-sys/word-sys-pdf-editor](https://github.com/word-sys/word-sys-pdf-editor) | Editor PDF de escritorio: objetos, páginas, miniaturas, guardado y exportación. | Arquitectura y fuentes revisadas para objetos y organización de páginas. Su motor nativo completo no se incorporó. |
 | [PDFCraftTool/pdfcraft](https://github.com/PDFCraftTool/pdfcraft) | Herramientas PDF que procesan archivos en el navegador mediante motores locales. | Referencia funcional. Desde 6.4 el taller usa algoritmos propios sobre pdf-lib; no incorpora sus procesadores. |
@@ -32,7 +32,7 @@ Entrega 6.3 / Writer 1.3 / Sheets 0.3, con primeras versiones de Slides, Data y 
 | [elexis-eu/lexonomy](https://github.com/elexis-eu/lexonomy) | Editor de entradas lexicales estructuradas y publicación de diccionarios. | Referencia de edición lexical; lectura XML/TEI básica. No se incorpora su servidor ni todos sus esquemas de metadatos. |
 | [ONLYOFFICE/core-fonts](https://github.com/ONLYOFFICE/core-fonts) | Colección de fuentes utilizadas por la suite. | Nueve familias originales añadidas, con licencias y hashes por familia: DejaVu, Abyssinica, Lohit y Padauk. |
 | [kiwi0fruit/open-fonts](https://github.com/kiwi0fruit/open-fonts) | Guías y colecciones de fuentes abiertas, sustituciones y cobertura de caracteres. | Dos familias originales añadidas: DejaVu Sans Mono y Embed Serif, con licencias y hashes. |
-| [wachin/Alternative-to-privative-Microsoft-Windows-Fonts](https://github.com/wachin/Alternative-to-privative-Microsoft-Windows-Fonts) | Guía de alternativas a familias de Microsoft. | Arvo y Anton originales añadidas con sus licencias; correspondencias Office conservadas. |
+| [wachin/Alternative-to-privative-Microsoft-Windows-Fonts](https://github.com/wachin/Alternative-to-privative-Microsoft-Windows-Fonts) | Guía de alternativas a familias de Microsoft. | Arvo y Anton originales añadidas con sus licencias; correspondencias OOXML conservadas. |
 | [GitHub topics/fonts](https://github.com/topics/fonts) | Directorio de proyectos, no una biblioteca con una licencia común. | Directorio consultado para descubrir familias; no constituye una biblioteca con licencia única. |
 
 ## Licencias y versiones revisadas
@@ -43,7 +43,7 @@ Los enlaces siguientes fijan el estado documental consultado. Las familias distr
 | --- | --- | --- |
 | genspark-ai/genoffice | [c8e9467c4101](https://github.com/genspark-ai/genoffice/tree/c8e9467c4101818e070644e1667bad48d4a2e1df) | Apache-2.0 |
 | ONLYOFFICE/DocumentServer | [f580eb584394](https://github.com/ONLYOFFICE/DocumentServer/tree/f580eb58439432310943ece02c9730c6a21365e7) | AGPL-3.0 |
-| Euro-Office/DocumentServer | [9503488edc0e](https://github.com/Euro-Office/DocumentServer/tree/9503488edc0e44c1a8e1329551e8d60192452768) | AGPL-3.0 |
+| Euro-OOXML/DocumentServer | [9503488edc0e](https://github.com/Euro-Office/DocumentServer/tree/9503488edc0e44c1a8e1329551e8d60192452768) | AGPL-3.0 |
 | Stirling-Tools/Stirling-PDF | [313794c573df](https://github.com/Stirling-Tools/Stirling-PDF/tree/313794c573df5e92d2f020f5ec53d08b264d6e4f) | MIT fuera de directorios excluidos; motor y módulos específicos tienen licencias propias |
 | word-sys/word-sys-pdf-editor | [9f44998afe04](https://github.com/word-sys/word-sys-pdf-editor/tree/9f44998afe04e5ef9feaa7ef1cb55232c5087143) | GPL-3.0 |
 | PDFCraftTool/pdfcraft | [a30070241c82](https://github.com/PDFCraftTool/pdfcraft/tree/a30070241c82ae9f03b8ce6398a29182387c1764) | AGPL-3.0 |

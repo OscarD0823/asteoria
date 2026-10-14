@@ -71,7 +71,7 @@
         },
         {
           "type": "Lista y política de fuentes 1.6.2",
-          "result": "Biblioteca solo en lista. Comprobación web con viewport 411 × 479 sin filas recortadas; Arial, Calibri, Times New Roman y Cambria originales al inicio. APA aplica Times New Roman original. Pruebas de nombres solicitados de Office, alternativas reales incrustadas y reapertura/reconstrucción DOCX.",
+          "result": "Biblioteca solo en lista. Comprobación web con viewport 411 × 479 sin filas recortadas; Arial, Calibri, Times New Roman y Cambria originales al inicio. APA aplica Times New Roman original. Pruebas de nombres solicitados de formatos de documentos, alternativas reales incrustadas y reapertura/reconstrucción DOCX.",
           "files": [
             "src/font-policy.ts",
             "tests/font-policy.test.ts",
@@ -117,13 +117,21 @@
         },
         {
           "type": "Entrega Windows/Android de toda la suite",
-          "result": "PDF 6.6.1, Writer 1.6.4, Sheets 0.6.1, Slides/Data/Publisher 0.3.2 y Prisma 1.2.2 compilados. Los siete Windows están instalados en D:\\Prisma, con perfiles respaldados, SHA-256 del paquete instalado igual al compilado y arranque sin errores. Las siete APK conservan el certificado anterior, sus identificadores y versiones. Word conserva 4/4 archivos Arial originales; PDF incrusta el original por SHA-256 y mantiene tildes, ñ y €. Las seis interfaces de Prisma reconocen la familia importada en Data. 165 pruebas superadas.",
+          "result": "PDF 6.6.1, Writer 1.6.4, Sheets 0.6.1, Slides/Data/Publisher 0.3.2 y Prisma 1.2.2 compilados. Los siete Windows están instalados en D:\\Prisma, con perfiles respaldados, SHA-256 del paquete instalado igual al compilado y arranque sin errores. Las siete APK conservan el certificado anterior, sus identificadores y versiones. documentos DOCX conserva 4/4 archivos Arial originales; PDF incrusta el original por SHA-256 y mantiene tildes, ñ y €. Las seis interfaces de Prisma reconocen la familia importada en Data. 165 pruebas superadas.",
           "privateReport": "D:\\PDF\\Pruebas\\Fuentes-todas-2026-10-13\\Entrega\\Entrega-suite-fonts.json",
           "limitation": "Comprobación web por importación real de archivos del PC; no certifica el permiso visual de Chrome/Edge. APK nuevas no probadas físicamente. Núcleo compilado cf705e518a8ac3cbbb491692304047e7c82d348f."
+        },
+        {
+          "type": "Enumeración real autorizada en Edge",
+          "date": "2026-10-13",
+          "result": "El usuario concedió el permiso del navegador. La interfaz de Writer 1.6.4 en Edge detectó 225 familias reales; Arial, Calibri, Times New Roman, Cambria, Cambria Math, Georgia y Courier New aparecen al inicio. Arial se leyó al seleccionarla y se aplicó a texto con tildes, ñ, € y números. No se concedió acceso mediante un permiso simulado.",
+          "origin": "http://127.0.0.1:4893/",
+          "privateReport": "D:\\PDF\\Pruebas\\Permiso-Edge-2026-10-13",
+          "limitation": "No se observó cancelar el diálogo nativo de Edge ni se probó Chrome. El permiso real fue concedido por el usuario; los resultados de enumeración y aplicación se comprobaron mediante la extensión."
         }
       ],
       "remaining": [
-        "Permitir, cancelar y reintentar en Chrome/Edge. El control nativo de ambos navegadores se detuvo al no poder verificar su URL actual. La autorización del usuario está concedida; la limitación restante es de la herramienta. No se ha sorteado esta restricción."
+        "La enumeración y aplicación reales con permiso concedido están comprobadas en Edge. Falta documentar cancelar y reintentar antes de conceder el permiso del navegador; Chrome no se ha comprobado."
       ]
     }
   ],
@@ -453,7 +461,7 @@
       "sourceIndex": 33,
       "area": "OCR",
       "priority": "P1",
-      "description": "Conservar el orden de lectura al exportar escaneos a Word.",
+      "description": "Conservar el orden de lectura al exportar escaneos a documentos DOCX.",
       "status": "pendiente",
       "acceptance": [],
       "evidence": []
@@ -513,7 +521,7 @@
       "sourceIndex": 39,
       "area": "Herramientas comunes",
       "priority": "P0",
-      "description": "Copiar y pegar texto enriquecido, tablas, formatos e imágenes entre Office y Prisma.",
+      "description": "Copiar y pegar texto enriquecido, tablas, formatos e imágenes entre formatos de documentos y Prisma.",
       "status": "pendiente",
       "acceptance": [],
       "evidence": []
@@ -653,7 +661,7 @@
       "sourceIndex": 53,
       "area": "Writer",
       "priority": "P0",
-      "description": "Paginación equivalente a Word: líneas, tablas, saltos, encabezados y pies.",
+      "description": "Paginación equivalente a documentos DOCX: líneas, tablas, saltos, encabezados y pies.",
       "status": "pendiente",
       "acceptance": [],
       "evidence": []
@@ -783,7 +791,7 @@
       "sourceIndex": 66,
       "area": "Writer",
       "priority": "P2",
-      "description": "Intercambiar bibliografía editable con Word.",
+      "description": "Intercambiar bibliografía editable con documentos DOCX.",
       "status": "pendiente",
       "acceptance": [],
       "evidence": []
@@ -813,7 +821,7 @@
       "sourceIndex": 69,
       "area": "Sheets",
       "priority": "P0",
-      "description": "Fórmulas, datos, errores, fechas y resultados equivalentes a Excel.",
+      "description": "Fórmulas, datos, errores, fechas y resultados equivalentes a libros XLSX.",
       "status": "pendiente",
       "acceptance": [],
       "evidence": []
@@ -1293,7 +1301,7 @@
       "sourceIndex": 117,
       "area": "Pruebas generales",
       "priority": "P1",
-      "description": "Abrir documentos creados en Office.",
+      "description": "Abrir documentos creados en formatos de documentos.",
       "status": "pendiente",
       "acceptance": [],
       "evidence": []
@@ -1303,7 +1311,7 @@
       "sourceIndex": 118,
       "area": "Pruebas generales",
       "priority": "P1",
-      "description": "Comparar la apariencia Office/Prisma.",
+      "description": "Comparar la apariencia formatos de documentos/Prisma.",
       "status": "pendiente",
       "acceptance": [],
       "evidence": []
@@ -1323,7 +1331,7 @@
       "sourceIndex": 120,
       "area": "Pruebas generales",
       "priority": "P1",
-      "description": "Reabrir con Office.",
+      "description": "Reabrir con formatos de documentos.",
       "status": "pendiente",
       "acceptance": [],
       "evidence": []
@@ -1343,7 +1351,7 @@
       "sourceIndex": 122,
       "area": "Pruebas generales",
       "priority": "P1",
-      "description": "Repetir el ciclo Office → Prisma → Office varias veces.",
+      "description": "Repetir el ciclo formatos de documentos → Prisma → formatos de documentos varias veces.",
       "status": "pendiente",
       "acceptance": [],
       "evidence": []
@@ -1353,7 +1361,7 @@
       "sourceIndex": 123,
       "area": "Pruebas generales",
       "priority": "P1",
-      "description": "Comparar resultados de fórmulas con Excel.",
+      "description": "Comparar resultados de fórmulas con libros XLSX.",
       "status": "pendiente",
       "acceptance": [],
       "evidence": []
@@ -1363,7 +1371,7 @@
       "sourceIndex": 124,
       "area": "Pruebas generales",
       "priority": "P1",
-      "description": "Comparar posiciones y apariencia PowerPoint/Slides.",
+      "description": "Comparar posiciones y apariencia presentaciones PPTX/Slides.",
       "status": "pendiente",
       "acceptance": [],
       "evidence": []
@@ -1449,7 +1457,7 @@
   "additionalRequests": [
     {
       "id": "REQ-20261013-001",
-      "description": "Vista y modificación persistente de definiciones de estilos de párrafo, incluidos títulos, con compatibilidad Word.",
+      "description": "Vista y modificación persistente de definiciones de estilos de párrafo, incluidos títulos, con compatibilidad documentos DOCX.",
       "status": "pendiente"
     },
     {

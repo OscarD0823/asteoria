@@ -8,19 +8,19 @@
     },
     "writer": {
       "repository": "OscarD0823/prisma-writer",
-      "commit": "6e5133681c1ff2fbad73ec5a6fc6405c9f4a01ea"
+      "commit": "6f034e1596812bdf48046a405a93e0315b9d907f"
     },
     "sheets": {
       "repository": "OscarD0823/prisma-sheets",
-      "commit": "fe52467df5da83bf86c91b034cdccf5f974e1e8f"
+      "commit": "cf1d6aa397e933a6f3fcc4ff0a8422539e79112d"
     },
     "slides": {
       "repository": "OscarD0823/prisma-slides",
-      "commit": "6c3975dfd969a3e65f48a58feb7a17b7a7bc2011"
+      "commit": "bc9bd04bcc36deb3745210b5031e0c6d26f37724"
     },
     "data": {
       "repository": "OscarD0823/prisma-data",
-      "commit": "82a89f64b5ed43df74c3f6aee4bfdcd491ff69d6"
+      "commit": "ad0f104a9c9692ba40fe699fde611864d3292c74"
     },
     "publisher": {
       "repository": "OscarD0823/prisma-publisher",

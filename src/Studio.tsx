@@ -1723,7 +1723,7 @@ export default function Studio() {
                 </h1>
                 <p>
                   {product.writer
-                    ? "Un espacio para escribir, dar formato y presentar tus trabajos. Abre documentos de Word y guarda todo en tu dispositivo."
+                    ? "Un espacio para escribir, dar formato y presentar tus trabajos. Abre documentos DOCX y guarda todo en tu dispositivo."
                     : "Escribe desde cero, transforma tus PDF y continúa cuando quieras. Tu trabajo se queda contigo."}
                 </p>
                 <div className="hero-actions">
@@ -1812,12 +1812,12 @@ export default function Studio() {
                 <div>
                   <h3>
                     {product.writer
-                      ? "Continúa un documento de Word"
+                      ? "Continúa un documento DOCX"
                       : "Dale otra vida a un PDF"}
                   </h3>
                   <p>
                     {product.writer
-                      ? "Importa DOCX y exporta a Word o PDF."
+                      ? "Importa DOCX y exporta a DOCX o PDF."
                       : "Edita palabras y mueve imágenes."}
                   </p>
                 </div>
@@ -3104,7 +3104,7 @@ export default function Studio() {
                     onChange={(e) => setExportFormat(e.target.value)}
                   >
                     <option value="pdf">PDF · diseño final</option>
-                    <option value="docx">Word · DOCX editable</option>
+                    <option value="docx">DOCX · Documento editable</option>
                     <option value="html">
                       HTML · documento con fuentes e imágenes
                     </option>

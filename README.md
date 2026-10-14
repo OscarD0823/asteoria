@@ -17,6 +17,7 @@ Este repositorio contiene el entorno común y el panel general. Cada editor tien
 
 La suite y los programas sueltos usan los mismos módulos. Una función se programa una vez. [Preparar el entorno y publicar](README-workspace.md).
 
+
 ```powershell
 node scripts/workspace.mjs sync
 pnpm install --frozen-lockfile
@@ -27,4 +28,4 @@ Abre `prisma.code-workspace` para trabajar con todos los repositorios. Las pági
 
 [Windows y Android](https://github.com/OscarD0823/prisma-pdf/releases/tag/prisma-v1.2.0) · [Estado y pendientes](docs/ESTADO-Y-PENDIENTES.md) · [Compatibilidad](README-office-analysis.md) · [Macros](README-programming.md).
 
-La compatibilidad Office es parcial; no se ejecuta todo VBA. No se publican documentos privados ni claves. Licencia AGPL-3.0-or-later y avisos propios de los recursos de terceros.
+La compatibilidad de formatos es parcial; no se ejecuta todo VBA. No se publican documentos privados ni claves. Licencia AGPL-3.0-or-later y avisos propios de los recursos de terceros.

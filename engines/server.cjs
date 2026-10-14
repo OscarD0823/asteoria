@@ -8,7 +8,7 @@ async function startLocalEngine(){const token=crypto.randomBytes(32).toString('h
    if(request.url!=='/run'||request.method!=='POST'){response.writeHead(404);response.end();return;}if(running){response.writeHead(409);response.end(JSON.stringify({error:'Hay otra operación local en curso.'}));return;}
    running=true;ownsOperation=true;let total=0;const chunks=[];for await(const chunk of request){total+=chunk.length;if(total>113*1024*1024)throw new Error('La solicitud supera el límite local.');chunks.push(chunk);}const payload=JSON.parse(Buffer.concat(chunks).toString('utf8'));const result=await local.run(payload);response.end(JSON.stringify(result));
   }catch(error){response.writeHead(400);response.end(JSON.stringify({error:error.message}));}finally{if(ownsOperation)running=false;}
- });await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const port=server.address().port;return {server,port,token,url:'https://oscard0823.github.io/prisma-pdf/writer/#prisma-engine='+token+'&port='+port};
+ });await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const port=server.address().port;return {server,port,token,url:'https://oscard0823.github.io/prisma/#prisma-engine='+token+'&port='+port};
 }
 module.exports={startLocalEngine};
 if(require.main===module)startLocalEngine().then(result=>{console.log('Motor local iniciado en 127.0.0.1:'+result.port);console.log('Abre este enlace privado para vincular Prisma: '+result.url);});

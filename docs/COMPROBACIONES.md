@@ -2,9 +2,9 @@
 
 Fuente: [Crear Suite Ofimática Web](https://chatgpt.com/share/6acd06a0-bec4-83e9-bccf-68cec5cae0be). Recuperada el 12 de octubre de 2026.
 
-Estado inicial: **FNT-001 — fuentes reales del PC, en curso**. Los 130 puntos del chat están pendientes de comprobación individual. Tener código o conservar un componente de Office no demuestra equivalencia de edición.
+Estado inicial: **FNT-001 — fuentes reales del PC, en curso**. Los 130 puntos del chat están pendientes de comprobación individual. Tener código o conservar un componente de OOXML no demuestra equivalencia de edición.
 
-Alcance activo solicitado: **Prisma Writer**, el reemplazo de Word. Se termina FNT-001 en Writer y después se aborda AUD-053, paginación, seguido de los demás puntos de Writer en su orden original. Los puntos de las otras aplicaciones conservan sus identificadores y su estado pendiente. Solo Writer recibe esta nueva versión de los instaladores mientras se comprueba el punto actual.
+Alcance activo solicitado: **Prisma Writer**, el procesador de documentos. Se termina FNT-001 en Writer y después se aborda AUD-053, paginación, seguido de los demás puntos de Writer en su orden original. Los puntos de las otras aplicaciones conservan sus identificadores y su estado pendiente. Solo Writer recibe esta nueva versión de los instaladores mientras se comprueba el punto actual.
 
 Un solo punto activo: reproducir → revisar → corregir → probar → publicar y verificar → cerrar. No se abre el siguiente mientras falte un criterio del actual. Una dependencia externa mantiene el punto abierto; no se omite. Windows y web se prueban realmente; Android en emulador. La prueba física se documenta por separado.
 
@@ -12,7 +12,7 @@ Cada entrada de [auditoria-prisma.json](auditoria-prisma.json) conserva un ident
 
 ## Antes de la auditoría
 
-- [ ] FNT-001 — Enumerar las fuentes del PC, usar las variantes originales, guardar y reabrir, comprobar PDF y formatos Office, publicar web y probar/installar Windows y Android.
+- [ ] FNT-001 — Enumerar las fuentes del PC, usar las variantes originales, guardar y reabrir, comprobar PDF y formatos OOXML, publicar web y probar/installar Windows y Android.
 
 ## PDF: conservación y edición
 
@@ -54,7 +54,7 @@ Cada entrada de [auditoria-prisma.json](auditoria-prisma.json) conserva un ident
 - [ ] **AUD-030 · P1** — Corregir rotaciones e inclinación antes de reconocer.
 - [ ] **AUD-031 · P1** — Procesar documentos extensos por lotes con memoria limitada.
 - [ ] **AUD-032 · P1** — Corregir el texto OCR junto a la imagen original.
-- [ ] **AUD-033 · P1** — Conservar el orden de lectura al exportar escaneos a Word.
+- [ ] **AUD-033 · P1** — Conservar el orden de lectura al exportar escaneos a DOCX.
 - [ ] **AUD-034 · P2** — Reconocer formularios, casillas y tablas complejas.
 - [ ] **AUD-035 · P2** — Reconocer escritura manuscrita mediante un motor local.
 
@@ -63,7 +63,7 @@ Cada entrada de [auditoria-prisma.json](auditoria-prisma.json) conserva un ident
 - [ ] **AUD-036 · P0** — Abrir, Guardar y Guardar como directamente en archivos locales.
 - [ ] **AUD-037 · P0** — Atajos Ctrl+S/O/P/Z/Y/F, F2 y propios de cada editor.
 - [ ] **AUD-038 · P0** — Selección precisa con ratón, teclado, tacto y múltiples objetos.
-- [ ] **AUD-039 · P0** — Copiar y pegar texto enriquecido, tablas, formatos e imágenes entre Office y Prisma.
+- [ ] **AUD-039 · P0** — Copiar y pegar texto enriquecido, tablas, formatos e imágenes entre OOXML y Prisma.
 - [ ] **AUD-040 · P1** — Menús contextuales pertinentes para cada selección.
 - [ ] **AUD-041 · P1** — Herramientas contextuales para imágenes y tablas.
 - [ ] **AUD-042 · P1** — Portapapeles entre Writer, Sheets y Slides.
@@ -80,7 +80,7 @@ Cada entrada de [auditoria-prisma.json](auditoria-prisma.json) conserva un ident
 
 ## Writer
 
-- [ ] **AUD-053 · P0** — Paginación equivalente a Word: líneas, tablas, saltos, encabezados y pies.
+- [ ] **AUD-053 · P0** — Paginación equivalente a DOCX: líneas, tablas, saltos, encabezados y pies.
 - [ ] **AUD-054 · P0** — Fuentes y métricas: originales, interlineado, kerning, ligaduras y sustituciones conocidas.
 - [ ] **AUD-055 · P1** — Control de cambios con inserciones, eliminaciones, aceptar y rechazar.
 - [ ] **AUD-056 · P1** — Comparar y combinar versiones de documentos.
@@ -93,13 +93,13 @@ Cada entrada de [auditoria-prisma.json](auditoria-prisma.json) conserva un ident
 - [ ] **AUD-063 · P1** — Controles de contenido, desplegables, casillas y campos rellenables.
 - [ ] **AUD-064 · P1** — Combinar correspondencia, cartas y etiquetas con hojas de cálculo.
 - [ ] **AUD-065 · P1** — Corrección gramatical, concordancia, puntuación y estilo local.
-- [ ] **AUD-066 · P2** — Intercambiar bibliografía editable con Word.
+- [ ] **AUD-066 · P2** — Intercambiar bibliografía editable con documentos DOCX.
 - [ ] **AUD-067 · P2** — Estilos jerárquicos/vinculados y plantillas DOTX.
 
 ## Sheets
 
 - [ ] **AUD-068 · P0** — Hojas grandes y libros complejos con renderizado virtualizado.
-- [ ] **AUD-069 · P0** — Fórmulas, datos, errores, fechas y resultados equivalentes a Excel.
+- [ ] **AUD-069 · P0** — Fórmulas, datos, errores, fechas y resultados equivalentes a libros XLSX.
 - [ ] **AUD-070 · P0** — Matrices dinámicas, derrames, referencias estructuradas y funciones modernas.
 - [ ] **AUD-071 · P1** — Gráficos nativos editables de barras, líneas, sectores, dispersión y combinados.
 - [ ] **AUD-072 · P1** — Tablas y gráficos dinámicos.
@@ -162,14 +162,14 @@ Cada entrada de [auditoria-prisma.json](auditoria-prisma.json) conserva un ident
 
 ## Pruebas generales
 
-- [ ] **AUD-117 · P1** — Abrir documentos creados en Office.
-- [ ] **AUD-118 · P1** — Comparar la apariencia Office/Prisma.
+- [ ] **AUD-117 · P1** — Abrir documentos creados en OOXML.
+- [ ] **AUD-118 · P1** — Comparar la apariencia OOXML/Prisma.
 - [ ] **AUD-119 · P1** — Editar y guardar con Prisma.
-- [ ] **AUD-120 · P1** — Reabrir con Office.
+- [ ] **AUD-120 · P1** — Reabrir con OOXML.
 - [ ] **AUD-121 · P1** — Comprobar objetos, fórmulas, notas, estilos y metadatos conservados.
-- [ ] **AUD-122 · P1** — Repetir el ciclo Office → Prisma → Office varias veces.
-- [ ] **AUD-123 · P1** — Comparar resultados de fórmulas con Excel.
-- [ ] **AUD-124 · P1** — Comparar posiciones y apariencia PowerPoint/Slides.
+- [ ] **AUD-122 · P1** — Repetir el ciclo OOXML → Prisma → OOXML varias veces.
+- [ ] **AUD-123 · P1** — Comparar resultados de fórmulas con libros XLSX.
+- [ ] **AUD-124 · P1** — Comparar posiciones y apariencia presentaciones PPTX/Slides.
 - [ ] **AUD-125 · P1** — Conservar íntegro un PDF no modificado.
 - [ ] **AUD-126 · P1** — Verificar formularios, vínculos, firmas y anotaciones tras editar PDF.
 - [ ] **AUD-127 · P1** — Comprobar eliminación efectiva de contenido redactado.

@@ -34,14 +34,14 @@ Instalación y actualización pertenecen a Prisma cuando se usa el paquete gener
 
 ## Orden de desarrollo acordado
 
-1. Completar nuestros propios equivalentes de Office, aplicación por aplicación: Writer/PDF, Sheets, Slides, Data y Publisher. La prioridad es edición, diseño, revisión, automatización y fidelidad de intercambio con archivos originales de Office. OneNote y Outlook siguen pendientes de una definición y desarrollo propios.
-2. Para cada función, comparar un archivo original y el archivo exportado, verificar contenido y partes preservadas y revisar visualmente el resultado. Un motor que abre archivos o conserva XML no equivale a todo Office.
-3. Después de cubrir la base de cada aplicación, revisar los repositorios aportados como referencias adicionales de funciones y mejoras: GenOffice, ONLYOFFICE, Euro-Office, Stirling PDF, word-sys, PDFCraft, OpenProject, los proyectos de diccionarios y fuentes. Implementar las ideas necesarias con interfaces y motores propios; conservar licencias y atribución cuando se utilizan datos o bibliotecas abiertas. Los conectores locales opcionales existentes no sustituyen la implementación propia.
+1. Completar nuestros propios editores de Prisma, aplicación por aplicación: Writer/PDF, Sheets, Slides, Data y Publisher. La prioridad es edición, diseño, revisión, automatización y fidelidad de intercambio con archivos originales de OOXML. cuadernos digitales y correo y calendario siguen pendientes de una definición y desarrollo propios.
+2. Para cada función, comparar un archivo original y el archivo exportado, verificar contenido y partes preservadas y revisar visualmente el resultado. Un motor que abre archivos o conserva XML no equivale a todo OOXML.
+3. Después de cubrir la base de cada aplicación, revisar los repositorios aportados como referencias adicionales de funciones y mejoras: GenOffice, ONLYOFFICE, Euro-OOXML, Stirling PDF, word-sys, PDFCraft, OpenProject, los proyectos de diccionarios y fuentes. Implementar las ideas necesarias con interfaces y motores propios; conservar licencias y atribución cuando se utilizan datos o bibliotecas abiertas. Los conectores locales opcionales existentes no sustituyen la implementación propia.
 
-Consulta [la matriz de Office y limitaciones](README-office-analysis.md), [los formatos](README-office.md) y [las macros Prisma](README-programming.md). El panel global no implica que se haya alcanzado toda la funcionalidad de Microsoft Office.
+Consulta [la matriz de OOXML y limitaciones](README-office-analysis.md), [los formatos](README-office.md) y [las macros Prisma](README-programming.md). El panel global no implica que se haya alcanzado toda la funcionalidad de otras suites.
 
 ## Plantillas y diseño
 
 El panel permite elegir una aplicación con búsqueda y filtros, abrirla o comenzar desde una plantilla editable. Writer/PDF tienen informes, cartas y otros documentos; Sheets incluye presupuesto, inventario, gastos y planificación; Slides ofrece presentaciones e informes; Data incluye estructuras de contactos, inventario y tareas; Publisher ofrece cartel, boletín, tríptico, invitación y certificado. Slides y Publisher permiten aplicar cinco paletas de diseño sin reemplazar el contenido. Las aplicaciones independientes muestran sus propias plantillas y créditos de OscarD0823, sin el selector global.
 
-Sheets dispone de «Conservar formato original» para cambiar contenido de celdas sin reconstruir el paquete XLSX/XLSM. Conserva partes desconocidas, estilos y el proyecto VBA para Excel. Cambiar estructura, hojas o formato requiere exportar una copia XLSX. Prisma no ejecuta VBA.
+Sheets dispone de «Conservar formato original» para cambiar contenido de celdas sin reconstruir el paquete XLSX/XLSM. Conserva partes desconocidas, estilos y el proyecto VBA para libros XLSX. Cambiar estructura, hojas o formato requiere exportar una copia XLSX. Prisma no ejecuta VBA.

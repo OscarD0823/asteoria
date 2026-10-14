@@ -116,5 +116,5 @@ ODict schema — GPL-3.0; esquema original y licencia en vendor/dictionaries/odi
 Tesseract.js/core — Apache-2.0; modelos oficiales spa/eng Apache-2.0, licencias y procedencia en ./ocr/.
 sql.js — MIT; motor SQLite WASM, licencia en ./third-party/.
 13 familias de ONLYOFFICE/core-fonts, kiwi0fruit/open-fonts y wachin: originales sin modificar, licencias y SHA-256 por familia en ./fonts/.
-Los servicios ONLYOFFICE, Euro-Office, Stirling y OpenProject son opcionales y no se redistribuyen con Prisma.
+Los complementos de PDF y proyectos son opcionales y no se redistribuyen con Prisma. No se incluyen motores de suites de documentos.
 Hunspell: motor léxico local WebAssembly; hunspell-asm MIT y Hunspell LGPL/GPL/MPL. Diccionarios y licencias: spelling/catalog.json y spelling/<idioma>/LICENSE.txt.

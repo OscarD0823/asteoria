@@ -10,8 +10,8 @@ Procesador de documentos para escribir, revisar y presentar trabajos desde la we
 - Revisión: diccionario de español Hunspell/Typo.js ejecutado en un worker local; sugerencias, omisiones, diccionario personal y subrayado. No incluye un motor completo de gramática.
 - Caracteres: inventario Unicode 18, códigos, frecuencias, invisibles, marcas combinantes y cobertura de la fuente elegida. Las marcas de formato no se exportan.
 - Páginas: la escritura muestra hojas y separaciones automáticas con un único editor, selección y deshacer compartidos. La vista PDF muestra la composición final para imprimir. Las métricas del navegador pueden diferir de las del PDF; las secciones con cambios de orientación y los objetos de gran tamaño deben revisarse allí.
-- DOCX: importa texto, estilos, títulos, listas básicas, tablas, imágenes PNG/JPEG, vínculos, comentarios y secciones. Usa alternativas locales si una fuente no está disponible. No reproduce todos los objetos avanzados, notas al pie o el historial de cambios de Microsoft Word; muestra un aviso cuando detecta estas características.
-- Índice DOCX: tabla de contenido con campo TOC y entradas visibles; Word puede actualizar sus números de página al abrirlo. Los otros índices se exportan con el contenido calculado.
+- DOCX: importa texto, estilos, títulos, listas básicas, tablas, imágenes PNG/JPEG, vínculos, comentarios y secciones. Usa alternativas locales si una fuente no está disponible. No reproduce todos los objetos avanzados, notas al pie o el historial de cambios de Microsoft documentos DOCX; muestra un aviso cuando detecta estas características.
+- Índice DOCX: tabla de contenido con campo TOC y entradas visibles; documentos DOCX puede actualizar sus números de página al abrirlo. Los otros índices se exportan con el contenido calculado.
 
 ## Privacidad
 
@@ -21,7 +21,7 @@ Los documentos, las palabras revisadas, los proyectos y las fuentes personales p
 
 `pnpm dev` abre Prisma PDF. En PowerShell, `$env:VITE_PRODUCT='writer'; pnpm dev` abre Writer. `pnpm build:products` genera `dist` (PDF), `dist-writer` (Writer) y `dist-sheets` (Sheets) y `dist-site` (las tres webs). Publicar `dist-site` en GitHub Pages. El perfil Writer usa la versión 1.3.0; PDF usa la versión del paquete.
 
-En Revisar → Compatibilidad con Office puedes consultar el resumen de importación: normas declaradas, fuentes sustituidas, objetos, apéndices, índices y secciones. Los documentos con varios estilos conservan el formato por sección y permanecen en Libre. No se infiere una norma únicamente por la tipografía o los márgenes. Los títulos SEQ de Word se vinculan a las tablas y figuras, y las listas de figuras/tablas se exportan como campos TOC actualizables.
+En Revisar → Compatibilidad con OOXML puedes consultar el resumen de importación: normas declaradas, fuentes sustituidas, objetos, apéndices, índices y secciones. Los documentos con varios estilos conservan el formato por sección y permanecen en Libre. No se infiere una norma únicamente por la tipografía o los márgenes. Los títulos SEQ de documentos DOCX se vinculan a las tablas y figuras, y las listas de figuras/tablas se exportan como campos TOC actualizables.
 
 Referencias de diseño: [tablas de contenido](https://support.microsoft.com/es-es/word/format-or-customize-a-table-of-contents-in-word), [revisión ortográfica](https://support.microsoft.com/es-es/word/how-to-check-grammar-in-word) y [espacios entre páginas](https://support.microsoft.com/es-es/word/word-options-display) de Microsoft. La interfaz utiliza identidad propia de Prisma.
 

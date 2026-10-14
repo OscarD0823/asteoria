@@ -8,7 +8,7 @@ La revisión comenzó con siete alertas de GitHub: cinco altas y dos moderadas. 
 | image-size 1.2.1, dos alertas | pptxgenjs 4.0.1 | image-size 2.0.3. ICNS/JXL de longitud cero terminan con error y PNG válido conserva dimensiones; las pruebas de exportación de presentaciones pasan. |
 | sprintf-js 1.1.3, una alerta | roarr → global-agent 3 → @electron/get 3.1.0 de las herramientas de empaquetado | global-agent 4.1.3 elimina Roarr y sprintf-js de esa ruta. Se adaptó la conservación de las opciones TLS y del host, y la comparación de puertos predeterminados en NO_PROXY. |
 
-Pasaron cinco pruebas específicas de dependencias y 165 pruebas del entorno completo. Se comprobaron conexiones HTTP y HTTPS reales en loopback con certificados del ensayo, rechazo de nombre incorrecto y exclusiones del proxy. No se desactivó la validación TLS ni se modificaron almacenes de confianza del usuario. Los once diccionarios locales, la conservación de documentos Office y las siete compilaciones web permanecen operativos.
+Pasaron cinco pruebas específicas de dependencias y 165 pruebas del entorno completo. Se comprobaron conexiones HTTP y HTTPS reales en loopback con certificados del ensayo, rechazo de nombre incorrecto y exclusiones del proxy. No se desactivó la validación TLS ni se modificaron almacenes de confianza del usuario. Los once diccionarios locales, la conservación de documentos OOXML y las siete compilaciones web permanecen operativos.
 
 Las pruebas están en `tests/dependency-security.test.mjs`; los overrides y los tres parches se registran en `pnpm-workspace.yaml`. El código fuente descargable incluye `patches/`, comprobado en el tar real.
 

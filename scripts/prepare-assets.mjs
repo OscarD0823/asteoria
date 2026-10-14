@@ -19,15 +19,11 @@ const appVersion=products[kind].version;
 const releaseTag =
   (kind==='pdf'?'v':kind+'-v')+appVersion;
 const assetName=products[kind].name.replace(' ','-');
-const suiteFeatures={
- prisma:['Fuentes del dispositivo en las seis aplicaciones; originales esenciales al inicio','Formato de texto de tablas en Slides y Publisher','Fuentes de Data conservadas al exportar Excel y actualización de dependencias'],
- pdf:['Fuentes reales del dispositivo con variantes y biblioteca en lista','Nombres de Office al exportar y fuentes reales en PDF','Dependencias de ortografía actualizadas; once diccionarios locales'],
- writer:['Fuentes reales del dispositivo con originales esenciales al inicio','Nombres de Office al exportar y fuentes reales en PDF','Dependencias de ortografía actualizadas; once diccionarios locales'],
- sheets:['Fuentes originales del dispositivo y nombres de Office en XLSX','Alternativas disponibles si falta la fuente solicitada','Dependencias actualizadas y conservación de fórmulas y macros'],
- slides:['Fuentes originales del dispositivo y nombres conservados en PPTX','Tipo de letra, tamaño y estilo en tablas; se conservan al editar texto','Dependencias de exportación y ortografía actualizadas'],
- data:['Selector de fuentes del dispositivo para la vista de datos','Fuente conservada en XLSX sin perder negrita ni valores','Guardado de la preferencia de fuente y dependencias actualizadas'],
- publisher:['Fuentes originales del dispositivo y nombres conservados en PPTX','Tipo de letra, tamaño y estilo en tablas; se conservan al editar texto','Dependencias de exportación y ortografía actualizadas']
-};
+const suiteFeatures=Object.fromEntries(Object.keys(products).map(kind=>[kind,[
+ 'Interfaz propia de Prisma y formatos DOCX, XLSX y PPTX sin comparaciones comerciales',
+ 'Motor local propio para conservar documentos, libros y presentaciones; exportación TXT y CSV',
+ 'Iconos renovados y fuentes reales del dispositivo'
+]]));
 const release = "https://github.com/OscarD0823/prisma-pdf/releases/";
 writeFileSync(
   "public/version.json",
@@ -58,7 +54,7 @@ writeFileSync(
             "Aplicación instalable y biblioteca completa de fuentes con favoritas",
             "Editor local de hojas XLSX y CSV",
             "Fórmulas, formatos y varias hojas",
-            "Tablas para Word y Writer, exportación PDF e impresión",
+            "Tablas para Prisma Writer, exportación PDF e impresión",
             "Guardado local y aviso de funciones incompatibles",
           ]
         : [

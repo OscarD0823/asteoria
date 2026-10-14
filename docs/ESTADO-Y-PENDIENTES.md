@@ -1,14 +1,12 @@
 # Estado y pendientes de Prisma — 13 de octubre de 2026
 
-Revisión del chat «Crear Suite Ofimática Web» y del código real. Se recuperó la auditoría completa mediante el enlace compartido. Sus 130 puntos están registrados individualmente en [COMPROBACIONES.md](COMPROBACIONES.md) y [auditoria-prisma.json](auditoria-prisma.json). Se conserva su orden; primero se trabaja en FNT-001, fuentes reales del PC, y no se inicia el siguiente punto mientras siga abierto.
+Los 130 puntos de la revisión de Prisma permanecen registrados con sus identificadores en COMPROBACIONES.md y auditoria-prisma.json. Cada función conserva su estado y evidencia; abrir un formato no demuestra que se puedan editar todas sus características.
 
-El 13 de octubre se comprobó Writer en un Samsung SM-S721B físico: abrió el DOCX con fuentes originales, permitió editar y guardó un proyecto con 17/17 variantes idénticas. Las actualizaciones conservaron ese proyecto. Writer 1.6.2 añade biblioteca solo en lista, originales esenciales al inicio, preferencia por originales al aplicar formatos académicos y nombres de Office en DOCX con alternativas reales declaradas. La APK publicada superó la prueba final con teclado, selección de Calibri, edición, guardado y reapertura. Proyecto y PDF exportados conservan 17/17 variantes originales; el PDF se inspeccionó visualmente y mediante extracción de texto. Detalles en [FUENTES-WRITER.md](FUENTES-WRITER.md).
+Edge detectó 225 familias reales del dispositivo con el permiso concedido por el usuario. Se comprobó la lista y Arial aplicada al texto. Esta prueba no usa autorización simulada. FNT-001 conserva pendiente documentar cancelar el diálogo nativo y volver a intentarlo antes de conceder el permiso; Chrome no está comprobado.
 
-Las solicitudes de modificar definiciones de estilos como en Word y abrir archivos desde el sistema están registradas fuera de los 130 puntos originales. Se mantiene el orden solicitado.
+Las comprobaciones anteriores de Windows, exportación, guardado y reapertura y la prueba física de Writer 1.6.2 en Samsung conservan sus informes y límites. Las siete alertas de dependencias revisadas quedaron corregidas en GitHub; véase DEPENDENCIAS-PENDIENTES.md. La autoría, independencia, formatos y adaptadores de Prisma se describen en INDEPENDENCIA-PRISMA.md.
 
-Writer 1.6.3 y Prisma 1.2.1 añaden las familias instaladas detectadas a la lista principal, aunque todavía no se hayan importado sus archivos. Sus interfaces nativas se comprobaron con 225 familias reales del PC: esenciales al principio, enumeración sin lectura de archivos y elección de Arial con lectura de sus cuatro variantes. Los dos programas están actualizados en `D:\Prisma` y superaron el arranque de prueba; las APK compilan con el certificado existente. Se superaron 158 pruebas. El consentimiento de estos dos ensayos fue controlado en perfiles aislados; no sustituye el permiso real pendiente de Chrome/Edge ni la prueba física anterior de Writer 1.6.2.
-
-Writer 1.6.2 está [publicado para Windows y Android](https://github.com/OscarD0823/prisma-pdf/releases/tag/writer-v1.6.2), con código fuente y cuatro sumas verificadas frente a GitHub. Está instalado en Windows (arranque comprobado) y en el Samsung físico (prueba final completada). FNT-001 continúa abierto únicamente por el permiso visual de Chrome/Edge. La revisión de GitHub detectó además [siete alertas de dependencias](DEPENDENCIAS-PENDIENTES.md), que permanecen abiertas y registradas para su corrección.
+Las solicitudes adicionales sobre definiciones editables de estilos y apertura de archivos desde el sistema están registradas por separado. El estado no se cambia a completado por la disponibilidad de una función sin su comprobación correspondiente.
 
 ## Resuelto ahora
 
@@ -19,17 +17,17 @@ Writer 1.6.2 está [publicado para Windows y Android](https://github.com/OscarD0
 - Conservación de URLs, identificadores y enlaces de los instaladores.
 - Código para buscar fuentes instaladas, leer la familia elegida e importar TTF/OTF/TTC. Se comprobaron 225 familias y 488 caras reales mediante Chromium, con 17 variantes de Arial, Calibri, Times New Roman, Cambria y Cambria Math. Los bytes de esas 17 caras coinciden en las exportaciones PDF y DOCX; XLSX/PPTX mantienen nombres y estilos. Writer 1.6.1 está publicado e instalado en Windows; Android se comprobó en emulador, incluido guardar y reabrir sin conexión. El diálogo real de Windows superó cancelar, reintentar y permitir; detectó 225 familias y se aplicó Arial. FNT-001 continúa abierto por la interacción de permisos en Chrome/Edge: el navegador integrado no expone el diálogo y el control nativo de Edge no pudo verificar su URL. Las fuentes variables y los formatos o permisos no compatibles muestran el motivo; no se anuncia acceso universal a cualquier fuente.
 
-## Compatibilidad con Office: pendientes
+## Compatibilidad con OOXML: pendientes
 
-| Programa | Comprobado | Falta para una equivalencia con Office |
+| Programa | Comprobado | Falta para una fidelidad de intercambio |
 | --- | --- | --- |
-| Writer | DOCX/DOCM, títulos, índices y enlaces, tablas, citas y secciones; pruebas con Word | Fidelidad de paginación y fuentes, campos complejos, revisión y correspondencia completas, DOC heredado y pruebas con más documentos |
-| Sheets | XLSX/XLSM, LET y nombres; 69 resultados comparados con Excel; macros BAS de celdas | VBA completo, UDF, formularios, eventos y proyectos binarios; LAMBDA, matrices dinámicas y referencias estructuradas completas; tablas dinámicas, Power Query y gráficos avanzados |
+| Writer | DOCX/DOCM, títulos, índices y enlaces, tablas, citas y secciones; pruebas con documentos DOCX | Fidelidad de paginación y fuentes, campos complejos, revisión y correspondencia completas, DOC heredado y pruebas con más documentos |
+| Sheets | XLSX/XLSM, LET y nombres; 69 resultados comparados con libros XLSX; macros BAS de celdas | VBA completo, UDF, formularios, eventos y proyectos binarios; LAMBDA, matrices dinámicas y referencias estructuradas completas; tablas dinámicas, Power Query y gráficos avanzados |
 | Slides | PPTX/PPTM, texto, imágenes, tablas, notas, plantillas y conservación de partes | Animaciones, SmartArt, multimedia, temas y diseños complejos, edición de grupos y accesibilidad |
 | Data | SQLite, tablas, relaciones, consultas, transacciones y exportaciones | ACCDB/MDB nativos, formularios, informes y automatización equivalentes a Access |
 | Publisher | Plantillas y composición por páginas; salida PPTX/PDF/SVG | PUB nativo, cajas encadenadas, maquetación editorial, preimpresión y gestión de color |
 | PDF | Texto y objetos, OCR, páginas, unión, exportación, impresión y proyectos locales | Fuentes incrustadas y documentos complejos; formularios y accesibilidad completos; comprobar retirada de contenido en censura; firmas digitales verificables |
-| Todos | PWA, Windows y Android; recursos abiertos y ortografía multilingüe | Pruebas físicas en más móviles; gramática y división silábica avanzadas; corpus público de pruebas Office |
+| Todos | PWA, Windows y Android; recursos abiertos y ortografía multilingüe | Pruebas físicas en más móviles; gramática y división silábica avanzadas; corpus público de pruebas OOXML |
 
 El soporte no es del 100 %. Conservar una parte del archivo no significa poder editarla o ejecutarla. La comparación de VBA cubre el subconjunto implementado. Los ejercicios originales de los chats no pudieron recuperarse; las comparaciones existentes usan archivos sintéticos identificados en informes locales.
 
@@ -45,7 +43,7 @@ El enlace de donación necesita una URL elegida por el autor; no se inventa una 
 
 ## Orden recomendado
 
-1. Ampliar pruebas de ida y vuelta Office y corregir pérdidas de contenido.
+1. Ampliar pruebas de ida y vuelta OOXML y corregir pérdidas de contenido.
 2. Mejorar fórmulas XLSX, paginación DOCX y representación PPTX.
 3. Ampliar tablas, gráficos, revisión y maquetación sobre motores comprobados.
 4. Extender automatización con límites explícitos y pruebas.
@@ -53,3 +51,9 @@ El enlace de donación necesita una URL elegida por el autor; no se inventa una 
 6. Medir rendimiento y distribución en equipos y móviles reales.
 
 Autor: [OscarD0823](https://github.com/OscarD0823). AGPL-3.0-or-later, con licencias separadas para recursos abiertos.
+
+## Actualización de independencia y Edge
+
+La interfaz utiliza nombres de Prisma y formatos de archivo. El motor de PC ya no detecta ni ejecuta suites de documentos externas; usa los mismos modelos propios de los editores para DOCX/DOCM, XLSX/XLSM y PPTX/PPTM. Se comprobaron conservación del original, cálculo de valores CSV, rechazo de motores retirados y aislamiento del complemento. La autoría de las bibliotecas abiertas y los contratos de formato se conservan.
+
+El permiso concedido por el usuario en Edge permitió enumerar 225 familias reales. Arial se aplicó al texto mediante el archivo original del dispositivo. La enumeración y la aplicación están comprobadas en el navegador conectado; falta documentar la cancelación del diálogo nativo antes de concederlo. Chrome no se ha probado.
