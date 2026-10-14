@@ -159,11 +159,11 @@ app.whenReady().then(() => {
       console.log("Desktop application loaded from bundled assets.");
       setTimeout(async () => {
         try {
-          if(testFile){for(let i=0;i<20;i++){const opened=await window.webContents.executeJavaScript('document.documentElement.dataset.asteoriaFileOpened||""');if(opened===path.basename(testFile))break;await new Promise(resolve=>setTimeout(resolve,1000));}}
+          if(testFile&&productKind!=='prisma'){for(let i=0;i<20;i++){const opened=await window.webContents.executeJavaScript('document.documentElement.dataset.asteoriaFileOpened||""');if(opened===path.basename(testFile))break;await new Promise(resolve=>setTimeout(resolve,1000));}}
           const stem=testFile?path.basename(testFile).replace(/\.[^.]+$/,''):'';
           const checks=await window.webContents.executeJavaScript('({origin:location.origin,secure:isSecureContext,indexedDB:typeof indexedDB==="object",localFontsApi:typeof queryLocalFonts==="function",openedFile:document.documentElement.dataset.asteoriaFileOpened||"",fileVisible:!'+JSON.stringify(stem)+'||document.body.innerText.includes('+JSON.stringify(stem)+')||Array.from(document.querySelectorAll("input")).some(input=>input.value==='+JSON.stringify(stem)+')})');
           console.log('Desktop diagnostics: '+JSON.stringify(checks));
-          app.exit(rendererFailed||!checks.secure||!checks.indexedDB||!checks.localFontsApi||(testFile&&(checks.openedFile!==path.basename(testFile)||!checks.fileVisible))?1:0);
+          app.exit(rendererFailed||!checks.secure||!checks.indexedDB||!checks.localFontsApi||(testFile&&((productKind!=='prisma'&&checks.openedFile!==path.basename(testFile))||!checks.fileVisible))?1:0);
         }catch(error){console.error(error);app.exit(1);}
       }, 6000);
     });

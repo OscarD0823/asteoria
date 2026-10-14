@@ -6,7 +6,7 @@ extraMetadata:
   name: asteoria-architecture
   version: 0.3.2
   prismaProduct: architecture
-fileAssociations: [{"ext":"atlas","mime":"application/x-asteoria-atlas","name":"Asteoria Atlas · .atlas","role":"Editor"},{"ext":"prisma-arquitectura","mime":"application/x-asteoria-atlas","name":"Asteoria Atlas · .prisma-arquitectura","role":"Editor"}]
+fileAssociations: [{"ext":"atlas","mimeType":"application/x-asteoria-atlas","name":"Asteoria Atlas · .atlas","role":"Editor"},{"ext":"prisma-arquitectura","mimeType":"application/x-asteoria-atlas","name":"Asteoria Atlas · .prisma-arquitectura","role":"Editor"}]
 files:
   - dist-architecture/**/*
   - desktop/**/*

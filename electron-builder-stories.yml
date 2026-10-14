@@ -6,7 +6,7 @@ extraMetadata:
   name: asteoria-stories
   version: 1.1.0
   prismaProduct: stories
-fileAssociations: [{"ext":"lore","mime":"application/x-asteoria-lore","name":"Asteoria Lore · .lore","role":"Editor"}]
+fileAssociations: [{"ext":"lore","mimeType":"application/x-asteoria-lore","name":"Asteoria Lore · .lore","role":"Editor"}]
 files:
   - dist-stories/**/*
   - desktop/**/*

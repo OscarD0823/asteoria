@@ -6,7 +6,7 @@ extraMetadata:
   name: asteoria-sheets
   version: 1.0.2
   prismaProduct: sheets
-fileAssociations: [{"ext":"xlsx","mime":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","name":"Asteoria Orbit · .xlsx","role":"Editor"},{"ext":"xlsm","mime":"application/vnd.ms-excel.sheet.macroEnabled.12","name":"Asteoria Orbit · .xlsm","role":"Editor"},{"ext":"csv","mime":"text/csv","name":"Asteoria Orbit · .csv","role":"Editor"},{"ext":"tsv","mime":"text/tab-separated-values","name":"Asteoria Orbit · .tsv","role":"Editor"}]
+fileAssociations: [{"ext":"xlsx","mimeType":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","name":"Asteoria Orbit · .xlsx","role":"Editor"},{"ext":"xlsm","mimeType":"application/vnd.ms-excel.sheet.macroEnabled.12","name":"Asteoria Orbit · .xlsm","role":"Editor"},{"ext":"csv","mimeType":"text/csv","name":"Asteoria Orbit · .csv","role":"Editor"},{"ext":"tsv","mimeType":"text/tab-separated-values","name":"Asteoria Orbit · .tsv","role":"Editor"}]
 files:
   - dist-sheets/**/*
   - desktop/**/*
