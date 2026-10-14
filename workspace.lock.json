@@ -4,35 +4,35 @@
   "apps": {
     "pdf": {
       "repository": "OscarD0823/asteoria-folio",
-      "commit": "f4248b2165799ee0edf10f79a66a4b0f7e3d62c9"
+      "commit": "3480161fec552c349d999c5c0070c3dc120e7371"
     },
     "writer": {
       "repository": "OscarD0823/asteoria-scribe",
-      "commit": "82f4652e6688985befa8bd04c165f07a25bfad8e"
+      "commit": "891915492b77e5aed4fe4adb32381923c139b8f2"
     },
     "sheets": {
       "repository": "OscarD0823/asteoria-orbit",
-      "commit": "6c6275dfaf5f05fa84391c766a65845ab3866804"
+      "commit": "aeda29f269ba98491aacc05155ed29b12e9d8171"
     },
     "slides": {
       "repository": "OscarD0823/asteoria-nova",
-      "commit": "5ac4e52b1007db59b06ad3a0fc24f4a1a5671742"
+      "commit": "f9a2d30639c3cf7e6bb09aeab39f78af514245e9"
     },
     "data": {
       "repository": "OscarD0823/asteoria-nexus",
-      "commit": "5fafcab21ecad4e5317b5b3cbcb8202f41688490"
+      "commit": "8d234940313748444ad92aeb3acbb3ee06230bd3"
     },
     "publisher": {
       "repository": "OscarD0823/asteoria-canvas",
-      "commit": "f214273b9050aa685f282ab7801fed738e077d5f"
+      "commit": "77cd535fe3076d4acad6668e07a7e4f8325defaf"
     },
     "architecture": {
       "repository": "OscarD0823/asteoria-atlas",
-      "commit": "ab2f39bc6d12b3bd650a7651dd3dad5a3e5e3daf"
+      "commit": "e3f55ff3427229be18516f6995d9b881cf65b343"
     },
     "stories": {
       "repository": "OscarD0823/asteoria-lore",
-      "commit": "f48fc8fae9e16f5ec6df91bee6969bd8a7820ffe"
+      "commit": "aa0c364d9a4f15143d76f07f3cde284586bba748"
     }
   }
 }

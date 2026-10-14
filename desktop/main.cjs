@@ -21,8 +21,8 @@ protocol.registerSchemesAsPrivileged([
       allowServiceWorkers: true,
     },
   },
+  {scheme:"prisma-architecture",privileges:{standard:true,secure:true,supportFetchAPI:true,corsEnabled:true,allowServiceWorkers:true}},
 ]);
-protocol.registerSchemesAsPrivileged([{scheme:"prisma-architecture",privileges:{standard:true,secure:true,supportFetchAPI:true,corsEnabled:true,allowServiceWorkers:true}}]);
 let window;
 const products=require('../products.json');const productKind=require('../package.json').prismaProduct||'pdf';
 const productInfo=products[productKind]||products.pdf;app.setName(productInfo.name);
@@ -144,7 +144,13 @@ app.whenReady().then(() => {
     });
     window.webContents.on("did-finish-load", () => {
       console.log("Desktop application loaded from bundled assets.");
-      setTimeout(() => app.exit(rendererFailed?1:0), 6000);
+      setTimeout(async () => {
+        try {
+          const checks=await window.webContents.executeJavaScript('({origin:location.origin,secure:isSecureContext,indexedDB:typeof indexedDB==="object",localFontsApi:typeof queryLocalFonts==="function"})');
+          console.log('Desktop diagnostics: '+JSON.stringify(checks));
+          app.exit(rendererFailed||!checks.secure||!checks.indexedDB||!checks.localFontsApi?1:0);
+        }catch(error){console.error(error);app.exit(1);}
+      }, 6000);
     });
   }
   window.webContents.setWindowOpenHandler(({ url }) => {

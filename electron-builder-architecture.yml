@@ -4,7 +4,7 @@ directories:
   output: release-architecture
 extraMetadata:
   name: asteoria-architecture
-  version: 0.3.0
+  version: 0.3.1
   prismaProduct: architecture
 files:
   - dist-architecture/**/*

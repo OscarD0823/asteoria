@@ -1,8 +1,8 @@
-Asteoria Folio 7.0.0 BETA / Asteoria Scribe 2.0.0 BETA / Asteoria Orbit 1.0.0 BETA / Asteoria Nova 1.0.0 BETA / Asteoria Nexus 1.0.0 BETA / Asteoria Canvas 1.0.0 BETA / Asteoria Atlas 0.3.0 BETA / Asteoria Lore 1.0.0 BETA / ASTEORIA 2.0.0 BETA
+Asteoria Folio 7.0.1 BETA / Asteoria Scribe 2.0.1 BETA / Asteoria Orbit 1.0.1 BETA / Asteoria Nova 1.0.1 BETA / Asteoria Nexus 1.0.1 BETA / Asteoria Canvas 1.0.1 BETA / Asteoria Atlas 0.3.1 BETA / Asteoria Lore 1.0.1 BETA / ASTEORIA 2.0.1 BETA
 Copyright (C) 2026 OscarD0823 y colaboradores.
 Software libre: AGPL-3.0-or-later. Sin garantía. Licencia completa: ./LICENSE.txt
 Código propio de esta compilación: ./prisma-pdf-source.tar.gz
-Fuentes correspondientes de los componentes copyleft y recetas fijadas: https://github.com/OscarD0823/asteoria/releases/download/v2.0.0/ASTEORIA-2.0.0-Corresponding-Source.tar.gz
+Fuentes correspondientes de los componentes copyleft y recetas fijadas: https://github.com/OscarD0823/asteoria/releases/download/v2.0.1/ASTEORIA-2.0.1-Corresponding-Source.tar.gz
 Inventario exacto, licencias declaradas y hashes de avisos: ./licenses-manifest.json
 
 @capacitor/android 8.5.3 — MIT — git+https://github.com/ionic-team/capacitor.git

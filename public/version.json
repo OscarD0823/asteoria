@@ -1,9 +1,9 @@
 {
-  "version": "7.0.0",
+  "version": "7.0.1",
   "channel": "beta",
-  "releaseUrl": "https://github.com/OscarD0823/asteoria-folio/releases/tag/v7.0.0",
-  "androidUrl": "https://github.com/OscarD0823/asteoria-folio/releases/download/v7.0.0/Asteoria-Folio-7.0.0-Android.apk",
-  "windowsUrl": "https://github.com/OscarD0823/asteoria-folio/releases/download/v7.0.0/Asteoria-Folio-7.0.0-Windows-Setup.exe",
+  "releaseUrl": "https://github.com/OscarD0823/asteoria-folio/releases/tag/v7.0.1",
+  "androidUrl": "https://github.com/OscarD0823/asteoria-folio/releases/download/v7.0.1/Asteoria-Folio-7.0.1-Android.apk",
+  "windowsUrl": "https://github.com/OscarD0823/asteoria-folio/releases/download/v7.0.1/Asteoria-Folio-7.0.1-Windows-Setup.exe",
   "features": [
     "ASTEORIA BETA: un universo para crear con identidad y nombres propios",
     "Motor local propio para conservar documentos, libros y presentaciones; exportación TXT y CSV",

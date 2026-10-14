@@ -2,63 +2,63 @@
   "pdf": {
     "name": "Asteoria Folio",
     "siteSlug": "asteoria-folio",
-    "version": "7.0.0",
+    "version": "7.0.1",
     "description": "Editor PDF local y privado",
     "channel": "beta"
   },
   "writer": {
     "name": "Asteoria Scribe",
     "siteSlug": "asteoria-scribe",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Documentos, escritura y trabajos académicos",
     "channel": "beta"
   },
   "sheets": {
     "name": "Asteoria Orbit",
     "siteSlug": "asteoria-orbit",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Hojas de cálculo, fórmulas y datos",
     "channel": "beta"
   },
   "slides": {
     "name": "Asteoria Nova",
     "siteSlug": "asteoria-nova",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Presentaciones para compartir tus ideas",
     "channel": "beta"
   },
   "data": {
     "name": "Asteoria Nexus",
     "siteSlug": "asteoria-nexus",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Bases de datos, tablas y consultas locales",
     "channel": "beta"
   },
   "publisher": {
     "name": "Asteoria Canvas",
     "siteSlug": "asteoria-canvas",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Diseño editorial y publicaciones",
     "channel": "beta"
   },
   "architecture": {
     "name": "Asteoria Atlas",
     "siteSlug": "asteoria-atlas",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "CAD, arquitectura y espacios en 3D",
     "channel": "beta"
   },
   "stories": {
     "name": "Asteoria Lore",
     "siteSlug": "asteoria-lore",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Historias, fanfics, personajes y familias",
     "channel": "beta"
   },
   "prisma": {
     "name": "ASTEORIA",
     "siteSlug": "asteoria",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Un universo para crear",
     "channel": "beta"
   }

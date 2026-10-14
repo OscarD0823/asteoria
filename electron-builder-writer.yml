@@ -4,7 +4,7 @@ directories:
   output: release-writer
 extraMetadata:
   name: asteoria-writer
-  version: 2.0.0
+  version: 2.0.1
   prismaProduct: writer
 files:
   - dist-writer/**/*

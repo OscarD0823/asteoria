@@ -4,7 +4,7 @@ directories:
   output: release-slides
 extraMetadata:
   name: asteoria-slides
-  version: 1.0.0
+  version: 1.0.1
   prismaProduct: slides
 files:
   - dist-slides/**/*

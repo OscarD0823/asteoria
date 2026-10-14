@@ -2,6 +2,7 @@ import { ArrowRight, Armchair, Box, Download, FolderOpen, Footprints, Lightbulb,
 import type { Project } from './model';
 import logo from './prisma-logo.svg';
 import './welcome.css';
+import {productInfo} from '../product-core';
 type Saved = { id: string; name:string; roomCount:number; updated:number };
 export default function ArchitectureWelcome({ saved, error, onNew, onDemo, onResume, onOpen }: { saved: Saved[]; error: string; onNew: () => void; onDemo: () => void; onResume: (s: Saved) => void; onOpen: (file: File) => void }) {
   return <div className="paw-home"><header className="paw-header"><a className="paw-brand" href="./"><img src={logo} alt=""/><span>Asteoria <b>Atlas <small>BETA</small></b></span></a><span className="paw-private"><ShieldCheck size={15}/>Proyectos locales</span></header>
@@ -10,6 +11,6 @@ export default function ArchitectureWelcome({ saved, error, onNew, onDemo, onRes
       {error && <p className="paw-error" role="alert">{error}</p>}
       {saved.length > 0 && <section className="paw-recents"><div className="paw-section-title"><h2>Continúa donde lo dejaste.</h2><span>Guardados en este dispositivo</span></div><div>{saved.slice(0, 6).map(s => <button key={s.id} onClick={() => onResume(s)}><span className="paw-project-icon"><Box size={23}/></span><span><b>{s.name}</b><small>{s.roomCount} espacios · {new Date(s.updated).toLocaleDateString('es-CO')}</small></span><ArrowRight size={18}/></button>)}</div></section>}
       <section className="paw-features"><article><span><Ruler size={23}/></span><h3>Cada medida, en su lugar.</h3><p>Trabaja en metros, centímetros o milímetros y exporta planos PDF a escala.</p></article><article><span><Footprints size={23}/></span><h3>Entra en tu proyecto.</h3><p>Coloca y transforma objetos en 3D. Recorre tus espacios a la altura de tus ojos.</p></article><article><span><Lightbulb size={23}/></span><h3>Prueba otra luz.</h3><p>Ajusta el sol y las lámparas. Guarda una imagen del proyecto hasta en 4K.</p></article></section>
-      {!window.prismaArchitectureDesktop && !('prismaDesktop' in window) && <a className="paw-desktop" href="https://github.com/OscarD0823/asteoria-atlas/releases/tag/v0.3.0"><Download size={18}/><span>Llévalo a tu PC.<small>Instalador Windows · BETA.</small></span><ArrowRight size={18}/></a>}
-    </main><footer className="paw-footer"><span>Asteoria Atlas 0.3 BETA · OscarD0823</span><span><ShieldCheck size={13}/>Hecho para crear. Guardado contigo.</span></footer></div>;
+      {!window.prismaArchitectureDesktop && !('prismaDesktop' in window) && <a className="paw-desktop" href={productInfo('architecture').repository+'/releases/tag/v'+productInfo('architecture').version}><Download size={18}/><span>Llévalo a tu PC.<small>Instalador Windows · BETA.</small></span><ArrowRight size={18}/></a>}
+    </main><footer className="paw-footer"><span>Asteoria Atlas {productInfo('architecture').version} BETA · OscarD0823</span><span><ShieldCheck size={13}/>Hecho para crear. Guardado contigo.</span></footer></div>;
 }

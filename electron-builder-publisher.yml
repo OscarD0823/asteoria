@@ -4,7 +4,7 @@ directories:
   output: release-publisher
 extraMetadata:
   name: asteoria-publisher
-  version: 1.0.0
+  version: 1.0.1
   prismaProduct: publisher
 files:
   - dist-publisher/**/*
