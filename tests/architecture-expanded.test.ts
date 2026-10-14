@@ -18,6 +18,7 @@ import { extrudedGeometry, meshAsset } from '../src/architecture/model-import';
 import { loadInitialProject, storeProject, listStoredProjects, getStoredProject } from '../src/architecture/project-store';
 import { saveProject, STORAGE_KEY } from '../src/architecture/storage';
 import { checkGltf, imageSize } from '../src/architecture/import-guards';
+test('los GLTF de entrada no pueden referenciar blobs ajenos aunque exista un archivo con el mismo nombre',async()=>{const local=new File([new Uint8Array(24)],'texture.png');await assert.rejects(checkGltf(JSON.stringify({asset:{version:'2.0'},images:[{uri:'blob:prisma-architecture://app/texture.png'}]}),[local]),/blob/);});
 
 test('el LOD reduce el detalle de una escena densa según su presupuesto',()=>{
  const p=emptyProject(),items=Array.from({length:1000},()=>makeFurniture('sofa',p.levels[0].id,{x:4,y:4})),group=new T.Group(),objects=new Map<string,T.Object3D>(),batch=furnitureInstances(group,objects),camera=new T.PerspectiveCamera();camera.position.set(0,1.65,0);batch.sync(items,[]);batch.visibility(camera,'eco');const eco=batch.stats().visibleTriangles;assert.ok(eco<=250000);batch.visibility(camera,'balanced');const balanced=batch.stats().visibleTriangles;assert.ok(balanced<=900000);assert.ok(balanced>eco);assert.equal(batch.stats().instances,1000);batch.dispose();

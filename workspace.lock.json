@@ -12,15 +12,15 @@
     },
     "sheets": {
       "repository": "OscarD0823/asteoria-orbit",
-      "commit": "d0a3ae2d9183bd4e4e40991d66499fc5902bceaf"
+      "commit": "6c6275dfaf5f05fa84391c766a65845ab3866804"
     },
     "slides": {
       "repository": "OscarD0823/asteoria-nova",
-      "commit": "887cf8387211ceeec45db01418d4fa7e0580e08d"
+      "commit": "5ac4e52b1007db59b06ad3a0fc24f4a1a5671742"
     },
     "data": {
       "repository": "OscarD0823/asteoria-nexus",
-      "commit": "e3f2fbb2b2f37adc50510b6666f28f4dd8e81a35"
+      "commit": "5fafcab21ecad4e5317b5b3cbcb8202f41688490"
     },
     "publisher": {
       "repository": "OscarD0823/asteoria-canvas",

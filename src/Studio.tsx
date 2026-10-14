@@ -1689,7 +1689,7 @@ export default function Studio() {
             <a href="#" className="brand" onClick={(e) => e.preventDefault()}>
               <img src={product.logo} alt={product.name} />
               <span>
-                ASTEORIA <b>{product.writer ? "Writer" : "PDF"}</b>
+                ASTEORIA <b>{product.writer ? "Scribe" : "Folio"}</b>
               </span>
             </a>
             <div>

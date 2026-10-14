@@ -55,7 +55,7 @@ writeFileSync(
             "Aplicación instalable y biblioteca completa de fuentes con favoritas",
             "Editor local de hojas XLSX y CSV",
             "Fórmulas, formatos y varias hojas",
-            "Tablas para Prisma Writer, exportación PDF e impresión",
+            "Tablas para Asteoria Scribe, exportación PDF e impresión",
             "Guardado local y aviso de funciones incompatibles",
           ]
         : [
