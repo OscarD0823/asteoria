@@ -1,0 +1,10 @@
+{
+  "pdf": {"application/pdf": [".pdf"], "application/x-asteoria-folio": [".prisma"]},
+  "writer": {"application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"], "application/vnd.ms-word.document.macroEnabled.12": [".docm"], "text/plain": [".txt"], "application/x-asteoria-scribe": [".prisma"]},
+  "sheets": {"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"], "application/vnd.ms-excel.sheet.macroEnabled.12": [".xlsm"], "text/csv": [".csv"], "text/tab-separated-values": [".tsv"]},
+  "slides": {"application/vnd.openxmlformats-officedocument.presentationml.presentation": [".pptx"], "application/vnd.ms-powerpoint.presentation.macroEnabled.12": [".pptm"]},
+  "data": {"application/vnd.sqlite3": [".sqlite", ".sqlite3", ".db"]},
+  "publisher": {"application/x-asteoria-canvas": [".prismapub"]},
+  "architecture": {"application/x-asteoria-atlas": [".atlas", ".prisma-arquitectura"]},
+  "stories": {"application/x-asteoria-lore": [".lore"]}
+}

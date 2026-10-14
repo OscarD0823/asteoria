@@ -2,63 +2,63 @@
   "pdf": {
     "name": "Asteoria Folio",
     "siteSlug": "asteoria-folio",
-    "version": "7.0.1",
+    "version": "7.0.2",
     "description": "Editor PDF local y privado",
     "channel": "beta"
   },
   "writer": {
     "name": "Asteoria Scribe",
     "siteSlug": "asteoria-scribe",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "Documentos, escritura y trabajos académicos",
     "channel": "beta"
   },
   "sheets": {
     "name": "Asteoria Orbit",
     "siteSlug": "asteoria-orbit",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Hojas de cálculo, fórmulas y datos",
     "channel": "beta"
   },
   "slides": {
     "name": "Asteoria Nova",
     "siteSlug": "asteoria-nova",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Presentaciones para compartir tus ideas",
     "channel": "beta"
   },
   "data": {
     "name": "Asteoria Nexus",
     "siteSlug": "asteoria-nexus",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Bases de datos, tablas y consultas locales",
     "channel": "beta"
   },
   "publisher": {
     "name": "Asteoria Canvas",
     "siteSlug": "asteoria-canvas",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Diseño editorial y publicaciones",
     "channel": "beta"
   },
   "architecture": {
     "name": "Asteoria Atlas",
     "siteSlug": "asteoria-atlas",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "description": "CAD, arquitectura y espacios en 3D",
     "channel": "beta"
   },
   "stories": {
     "name": "Asteoria Lore",
     "siteSlug": "asteoria-lore",
-    "version": "1.0.1",
-    "description": "Historias, fanfics, personajes y familias",
+    "version": "1.1.0",
+    "description": "Historias, personajes, familias y audiolibros locales",
     "channel": "beta"
   },
   "prisma": {
     "name": "ASTEORIA",
     "siteSlug": "asteoria",
-    "version": "2.0.2",
+    "version": "2.1.0",
     "description": "Un universo para crear",
     "channel": "beta"
   }

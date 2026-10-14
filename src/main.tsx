@@ -7,6 +7,14 @@ import "@prisma/writer/word.css";
 import "./experience.css";
 import "./product-design.css";
 import { Capacitor } from "@capacitor/core";
+import {startFileHandling} from './file-launch';
+import './file-launch.css';
+startFileHandling();
+window.addEventListener('asteoria-file-error',event=>{
+ const message=String((event as CustomEvent).detail??'No se pudo abrir el documento.');
+ const notice=document.createElement('div');notice.setAttribute('role','alert');notice.className='asteoria-file-alert';
+ const text=document.createElement('span');text.textContent=message;const close=document.createElement('button');close.textContent='Cerrar';close.onclick=()=>notice.remove();notice.append(text,close);document.body.append(notice);
+});
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />

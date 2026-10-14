@@ -1,0 +1,2 @@
+Original procedural audio by OscarD0823. Dedicated to the public domain under CC0-1.0. Generator: scripts/create-lore-ambiences.mjs
+https://creativecommons.org/publicdomain/zero/1.0/

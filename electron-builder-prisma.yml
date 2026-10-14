@@ -4,14 +4,16 @@ directories:
   output: release-prisma
 extraMetadata:
   name: asteoria-prisma
-  version: 2.0.2
+  version: 2.1.0
   prismaProduct: prisma
+fileAssociations: [{"ext":"pdf","mime":"application/pdf","name":"ASTEORIA · .pdf","role":"Editor"},{"ext":"prisma","mime":"application/x-asteoria-folio","name":"ASTEORIA · .prisma","role":"Editor"},{"ext":"docx","mime":"application/vnd.openxmlformats-officedocument.wordprocessingml.document","name":"ASTEORIA · .docx","role":"Editor"},{"ext":"docm","mime":"application/vnd.ms-word.document.macroEnabled.12","name":"ASTEORIA · .docm","role":"Editor"},{"ext":"txt","mime":"text/plain","name":"ASTEORIA · .txt","role":"Editor"},{"ext":"prisma","mime":"application/x-asteoria-scribe","name":"ASTEORIA · .prisma","role":"Editor"},{"ext":"xlsx","mime":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","name":"ASTEORIA · .xlsx","role":"Editor"},{"ext":"xlsm","mime":"application/vnd.ms-excel.sheet.macroEnabled.12","name":"ASTEORIA · .xlsm","role":"Editor"},{"ext":"csv","mime":"text/csv","name":"ASTEORIA · .csv","role":"Editor"},{"ext":"tsv","mime":"text/tab-separated-values","name":"ASTEORIA · .tsv","role":"Editor"},{"ext":"pptx","mime":"application/vnd.openxmlformats-officedocument.presentationml.presentation","name":"ASTEORIA · .pptx","role":"Editor"},{"ext":"pptm","mime":"application/vnd.ms-powerpoint.presentation.macroEnabled.12","name":"ASTEORIA · .pptm","role":"Editor"},{"ext":"sqlite","mime":"application/vnd.sqlite3","name":"ASTEORIA · .sqlite","role":"Editor"},{"ext":"sqlite3","mime":"application/vnd.sqlite3","name":"ASTEORIA · .sqlite3","role":"Editor"},{"ext":"db","mime":"application/vnd.sqlite3","name":"ASTEORIA · .db","role":"Editor"},{"ext":"prismapub","mime":"application/x-asteoria-canvas","name":"ASTEORIA · .prismapub","role":"Editor"},{"ext":"atlas","mime":"application/x-asteoria-atlas","name":"ASTEORIA · .atlas","role":"Editor"},{"ext":"prisma-arquitectura","mime":"application/x-asteoria-atlas","name":"ASTEORIA · .prisma-arquitectura","role":"Editor"},{"ext":"lore","mime":"application/x-asteoria-lore","name":"ASTEORIA · .lore","role":"Editor"}]
 files:
   - dist-prisma/**/*
   - desktop/**/*
   - engines/**/*
   - engines/dist/*.cjs
   - products.json
+  - file-formats.json
   - package.json
   - "!node_modules/**/*"
 asar: true

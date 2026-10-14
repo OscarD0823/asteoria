@@ -36,10 +36,17 @@ export async function takeLaunch(token: string, editor: EditorKind): Promise<Lau
 export function editorForFile(name: string): EditorKind | undefined {
   const extension = name.toLowerCase().split('.').at(-1) ?? '';
   if(extension==='lore')return 'stories';
+  if(extension==='prismapub')return 'publisher';
   if(['atlas','prisma-arquitectura'].includes(extension))return 'architecture';
   if (['pdf', 'prisma'].includes(extension)) return 'pdf';
   if (['docx', 'docm', 'txt'].includes(extension)) return 'writer';
   if (['xlsx', 'xlsm', 'csv', 'tsv'].includes(extension)) return 'sheets';
   if (['pptx', 'pptm'].includes(extension)) return 'slides';
   if (['sqlite', 'sqlite3', 'db'].includes(extension)) return 'data';
+}
+export async function editorForLaunchFile(file:File):Promise<EditorKind|undefined>{
+  if(/\.prisma$/i.test(file.name)&&file.size<=160*1024*1024){
+    try{const project=JSON.parse(await file.text());if(project?.format==='prisma-pdf'&&project?.workspace?.flow)return 'writer';}catch{/* The editor reports malformed projects. */}
+  }
+  return editorForFile(file.name);
 }

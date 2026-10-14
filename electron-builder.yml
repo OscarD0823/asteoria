@@ -4,14 +4,16 @@ directories:
   output: release
 extraMetadata:
   name: asteoria-pdf
-  version: 7.0.1
+  version: 7.0.2
   prismaProduct: pdf
+fileAssociations: [{"ext":"pdf","mime":"application/pdf","name":"Asteoria Folio · .pdf","role":"Editor"},{"ext":"prisma","mime":"application/x-asteoria-folio","name":"Asteoria Folio · .prisma","role":"Editor"}]
 files:
   - dist/**/*
   - desktop/**/*
   - engines/**/*
   - engines/dist/*.cjs
   - products.json
+  - file-formats.json
   - package.json
   - "!node_modules/**/*"
 asar: true

@@ -4,14 +4,16 @@ directories:
   output: release-publisher
 extraMetadata:
   name: asteoria-publisher
-  version: 1.0.1
+  version: 1.0.2
   prismaProduct: publisher
+fileAssociations: [{"ext":"prismapub","mime":"application/x-asteoria-canvas","name":"Asteoria Canvas · .prismapub","role":"Editor"}]
 files:
   - dist-publisher/**/*
   - desktop/**/*
   - engines/**/*
   - engines/dist/*.cjs
   - products.json
+  - file-formats.json
   - package.json
   - "!node_modules/**/*"
 asar: true

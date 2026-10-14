@@ -10,6 +10,7 @@ import { dirname, join } from "node:path";
 const require = createRequire(import.meta.url);
 await import('./prepare-licenses.mjs');
 await import('./prepare-proofing.mjs');
+await import('./prepare-lore-audio.mjs');
 const {gunzipSync}=require('node:zlib');
 const {unlinkSync}=require('node:fs');
 const writer = process.env.VITE_PRODUCT === "writer";
@@ -24,6 +25,8 @@ const suiteFeatures=Object.fromEntries(Object.keys(products).map(kind=>[kind,[
  'Motor local propio para conservar documentos, libros y presentaciones; exportación TXT y CSV',
  'Iconos renovados y fuentes reales del dispositivo'
 ]]));
+for(const features of Object.values(suiteFeatures))features.unshift('Abre documentos desde el Explorador, Android y la web instalada compatible; conserva el guardado local');
+for(const target of ['stories','prisma'])suiteFeatures[target].unshift('Audiolibros locales: 12 voces, diálogos por personaje, 264 efectos, música propia y exportación WAV/ZIP');
 const release = 'https://github.com/OscarD0823/'+products[kind].siteSlug+'/releases/';
 writeFileSync(
   "public/version.json",

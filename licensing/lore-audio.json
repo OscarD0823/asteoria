@@ -1,0 +1,9 @@
+{
+ "speech": {"name":"meSpeak / eSpeak","version":"2.0.7","license":"GPL-3.0","source":"https://www.masswerk.at/mespeak/mespeak.zip","preferredJavaScriptSource":"vendor/mespeak-source/src","notes":"12 synthetic voice variants; local exportable synthesis, not recorded actors."},
+ "effects": [
+  {"name":"Kenney RPG Audio","license":"CC0-1.0","source":"https://kenney.nl/assets/rpg-audio"},
+  {"name":"Kenney Impact Sounds","license":"CC0-1.0","source":"https://kenney.nl/assets/impact-sounds"},
+  {"name":"Kenney Sci-fi Sounds","license":"CC0-1.0","source":"https://kenney.nl/assets/sci-fi-sounds"},
+  {"name":"Asteoria original procedural ambience","author":"OscarD0823","license":"CC0-1.0","source":"scripts/create-lore-ambiences.mjs"}
+ ]
+}

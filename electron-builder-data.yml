@@ -4,14 +4,16 @@ directories:
   output: release-data
 extraMetadata:
   name: asteoria-data
-  version: 1.0.1
+  version: 1.0.2
   prismaProduct: data
+fileAssociations: [{"ext":"sqlite","mime":"application/vnd.sqlite3","name":"Asteoria Nexus · .sqlite","role":"Editor"},{"ext":"sqlite3","mime":"application/vnd.sqlite3","name":"Asteoria Nexus · .sqlite3","role":"Editor"},{"ext":"db","mime":"application/vnd.sqlite3","name":"Asteoria Nexus · .db","role":"Editor"}]
 files:
   - dist-data/**/*
   - desktop/**/*
   - engines/**/*
   - engines/dist/*.cjs
   - products.json
+  - file-formats.json
   - package.json
   - "!node_modules/**/*"
 asar: true

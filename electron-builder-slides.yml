@@ -4,14 +4,16 @@ directories:
   output: release-slides
 extraMetadata:
   name: asteoria-slides
-  version: 1.0.1
+  version: 1.0.2
   prismaProduct: slides
+fileAssociations: [{"ext":"pptx","mime":"application/vnd.openxmlformats-officedocument.presentationml.presentation","name":"Asteoria Nova · .pptx","role":"Editor"},{"ext":"pptm","mime":"application/vnd.ms-powerpoint.presentation.macroEnabled.12","name":"Asteoria Nova · .pptm","role":"Editor"}]
 files:
   - dist-slides/**/*
   - desktop/**/*
   - engines/**/*
   - engines/dist/*.cjs
   - products.json
+  - file-formats.json
   - package.json
   - "!node_modules/**/*"
 asar: true

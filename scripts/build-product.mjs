@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
+const formats=JSON.parse(fs.readFileSync('file-formats.json','utf8'));
 const products=JSON.parse(fs.readFileSync('products.json','utf8'));
 const kind=process.argv[2]??process.env.VITE_PRODUCT;
 if(!Object.hasOwn(products,kind))throw Error('Selecciona uno de estos programas: '+Object.keys(products).join(', ')+'.');
@@ -19,6 +20,7 @@ if(kind!=='pdf'){
 }
 const manifest=JSON.parse(fs.readFileSync('public/manifest.webmanifest','utf8'));
 Object.assign(manifest,{name:product.name,short_name:product.name,description:product.description,id:'./',start_url:'./',scope:'./',categories:['productivity']});
+manifest.file_handlers=[{action:'./',accept:kind==='prisma'?Object.assign({},...Object.values(formats)):formats[kind],launch_type:'single-client'}];
 fs.writeFileSync(path.join(output,'manifest.webmanifest'),JSON.stringify(manifest,null,2)+'\n');
 run(['scripts/package-source.mjs']);
 run(['scripts/build-offline.mjs']);

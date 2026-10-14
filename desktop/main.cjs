@@ -32,11 +32,24 @@ const appScheme=productKind==='architecture'?'prisma-architecture':'prisma';
 const appOrigin=appScheme+'://app/';
 const smoke = process.argv.includes("--smoke-test");
 if(smoke)app.setPath('userData',require('node:fs').mkdtempSync(path.join(require('node:os').tmpdir(),'asteoria-smoke-')));
+const files=require('./file-launch.cjs').fileQueue(productKind,()=>window?.webContents.send('asteoria-files-available'));
+const testIndex=smoke?process.argv.indexOf('--open-file-test'):-1;
+const testFile=testIndex>=0?process.argv[testIndex+1]:undefined;
+if(testFile)files.add([testFile],process.cwd());
+if(!smoke&&!process.argv.includes('--local-engine')){
+ if(!app.requestSingleInstanceLock())app.exit(0);
+ else{
+  files.add(process.argv,process.cwd());
+  app.on('second-instance',(_event,args,cwd)=>{files.add(args,cwd);if(window){if(window.isMinimized())window.restore();window.show();window.focus();}});
+  app.on('open-file',(event,file)=>{event.preventDefault();files.add([file],process.cwd());});
+ }
+}
 app.whenReady().then(() => {
   if(process.argv.includes('--local-engine')){require('../engines/server.cjs').startLocalEngine().then(result=>{void shell.openExternal(result.url);app.on('before-quit',()=>result.server.close());}).catch(error=>{console.error(error.message);app.exit(1);});return;}
   const validEngineOrigin=event=>{if(event.sender!==window?.webContents||!event.sender.getURL().startsWith(appOrigin))throw new Error('Origen del motor no válido.');};
   ipcMain.handle('prisma-engine-capabilities',event=>{validEngineOrigin(event);return require('../engines/local.cjs').capabilities();});
   ipcMain.handle('prisma-engine-run',(event,payload)=>{validEngineOrigin(event);return require('../engines/local.cjs').run(payload);});
+  ipcMain.handle('asteoria-files-take',event=>{validEngineOrigin(event);if(event.senderFrame!==window?.webContents.mainFrame)throw Error('Solo el editor puede abrir el documento solicitado.');return files.take();});
   const root=path.resolve(__dirname,productKind==='pdf'?'../dist':'../dist-'+productKind);
   protocol.handle(appScheme, (request) => {
     const url = new URL(request.url);
@@ -146,9 +159,11 @@ app.whenReady().then(() => {
       console.log("Desktop application loaded from bundled assets.");
       setTimeout(async () => {
         try {
-          const checks=await window.webContents.executeJavaScript('({origin:location.origin,secure:isSecureContext,indexedDB:typeof indexedDB==="object",localFontsApi:typeof queryLocalFonts==="function"})');
+          if(testFile){for(let i=0;i<20;i++){const opened=await window.webContents.executeJavaScript('document.documentElement.dataset.asteoriaFileOpened||""');if(opened===path.basename(testFile))break;await new Promise(resolve=>setTimeout(resolve,1000));}}
+          const stem=testFile?path.basename(testFile).replace(/\.[^.]+$/,''):'';
+          const checks=await window.webContents.executeJavaScript('({origin:location.origin,secure:isSecureContext,indexedDB:typeof indexedDB==="object",localFontsApi:typeof queryLocalFonts==="function",openedFile:document.documentElement.dataset.asteoriaFileOpened||"",fileVisible:!'+JSON.stringify(stem)+'||document.body.innerText.includes('+JSON.stringify(stem)+')||Array.from(document.querySelectorAll("input")).some(input=>input.value==='+JSON.stringify(stem)+')})');
           console.log('Desktop diagnostics: '+JSON.stringify(checks));
-          app.exit(rendererFailed||!checks.secure||!checks.indexedDB||!checks.localFontsApi?1:0);
+          app.exit(rendererFailed||!checks.secure||!checks.indexedDB||!checks.localFontsApi||(testFile&&(checks.openedFile!==path.basename(testFile)||!checks.fileVisible))?1:0);
         }catch(error){console.error(error);app.exit(1);}
       }, 6000);
     });

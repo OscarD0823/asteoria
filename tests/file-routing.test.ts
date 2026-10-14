@@ -1,0 +1,4 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';
+import {editorForFile,editorForLaunchFile} from '../src/prisma-launch';
+test('apertura exterior dirige cada formato al editor correspondiente',()=>{for(const [name,editor]of [['historia.lore','stories'],['documento.docx','writer'],['datos.xlsm','sheets'],['charla.pptx','slides'],['plano.atlas','architecture'],['diseño.prismapub','publisher'],['base.sqlite','data'],['documento.pdf','pdf']])assert.equal(editorForFile(name),editor);});
+test('una copia de escritura .prisma se abre en Scribe dentro de la suite',async()=>{assert.equal(await editorForLaunchFile(new File([JSON.stringify({format:'prisma-pdf',workspace:{flow:{content:{}}}})],'Trabajo.prisma')),'writer');assert.equal(await editorForLaunchFile(new File(['malformed'],'Documento.prisma')),'pdf');});

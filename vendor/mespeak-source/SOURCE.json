@@ -1,0 +1,8 @@
+{
+  "meSpeakOriginal": "https://www.masswerk.at/mespeak/mespeak.zip",
+  "derivation": "Unmodified mespeak-core.js; ASTEORIA Worker adapter and timeline are separate. Original readable JavaScript and original package included. Upstream C/C++ source, dictionaries and Emscripten build scripts included in pinned source archive. Bit-identical rebuilding has not been verified.",
+  "commit": "9c6f642f7d78bab51d16b2e8b79cdf205643ec35",
+  "upstream": "https://github.com/kripken/speak.js",
+  "version": "2.0.7",
+  "archive": "speak-js-source.tar.gz"
+}

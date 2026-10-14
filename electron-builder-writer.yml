@@ -4,14 +4,16 @@ directories:
   output: release-writer
 extraMetadata:
   name: asteoria-writer
-  version: 2.0.1
+  version: 2.0.2
   prismaProduct: writer
+fileAssociations: [{"ext":"docx","mime":"application/vnd.openxmlformats-officedocument.wordprocessingml.document","name":"Asteoria Scribe · .docx","role":"Editor"},{"ext":"docm","mime":"application/vnd.ms-word.document.macroEnabled.12","name":"Asteoria Scribe · .docm","role":"Editor"},{"ext":"txt","mime":"text/plain","name":"Asteoria Scribe · .txt","role":"Editor"},{"ext":"prisma","mime":"application/x-asteoria-scribe","name":"Asteoria Scribe · .prisma","role":"Editor"}]
 files:
   - dist-writer/**/*
   - desktop/**/*
   - engines/**/*
   - engines/dist/*.cjs
   - products.json
+  - file-formats.json
   - package.json
   - "!node_modules/**/*"
 asar: true

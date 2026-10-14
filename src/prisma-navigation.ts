@@ -3,14 +3,16 @@ import {inPrisma, product} from './product';
 import {takeLaunch, storeLaunch, type Launch} from './prisma-launch';
 import {isEditorKind, type EditorKind} from './product-core';
 import {creationTemplate} from './template-catalog';
+import {registerFileOpener} from './file-launch';
 type Handlers = {template?: (id:string)=>Promise<unknown>; save: () => Promise<unknown>; file: (file: File) => Promise<unknown>; recent: (id: string) => Promise<unknown>; error: (error: unknown) => void};
 let saver: (() => Promise<unknown>) | undefined;
 let navigating = false;
 export function usePrismaNavigation(handlers: Handlers, ready = true) {
   const current = useRef(handlers), consumed = useRef(false); current.current = handlers;
   useEffect(() => {
-    if (!inPrisma || !ready || !isEditorKind(product.kind)) return;
+    if (!ready || !isEditorKind(product.kind)) return;
     const save = () => current.current.save(); saver = save;
+    const unregister=registerFileOpener(async file=>{await current.current.save();await current.current.file(file);});
     const token = new URLSearchParams(location.search).get('launch');
     if (token && !consumed.current) {
       consumed.current = true;
@@ -22,7 +24,7 @@ export function usePrismaNavigation(handlers: Handlers, ready = true) {
         const url = new URL(location.href); url.searchParams.delete('launch'); history.replaceState(null, '', url);
       }).catch(error => current.current.error(error));
     }
-    return () => { if (saver === save) saver = undefined; };
+    return () => { unregister();if (saver === save) saver = undefined; };
   }, [ready]);
 }
 export async function navigatePrisma(editor?: EditorKind, launch?: Launch) {

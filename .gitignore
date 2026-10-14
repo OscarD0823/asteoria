@@ -12,6 +12,7 @@ release-arquitectura/
 .openai/
 public/pdfjs/
 public/engine/
+public/lore-audio/
 qa/
 *.log
 release/

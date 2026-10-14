@@ -27,6 +27,7 @@ const files = [
   "application.json",
   "package.json",
   "products.json",
+  "file-formats.json",
   "workspace.lock.json",
   "workspace-ownership.json",
   "prisma.code-workspace",
@@ -44,6 +45,8 @@ const files = [
   "scripts",
   "desktop",
   "vendor/dictionaries",
+  "vendor/lore-audio",
+  "vendor/mespeak-source",
   "engines",
   "capacitor.config.ts",
   "electron-builder.yml",
@@ -85,7 +88,7 @@ const files = [
 ];
 files.push('public/architecture-logo.svg','public/architecture-icons','public/stories-logo.svg','public/stories-icons','public/licenses-manifest.json','public/source.html');
 writeFileSync('workspace-source.json',JSON.stringify(buildProvenance(),null,2)+'\n');
-for(const kind of appKinds)for(const file of ['src','tests','tools','package.json','application.json','.github','README.md','LICENSE','.gitignore']){
+for(const kind of appKinds)for(const file of ['src','tests','tools','package.json','application.json','.github','README.md','AUDIOBOOK.md','LICENSE','.gitignore']){
   const target='.prisma/apps/'+kind+'/'+file;
   if((await import('node:fs')).existsSync(target))files.push(target);
 }
