@@ -26,7 +26,7 @@ const suiteFeatures=Object.fromEntries(Object.keys(products).map(kind=>[kind,[
  'Iconos renovados y fuentes reales del dispositivo'
 ]]));
 for(const features of Object.values(suiteFeatures))features.unshift('Abre documentos desde el Explorador, Android y la web instalada compatible; conserva el guardado local');
-for(const target of ['stories','prisma'])suiteFeatures[target].unshift('Audiolibros locales: 12 voces, diálogos por personaje, 264 efectos, música propia y exportación WAV/ZIP');
+for(const target of ['stories','prisma'])suiteFeatures[target].unshift('Audiolibros neuronales locales: 19 voces en 10 idiomas, detección automática, diálogos por personaje, 264 efectos y exportación WAV/ZIP');
 const release = 'https://github.com/OscarD0823/'+products[kind].siteSlug+'/releases/';
 writeFileSync(
   "public/version.json",
