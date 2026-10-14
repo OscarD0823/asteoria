@@ -5,6 +5,28 @@ export type InstallPrompt = Event & {
 let pending: InstallPrompt | null = null;
 const listeners = new Set<() => void>();
 const notify = () => listeners.forEach(listener => listener());
+let updateReady = false;
+const updateListeners = new Set<() => void>();
+export const appUpdateReady = () => updateReady;
+export function subscribeAppUpdates(listener: () => void) {
+  updateListeners.add(listener);
+  return () => { updateListeners.delete(listener); };
+}
+// An update may activate while the home screen or another editor is open.
+// Remember it until a deliberate reload, after the active document is saved.
+export function trackWorkerUpdates(container: ServiceWorkerContainer) {
+  let previous = container.controller;
+  const changed = () => {
+    const next = container.controller;
+    if (previous && next && next !== previous) {
+      updateReady = true;
+      updateListeners.forEach(listener => listener());
+    }
+    previous = next;
+  };
+  container.addEventListener('controllerchange', changed);
+  return () => container.removeEventListener('controllerchange', changed);
+}
 // Loaded by main.tsx before the editor's lazy chunks. The event can arrive early.
 if (typeof window !== "undefined") {
   window.addEventListener("beforeinstallprompt", event => {
@@ -33,7 +55,7 @@ export async function promptInstall() {
 }
 export type OfflineStatus = {
   type: "prisma-offline-status";
-  ready: boolean; cached: number; total: number;
+  ready: boolean; shellReady?: boolean; cached: number; total: number;
   fontsCached: number; fontsTotal: number;
   downloading: boolean; error: string; version: string;
 };

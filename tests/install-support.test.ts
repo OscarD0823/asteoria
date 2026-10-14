@@ -25,3 +25,19 @@ test("installation captures an early event and never reuses a dismissed or faile
   unsubscribe();
   delete (globalThis as { window?: unknown }).window;
 });
+
+test('a worker upgrade is remembered across editor mounts, without reloading an unsaved document', async () => {
+  const support = await import('@prisma/core/install-support');
+  const target = Object.assign(new EventTarget(), {controller:null as unknown});
+  const stop = support.trackWorkerUpdates(target as ServiceWorkerContainer);
+  let notices = 0;
+  const unsubscribe = support.subscribeAppUpdates(() => notices++);
+  target.controller = {scriptURL:'https://example.org/sw.js'};
+  target.dispatchEvent(new Event('controllerchange'));
+  assert.equal(support.appUpdateReady(), false);
+  target.controller = {scriptURL:'https://example.org/sw.js'};
+  target.dispatchEvent(new Event('controllerchange'));
+  assert.equal(support.appUpdateReady(), true);
+  assert.equal(notices, 1);
+  unsubscribe(); stop();
+});

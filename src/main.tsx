@@ -8,6 +8,7 @@ import "./experience.css";
 import "./product-design.css";
 import { Capacitor } from "@capacitor/core";
 import {startFileHandling} from './file-launch';
+import {trackWorkerUpdates} from './install-support';
 import './file-launch.css';
 startFileHandling();
 window.addEventListener('asteoria-file-error',event=>{
@@ -26,8 +27,9 @@ if (
   ["http:", "https:"].includes(location.protocol) &&
   "serviceWorker" in navigator
 ) {
+  trackWorkerUpdates(navigator.serviceWorker);
   void navigator.serviceWorker
-    .register(new URL("./sw.js", document.baseURI), { scope: "./" })
+    .register(new URL("./sw.js", document.baseURI), { scope: "./", updateViaCache: "none" })
     .then((registration) => {
       void registration.update().catch(() => {});
       return navigator.serviceWorker.ready;
@@ -36,4 +38,13 @@ if (
     .catch(() => {
       /* PDF processing remains available without offline caching. */
     });
+  let lastUpdate = Date.now();
+  const checkWhenResumed = () => {
+    if (document.visibilityState !== 'visible' || Date.now() - lastUpdate < 60_000) return;
+    lastUpdate = Date.now();
+    void navigator.serviceWorker.getRegistration(new URL('./', document.baseURI).href)
+      .then(registration => registration?.update()).catch(() => {});
+  };
+  window.addEventListener('online', checkWhenResumed);
+  document.addEventListener('visibilitychange', checkWhenResumed);
 }

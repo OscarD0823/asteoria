@@ -1,8 +1,10 @@
+import {bootResources} from './offline-resources.mjs';
 /** Only application resources enter these caches, never user files or projects. */
 export function offlineWorker(resources, version, required = Object.keys(resources)) {
   return `// Only application resources are cached. User documents never enter this cache.
 const RESOURCES=${JSON.stringify(resources)};
 const FILES=Object.keys(RESOURCES), REQUIRED=${JSON.stringify(required)};
+const BOOT=${JSON.stringify(bootResources(Object.keys(resources)))};
 const PREFIX='prisma-code-'+encodeURIComponent(self.registration.scope)+'-';
 const CACHE=PREFIX+'${version}';
 const MANIFEST=new URL('__prisma_resource_hashes__',self.registration.scope).href;
@@ -35,7 +37,7 @@ async function status(){
   const cache=await caches.open(CACHE), urls=new Set((await cache.keys()).map(request=>request.url));
   const present=new Set(FILES.filter(name=>urls.has(new URL(name,self.registration.scope).href)));
   const fonts=FILES.filter(name=>name.replace(/^\\.\\.\\//,'').startsWith('fonts/')&&/\\.(ttf|otf|woff2?)$/i.test(name));
-  return {type:'prisma-offline-status',version:'${version}',ready:REQUIRED.every(name=>present.has(name)),
+  return {type:'prisma-offline-status',version:'${version}',ready:REQUIRED.every(name=>present.has(name)),shellReady:BOOT.every(name=>present.has(name)),
     cached:present.size,total:FILES.length,fontsCached:fonts.filter(name=>present.has(name)).length,
     fontsTotal:fonts.length,downloading:!!download,error:failure};
 }
@@ -44,15 +46,7 @@ async function broadcast(){
 }
 self.addEventListener('install',event=>event.waitUntil((async()=>{
   const cache=await caches.open(CACHE),prior=await previousCaches();
-  for(let i=0;i<REQUIRED.length;i+=8)await Promise.all(REQUIRED.slice(i,i+8).map(name=>resource(name,prior)));
-  // Carry forward previously downloaded optional fonts without downloading unused ones.
-  const optional=FILES.filter(name=>!REQUIRED.includes(name));
-  for(let i=0;i<optional.length;i+=8)await Promise.all(optional.slice(i,i+8).map(async name=>{
-    const url=new URL(name,self.registration.scope).href;
-    for(const previous of prior)if(previous.hashes[name]===RESOURCES[name]){
-      const response=await previous.cache.match(url);if(response){try{await cache.put(url,response);}catch{}return;}
-    }
-  }));
+  for(let i=0;i<BOOT.length;i+=8)await Promise.all(BOOT.slice(i,i+8).map(name=>resource(name,prior)));
   // Recording a hash never substitutes for checking whether the file is present.
   await cache.put(MANIFEST,new Response(JSON.stringify(RESOURCES),{headers:{'Content-Type':'application/json'}}));
   await self.skipWaiting();
@@ -76,6 +70,15 @@ self.addEventListener('activate',event=>event.waitUntil((async()=>{
   const prior=(await caches.keys()).filter(key=>key.startsWith(PREFIX)&&key!==CACHE);
   for(const key of prior.slice(0,-1))await caches.delete(key);
   await self.clients.claim();
+  // Reuse optional downloads after taking control, without blocking installation.
+  const cache=await caches.open(CACHE),previous=await previousCaches();
+  const optional=FILES.filter(name=>!BOOT.includes(name));
+  for(let i=0;i<optional.length;i+=8)await Promise.all(optional.slice(i,i+8).map(async name=>{
+    const url=new URL(name,self.registration.scope).href;
+    for(const old of previous)if(old.hashes[name]===RESOURCES[name]){
+      const response=await old.cache.match(url);if(response){try{await cache.put(url,response);}catch{}return;}
+    }
+  }));
 })()));
 self.addEventListener('fetch',event=>{
   const request=event.request;if(request.method!=='GET')return;
@@ -87,7 +90,17 @@ self.addEventListener('fetch',event=>{
   if(!navigation&&!ALLOWED.has(clean)&&!legacyAsset)return;
   event.respondWith((async()=>{
     const cache=await caches.open(CACHE),key=navigation?new URL('index.html',self.registration.scope).href:clean;
-    const cached=await cache.match(key);if(cached)return cached;
+    const cached=await cache.match(key);
+    if(navigation){
+      const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),6000);
+      try{
+        const response=await fetch(new Request(request,{cache:'no-cache',signal:controller.signal}));
+        if(response.ok)return response;
+        if(!cached)return response;
+      }catch(error){if(!cached)throw error;}finally{clearTimeout(timer);}
+      return cached;
+    }
+    if(cached)return cached;
     if(!navigation&&legacyAsset)for(const previous of await previousCaches()){
       const relative=decodeURIComponent(new URL(key).pathname.slice(new URL(self.registration.scope).pathname.length));
       if(ALLOWED.has(clean)&&previous.hashes[relative]!==RESOURCES[relative])continue;

@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { Capacitor, registerPlugin } from "@capacitor/core";
 import { RefreshCw, X, Download } from "lucide-react";
 import { distributionProduct as product } from "./product";
+import {appUpdateReady, subscribeAppUpdates} from './install-support';
 import {
   checkRelease,
   newerVersion,
@@ -31,7 +32,7 @@ export function Updates({
     [release, setRelease] = useState<ReleaseInfo | null>(null),
     [status, setStatus] = useState(""),
     [checking, setChecking] = useState(false),
-    [ready, setReady] = useState(false),
+    [ready, setReady] = useState(appUpdateReady),
     [updating, setUpdating] = useState(false);
   const checkingRef = useRef(false),
     restart = useRef(false),
@@ -39,6 +40,7 @@ export function Updates({
     trigger = useRef<HTMLButtonElement>(null),
     dialog = useRef<HTMLElement>(null);
   save.current = beforeReload;
+  useEffect(() => subscribeAppUpdates(() => setReady(appUpdateReady())), []);
   const check = async (manual = false) => {
     if (checkingRef.current) return;
     checkingRef.current = true;

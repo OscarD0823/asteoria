@@ -52,9 +52,14 @@ test("updates reuse identical app resources, replace changed files and never cac
       },
     });
     await done;
+    events.activate({waitUntil: (promise: Promise<unknown>) => {done = promise;}});
+    await done;
   };
   await install("first", { "index.html": "old", "fonts/sample.ttf": "same" });
-  assert.equal(downloads.length, 2);
+  assert.equal(downloads.length, 1);
+  let font: Promise<Response> | undefined;
+  events.fetch({request: new Request(scope + 'fonts/sample.ttf'), respondWith: (value: Promise<Response>) => {font = value;}});
+  await font;
   downloads.length = 0;
   await install("second", {
     "index.html": "changed",

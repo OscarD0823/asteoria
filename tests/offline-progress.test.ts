@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import vm from "node:vm";
 import { offlineWorker } from "../scripts/offline-worker.mjs";
-import { requiredResources } from "../scripts/offline-resources.mjs";
+import { requiredResources, bootResources } from "../scripts/offline-resources.mjs";
 function harness() {
   const scope = "https://example.org/prisma/", stores = new Map<string, Map<string, Response>>();
   const events: Record<string, Function> = {}, downloads: string[] = [];
@@ -22,8 +22,8 @@ function harness() {
     },
   };
   const resources = { "index.html": "one", "fonts/Carlito/Regular.ttf": "base", "fonts/extra.ttf": "extra" };
-  const load = (version = "one", hashes = resources) => vm.runInNewContext(offlineWorker(hashes, version, ["index.html", "fonts/Carlito/Regular.ttf"]), {
-    URL, Request, Response, Map, Set, JSON, Promise, caches,
+  const load = (version = "one", hashes: Record<string,string> = resources) => vm.runInNewContext(offlineWorker(hashes, version, requiredResources(Object.keys(hashes))), {
+    URL, Request, Response, Map, Set, JSON, Promise, caches, AbortController, setTimeout, clearTimeout,
     fetch: async (request: Request) => {
       downloads.push(request.url);
       if (offline) throw new Error("offline");
@@ -35,6 +35,8 @@ function harness() {
     let promise: Promise<unknown> | undefined;
     events.install({ waitUntil: (value: Promise<unknown>) => { promise = value; } });
     await promise;
+    events.activate({ waitUntil: (value: Promise<unknown>) => { promise = value; } });
+    await promise;
   };
   const message = async (type: string) => {
     let promise: Promise<unknown> | undefined;
@@ -42,9 +44,11 @@ function harness() {
     events.message({ data: { type }, ports: [{ postMessage: (state: unknown) => states.push(state) }], waitUntil: (value: Promise<unknown>) => { promise = value; } });
     await promise; return states;
   };
-  const request = async (path: string) => {
+  const request = async (path: string, navigation = false) => {
     let response: Promise<Response> | undefined;
-    events.fetch({ request: new Request(scope + path), respondWith: (value: Promise<Response>) => { response = value; } });
+    const input = new Request(scope + path);
+    if (navigation) Object.defineProperty(input, 'mode', {value:'navigate'});
+    events.fetch({ request: input, respondWith: (value: Promise<Response>) => { response = value; } });
     return response;
   };
   return { scope, stores, downloads, load, install, message, request, events,
@@ -53,6 +57,10 @@ function harness() {
 }
 test("unused fonts cannot block installation; on-demand fonts work offline and survive an unchanged upgrade", async () => {
   const h = harness(); h.load(); h.setUnavailable("extra.ttf"); await h.install();
+  assert.equal(h.downloads.length, 1);
+  assert.equal((await h.message("prisma-offline-status")).at(-1).ready, false);
+  assert.equal((await h.message("prisma-offline-status")).at(-1).shellReady, true);
+  await h.request('fonts/Carlito/Regular.ttf');
   assert.equal(h.downloads.length, 2);
   assert.equal((await h.message("prisma-offline-status")).at(-1).ready, true);
   h.setUnavailable(""); await h.request("fonts/extra.ttf");
@@ -65,7 +73,7 @@ test("unused fonts cannot block installation; on-demand fonts work offline and s
   assert.equal(await h.request("../writer/index.html"), undefined);
 });
 test("full-library download reports quota failures, retains the editor and can resume", async () => {
-  const h = harness(); h.load(); await h.install(); h.setQuota(true);
+  const h = harness(); h.load(); await h.install(); await h.request('fonts/Carlito/Regular.ttf'); h.setQuota(true);
   const failed = (await h.message("prisma-cache-all")).at(-1);
   assert.equal(failed.ready, true); assert.equal(failed.downloading, false); assert.match(failed.error, /espacio/);
   assert.equal(failed.cached, 2);
@@ -85,4 +93,30 @@ test("an unavailable core update leaves the preceding application usable", async
 test("required resources include local spelling, PDF engines and essential faces but defer large fonts", () => {
   const names = ["index.html", "assets/editor.js", "engine/mupdf.wasm", "spelling/index.dic", "fonts/fonts.css", "fonts/LiberationSerif-Regular.ttf", "fonts/Carlito/Carlito-Bold.ttf", "fonts/NotoSansMath/NotoSansMath-Regular.ttf", "fonts/NotoSansSC/NotoSansSC-Regular.ttf", "fonts/PTSans/PTSans-Regular.ttf"];
   assert.deepEqual(requiredResources(names), names.slice(0, 8));
+});
+
+test('an unavailable engine, voice runtime or dictionary cannot prevent a mobile update', async () => {
+  const h = harness(); h.load(); await h.install();
+  h.load('new', { 'index.html': 'new', 'assets/app.js': 'js', 'fonts/Carlito/Regular.ttf': 'base', 'fonts/extra.ttf': 'extra', 'lore-audio/neural/voice.data': 'large' });
+  h.setUnavailable('voice.data'); await h.install();
+  assert.equal(h.activations(), 2);
+  assert(!h.downloads.some(url => url.endsWith('voice.data')));
+  const status = (await h.message('prisma-offline-status')).at(-1);
+  assert.equal(status.shellReady, true);
+  assert.equal(status.ready, false);
+  assert.deepEqual(bootResources(['index.html', 'assets/app.js', 'assets/app.css', 'assets/engine.wasm', 'lore-audio/neural/voice.data', 'spelling/index.dic']), ['index.html', 'assets/app.js', 'assets/app.css']);
+});
+
+test('reopening gets fresh online HTML, keeps a coherent offline shell and survives HTTP failures', async () => {
+  const h = harness(); h.load(); await h.install();
+  const key = 'prisma-code-' + encodeURIComponent(h.scope) + '-one';
+  h.stores.get(key)!.set(h.scope + 'index.html', new Response('saved shell'));
+  assert.equal(await (await h.request('', true))?.text(), h.scope);
+  // The online response may belong to a newer deployment. It must not replace
+  // this worker's matching offline HTML before that deployment is installed.
+  assert.equal(await h.stores.get(key)!.get(h.scope + 'index.html')!.clone().text(), 'saved shell');
+  h.setOffline(true);
+  assert.equal(await (await h.request('', true))?.text(), 'saved shell');
+  h.setOffline(false); h.setUnavailable('index.html');
+  assert.equal(await (await h.request('index.html', true))?.text(), 'saved shell');
 });

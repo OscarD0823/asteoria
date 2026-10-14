@@ -85,11 +85,11 @@ export function InstallApp() {
         </ol>
         <div className="install-offline-card">
           <h3><WifiOff size={17} /> Uso sin conexión</h3>
-          <p role="status">{status?.ready ? full ? "Editor y biblioteca completa preparados." : "Editor y fuentes esenciales preparados. Las demás fuentes se guardan al utilizarlas." : "Preparando los recursos del editor. Mantén esta página abierta y con conexión."}</p>
+          <p role="status">{status?.ready ? full ? "Editor y biblioteca completa preparados." : "Editor y fuentes esenciales preparados. Las demás fuentes se guardan al utilizarlas." : status?.shellReady ? "Aplicación actualizada. Las herramientas, fuentes y motores se guardan al utilizarlos. Descarga todo para preparar el uso sin conexión." : "Preparando los recursos del editor. Mantén esta página abierta y con conexión."}</p>
           {status && <>
             <progress aria-label="Recursos disponibles sin conexión" value={status.cached} max={status.total} />
             <small>{status.cached} / {status.total} recursos · {status.fontsCached} / {status.fontsTotal} archivos de fuentes</small>
-            <button disabled={!status.ready || full || status.downloading} onClick={prepare}>
+            <button disabled={!(status.shellReady ?? status.ready) || full || status.downloading} onClick={prepare}>
               {status.downloading ? "Descargando biblioteca…" : full ? "Biblioteca completa disponible" : "Descargar todo para usar sin conexión"}
             </button>
           </>}
