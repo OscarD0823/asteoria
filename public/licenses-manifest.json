@@ -3,55 +3,55 @@
   "products": {
     "pdf": {
       "name": "Asteoria Folio",
-      "version": "7.0.1",
+      "version": "7.0.2",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria-folio"
     },
     "writer": {
       "name": "Asteoria Scribe",
-      "version": "2.0.1",
+      "version": "2.0.2",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria-scribe"
     },
     "sheets": {
       "name": "Asteoria Orbit",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria-orbit"
     },
     "slides": {
       "name": "Asteoria Nova",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria-nova"
     },
     "data": {
       "name": "Asteoria Nexus",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria-nexus"
     },
     "publisher": {
       "name": "Asteoria Canvas",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria-canvas"
     },
     "architecture": {
       "name": "Asteoria Atlas",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria-atlas"
     },
     "stories": {
       "name": "Asteoria Lore",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria-lore"
     },
     "prisma": {
       "name": "ASTEORIA",
-      "version": "2.0.2",
+      "version": "2.1.0",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria"
     }
