@@ -45,13 +45,13 @@
     },
     "stories": {
       "name": "Asteoria Lore",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria-lore"
     },
     "prisma": {
       "name": "ASTEORIA",
-      "version": "2.1.0",
+      "version": "2.2.0",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria"
     }
@@ -939,6 +939,123 @@
         {
           "file": "third-party/@peculiar-webcrypto-1.7.1-LICENSE.md",
           "sha256": "06fa9b6896b5e0062651f1a769d08f19892e76f2c1b42329f60f4cdd8de4c378"
+        }
+      ]
+    },
+    {
+      "name": "@protobufjs/aspromise",
+      "version": "1.1.2",
+      "declaredLicense": "BSD-3-Clause",
+      "scope": "installed-transitive",
+      "repository": "https://github.com/dcodeIO/protobuf.js.git",
+      "notices": [
+        {
+          "file": "third-party/@protobufjs-aspromise-1.1.2-LICENSE",
+          "sha256": "a67b34a24a5daddcce46aea68c5004e4442bbfb63690329fa607bf4de4269794"
+        }
+      ]
+    },
+    {
+      "name": "@protobufjs/base64",
+      "version": "1.1.2",
+      "declaredLicense": "BSD-3-Clause",
+      "scope": "installed-transitive",
+      "repository": "https://github.com/dcodeIO/protobuf.js.git",
+      "notices": [
+        {
+          "file": "third-party/@protobufjs-base64-1.1.2-LICENSE",
+          "sha256": "a67b34a24a5daddcce46aea68c5004e4442bbfb63690329fa607bf4de4269794"
+        }
+      ]
+    },
+    {
+      "name": "@protobufjs/codegen",
+      "version": "2.0.5",
+      "declaredLicense": "BSD-3-Clause",
+      "scope": "installed-transitive",
+      "repository": "https://github.com/dcodeIO/protobuf.js.git",
+      "notices": [
+        {
+          "file": "third-party/@protobufjs-codegen-2.0.5-LICENSE",
+          "sha256": "a67b34a24a5daddcce46aea68c5004e4442bbfb63690329fa607bf4de4269794"
+        }
+      ]
+    },
+    {
+      "name": "@protobufjs/eventemitter",
+      "version": "1.1.1",
+      "declaredLicense": "BSD-3-Clause",
+      "scope": "installed-transitive",
+      "repository": "https://github.com/dcodeIO/protobuf.js.git",
+      "notices": [
+        {
+          "file": "third-party/@protobufjs-eventemitter-1.1.1-LICENSE",
+          "sha256": "a67b34a24a5daddcce46aea68c5004e4442bbfb63690329fa607bf4de4269794"
+        }
+      ]
+    },
+    {
+      "name": "@protobufjs/fetch",
+      "version": "1.1.1",
+      "declaredLicense": "BSD-3-Clause",
+      "scope": "installed-transitive",
+      "repository": "https://github.com/dcodeIO/protobuf.js.git",
+      "notices": [
+        {
+          "file": "third-party/@protobufjs-fetch-1.1.1-LICENSE",
+          "sha256": "a67b34a24a5daddcce46aea68c5004e4442bbfb63690329fa607bf4de4269794"
+        }
+      ]
+    },
+    {
+      "name": "@protobufjs/float",
+      "version": "1.0.2",
+      "declaredLicense": "BSD-3-Clause",
+      "scope": "installed-transitive",
+      "repository": "https://github.com/dcodeIO/protobuf.js.git",
+      "notices": [
+        {
+          "file": "third-party/@protobufjs-float-1.0.2-LICENSE",
+          "sha256": "a67b34a24a5daddcce46aea68c5004e4442bbfb63690329fa607bf4de4269794"
+        }
+      ]
+    },
+    {
+      "name": "@protobufjs/path",
+      "version": "1.1.2",
+      "declaredLicense": "BSD-3-Clause",
+      "scope": "installed-transitive",
+      "repository": "https://github.com/dcodeIO/protobuf.js.git",
+      "notices": [
+        {
+          "file": "third-party/@protobufjs-path-1.1.2-LICENSE",
+          "sha256": "a67b34a24a5daddcce46aea68c5004e4442bbfb63690329fa607bf4de4269794"
+        }
+      ]
+    },
+    {
+      "name": "@protobufjs/pool",
+      "version": "1.1.0",
+      "declaredLicense": "BSD-3-Clause",
+      "scope": "installed-transitive",
+      "repository": "https://github.com/dcodeIO/protobuf.js.git",
+      "notices": [
+        {
+          "file": "third-party/@protobufjs-pool-1.1.0-LICENSE",
+          "sha256": "a67b34a24a5daddcce46aea68c5004e4442bbfb63690329fa607bf4de4269794"
+        }
+      ]
+    },
+    {
+      "name": "@protobufjs/utf8",
+      "version": "1.1.2",
+      "declaredLicense": "BSD-3-Clause",
+      "scope": "installed-transitive",
+      "repository": "https://github.com/protobufjs/protobuf.js.git",
+      "notices": [
+        {
+          "file": "third-party/@protobufjs-utf8-1.1.2-LICENSE",
+          "sha256": "a67b34a24a5daddcce46aea68c5004e4442bbfb63690329fa607bf4de4269794"
         }
       ]
     },
@@ -2682,6 +2799,19 @@
       ]
     },
     {
+      "name": "collapse-white-space",
+      "version": "2.1.0",
+      "declaredLicense": "MIT",
+      "scope": "installed-transitive",
+      "repository": "wooorm/collapse-white-space",
+      "notices": [
+        {
+          "file": "third-party/collapse-white-space-2.1.0-license",
+          "sha256": "63cb98b3f6abfb3c3592c16f88253c1bdc834087bf52671e8ce5609e4eb693cf"
+        }
+      ]
+    },
+    {
       "name": "color-convert",
       "version": "2.0.1",
       "declaredLicense": "MIT",
@@ -3748,6 +3878,19 @@
       "notices": []
     },
     {
+      "name": "flatbuffers",
+      "version": "25.9.23",
+      "declaredLicense": "Apache-2.0",
+      "scope": "installed-transitive",
+      "repository": "git+https://github.com/google/flatbuffers.git",
+      "notices": [
+        {
+          "file": "third-party/flatbuffers-25.9.23-LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        }
+      ]
+    },
+    {
       "name": "for-each",
       "version": "0.3.5",
       "declaredLicense": "MIT",
@@ -3772,6 +3915,14 @@
           "sha256": "e5b780d4f38d1d3328e3e53186c4e62d3fa149ea6f2bacd5de5ad0c30ac85343"
         }
       ]
+    },
+    {
+      "name": "franc-min",
+      "version": "6.2.0",
+      "declaredLicense": "MIT",
+      "scope": "direct-runtime",
+      "repository": "https://github.com/wooorm/franc/tree/main/packages/franc-min",
+      "notices": []
     },
     {
       "name": "fs-constants",
@@ -4123,6 +4274,14 @@
           "sha256": "f65c5d9f22a317b2a10803bd1868461ce6499c2ed7217bc80c0cc772a748789c"
         }
       ]
+    },
+    {
+      "name": "guid-typescript",
+      "version": "1.0.9",
+      "declaredLicense": "ISC",
+      "scope": "installed-transitive",
+      "repository": "https://github.com/NicolasDeveloper/guid-typescript",
+      "notices": []
     },
     {
       "name": "has-bigints",
@@ -5290,6 +5449,19 @@
       ]
     },
     {
+      "name": "long",
+      "version": "5.3.2",
+      "declaredLicense": "Apache-2.0",
+      "scope": "installed-transitive",
+      "repository": "https://github.com/dcodeIO/long.js.git",
+      "notices": [
+        {
+          "file": "third-party/long-5.3.2-LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        }
+      ]
+    },
+    {
       "name": "lowercase-keys",
       "version": "2.0.0",
       "declaredLicense": "MIT",
@@ -5636,6 +5808,19 @@
       ]
     },
     {
+      "name": "n-gram",
+      "version": "2.0.2",
+      "declaredLicense": "MIT",
+      "scope": "installed-transitive",
+      "repository": "words/n-gram",
+      "notices": [
+        {
+          "file": "third-party/n-gram-2.0.2-license",
+          "sha256": "9966260ba3ea9d6a5f839297dca80ddc99735a34b4ae82811cac7b956d2e3afd"
+        }
+      ]
+    },
+    {
       "name": "nanoid",
       "version": "3.3.20",
       "declaredLicense": "MIT",
@@ -5850,6 +6035,22 @@
           "sha256": "4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b"
         }
       ]
+    },
+    {
+      "name": "onnxruntime-common",
+      "version": "1.30.0",
+      "declaredLicense": "MIT",
+      "scope": "installed-transitive",
+      "repository": "https://github.com/Microsoft/onnxruntime.git",
+      "notices": []
+    },
+    {
+      "name": "onnxruntime-web",
+      "version": "1.30.0",
+      "declaredLicense": "MIT",
+      "scope": "direct-runtime",
+      "repository": "https://github.com/Microsoft/onnxruntime.git",
+      "notices": []
     },
     {
       "name": "open",
@@ -6108,6 +6309,19 @@
         {
           "file": "third-party/pkijs-3.4.1-LICENSE",
           "sha256": "d27a2aa238102924ea75da808f79253484347d824b9b7b077837e4232f9493f5"
+        }
+      ]
+    },
+    {
+      "name": "platform",
+      "version": "1.3.6",
+      "declaredLicense": "MIT",
+      "scope": "installed-transitive",
+      "repository": "bestiejs/platform.js",
+      "notices": [
+        {
+          "file": "third-party/platform-1.3.6-LICENSE",
+          "sha256": "4a161ebed4f1ef933e16ccfa00d86c718703f5d015a9987ea7ce1bb72a43cd22"
         }
       ]
     },
@@ -6433,6 +6647,19 @@
         {
           "file": "third-party/prosemirror-view-1.42.6-LICENSE",
           "sha256": "ef0b452ced6304db2ce78ca66de1fc7b97bab05bc1750c95df359ed3fe1d65c8"
+        }
+      ]
+    },
+    {
+      "name": "protobufjs",
+      "version": "7.6.6",
+      "declaredLicense": "BSD-3-Clause",
+      "scope": "installed-transitive",
+      "repository": "protobufjs/protobuf.js",
+      "notices": [
+        {
+          "file": "third-party/protobufjs-7.6.6-LICENSE",
+          "sha256": "49d6a1c9a623784c61c6cb70f773f3457faceb1914a13c8560a9823b7631950c"
         }
       ]
     },
@@ -7603,6 +7830,19 @@
         {
           "file": "third-party/tree-kill-1.2.2-LICENSE",
           "sha256": "33eba3cb810ee4b03426ec7fecf22e7529e2fe95f8163e7213016459bee7a276"
+        }
+      ]
+    },
+    {
+      "name": "trigram-utils",
+      "version": "2.0.1",
+      "declaredLicense": "MIT",
+      "scope": "installed-transitive",
+      "repository": "wooorm/trigram-utils",
+      "notices": [
+        {
+          "file": "third-party/trigram-utils-2.0.1-license",
+          "sha256": "9966260ba3ea9d6a5f839297dca80ddc99735a34b4ae82811cac7b956d2e3afd"
         }
       ]
     },

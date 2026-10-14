@@ -13,3 +13,4 @@ for(const [folder,category] of [['rpg','Fantasía y acciones'],['impact','Golpes
 }
 fs.writeFileSync(output+'/catalog.json',JSON.stringify(catalog,null,2)+'\n');
 console.log(`Lore: ${catalog.length} efectos CC0 y motor de voz local.`);
+await import('./prepare-lore-neural.mjs');

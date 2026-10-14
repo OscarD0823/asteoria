@@ -1,0 +1,20 @@
+{
+  "engine": "Piper VITS + ONNX Runtime Web",
+  "runtimeVersion": "1.30.0",
+  "runtimeLicense": "MIT",
+  "phonemizer": "Piper Phonemize 1.2.0 / eSpeak NG",
+  "phonemizerLicense": "MIT and GPL-3.0",
+  "voiceRevision": "c10ece1aade47bb51c153c893d14e5bf8e5b7117",
+  "voices": 19,
+  "languages": 10,
+  "assets": [
+    "piper_phonemize.js",
+    "piper_phonemize.wasm",
+    "piper_phonemize.data"
+  ],
+  "source": "vendor/lore-neural/sources",
+  "build": "vendor/lore-neural/BUILD.md",
+  "models": "vendor/lore-neural/models.json",
+  "modelCards": "vendor/lore-neural/model-cards",
+  "notes": "Local inference only. Unmodified voice models; individual dataset licenses retained. No NC or unknown dataset licenses are selected."
+}

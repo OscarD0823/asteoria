@@ -78,16 +78,16 @@ android {
         stories {
             dimension 'product'
             applicationId 'com.oscard.asteorialore'
-            versionCode 10100
-            versionName '1.1.0'
+            versionCode 10200
+            versionName '1.2.0'
             resValue 'string', 'app_name', 'Asteoria Lore'
             resValue 'string', 'title_activity_main', 'Asteoria Lore'
         }
         prisma {
             dimension 'product'
             applicationId 'com.oscard.prisma'
-            versionCode 20100
-            versionName '2.1.0'
+            versionCode 20200
+            versionName '2.2.0'
             resValue 'string', 'app_name', 'ASTEORIA'
             resValue 'string', 'title_activity_main', 'ASTEORIA'
         }

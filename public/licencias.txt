@@ -1,4 +1,4 @@
-Asteoria Folio 7.0.2 BETA / Asteoria Scribe 2.0.2 BETA / Asteoria Orbit 1.0.2 BETA / Asteoria Nova 1.0.2 BETA / Asteoria Nexus 1.0.2 BETA / Asteoria Canvas 1.0.2 BETA / Asteoria Atlas 0.3.2 BETA / Asteoria Lore 1.1.0 BETA / ASTEORIA 2.1.0 BETA
+Asteoria Folio 7.0.2 BETA / Asteoria Scribe 2.0.2 BETA / Asteoria Orbit 1.0.2 BETA / Asteoria Nova 1.0.2 BETA / Asteoria Nexus 1.0.2 BETA / Asteoria Canvas 1.0.2 BETA / Asteoria Atlas 0.3.2 BETA / Asteoria Lore 1.2.0 BETA / ASTEORIA 2.2.0 BETA
 Copyright (C) 2026 OscarD0823 y colaboradores.
 Software libre: AGPL-3.0-or-later. Sin garantía. Licencia completa: ./LICENSE.txt
 Código propio de esta compilación: ./prisma-pdf-source.tar.gz
@@ -46,6 +46,7 @@ docx 9.9.0 — MIT — git+https://github.com/dolanmiu/docx.git
 exceljs 4.4.0 — MIT — https://github.com/exceljs/exceljs.git
 fast-xml-parser 5.11.2 — MIT — git+https://github.com/NaturalIntelligence/fast-xml-parser.git
 fflate 0.8.3 — MIT — https://github.com/101arrowz/fflate
+franc-min 6.2.0 — MIT — https://github.com/wooorm/franc/tree/main/packages/franc-min
 hunspell-asm 4.0.2 — MIT — git+https://github.com/kwonoj/hunspell-asm.git
 hyperformula 3.5.0 — GPL-3.0-only — https://github.com/handsontable/hyperformula.git
 immer 10.1.1 — MIT — https://github.com/immerjs/immer.git
@@ -53,6 +54,7 @@ jszip 3.10.2 — (MIT OR GPL-3.0-or-later) — https://github.com/Stuk/jszip.git
 lucide-react 0.468.0 — ISC — https://github.com/lucide-icons/lucide.git
 mathjax-full 3.2.2 — Apache-2.0 — https://github.com/mathjax/Mathjax-src/
 mupdf 1.28.1 — AGPL-3.0-or-later — https://cgit.ghostscript.com/mupdf.git/
+onnxruntime-web 1.30.0 — MIT — https://github.com/Microsoft/onnxruntime.git
 opentype.js 2.0.0 — MIT — git://github.com/opentypejs/opentype.js.git
 pdf-lib 1.17.1 — MIT — git+https://github.com/Hopding/pdf-lib.git
 pdfjs-dist 6.4.299 — Apache-2.0 — git+https://github.com/mozilla/pdf.js.git
@@ -189,6 +191,8 @@ Hunspell: motor léxico local WebAssembly; hunspell-asm MIT y Hunspell LGPL/GPL/
 Asteoria Lore audio: meSpeak 2.0.7 / eSpeak (GPL-3.0). Original license in lore-audio/licenses; JavaScript source and original upstream package in vendor/mespeak-source.
 Kenney RPG Audio, Impact Sounds and Sci-fi Sounds: CC0-1.0; original notices in lore-audio/licenses.
 Ten original ASTEORIA procedural ambience sounds by OscarD0823: CC0-1.0, generator scripts/create-lore-ambiences.mjs.
+
+Lore neural voices: ONNX Runtime Web 1.30.0 (MIT), Piper Phonemize (MIT), eSpeak NG (GPL-3.0). Original notices, model cards and licenses in lore-audio/neural; preferred C/C++ source archives and build recipe in vendor/lore-neural. Models are pinned and verified before storage; manuscripts remain local.
 
 
 Hunspell v1.6.2: autores y opciones en ./third-party/Hunspell-license.hunspell.txt; fuente y recetas de WASM fijadas en la entrega acompañante.

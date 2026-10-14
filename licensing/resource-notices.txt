@@ -119,3 +119,5 @@ Hunspell: motor léxico local WebAssembly; hunspell-asm MIT y Hunspell LGPL/GPL/
 Asteoria Lore audio: meSpeak 2.0.7 / eSpeak (GPL-3.0). Original license in lore-audio/licenses; JavaScript source and original upstream package in vendor/mespeak-source.
 Kenney RPG Audio, Impact Sounds and Sci-fi Sounds: CC0-1.0; original notices in lore-audio/licenses.
 Ten original ASTEORIA procedural ambience sounds by OscarD0823: CC0-1.0, generator scripts/create-lore-ambiences.mjs.
+
+Lore neural voices: ONNX Runtime Web 1.30.0 (MIT), Piper Phonemize (MIT), eSpeak NG (GPL-3.0). Original notices, model cards and licenses in lore-audio/neural; preferred C/C++ source archives and build recipe in vendor/lore-neural. Models are pinned and verified before storage; manuscripts remain local.

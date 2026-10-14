@@ -47,6 +47,7 @@ const files = [
   "vendor/dictionaries",
   "vendor/lore-audio",
   "vendor/mespeak-source",
+  "vendor/lore-neural",
   "engines",
   "capacitor.config.ts",
   "electron-builder.yml",
