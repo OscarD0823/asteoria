@@ -43,6 +43,12 @@
       ],
       "@prisma/active-app": [
         "./src/PrismaRouter.tsx"
+      ],
+      "@prisma/architecture/*": [
+        "./.prisma/apps/architecture/src/*"
+      ],
+      "@prisma/stories/*": [
+        "./.prisma/apps/stories/src/*"
       ]
     },
     "allowJs": true

@@ -1,60 +1,33 @@
-# Un entorno, siete repositorios
+# Un entorno, nueve repositorios
 
-`OscarD0823/prisma` contiene el panel general, el núcleo común, las dependencias, las fuentes y diccionarios abiertos, los motores locales y la configuración para web, Windows y Android. Cada aplicación tiene su código en su repositorio: `prisma-pdf`, `prisma-writer`, `prisma-sheets`, `prisma-slides`, `prisma-data` y `prisma-publisher`.
+El repositorio OscarD0823/asteoria contiene el panel general, núcleo, dependencias, fuentes y diccionarios, motores locales y configuraciones web/Windows/Android. Los ocho módulos se enlazan desde asteoria-folio, asteoria-scribe, asteoria-orbit, asteoria-nova, asteoria-nexus, asteoria-canvas, asteoria-atlas y asteoria-lore. Atlas mantiene su implementación en src/architecture del núcleo y una entrada en su repositorio.
 
-Prisma importa directamente sus módulos. PDF y Writer comparten el espacio de edición documental; Slides y Publisher comparten el motor de presentaciones. Las plantillas de Publisher pertenecen a su repositorio. Las dependencias se declaran con importaciones `@prisma/<programa>/<módulo>`; no se copia el editor dentro de la suite.
+## Preparación
 
-## Preparar el entorno
-
-```powershell
-git clone https://github.com/OscarD0823/prisma.git
-cd prisma
+~~~powershell
+git clone https://github.com/OscarD0823/asteoria.git
+cd asteoria
 node scripts/workspace.mjs sync
 pnpm install --frozen-lockfile
 pnpm dev
-```
+~~~
 
-Node 22 y pnpm 11.25.0. `sync` clona los commits de `workspace.lock.json` dentro de `.prisma/apps/`. `node scripts/workspace.mjs sync --latest` obtiene cambios publicados sin sobrescribir trabajo sin confirmar. Puedes enlazar un checkout existente con `node scripts/workspace.mjs sync --use sheets=D:\ruta\prisma-sheets`; `.prisma-local.json` guarda esta preferencia fuera de Git.
+Node 22 y pnpm 11.25.0. Abre asteoria.code-workspace. sync utiliza los commits de workspace.lock.json; --latest obtiene cambios confirmados sin sobrescribir trabajo local. --use sheets=D:\ruta\asteoria-orbit enlaza un checkout. .prisma-local.json no se publica. En una extracción Source, sync conserva los módulos incluidos y valida workspace-source.json sin exigir historia Git.
 
-Abre `prisma.code-workspace` para ver los siete repositorios en una ventana. Por ejemplo, `.prisma/apps/sheets/src/Sheets.tsx` pertenece a `prisma-sheets`, y las dos versiones de Sheets lo utilizan.
+## Pruebas y builds
 
-## Comprobar y compilar
+pnpm test; node scripts/workspace.mjs validate; pnpm build:product sheets.
 
-```powershell
-pnpm test
-node scripts/workspace.mjs validate
-pnpm build:product sheets
-pnpm build:products
-```
+build:product admite pdf, writer, sheets, slides, data, publisher, architecture, stories y prisma (identificador técnico de la versión general). PRISMA_OUTDIR selecciona una carpeta vacía. build:products crea las nueve salidas dist/dist-*. Todos comparten los mismos módulos; la entrada independiente incluye las dependencias necesarias.
 
-`build:product` admite los seis editores y `prisma`. La salida predeterminada `dist-pages` debe estar vacía; `PRISMA_OUTDIR` permite elegir otra carpeta. `build:products` conserva `dist`, `dist-writer`, etc. para los instaladores y genera `dist-site` con las rutas antiguas.
+## Publicación
 
-Cada versión suelta tiene una entrada exclusiva. Prisma carga el editor solicitado. Los motores y componentes compartidos necesarios se incluyen como dependencias.
+Confirma cambios en el repositorio propietario y ejecuta pnpm workspace:publish sheets desde el núcleo. Se sube el módulo, se fija su commit y se solicita publicación de Orbit y ASTEORIA. Para el núcleo: pnpm workspace:publish prisma solicita las nueve publicaciones. No fuerza ramas ni sobrescribe divergencias remotas.
 
-## Publicar una función
+Un push publica el programa. Las páginas comprueban actualizaciones de los módulos cada 15 minutos, según disponibilidad de GitHub Actions; los commits concretos y la huella se registran en workspace-build.json. EXE/APK necesitan un build nativo firmado y un release prerelease Beta independiente, con versiones propias y sus archivos Source.
 
-1. Edita el programa y comprueba las pruebas.
-2. Confirma sus cambios con Git en el repositorio correspondiente.
-3. Ejecuta `pnpm workspace:publish sheets`, o el nombre del editor modificado.
+## Fuentes, privacidad y migración
 
-El comando sube Sheets, actualiza su commit fijado, sube Prisma y solicita ambas publicaciones. Si modificas el núcleo, confírmalo y ejecuta `pnpm workspace:publish prisma`: solicita las siete publicaciones. Requiere Git y GitHub CLI autenticados; no guarda credenciales en el código.
+Buscar fuentes instaladas usa Local Font Access en navegadores compatibles, con permiso del usuario. Windows solicita permiso local; sólo se utilizan los archivos seleccionados. Donde no hay API, se importan TTF/OTF/TTC/OTC. No se afirma detección automática de todas las fuentes móviles. Se conservan nombres tipográficos, variantes, permisos de incrustación y compatibilidad OOXML. Las fuentes del dispositivo y documentos privados no se publican.
 
-Se publica la revisión confirmada en la rama `main` del repositorio correspondiente, también si empezaste desde el commit fijado por `sync`. No se fuerza una actualización ni se sobrescriben cambios remotos divergentes: Git detiene la publicación hasta resolverlos.
-
-Un push directo publica el programa. Las páginas comprueban cambios cada 15 minutos: Prisma recoge cambios de los editores y estos recogen cambios de sus dependencias. GitHub puede retrasar las ejecuciones programadas. Se comparan commits antes de descargar dependencias y compilar. `workspace-build.json` registra la procedencia y huella de los módulos utilizados.
-
-## Distribución
-
-Se conservan los identificadores, las URLs y los enlaces de los instaladores actuales. Los nuevos EXE/APK se construyen desde este entorno con `electron-builder*.yml` y los sabores Android existentes. Publicar código web no genera ni instala automáticamente un nuevo EXE/APK: hay que compilar, firmar, comprobar y publicar una versión. Las claves de firma siguen fuera de Git.
-
-## Fuentes del dispositivo
-
-La biblioteca ofrece **Buscar fuentes instaladas**. En navegadores que implementan Local Font Access, el usuario autoriza la lectura de la lista. Solo se leen los archivos de la familia que selecciona; las familias no se suben a servidores. PDF/Writer las incluyen en el proyecto. Sheets/Slides/Publisher guardan las fuentes elegidas en una biblioteca del dispositivo y conservan el nombre real al exportar a OOXML; PDF y SVG utilizan los archivos seleccionados cuando pueden incrustarse.
-
-Los navegadores móviles y otros navegadores sin esa API permiten elegir TTF/OTF y colecciones TTC/OTC mediante **Importar**. Cambria y Cambria Math se extraen como caras independientes conservando tablas y métricas. Writer recupera las fuentes incrustadas autorizadas de un DOCX y las guarda con el proyecto. El código de Windows solicita confirmación local mediante el preload antes de enumerar; esta mejora requiere un instalador nuevo para llegar a las aplicaciones ya instaladas. Se mantienen la validación, los límites de tamaño y los permisos de incrustación. Las variantes que no pueden utilizarse muestran su motivo. No se afirma acceso automático a todas las fuentes del celular.
-
-Writer 1.6.1 incorpora estas correcciones en los paquetes de Windows y Android. El selector se ajusta al espacio visible cuando aparece el teclado. Android permite guardar los archivos en una carpeta del dispositivo mediante su selector de documentos y conserva la extensión `.prisma`; el selector de apertura admite los proyectos que proceden de las versiones web y de Windows.
-
-La revisión secuencial está en [COMPROBACIONES.md](docs/COMPROBACIONES.md). FNT-001 sigue abierto hasta completar los criterios de web, Windows y Android emulado; las pruebas de integración de fuentes usan archivos reales del dispositivo y permanecen fuera del repositorio público.
-
-El código descargable incluye los módulos de las seis aplicaciones, sus commits y `workspace-source.json`. Se puede reconstruir sin historia de Git. No se empaquetan documentos privados, cachés personales ni claves. Esta reorganización no cambia IndexedDB, los perfiles nativos ni el procesamiento local de documentos.
+La marca visible es ASTEORIA. Los IDs nativos, perfiles, nombres de schemas y formatos antiguos permanecen por compatibilidad. Las rutas públicas sí cambian; cada herramienta tiene su propia página. Las claves de firma quedan fuera de Git y de Source. Las fuentes propias, parches, licencias y datos se incluyen en Source; el complemento Corresponding-Source fija los motores copyleft y recetas originales. Véase docs/ASTEORIA-BETA.md.

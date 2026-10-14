@@ -1,10 +1,10 @@
 appId: com.oscard.prismadata
-productName: Prisma Data
+productName: Asteoria Nexus
 directories:
   output: release-data
 extraMetadata:
-  name: prisma-data
-  version: 0.3.3
+  name: asteoria-data
+  version: 1.0.0
   prismaProduct: data
 files:
   - dist-data/**/*
@@ -27,4 +27,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Prisma-Data-${version}-Windows-Setup.exe
+  artifactName: Asteoria-Nexus-${version}-Windows-Setup.exe

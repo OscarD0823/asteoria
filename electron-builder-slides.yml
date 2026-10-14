@@ -1,10 +1,10 @@
 appId: com.oscard.prismaslides
-productName: Prisma Slides
+productName: Asteoria Nova
 directories:
   output: release-slides
 extraMetadata:
-  name: prisma-slides
-  version: 0.3.3
+  name: asteoria-slides
+  version: 1.0.0
   prismaProduct: slides
 files:
   - dist-slides/**/*
@@ -27,4 +27,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Prisma-Slides-${version}-Windows-Setup.exe
+  artifactName: Asteoria-Nova-${version}-Windows-Setup.exe

@@ -1,3 +1,4 @@
+import { footprint } from './plan-dxf';
 import { useEffect, useRef, useState } from 'react';
 import { bounds, distance, distance3, snapPoint, resolvedWalls, wallOpenings, type Furniture, type Point, type Project, type Selection } from './model';
 import { meters } from './exports';
@@ -23,8 +24,9 @@ export default function Plan(props: Props) {
   const drag = useRef<{ id?: string; start: Point; item?: Point; frame: typeof frame; client: Point; moved: boolean } | null>(null);
   const [viewport, setViewport] = useState({ width: 600, height: 600 });
   useEffect(() => { const observer = new ResizeObserver(entries => { const r = entries[0].contentRect; setViewport({ width: r.width, height: r.height }); }); observer.observe(svg.current!); return () => observer.disconnect(); }, []);
+  const gridStep = frame.width>200?50:frame.width>40?5:1;
   const pxPerMeter = Math.min(viewport.width / frame.width, viewport.height / frame.height);
-  const rulerLength = [.001, .002, .005, .01, .02, .05, .1, .2, .5, 1, 2, 5, 10, 20, 50].filter(v => v * pxPerMeter <= 90).at(-1) ?? .001;
+  const rulerLength = [.001, .002, .005, .01, .02, .05, .1, .2, .5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000].filter(v => v * pxPerMeter <= 90).at(-1) ?? .001;
   useEffect(() => { setFrame(bounds(project, levelId)); setPreview(null); }, [levelId, props.resetKey]);
   useEffect(() => {
     const element = svg.current!;
@@ -34,7 +36,7 @@ export default function Plan(props: Props) {
       const p = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
       const ratio = event.deltaY > 0 ? 1.12 : 1 / 1.12;
       setFrame(old => {
-        if (old.width * ratio < 2 || old.width * ratio > 400) return old;
+        if (old.width * ratio < .1 || old.width * ratio > 200000) return old;
         return { x: p.x - (p.x - old.x) * ratio, y: p.y - (p.y - old.y) * ratio, width: old.width * ratio, height: old.height * ratio };
       });
     };
@@ -80,9 +82,11 @@ export default function Plan(props: Props) {
       }
       drag.current = null; setPreview(null);
     }} onPointerCancel={() => { drag.current = null; setPreview(null); }}>
-    <defs><pattern id="pa-dots" width={1} height={1} patternUnits="userSpaceOnUse"><circle cx={0} cy={0} r={.016} fill="#afb5bf"/><path d="M.5 0v1M0 .5h1" stroke="#e9ebee" strokeWidth={.012}/></pattern></defs>
+    <defs><pattern id="pa-dots" width={gridStep} height={gridStep} patternUnits="userSpaceOnUse"><circle cx={0} cy={0} r={.016} fill="#afb5bf"/><path d="M.5 0v1M0 .5h1" stroke="#e9ebee" strokeWidth={.012}/></pattern></defs>
     <rect x={frame.x - 500} y={frame.y - 500} width={frame.width + 1000} height={frame.height + 1000} fill="#f9fafb"/>
     <rect x={frame.x - 500} y={frame.y - 500} width={frame.width + 1000} height={frame.height + 1000} fill="url(#pa-dots)"/>
+    {project.site.enabled&&project.site.boundary.length>=3&&<polygon points={project.site.boundary.map(p=>`${p.x},${p.y}`).join(' ')} fill="#bdd1ac33" stroke="#94a47d" strokeWidth={.08} pointerEvents="none"/>}
+    {project.underlays.filter(r=>r.levelId===levelId).map(r=><image key={r.id} href={r.image} x={r.x} y={r.y} width={r.width} height={r.depth} opacity={r.opacity} pointerEvents="none"/>)}
     {project.rooms.filter(r => r.levelId === levelId).map(r => <g key={r.id} onPointerDown={e => choose(e, 'room', r.id)}>
       <rect x={r.x} y={r.y} width={r.width} height={r.depth} fill={r.color} stroke={selected('room', r.id) ? '#7562ce' : 'transparent'} strokeWidth={.06}/>
       <text x={r.x + r.width - .35} y={r.y + r.depth - .6} textAnchor="end" fontSize={.26} fontWeight={600} fill="#47505d">{r.name}</text>
@@ -102,7 +106,7 @@ export default function Plan(props: Props) {
     {project.furniture.filter(f => f.levelId === levelId).map(original => {
       const f = preview?.id === original.id ? { ...original, ...preview } : original;
       return <g key={f.id} transform={`translate(${f.x} ${f.y}) rotate(${f.rotation})`} onPointerDown={e => choose(e, 'furniture', f.id, original)} className="pa-furniture-plan">
-        <title>{f.name}</title><FurnitureSymbol item={f}/>
+        <title>{f.name}</title>{f.kind==='custom'?<polygon points={footprint(project,{...f,x:0,y:0,rotation:0}).map(p=>`${p.x},${p.y}`).join(' ')} fill={f.color} stroke="#64808d" strokeWidth={.025}/>:<FurnitureSymbol item={f}/>}
         {selected('furniture', f.id) && <rect x={-f.width / 2 - .08} y={-f.depth / 2 - .08} width={f.width + .16} height={f.depth + .16} fill="none" stroke="#7562ce" strokeWidth={.035} strokeDasharray=".08 .04"/>}
       </g>;
     })}

@@ -35,6 +35,8 @@ export async function takeLaunch(token: string, editor: EditorKind): Promise<Lau
 }
 export function editorForFile(name: string): EditorKind | undefined {
   const extension = name.toLowerCase().split('.').at(-1) ?? '';
+  if(extension==='lore')return 'stories';
+  if(['atlas','prisma-arquitectura'].includes(extension))return 'architecture';
   if (['pdf', 'prisma'].includes(extension)) return 'pdf';
   if (['docx', 'docm', 'txt'].includes(extension)) return 'writer';
   if (['xlsx', 'xlsm', 'csv', 'tsv'].includes(extension)) return 'sheets';

@@ -31,20 +31,9 @@ export default defineConfig({
         const kind=process.env.VITE_PRODUCT as keyof typeof products;
         const canonical='https://oscard0823.github.io/'+(products[kind]??products.pdf).siteSlug+'/';
         html=html.replace('<head>','<head>\n    <link rel="canonical" href="'+canonical+'" />');
-        const more:Record<string,string>={slides:'Prisma Slides',data:'Prisma Data',publisher:'Prisma Publisher',prisma:'Prisma'};
-        if(process.env.VITE_PRODUCT&&more[process.env.VITE_PRODUCT])return html.replaceAll('Prisma PDF',more[process.env.VITE_PRODUCT]);
-        if (process.env.VITE_PRODUCT === "sheets")
-          return html
-            .replaceAll("Prisma PDF", "Prisma Sheets")
-            .replace("De documento a posibilidad", "Da forma a tus números");
-        return process.env.VITE_PRODUCT === "writer"
-          ? html
-              .replaceAll("Prisma PDF", "Prisma Writer")
-              .replace(
-                "De documento a posibilidad",
-                "Tus palabras, tu próxima idea",
-              )
-          : html;
+        html=html.replace(/<title>[\s\S]*?<\/title>/,'<title>'+(products[kind]??products.pdf).name+' · BETA · Un universo para crear</title>');
+        html=html.replaceAll('Asteoria Folio',(products[kind]??products.pdf).name);
+        return html;
       },
     },
   ],

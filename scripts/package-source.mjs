@@ -23,11 +23,14 @@ const files = [
   "README-prisma.md",
   "README-workspace.md",
   "docs",
+  "licensing",
+  "application.json",
   "package.json",
   "products.json",
   "workspace.lock.json",
   "workspace-ownership.json",
   "prisma.code-workspace",
+  "asteoria.code-workspace",
   "workspace-source.json",
   "pnpm-lock.yaml",
   "pnpm-workspace.yaml",
@@ -77,9 +80,12 @@ const files = [
   "public/prisma-logo.svg",
   "public/pdf-logo.svg",
   "public/prisma-icons",
+  "electron-builder-architecture.yml",
+  "electron-builder-stories.yml",
 ];
+files.push('public/architecture-logo.svg','public/architecture-icons','public/stories-logo.svg','public/stories-icons','public/licenses-manifest.json','public/source.html');
 writeFileSync('workspace-source.json',JSON.stringify(buildProvenance(),null,2)+'\n');
-for(const kind of appKinds)for(const file of ['src','tests','tools','package.json','README.md','LICENSE','.gitignore']){
+for(const kind of appKinds)for(const file of ['src','tests','tools','package.json','application.json','.github','README.md','LICENSE','.gitignore']){
   const target='.prisma/apps/'+kind+'/'+file;
   if((await import('node:fs')).existsSync(target))files.push(target);
 }
@@ -99,3 +105,4 @@ const result = spawnSync(
 );
 if (result.status !== 0)
   throw new Error("No se pudo empaquetar el código fuente.");
+

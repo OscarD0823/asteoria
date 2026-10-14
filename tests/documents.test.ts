@@ -73,11 +73,11 @@ test("merged table cells, links and image dimensions match the writing editor", 
           content: [
             {
               type: "text",
-              text: "Prisma PDF",
+              text: "Asteoria Folio",
               marks: [
                 {
                   type: "link",
-                  attrs: { href: "https://oscard0823.github.io/prisma-pdf/" },
+                  attrs: { href: "https://oscard0823.github.io/asteoria-folio/" },
                 },
               ],
             },
@@ -183,7 +183,7 @@ test("rich documents paginate, preserve Unicode, styles, tables and manual break
         content,
         layout: {
           ...defaultLayout(),
-          header: "PRISMA STUDIO",
+          header: "ASTEORIA STUDIO",
           footer: "Documento local",
           numbering: true,
         },

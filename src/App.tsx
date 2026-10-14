@@ -5,6 +5,7 @@ import {PrismaBar} from './PrismaBar';
 import {navigatePrisma} from './prisma-navigation';
 import {editorKinds, productInfo} from './product-core';
 import {useDeviceFonts} from './device-fonts';
+import {BetaBadge} from './BetaBadge';
 const Current=lazy(()=>import('@prisma/active-app'));
 export default function App() {
   useDeviceFonts();
@@ -24,7 +25,7 @@ export default function App() {
     <>{inPrisma&&product.kind!=='prisma'&&<PrismaBar/>}<Suspense
       fallback={<div className="sheets-busy">Abriendo {product.name}…</div>}
     >
-      <Current/>
+      <Current/><BetaBadge/>
       {!inPrisma&&<SuiteAccess/>}
     </Suspense></>
   );

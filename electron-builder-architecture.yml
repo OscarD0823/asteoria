@@ -1,0 +1,30 @@
+appId: com.oscard.prismaarquitectura
+productName: Asteoria Atlas
+directories:
+  output: release-architecture
+extraMetadata:
+  name: asteoria-architecture
+  version: 0.3.0
+  prismaProduct: architecture
+files:
+  - dist-architecture/**/*
+  - desktop/**/*
+  - engines/**/*
+  - engines/dist/*.cjs
+  - products.json
+  - package.json
+  - "!node_modules/**/*"
+asar: true
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: public/architecture-icons/prisma.ico
+  signExecutable: false
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  artifactName: Asteoria-Atlas-${version}-Windows-Setup.exe

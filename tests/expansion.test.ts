@@ -443,9 +443,9 @@ test("update versions are ordered numerically and download links are restricted 
   const r = {
     version: "5.0.0",
     releaseUrl: releaseBase + "tag/v5.0.0",
-    androidUrl: releaseBase + "download/v5.0.0/Prisma-PDF-5.0.0-Android.apk",
+    androidUrl: releaseBase + "download/v5.0.0/Asteoria-Folio-5.0.0-Android.apk",
     windowsUrl:
-      releaseBase + "download/v5.0.0/Prisma-PDF-5.0.0-Windows-Setup.exe",
+      releaseBase + "download/v5.0.0/Asteoria-Folio-5.0.0-Windows-Setup.exe",
     features: ["Fuentes"],
   };
   assert.equal(validateRelease(r).version, "5.0.0");

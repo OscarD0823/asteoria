@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-export const appKinds=['pdf','writer','sheets','slides','data','publisher'];
+export const appKinds=['pdf','writer','sheets','slides','data','publisher','architecture','stories'];
 export function assertKind(kind){if(!appKinds.includes(kind)&&kind!=='prisma')throw Error('Aplicación desconocida: '+kind);return kind;}
 export function appPath(root,kind){assertKind(kind);if(kind==='prisma')throw Error('Prisma es la raíz del entorno.');return path.join(root,'.prisma','apps',kind);}
 export function activeEntry(root,kind){assertKind(kind);return kind==='prisma'?path.join(root,'src','PrismaRouter.tsx'):path.join(appPath(root,kind),'src','entry.tsx');}

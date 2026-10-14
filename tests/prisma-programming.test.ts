@@ -19,7 +19,7 @@ test('macro language bounds loops and rejects Javascript, filesystem, network an
  assert.throws(()=>planPrismaMacro('{"version":1,"name":"Test","steps":[],"__proto__":{}}',snapshot,[]),/permitido/);
  assert.throws(()=>planPrismaMacro(JSON.stringify({version:1,name:'Test',steps:[{repeat:1000,steps:[{repeat:1000,steps:[{log:'x'}]}]}]}),snapshot,[]));
 });
-test('Prisma presentation replacements span styled runs, leave other words and survive repeated save and duplication',async()=>{
+test("ASTEORIA presentation replacements span styled runs, leave other words and survive repeated save and duplication",async()=>{
  const opened=await createPresentation(),element=engine.addElement(opened.deck.slides[0],{kind:'textbox',offset:{x:EMU,y:EMU,cx:6*EMU,cy:EMU},paragraphs:[{runs:[{text:'Una i',bold:true,fontFamily:'Carlito',fontSize:24},{text:'dea, ideas.',italic:true,fontFamily:'Carlito',fontSize:24}]}]});
  replacePresentationText(opened,[{op:'replaceText',args:{find:'idea',replace:'proyecto',wholeWord:true}}]);assert.equal(slideText(element),'Una proyecto, ideas.');assert.ok(element.text!.paragraphs[0].runs.some(run=>run.bold&&run.text==='proyecto'));
  engine.duplicateSlide(opened,0);engine.setSlideNotes(opened,0,'Hola, España. 🧪');const first=await engine.savePptx(opened);await engine.savePptx(opened);const last=await engine.savePptx(opened),loaded=await engine.openPptx(last);assert.equal(loaded.deck.slides.length,2);assert.equal(engine.getSlideNotes(loaded.archive,loaded.deck.slides[0].path),'Hola, España. 🧪');

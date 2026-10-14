@@ -21,13 +21,15 @@ export async function listPrismaLibrary(): Promise<{cards: LibraryCard[]; errors
   const results = await Promise.allSettled([
     readStore('prisma-pdf-local-v2', 'projectIndex'), readStore('prisma-writer-local-v1', 'projectIndex'),
     readStore('prisma-office-local-v1', 'cards'), readStore('prisma-sheets-local-v1', 'cards', 'current'),
+    readStore('asteoria-lore-local-v1','stories'),
+    readStore('prisma-arquitectura-projects','summaries'),
   ]);
   const cards: LibraryCard[] = [];
   results.forEach((result, index) => {
     if (result.status !== 'fulfilled') return;
     for (const raw of result.value) {
       const row = raw as Record<string, unknown>;
-      const editor = index < 2 ? index === 0 ? 'pdf' : 'writer' : index === 3 ? 'sheets' : row.product;
+      const editor = index < 2 ? index === 0 ? 'pdf' : 'writer' : index === 3 ? 'sheets' : index===4?'stories':index===5?'architecture':row.product;
       if (!isEditorKind(editor) || typeof row.name !== 'string' || typeof row.id !== 'string') continue;
       cards.push({id: row.id, editor, name: row.name, updated: Number(row.updatedAt ?? row.updated) || 0, session: index === 3});
     }

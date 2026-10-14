@@ -45,7 +45,10 @@ export function furnitureMesh(f: Furniture) {
   group.position.set(f.x, f.elevation, f.y); group.rotation.y = -f.rotation * Math.PI / 180;
   group.userData.selection = { kind: 'furniture', id: f.id }; group.userData.dimensions = { width: w, height: h, depth: d }; return group;
 }
+const floorSources = new Map<string, THREE.CanvasTexture>();
+export function clearFloorTextures() { floorSources.forEach(t=>t.dispose());floorSources.clear(); }
 export function floorTexture(room: Room) {
+  const key=room.finish+room.color,cached=floorSources.get(key);if(cached){const texture=cached.clone();texture.userData={};texture.repeat.set(room.width/2,room.depth/2);return texture;}
   const canvas = document.createElement('canvas'); canvas.width = canvas.height = 512;
   const ctx = canvas.getContext('2d')!;
   const color = new THREE.Color(room.color);
@@ -65,7 +68,7 @@ export function floorTexture(room: Room) {
   } else {
     for (let i = 0; i < 1800; i++) { ctx.fillStyle = i % 2 ? '#ffffff0c' : '#5259630c'; ctx.fillRect((i * 73) % 512, (i * 137) % 512, 2, 2); }
   }
-  const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace; texture.wrapS = texture.wrapT = THREE.RepeatWrapping; texture.repeat.set(room.width / 2, room.depth / 2); texture.anisotropy = 8; return texture;
+  const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace; texture.wrapS = texture.wrapT = THREE.RepeatWrapping; texture.repeat.set(room.width / 2, room.depth / 2); texture.anisotropy = 4; const source=texture.clone();source.userData.retained=true;floorSources.set(key,source);if(floorSources.size>32){const oldest=floorSources.keys().next().value!;floorSources.get(oldest)!.dispose();floorSources.delete(oldest);}return texture;
 }
 export function lightMesh(data: SceneLight, shadowsAllowed: boolean) {
   const group = new THREE.Group(); group.position.set(data.x, data.elevation, data.y); group.userData.selection = { kind: 'light', id: data.id };
@@ -93,11 +96,12 @@ export function textSprite(text: string) {
 export function dispose(root: THREE.Object3D) {
   const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>(), textures = new Set<THREE.Texture>();
   root.traverse(o => {
+    if(o instanceof THREE.InstancedMesh)o.dispose();
     if (o instanceof THREE.PointLight || o instanceof THREE.SpotLight || o instanceof THREE.DirectionalLight) o.shadow.dispose();
     if (o instanceof THREE.Mesh || o instanceof THREE.LineSegments || o instanceof THREE.Line || o instanceof THREE.Sprite) {
       if ('geometry' in o) geometries.add(o.geometry);
       for (const m of Array.isArray(o.material) ? o.material : [o.material]) { materials.add(m); for (const value of Object.values(m)) if (value instanceof THREE.Texture) textures.add(value); }
     }
   });
-  geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); textures.forEach(t => t.dispose());
+  geometries.forEach(g => {if(!g.userData.retained)g.dispose();}); materials.forEach(m => {if(!m.userData.retained)m.dispose();}); textures.forEach(t => {if(!t.userData.retained)t.dispose();});
 }

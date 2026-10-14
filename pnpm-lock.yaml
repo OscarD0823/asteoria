@@ -142,6 +142,9 @@ importers:
       hyperformula:
         specifier: 3.5.0
         version: 3.5.0
+      immer:
+        specifier: 10.1.1
+        version: 10.1.1
       jszip:
         specifier: ^3.10.2
         version: 3.10.2
@@ -239,18 +242,6 @@ importers:
       vite:
         specifier: ^7.0.4
         version: 7.3.7(@types/node@22.20.5)(jiti@2.7.0)(tsx@4.23.15)
-
-  .prisma/apps/data: {}
-
-  .prisma/apps/pdf: {}
-
-  .prisma/apps/publisher: {}
-
-  .prisma/apps/sheets: {}
-
-  .prisma/apps/slides: {}
-
-  .prisma/apps/writer: {}
 
 packages:
 
@@ -1945,6 +1936,9 @@ packages:
 
   immediate@3.0.6:
     resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
+
+  immer@10.1.1:
+    resolution: {integrity: sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==}
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
@@ -5111,6 +5105,8 @@ snapshots:
   image-size@2.0.3: {}
 
   immediate@3.0.6: {}
+
+  immer@10.1.1: {}
 
   inflight@1.0.6:
     dependencies:

@@ -1,4 +1,4 @@
-name: Publicar Prisma
+name: Publicar ASTEORIA BETA
 on:
   push:
     branches: [main]

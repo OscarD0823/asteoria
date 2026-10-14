@@ -111,7 +111,7 @@ export async function readProject(bytes: Uint8Array): Promise<Workspace> {
     throw new Error("El archivo de proyecto no es válido.");
   }
   if (input?.format !== "prisma-pdf" || input?.version !== 3)
-    throw new Error("Selecciona un proyecto .prisma de Prisma PDF.");
+    throw new Error("Selecciona un proyecto .prisma de Asteoria Folio.");
   const w = input.workspace as Workspace;
   if (
     !w ||

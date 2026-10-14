@@ -1,6 +1,6 @@
 {
-  "name": "prisma-workspace",
-  "version": "6.6.2",
+  "name": "asteoria-workspace",
+  "version": "7.0.0",
   "license": "AGPL-3.0-or-later",
   "private": true,
   "type": "module",
@@ -20,11 +20,10 @@
     "workspace:sync": "node scripts/workspace.mjs sync",
     "workspace:status": "node scripts/workspace.mjs status",
     "workspace:publish": "node scripts/workspace.mjs publish",
-    "dev:architecture": "node scripts/architecture.mjs dev",
-    "build:architecture": "node scripts/architecture.mjs build",
-    "test:architecture": "node scripts/architecture.mjs test",
-    "desktop:architecture": "node scripts/architecture.mjs desktop",
-    "source:architecture": "node scripts/architecture.mjs source"
+    "dev:architecture": "node scripts/workspace.mjs dev architecture",
+    "build:architecture": "node scripts/build-product.mjs architecture",
+    "test:architecture": "node scripts/test-workspace.mjs",
+    "desktop:architecture": "electron-builder --config electron-builder-architecture.yml --win nsis --x64"
   },
   "dependencies": {
     "@capacitor/android": "8.5.3",
@@ -83,7 +82,8 @@
     "tesseract.js-core": "7.0.0",
     "typo-js": "1.3.2",
     "utif2": "^4.1.0",
-    "three": "0.186.0"
+    "three": "0.186.0",
+    "immer": "10.1.1"
   },
   "devDependencies": {
     "@capacitor/cli": "8.5.3",
@@ -104,5 +104,5 @@
   },
   "main": "desktop/main.cjs",
   "author": "OscarD0823",
-  "description": "Entorno común y suite Prisma para web, Android y Windows"
+  "description": "Entorno común y suite ASTEORIA BETA para web, Android y Windows"
 }

@@ -1,7 +1,9 @@
 import { distance, projectPoint, resolvedWalls, wallOpenings, parseProject, type Point, type Project, type Selection } from './model';
+import { produce } from 'immer';
+import { indexedCanWalk } from './collisions';
 export type Transform = { x: number; y: number; elevation: number; rotation: number; scaleX: number; scaleY: number; scaleZ: number };
 export function transformProject(project: Project, selection: NonNullable<Selection>, t: Transform) {
-  const next = structuredClone(project);
+  const next = produce(project, next => {
   if (selection.kind === 'furniture') {
     const f = next.furniture.find(f => f.id === selection.id)!;
     Object.assign(f, { x: t.x, y: t.y, elevation: t.elevation, rotation: t.rotation, width: f.width * t.scaleX, depth: f.depth * t.scaleZ, height: f.height * t.scaleY });
@@ -22,9 +24,10 @@ export function transformProject(project: Project, selection: NonNullable<Select
     const o = next.openings.find(o => o.id === selection.id)!;
     o.offset = t.x; o.sill = o.kind === 'window' ? t.elevation : 0; o.width *= t.scaleX; o.height *= t.scaleY;
   }
-  return parseProject(next);
+  }); parseProject(next); return next;
 }
 export function canWalkAt(project: Project, levelId: string, p: Point, radius = .18) {
+  if (Object.isFrozen(project)) return indexedCanWalk(project,levelId,p,radius);
   for (const wall of resolvedWalls(project, levelId)) {
     const nearest = projectPoint(p, wall);
     if (nearest.distance >= wall.thickness / 2 + radius) continue;

@@ -62,7 +62,7 @@ export function Updates({
       if (
         "serviceWorker" in navigator &&
         !Capacitor.isNativePlatform() &&
-        location.protocol !== "prisma:"
+        !["prisma:","prisma-architecture:"].includes(location.protocol)
       ) {
         const registration = await navigator.serviceWorker.getRegistration();
         void registration?.update().catch(() => {});
@@ -101,7 +101,7 @@ export function Updates({
     if (
       !("serviceWorker" in navigator) ||
       Capacitor.isNativePlatform() ||
-      location.protocol === "prisma:"
+      ["prisma:","prisma-architecture:"].includes(location.protocol)
     )
       return;
     let hadController = !!navigator.serviceWorker.controller;
@@ -137,7 +137,7 @@ export function Updates({
     return () => window.removeEventListener("keydown", key);
   }, [open]);
   const native =
-      Capacitor.isNativePlatform() || location.protocol === "prisma:",
+      Capacitor.isNativePlatform() || ["prisma:","prisma-architecture:"].includes(location.protocol),
     newer = release && newerVersion(release.version, product.version);
   const install = async () => {
     try {

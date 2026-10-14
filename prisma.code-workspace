@@ -1,32 +1,40 @@
 {
   "folders": [
     {
-      "name": "Prisma · entorno y núcleo",
+      "name": "ASTEORIA · entorno y núcleo",
       "path": "."
     },
     {
-      "name": "Prisma Pdf",
+      "name": "Asteoria Folio",
       "path": ".prisma/apps/pdf"
     },
     {
-      "name": "Prisma Writer",
+      "name": "Asteoria Scribe",
       "path": ".prisma/apps/writer"
     },
     {
-      "name": "Prisma Sheets",
+      "name": "Asteoria Orbit",
       "path": ".prisma/apps/sheets"
     },
     {
-      "name": "Prisma Slides",
+      "name": "Asteoria Nova",
       "path": ".prisma/apps/slides"
     },
     {
-      "name": "Prisma Data",
+      "name": "Asteoria Nexus",
       "path": ".prisma/apps/data"
     },
     {
-      "name": "Prisma Publisher",
+      "name": "Asteoria Canvas",
       "path": ".prisma/apps/publisher"
+    },
+    {
+      "name": "Asteoria Atlas",
+      "path": ".prisma/apps/architecture"
+    },
+    {
+      "name": "Asteoria Lore",
+      "path": ".prisma/apps/stories"
     }
   ],
   "settings": {

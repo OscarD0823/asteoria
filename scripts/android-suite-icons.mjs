@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const sharp = require(process.env.PRISMA_SHARP_PATH || 'sharp');
-const backgrounds = { pdf:'#171f39', writer:'#122e35', sheets:'#142f2b', slides:'#2b203e', data:'#342335', publisher:'#152f42', prisma:'#20233e' };
+const backgrounds = { pdf:'#171f39', writer:'#122e35', sheets:'#142f2b', slides:'#2b203e', data:'#342335', publisher:'#152f42', prisma:'#20233e', architecture:'#3d3524', stories:'#3d3059' };
 for (const [kind, background] of Object.entries(backgrounds)) {
   const logo = `public/${kind === 'pdf' ? 'pdf' : kind}-logo.svg`;
   const root = `android/app/src/${kind === 'pdf' ? 'main' : kind}/res`;

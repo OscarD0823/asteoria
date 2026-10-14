@@ -36,7 +36,7 @@ export function parseLexicon(text: string, filename: string) {
     const data: unknown = JSON.parse(text);
     if (Array.isArray(data)) values = data;
     else if (data && typeof data === "object" && "format" in data && data.format === "prisma-lexicon" && "version" in data && data.version === 1 && "entries" in data && Array.isArray(data.entries)) values = data.entries;
-    else throw new Error("Usa un JSON de Prisma o una lista de entradas con term y definition.");
+    else throw new Error("Usa un JSON de ASTEORIA o una lista de entradas con term y definition.");
   } else if (/\.(txt|tsv)$/i.test(filename)) {
     values = text.split(/\r?\n/).filter(line => line.trim()).map(line => {
       const [term, ...definition] = line.split("\t");

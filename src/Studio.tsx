@@ -1689,7 +1689,7 @@ export default function Studio() {
             <a href="#" className="brand" onClick={(e) => e.preventDefault()}>
               <img src={product.logo} alt={product.name} />
               <span>
-                Prisma <b>{product.writer ? "Writer" : "PDF"}</b>
+                ASTEORIA <b>{product.writer ? "Writer" : "PDF"}</b>
               </span>
             </a>
             <div>
@@ -1753,7 +1753,7 @@ export default function Studio() {
                 <div className="floating-doc">
                   <div className="doc-brand">
                     <img src={product.logo} />
-                    <span>PRISMA STUDIO</span>
+                    <span>ASTEORIA STUDIO</span>
                     <span>01</span>
                   </div>
                   <div className="art-pill">IDEAS QUE TOMAN FORMA</div>
@@ -1918,8 +1918,8 @@ export default function Studio() {
               Código abierto
               <ArrowRight size={13} />
             </a>
-            <a href="https://oscard0823.github.io/prisma-sheets/">
-              Abrir Prisma Sheets <ArrowRight size={13} />
+            <a href="https://oscard0823.github.io/asteoria-orbit/">
+              Abrir Asteoria Orbit <ArrowRight size={13} />
             </a>
           </footer>
         </>

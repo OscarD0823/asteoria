@@ -22,17 +22,23 @@ protocol.registerSchemesAsPrivileged([
     },
   },
 ]);
+protocol.registerSchemesAsPrivileged([{scheme:"prisma-architecture",privileges:{standard:true,secure:true,supportFetchAPI:true,corsEnabled:true,allowServiceWorkers:true}}]);
 let window;
 const products=require('../products.json');const productKind=require('../package.json').prismaProduct||'pdf';
 const productInfo=products[productKind]||products.pdf;app.setName(productInfo.name);
+const legacyNames={pdf:'Prisma PDF',writer:'Prisma Writer',sheets:'Prisma Sheets',slides:'Prisma Slides',data:'Prisma Data',publisher:'Prisma Publisher',prisma:'Prisma',architecture:'PrismaArquitectura'};
+if(legacyNames[productKind])app.setPath('userData',path.join(app.getPath('appData'),legacyNames[productKind]));
+const appScheme=productKind==='architecture'?'prisma-architecture':'prisma';
+const appOrigin=appScheme+'://app/';
 const smoke = process.argv.includes("--smoke-test");
+if(smoke)app.setPath('userData',require('node:fs').mkdtempSync(path.join(require('node:os').tmpdir(),'asteoria-smoke-')));
 app.whenReady().then(() => {
   if(process.argv.includes('--local-engine')){require('../engines/server.cjs').startLocalEngine().then(result=>{void shell.openExternal(result.url);app.on('before-quit',()=>result.server.close());}).catch(error=>{console.error(error.message);app.exit(1);});return;}
-  const validEngineOrigin=event=>{if(event.sender!==window?.webContents||!event.sender.getURL().startsWith('prisma://app/'))throw new Error('Origen del motor no válido.');};
+  const validEngineOrigin=event=>{if(event.sender!==window?.webContents||!event.sender.getURL().startsWith(appOrigin))throw new Error('Origen del motor no válido.');};
   ipcMain.handle('prisma-engine-capabilities',event=>{validEngineOrigin(event);return require('../engines/local.cjs').capabilities();});
   ipcMain.handle('prisma-engine-run',(event,payload)=>{validEngineOrigin(event);return require('../engines/local.cjs').run(payload);});
   const root=path.resolve(__dirname,productKind==='pdf'?'../dist':'../dist-'+productKind);
-  protocol.handle("prisma", (request) => {
+  protocol.handle(appScheme, (request) => {
     const url = new URL(request.url);
     if (url.host !== "app") return new Response("Not found", { status: 404 });
     const relative =
@@ -49,7 +55,7 @@ app.whenReady().then(() => {
     minWidth: 760,
     minHeight: 600,
     backgroundColor: "#f7f8fc",
-    title:productInfo.name,
+    title:productInfo.name+' · BETA',
     icon: path.join(root, "icons/prisma-512.png"),
     autoHideMenuBar: true,
     webPreferences: {
@@ -63,7 +69,7 @@ app.whenReady().then(() => {
   ipcMain.handle("prisma-print", async (event, payload) => {
     if (
       event.sender !== window.webContents ||
-      !event.sender.getURL().startsWith("prisma://app/")
+      !event.sender.getURL().startsWith(appOrigin)
     )
       throw new Error("Origen de impresión no válido.");
     if (
@@ -90,7 +96,7 @@ app.whenReady().then(() => {
     }
     if (total > 256 * 1024 * 1024)
       throw new Error("Imprime este documento en varios rangos.");
-    const title = String(payload.name ?? "Prisma PDF")
+    const title = String(payload.name ?? productInfo.name)
         .replace(/[<>&"']/g, "")
         .slice(0, 150),
       first = payload.pages[0];
@@ -147,20 +153,20 @@ app.whenReady().then(() => {
     return { action: "deny" };
   });
   window.webContents.on("will-navigate", (event, url) => {
-    if (!url.startsWith("prisma://app/")) event.preventDefault();
+    if (!url.startsWith(appOrigin)) event.preventDefault();
   });
   let localFontsAllowed=false;
   let fontPermissionRequest;
-  const requestFontAccess=()=>fontPermissionRequest??=(dialog.showMessageBox(window,{type:'question',title:'Fuentes del dispositivo',message:'¿Permitir que Prisma muestre tus fuentes instaladas?',detail:'Los archivos de las fuentes seleccionadas se usarán localmente. No se envían a un servidor.',buttons:['Permitir','Cancelar'],defaultId:1,cancelId:1}).then(result=>{localFontsAllowed=result.response===0;return localFontsAllowed;}).catch(()=>false).finally(()=>{fontPermissionRequest=undefined;}));
+  const requestFontAccess=()=>fontPermissionRequest??=(dialog.showMessageBox(window,{type:'question',title:'Fuentes del dispositivo',message:'¿Permitir que ASTEORIA muestre tus fuentes instaladas?',detail:'Los archivos de las fuentes seleccionadas se usarán localmente. No se envían a un servidor.',buttons:['Permitir','Cancelar'],defaultId:1,cancelId:1}).then(result=>{localFontsAllowed=result.response===0;return localFontsAllowed;}).catch(()=>false).finally(()=>{fontPermissionRequest=undefined;}));
   ipcMain.handle('prisma-fonts-authorize',event=>{
     validEngineOrigin(event);
     if(event.senderFrame!==window?.webContents.mainFrame)throw Error('La lectura de fuentes solo se permite desde el editor.');
     return localFontsAllowed||requestFontAccess();
   });
-  session.defaultSession.setPermissionCheckHandler((webContents,permission,origin,details)=>permission==='local-fonts'&&localFontsAllowed&&webContents===window?.webContents&&['prisma://app','prisma://app/'].includes(origin)&&details.isMainFrame===true);
+  session.defaultSession.setPermissionCheckHandler((webContents,permission,origin,details)=>permission==='local-fonts'&&localFontsAllowed&&webContents===window?.webContents&&[appOrigin.slice(0,-1),appOrigin].includes(origin)&&details.isMainFrame===true);
   session.defaultSession.setPermissionRequestHandler(
     (webContents, permission, callback, details) => {
-      if(permission!=='local-fonts'||webContents!==window?.webContents||!webContents.getURL().startsWith('prisma://app/')||details.isMainFrame===false||!String(details.requestingUrl??webContents.getURL()).startsWith('prisma://app/')){callback(false);return;}
+      if(permission!=='local-fonts'||webContents!==window?.webContents||!webContents.getURL().startsWith(appOrigin)||details.isMainFrame===false||!String(details.requestingUrl??webContents.getURL()).startsWith(appOrigin)){callback(false);return;}
       void requestFontAccess().then(callback).catch(()=>callback(false));
     },
   );
@@ -171,7 +177,7 @@ app.whenReady().then(() => {
     }),
   );
   const editorArgument=process.argv.find(argument=>argument.startsWith('--editor='))?.slice(9);
-  const editor=productKind==='prisma'&&['pdf','writer','sheets','slides','data','publisher'].includes(editorArgument)?editorArgument:undefined;
-  window.loadURL("prisma://app/index.html"+(editor?'?editor='+editor:''));
+  const editor=productKind==='prisma'&&['pdf','writer','sheets','slides','data','publisher','architecture','stories'].includes(editorArgument)?editorArgument:undefined;
+  window.loadURL(appOrigin+"index.html"+(editor?'?editor='+editor:''));
 });
 app.on("window-all-closed", () => app.quit());

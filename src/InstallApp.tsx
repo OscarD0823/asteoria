@@ -42,7 +42,7 @@ export function InstallApp() {
     };
   }, [open]);
   useEffect(() => { if (open) close.current?.focus(); }, [open]);
-  if (Capacitor.isNativePlatform() || location.protocol === "prisma:") return null;
+  if (Capacitor.isNativePlatform() || ["prisma:","prisma-architecture:"].includes(location.protocol)) return null;
   const dismiss = () => { setOpen(false); button.current?.focus(); };
   async function install() {
     setError("");
@@ -74,7 +74,7 @@ export function InstallApp() {
           <button ref={close} aria-label="Cerrar instalación" onClick={dismiss}><X size={20} /></button></div>
         <Smartphone className="install-icon" size={38} />
         <h2 id="install-title">Instala {product.name}</h2>
-        <p>{product.kind==='prisma'?'Prisma reúne los seis editores en una aplicación. También puedes instalar cada editor por separado.':'Ábrelo desde su propio icono. Cada aplicación de Prisma se instala por separado.'}</p>
+        <p>{product.kind==='prisma'?"ASTEORIA reúne los seis editores en una aplicación. También puedes instalar cada editor por separado.":"Ábrelo desde su propio icono. Cada aplicación de ASTEORIA se instala por separado."}</p>
         {available && !installed && <button className="primary" onClick={() => void install()}><Download size={16} /> Instalar {product.name}</button>}
         {installed && <p className="offline-state"><Check size={16} /> Estás usando la aplicación instalada.</p>}
         <ol>

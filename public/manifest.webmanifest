@@ -1,6 +1,6 @@
 {
-  "name": "Prisma PDF",
-  "short_name": "Prisma PDF",
+  "name": "Asteoria Folio",
+  "short_name": "Asteoria Folio",
   "description": "Editor de PDF local y privado",
   "start_url": "./",
   "scope": "./",

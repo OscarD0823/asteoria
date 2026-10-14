@@ -34,6 +34,11 @@ function sync(){
   }else if(!fs.existsSync(destination)){
    run('git',['clone','--filter=blob:none','--no-checkout','https://github.com/'+item.repository+'.git',destination]);
    run('git',['checkout','--detach',refs[kind]??(latest?'origin/main':item.commit)],destination);
+  }else if(!fs.existsSync(path.join(destination,'.git'))){
+   const archiveFile=path.join(root,'workspace-source.json');
+   const archive=fs.existsSync(archiveFile)?JSON.parse(fs.readFileSync(archiveFile,'utf8')):undefined;
+   if(!archive?.sources?.[kind]||!fs.existsSync(path.join(destination,'src','entry.tsx')))throw Error('Módulo sin Git ni procedencia de fuente: '+kind);
+   if(refs[kind]&&refs[kind]!==archive.sources[kind])throw Error('La revisión solicitada no coincide con el archivo de fuentes.');
   }else if(refs[kind]||latest||git(destination,'rev-parse','HEAD')!==item.commit){
    if(git(destination,'status','--porcelain'))throw Error('Hay cambios sin guardar en '+kind+'; no se actualizará.');
    run('git',['fetch','origin','main'],destination);
@@ -46,7 +51,7 @@ function sync(){
   fs.writeFileSync(path.join(destination,'.prisma','tsconfig.json'),JSON.stringify({extends:path.join(root,'tsconfig.json')},null,2)+'\n');
  }
  if(Object.keys(local).length)fs.writeFileSync(localFile,JSON.stringify(local,null,2)+'\n');
- console.log('Un entorno; seis repositorios de código enlazados.');
+ console.log('Un entorno; ocho módulos de aplicación enlazados.');
 }
 function sources(){return {prisma:git(root,'rev-parse','HEAD'),...Object.fromEntries(appKinds.map(kind=>[kind,git(appPath(root,kind),'rev-parse','HEAD')]))};}
 if(command==='sync')sync();

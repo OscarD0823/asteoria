@@ -8,6 +8,7 @@ import {
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 const require = createRequire(import.meta.url);
+await import('./prepare-licenses.mjs');
 await import('./prepare-proofing.mjs');
 const {gunzipSync}=require('node:zlib');
 const {unlinkSync}=require('node:fs');
@@ -16,20 +17,20 @@ const sheets = process.env.VITE_PRODUCT === "sheets";
 const products=JSON.parse(readFileSync('products.json','utf8'));
 const kind=process.env.VITE_PRODUCT&&products[process.env.VITE_PRODUCT]?process.env.VITE_PRODUCT:'pdf';
 const appVersion=products[kind].version;
-const releaseTag =
-  (kind==='pdf'?'v':kind+'-v')+appVersion;
-const assetName=products[kind].name.replace(' ','-');
+const releaseTag = 'v'+appVersion;
+const assetName=products[kind].name.replaceAll(' ','-');
 const suiteFeatures=Object.fromEntries(Object.keys(products).map(kind=>[kind,[
- 'Interfaz propia de Prisma y formatos DOCX, XLSX y PPTX sin comparaciones comerciales',
+ 'ASTEORIA BETA: un universo para crear con identidad y nombres propios',
  'Motor local propio para conservar documentos, libros y presentaciones; exportación TXT y CSV',
  'Iconos renovados y fuentes reales del dispositivo'
 ]]));
-const release = "https://github.com/OscarD0823/prisma-pdf/releases/";
+const release = 'https://github.com/OscarD0823/'+products[kind].siteSlug+'/releases/';
 writeFileSync(
   "public/version.json",
   JSON.stringify(
     {
       version: appVersion,
+      channel:'beta',
       releaseUrl: release + "tag/" + releaseTag,
       androidUrl:
         release +

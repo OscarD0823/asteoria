@@ -1,10 +1,10 @@
 appId: com.oscard.prismapdf
-productName: Prisma PDF
+productName: Asteoria Folio
 directories:
   output: release
 extraMetadata:
-  name: prisma-pdf
-  version: 6.6.2
+  name: asteoria-pdf
+  version: 7.0.0
   prismaProduct: pdf
 files:
   - dist/**/*
@@ -27,4 +27,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Prisma-PDF-${version}-Windows-Setup.exe
+  artifactName: Asteoria-Folio-${version}-Windows-Setup.exe

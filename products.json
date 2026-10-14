@@ -1,44 +1,65 @@
 {
   "pdf": {
-    "name": "Prisma PDF",
-    "siteSlug": "prisma-pdf",
-    "version": "6.6.2",
-    "description": "Editor PDF local y privado"
+    "name": "Asteoria Folio",
+    "siteSlug": "asteoria-folio",
+    "version": "7.0.0",
+    "description": "Editor PDF local y privado",
+    "channel": "beta"
   },
   "writer": {
-    "name": "Prisma Writer",
-    "siteSlug": "prisma-writer",
-    "version": "1.6.5",
-    "description": "Procesador de documentos local y privado"
+    "name": "Asteoria Scribe",
+    "siteSlug": "asteoria-scribe",
+    "version": "2.0.0",
+    "description": "Documentos, escritura y trabajos académicos",
+    "channel": "beta"
   },
   "sheets": {
-    "name": "Prisma Sheets",
-    "siteSlug": "prisma-sheets",
-    "version": "0.6.2",
-    "description": "Hojas de cálculo locales compatibles con XLSX"
+    "name": "Asteoria Orbit",
+    "siteSlug": "asteoria-orbit",
+    "version": "1.0.0",
+    "description": "Hojas de cálculo, fórmulas y datos",
+    "channel": "beta"
   },
   "slides": {
-    "name": "Prisma Slides",
-    "siteSlug": "prisma-slides",
-    "version": "0.3.3",
-    "description": "Presentaciones locales compatibles con PPTX"
+    "name": "Asteoria Nova",
+    "siteSlug": "asteoria-nova",
+    "version": "1.0.0",
+    "description": "Presentaciones para compartir tus ideas",
+    "channel": "beta"
   },
   "data": {
-    "name": "Prisma Data",
-    "siteSlug": "prisma-data",
-    "version": "0.3.3",
-    "description": "Bases de datos, tablas y consultas locales"
+    "name": "Asteoria Nexus",
+    "siteSlug": "asteoria-nexus",
+    "version": "1.0.0",
+    "description": "Bases de datos, tablas y consultas locales",
+    "channel": "beta"
   },
   "publisher": {
-    "name": "Prisma Publisher",
-    "siteSlug": "prisma-publisher",
-    "version": "0.3.3",
-    "description": "Diseño de publicaciones y páginas para imprimir"
+    "name": "Asteoria Canvas",
+    "siteSlug": "asteoria-canvas",
+    "version": "1.0.0",
+    "description": "Diseño editorial y publicaciones",
+    "channel": "beta"
+  },
+  "architecture": {
+    "name": "Asteoria Atlas",
+    "siteSlug": "asteoria-atlas",
+    "version": "0.3.0",
+    "description": "CAD, arquitectura y espacios en 3D",
+    "channel": "beta"
+  },
+  "stories": {
+    "name": "Asteoria Lore",
+    "siteSlug": "asteoria-lore",
+    "version": "1.0.0",
+    "description": "Historias, fanfics, personajes y familias",
+    "channel": "beta"
   },
   "prisma": {
-    "name": "Prisma",
-    "siteSlug": "prisma",
-    "version": "1.2.3",
-    "description": "Tu espacio de trabajo local: documentos, hojas, presentaciones, PDF, datos y publicaciones"
+    "name": "ASTEORIA",
+    "siteSlug": "asteoria",
+    "version": "2.0.0",
+    "description": "Un universo para crear",
+    "channel": "beta"
   }
 }

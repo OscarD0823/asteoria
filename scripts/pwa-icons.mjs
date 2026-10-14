@@ -11,8 +11,11 @@ for (const [logo, folder, color] of [
   ['data-logo.svg','data-icons','#342335'],
   ['publisher-logo.svg','publisher-icons','#152f42'],
   ['prisma-logo.svg','prisma-icons','#20233e'],
+  ['architecture-logo.svg','architecture-icons','#3d3524'],
+  ['stories-logo.svg','stories-icons','#3d3059'],
 ]) {
   const source = readFileSync("public/" + logo).toString("base64");
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><rect width="512" height="512" fill="${color}"/><image href="data:image/svg+xml;base64,${source}" x="92" y="92" width="328" height="328"/></svg>`;
   await sharp(Buffer.from(svg)).png().toFile("public/" + folder + "/prisma-maskable-512.png");
 }
+

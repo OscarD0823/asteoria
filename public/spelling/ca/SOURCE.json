@@ -3,7 +3,15 @@
   "package": "dictionary-ca",
   "version": "3.0.0",
   "license": "(GPL-2.0 OR LGPL-2.1)",
-  "source": "https://github.com/wooorm/dictionaries/tree/main/dictionaries/ca",
+  "source": "https://github.com/wooorm/dictionaries/tree/a7c018ca64fcb125cabbd5e4ab120b146b2fa0e8/dictionaries/ca",
+  "provenance": {
+    "package": "dictionary-ca",
+    "version": "3.0.0",
+    "npmTarball": "https://registry.npmjs.org/dictionary-ca/-/dictionary-ca-3.0.0.tgz",
+    "npmIntegrity": "sha512-h+crBYqX/X7cEU3cFAEgwIojOZTAw1wW4ybYN5Aum9f1oZ+8ULO/GGglLs8m8UBBGtSVLyoYf0CdvX8WKt8VDg==",
+    "upstreamCommit": "a7c018ca64fcb125cabbd5e4ab120b146b2fa0e8",
+    "upstreamSource": "https://github.com/wooorm/dictionaries/tree/a7c018ca64fcb125cabbd5e4ab120b146b2fa0e8/dictionaries/ca"
+  },
   "files": {
     "index.aff": "bfc7d8412c9450ec63e00d13f2153191a11d04868b14d51cf6c50eace71efdb2",
     "index.dic": "e272aeff4b2d1a92b428a22b52c685292d04936e34dfe7786e27539175cbef2e",

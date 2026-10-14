@@ -1,10 +1,10 @@
 appId: com.oscard.prismasheets
-productName: Prisma Sheets
+productName: Asteoria Orbit
 directories:
   output: release-sheets
 extraMetadata:
-  name: prisma-sheets
-  version: 0.6.2
+  name: asteoria-sheets
+  version: 1.0.0
   prismaProduct: sheets
 files:
   - dist-sheets/**/*
@@ -27,4 +27,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Prisma-Sheets-${version}-Windows-Setup.exe
+  artifactName: Asteoria-Orbit-${version}-Windows-Setup.exe

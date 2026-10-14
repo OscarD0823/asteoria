@@ -3,7 +3,15 @@
   "package": "dictionary-en-gb",
   "version": "3.0.0",
   "license": "(MIT AND BSD)",
-  "source": "https://github.com/wooorm/dictionaries/tree/main/dictionaries/en-gb",
+  "source": "https://github.com/wooorm/dictionaries/tree/a7c018ca64fcb125cabbd5e4ab120b146b2fa0e8/dictionaries/en-gb",
+  "provenance": {
+    "package": "dictionary-en-gb",
+    "version": "3.0.0",
+    "npmTarball": "https://registry.npmjs.org/dictionary-en-gb/-/dictionary-en-gb-3.0.0.tgz",
+    "npmIntegrity": "sha512-gU/dwC9xGYPh/0CCcmGNXO8OwSgOySAqevcSXxADCsgUD+tr6OJ52u7XaC7No7dNssvdUSfVjkzcqLrRZq3kPA==",
+    "upstreamCommit": "a7c018ca64fcb125cabbd5e4ab120b146b2fa0e8",
+    "upstreamSource": "https://github.com/wooorm/dictionaries/tree/a7c018ca64fcb125cabbd5e4ab120b146b2fa0e8/dictionaries/en-gb"
+  },
   "files": {
     "index.aff": "8ae1f19d4840d957728ad90555d5a8dff6cc5c046279c95ff0c00fc0a0136c7b",
     "index.dic": "869fe17ba4ee4b5401c60a666ee2d6a3dcc237f460b7294435df1cc6a799aa57",

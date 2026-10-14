@@ -11,8 +11,8 @@ test('las versiones sueltas y Prisma resuelven exactamente el mismo módulo de c
 test('los propietarios del código son únicos y todos los módulos migrados existen',()=>{
  const count=validateOwnership(process.cwd(),JSON.parse(fs.readFileSync('workspace-ownership.json')));assert.ok(count>140);
 });
-test('un programa publica también Prisma; cambios compartidos publican las siete aplicaciones',()=>{
- assert.deepEqual(publicationTargets(['sheets']),['prisma','sheets']);assert.equal(publicationTargets(['prisma']).length,7);assert.throws(()=>publicationTargets(['../../x']));assert.throws(()=>appPath('/tmp','../pdf'));
+test('un programa publica también ASTEORIA; cambios compartidos publican las nueve distribuciones',()=>{
+ assert.deepEqual(publicationTargets(['sheets']),['prisma','sheets']);assert.equal(publicationTargets(['prisma']).length,9);assert.throws(()=>publicationTargets(['../../x']));assert.throws(()=>appPath('/tmp','../pdf'));
 });
 test('la huella cambia con el código, no con el orden de los repositorios',()=>{
  assert.equal(fingerprint({prisma:'1',sheets:'2'}),fingerprint({sheets:'2',prisma:'1'}));assert.notEqual(fingerprint({prisma:'1',sheets:'2'}),fingerprint({prisma:'1',sheets:'3'}));

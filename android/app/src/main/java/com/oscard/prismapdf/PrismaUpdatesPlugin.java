@@ -11,11 +11,17 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 public class PrismaUpdatesPlugin extends Plugin {
   @PluginMethod public void openRelease(PluginCall call) {
     String url=call.getString("url", "");
-    String kind=getContext().getPackageName().replace("com.oscard.prisma", "");
-    if (!kind.matches("pdf|writer|sheets|slides|data|publisher")) {call.reject("Aplicación no válida.");return;}
-    String name=kind.equals("pdf")?"PDF":Character.toUpperCase(kind.charAt(0))+kind.substring(1);
-    String path=(kind.equals("pdf")?"v":kind+"-v")+"[0-9.]+/Prisma-"+name+"-";
-    if (!url.matches("https://github\\.com/OscarD0823/prisma-pdf/releases/download/" + path + "[0-9.]+-Android\\.apk")) {call.reject("Enlace de actualización no válido.");return;}
+    String kind=BuildConfig.FLAVOR;
+    String[] kinds={"pdf","writer","sheets","slides","data","publisher","architecture","stories","prisma"};
+    String[] slugs={"folio","scribe","orbit","nova","nexus","canvas","atlas","lore",""};
+    String[] names={"Asteoria-Folio","Asteoria-Scribe","Asteoria-Orbit","Asteoria-Nova","Asteoria-Nexus","Asteoria-Canvas","Asteoria-Atlas","Asteoria-Lore","ASTEORIA"};
+    int selected=-1;for(int i=0;i<kinds.length;i++)if(kinds[i].equals(kind))selected=i;
+    if(selected<0){call.reject("Aplicación no válida.");return;}
+    String slug="asteoria"+(slugs[selected].isEmpty()?"":"-"+slugs[selected]);
+    String prefix="https://github.com/OscarD0823/"+slug+"/releases/download/v";
+    if(!url.startsWith(prefix)){call.reject("Enlace de actualización no válido.");return;}
+    String tail=url.substring(prefix.length());
+    if(!tail.matches("[0-9]+[.][0-9]+[.][0-9]+/"+names[selected]+"-[0-9]+[.][0-9]+[.][0-9]+-Android[.]apk")){call.reject("Enlace de actualización no válido.");return;}
     try {getActivity().startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(url)));call.resolve();}
     catch (Exception error) {call.reject("No se pudo abrir el navegador para descargar la actualización.");}
   }

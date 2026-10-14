@@ -36,3 +36,10 @@ engines/dist/
 workspace-source.json
 *.tsbuildinfo
 dist-pages/
+
+dist-architecture/
+dist-stories/
+release-architecture/
+release-stories/
+
+node_modules-shared-before-asteoria/

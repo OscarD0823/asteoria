@@ -2,18 +2,41 @@
   "package": "hunspell-asm",
   "version": "4.0.2",
   "wasmBuildTag": "fc6a952-200131",
+  "hunspellVersion": "1.6.2",
+  "chain": [
+    {
+      "repository": "https://github.com/kwonoj/hunspell-asm",
+      "commit": "b8e719f61e8f5fde76b31e48f42d241383d9790e"
+    },
+    {
+      "repository": "https://github.com/kwonoj/docker-hunspell-wasm",
+      "commit": "fc6a952fd11ae95f4bce4118c1b41f5bee3d91d1"
+    },
+    {
+      "repository": "https://github.com/hunspell/hunspell",
+      "commit": "2730ad3d32d839f439ba7f286e3600cd9294a978"
+    }
+  ],
   "licenseFiles": [
     {
-      "url": "https://raw.githubusercontent.com/hunspell/hunspell/master/COPYING",
-      "sha256": "640d90f6ee401241ff62834d0d1b33f83049e99b8bfdfa04ed1b0a1635dde3e7"
+      "file": "Hunspell-COPYING.txt",
+      "url": "https://raw.githubusercontent.com/hunspell/hunspell/v1.6.2/COPYING",
+      "sha256": "0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b"
     },
     {
-      "url": "https://raw.githubusercontent.com/hunspell/hunspell/master/COPYING.LESSER",
-      "sha256": "7c6699c75f87b52bdc542db26d6b1b92892577cda46e20eceb79e2790a1c291b"
+      "file": "Hunspell-COPYING.LESSER.txt",
+      "url": "https://raw.githubusercontent.com/hunspell/hunspell/v1.6.2/COPYING.LESSER",
+      "sha256": "ea7d049c7705dc13afc202dd18e1827f3484f8212fd3fa7b82fc4a0c363432c9"
     },
     {
-      "url": "https://raw.githubusercontent.com/hunspell/hunspell/master/COPYING.MPL",
-      "sha256": "53692a2ed6c6a2c6ec9b32dd0b820dfae91e0a1fcdf625ca9ed0bdf8705fcc4f"
+      "file": "Hunspell-COPYING.MPL.txt",
+      "url": "https://raw.githubusercontent.com/hunspell/hunspell/v1.6.2/COPYING.MPL",
+      "sha256": "fa01277004aff314888151ea523bdf390992892e13523984f221695d48c7455b"
+    },
+    {
+      "file": "Hunspell-license.hunspell.txt",
+      "url": "https://raw.githubusercontent.com/hunspell/hunspell/v1.6.2/license.hunspell",
+      "sha256": "edde89b5e4680af2cfaec2fd77e72dd434aea2adeb2233a761277174894dfe67"
     }
   ]
 }

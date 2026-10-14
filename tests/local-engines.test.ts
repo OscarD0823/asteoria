@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {createServer} from 'node:http';
 const require=createRequire(import.meta.url),local=require('../engines/local.cjs'),{startLocalEngine}=require('../engines/server.cjs');
-test('Prisma local adapters preserve XLSM bytes and export recalculated CSV without launching a suite',async()=>{
+test("ASTEORIA local adapters preserve XLSM bytes and export recalculated CSV without launching a suite",async()=>{
  const {default:ExcelJS}=await import('exceljs'),{unzipSync,zipSync}=await import('fflate');
  const book=new ExcelJS.Workbook(),sheet=book.addWorksheet('Prueba');sheet.addRow(['Nombre','Valor']);sheet.addRow(['ñ, €',12]);sheet.addRow(['Total',{formula:'SUM(B2:B2)',result:0}]);book.addWorksheet('Segunda').getCell('A1').value='Se conserva';
  const original=new Uint8Array(await book.xlsx.writeBuffer()),parts=unzipSync(original);parts['xl/vbaProject.bin']=new Uint8Array([1,2,3,4]);const bytes=Buffer.from(zipSync(parts));

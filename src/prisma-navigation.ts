@@ -15,7 +15,7 @@ export function usePrismaNavigation(handlers: Handlers, ready = true) {
     if (token && !consumed.current) {
       consumed.current = true;
       void takeLaunch(token, product.kind).then(async launch => {
-        if (!launch) throw Error('El archivo pendiente ya no está disponible. Vuelve a abrirlo desde Prisma.');
+        if (!launch) throw Error("El archivo pendiente ya no está disponible. Vuelve a abrirlo desde ASTEORIA.");
         if (launch.action === 'file' && launch.file) await current.current.file(launch.file);
         else if (launch.action === 'recent' && launch.id) await current.current.recent(launch.id);
         else if (launch.action === 'template' && launch.id && current.current.template) await current.current.template(launch.id);

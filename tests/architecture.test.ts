@@ -48,7 +48,7 @@ test('no acepta espacios superpuestos ni referencias a plantas ausentes', () => 
   assert.throws(() => parseProject(p), /planta inexistente/);
 });
 test('rechaza versiones futuras, IDs duplicados y dimensiones no finitas', () => {
-  assert.throws(() => parseProject({ ...emptyProject(), version: 3 }), /versión incompatible/);
+  assert.throws(() => parseProject({ ...emptyProject(), version: 4 }), /versión incompatible/);
   const p = demoProject(); p.furniture[1].id = p.furniture[0].id;
   assert.throws(() => parseProject(p), /duplicados/);
   p.furniture[1].id = uid(); p.rooms[0].width = Infinity;
@@ -96,7 +96,7 @@ test('migra un proyecto v1 sin cambiar geometría, aberturas ni identidades', ()
   delete old.lights; delete old.measurements; delete old.environment;
   old.furniture = p.furniture.map(({ elevation: _e, ...f }) => f); old.rooms = p.rooms.map(({ finish: _f, ...r }) => r);
   const migrated = parseProject(JSON.parse(JSON.stringify(old)));
-  assert.equal(migrated.version, 2); assert.deepEqual(migrated.openings, p.openings);
+  assert.equal(migrated.version, 3); assert.deepEqual(migrated.openings, p.openings);
   assert.deepEqual(migrated.furniture, parseProject(p).furniture); assert.ok(migrated.rooms.every(r => r.finish === 'wood'));
   assert.deepEqual(migrated.lights, []); assert.deepEqual(migrated.measurements, []);
   assert.equal(migrated.environment.eyeHeight, 1.65); assert.deepEqual(parseProject(migrated), migrated);
@@ -132,8 +132,8 @@ test('acepta apagar todas las luces y rechaza parámetros luminosos inválidos',
 });
 test('limita las luces por planta y un panel no solicita sombras no soportadas', () => {
   const p = emptyProject(), level = p.levels[0].id;
-  for (let i = 0; i < 16; i++) p.lights.push(makeLight('point', level, { x: i, y: 0 }));
-  assert.doesNotThrow(() => parseProject(p)); p.lights.push(makeLight('area', level, { x: 1, y: 2 })); assert.throws(() => parseProject(p), /16 fuentes/);
+  for (let i = 0; i < 2048; i++) p.lights.push(makeLight('point', level, { x: i, y: 0 }));
+  assert.doesNotThrow(() => parseProject(p)); p.lights.push(makeLight('area', level, { x: 1, y: 2 })); assert.throws(() => parseProject(p), /2048 fuentes/);
   p.lights = [makeLight('area', level, { x: 1, y: 2 })]; p.lights[0].shadows = true; assert.equal(parseProject(p).lights[0].shadows, false);
 });
 test('el sentido de una abertura centrada sigue identificado en un muro compartido', () => {
@@ -176,7 +176,7 @@ test('el PDF conserva una barra física de 20 mm a 1:50 y el tamaño A3', async 
   const drawing = streams.map(stream => new TextDecoder().decode(decodePDFRawStream(stream as PDFRawStream).decode())).join('\n');
   const segments = [...drawing.matchAll(/([\d.]+) ([\d.]+) m\s+([\d.]+) ([\d.]+) l/g)];
   assert.ok(segments.some(([, x1, y1, x2, y2]) => Math.abs(Number(y1) - Number(y2)) < 1e-8 && Math.abs((Number(x2) - Number(x1)) * 25.4 / 72 - 20) < 1e-6), 'el PDF debe incluir una barra vectorial de un metro que mida 20 mm');
-  assert.equal(doc.getCreator(), 'Prisma Arquitectura 0.2');
+  assert.equal(doc.getCreator(), 'Asteoria Atlas 0.3 BETA');
 });
 test('un plano que no cabe a su escala se rechaza, sin reescalarlo silenciosamente', async () => {
   const p = demoProject(), level = p.levels[0].id;

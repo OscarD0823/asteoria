@@ -16,4 +16,4 @@ for(const kind of Object.keys(products)){
  if(['sheets','slides','data','publisher'].includes(kind))fs.rmSync(path.join(output,'ocr'),{recursive:true,force:true});
  const result=spawnSync(process.execPath,['scripts/build-offline.mjs'],{stdio:'inherit',env:{...process.env,PRISMA_OUTDIR:output,...(kind==='pdf'?{}:{PRISMA_SHARED_ROOT:site})}});if(result.status!==0)throw Error('No se pudo preparar '+kind);
 }
-console.log('Siete aplicaciones publicables en '+site+'; fuentes y diccionarios compartidos.');
+console.log('Nueve distribuciones publicables en '+site+'; fuentes y diccionarios compartidos.');

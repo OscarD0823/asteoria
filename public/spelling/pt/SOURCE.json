@@ -3,7 +3,15 @@
   "package": "dictionary-pt",
   "version": "4.0.0",
   "license": "(LGPL-3.0 OR MPL-2.0)",
-  "source": "https://github.com/wooorm/dictionaries/tree/main/dictionaries/pt",
+  "source": "https://github.com/wooorm/dictionaries/tree/a7c018ca64fcb125cabbd5e4ab120b146b2fa0e8/dictionaries/pt",
+  "provenance": {
+    "package": "dictionary-pt",
+    "version": "4.0.0",
+    "npmTarball": "https://registry.npmjs.org/dictionary-pt/-/dictionary-pt-4.0.0.tgz",
+    "npmIntegrity": "sha512-ryJRhAtsaunBWw9grYXmVFftfab8+BCQ5wwh7fUzWO0oYEeMuR1lW2ubu1AHdvxOL32XP+u5wW/XhbFuoFuq8Q==",
+    "upstreamCommit": "a7c018ca64fcb125cabbd5e4ab120b146b2fa0e8",
+    "upstreamSource": "https://github.com/wooorm/dictionaries/tree/a7c018ca64fcb125cabbd5e4ab120b146b2fa0e8/dictionaries/pt"
+  },
   "files": {
     "index.aff": "a9f3621b94eb4d6838474bf9982027758e77dcb248815f49409b1a4a477dbd27",
     "index.dic": "32e2edd83541d58613bcc83ef731a79aadf85ed57e977a16c6b5f711a7a36cee",

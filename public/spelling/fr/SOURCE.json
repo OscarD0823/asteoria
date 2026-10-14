@@ -3,7 +3,15 @@
   "package": "dictionary-fr",
   "version": "3.0.0",
   "license": "MPL-2.0",
-  "source": "https://github.com/wooorm/dictionaries/tree/main/dictionaries/fr",
+  "source": "https://github.com/wooorm/dictionaries/tree/a7c018ca64fcb125cabbd5e4ab120b146b2fa0e8/dictionaries/fr",
+  "provenance": {
+    "package": "dictionary-fr",
+    "version": "3.0.0",
+    "npmTarball": "https://registry.npmjs.org/dictionary-fr/-/dictionary-fr-3.0.0.tgz",
+    "npmIntegrity": "sha512-fhDRX1cRyHPA69GJg8R4XgNYgSQvbNHj3kr5UqvEG1OS5pJqH6P3GbO7wpTCwvr5KMQ0NxGIsXps9P5NyXRVEg==",
+    "upstreamCommit": "a7c018ca64fcb125cabbd5e4ab120b146b2fa0e8",
+    "upstreamSource": "https://github.com/wooorm/dictionaries/tree/a7c018ca64fcb125cabbd5e4ab120b146b2fa0e8/dictionaries/fr"
+  },
   "files": {
     "index.aff": "05a735d34c912e4e381ff08ee7c747923ccf5cf9dca81d8467982fa1ca51c2b7",
     "index.dic": "984e933237bc1224a48f42828233be9b03228260ef67aa8e2bdddcd03a26230d",

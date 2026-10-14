@@ -3,7 +3,7 @@ import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 const products=JSON.parse(fs.readFileSync('products.json','utf8'));
 const kind=process.argv[2]??process.env.VITE_PRODUCT;
-if(!Object.hasOwn(products,kind))throw Error('Selecciona pdf, writer, sheets, slides, data, publisher o prisma.');
+if(!Object.hasOwn(products,kind))throw Error('Selecciona uno de estos programas: '+Object.keys(products).join(', ')+'.');
 const product=products[kind],output=path.resolve(process.env.PRISMA_OUTDIR||'dist-pages');
 if(fs.existsSync(output)&&fs.readdirSync(output).length)throw Error('Usa una carpeta de publicación vacía para '+product.name+'.');
 const env={...process.env,VITE_PRODUCT:kind,PRISMA_OUTDIR:output};

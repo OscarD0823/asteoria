@@ -15,7 +15,7 @@ try {
   );
 }
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const kind=['writer','sheets','slides','data','publisher','prisma'].find(value=>process.argv.includes('--'+value))??'pdf';
+const kind=['writer','sheets','slides','data','publisher','prisma','architecture','stories'].find(value=>process.argv.includes('--'+value))??'pdf';
 const icons=resolve(root,kind==='pdf'?'public/icons':'public/'+kind+'-icons');
 const logo=resolve(root,kind==='pdf'?'public/logo.svg':'public/'+kind+'-logo.svg');
 mkdirSync(icons, { recursive: true });
@@ -91,3 +91,4 @@ if (previewIndex !== -1) {
   await sharp(Buffer.from(sheet)).png().toFile(destination);
   console.log(`Vista de identidad exportada: ${destination}`);
 }
+

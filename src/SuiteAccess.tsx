@@ -1,3 +1,4 @@
 import {LocalEngines} from './LocalEngines';
 import {Credits} from './Credits';
-export function SuiteAccess(){return <div className="suite-access"><LocalEngines/><Credits/></div>;}
+import {Downloads} from './Downloads';
+export function SuiteAccess(){return <div className="suite-access"><Downloads/><LocalEngines/><Credits/></div>;}

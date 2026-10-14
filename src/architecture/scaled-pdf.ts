@@ -1,3 +1,4 @@
+import { footprint } from './plan-dxf';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { bounds, distance, resolvedWalls, wallOpenings, type Point, type Project } from './model';
 import { printedLengthMm } from './units';
@@ -16,14 +17,13 @@ export async function scaledPdf(project: Project, levelId: string, scale: number
   const color = (hex: string) => rgb(parseInt(hex.slice(1, 3), 16) / 255, parseInt(hex.slice(3, 5), 16) / 255, parseInt(hex.slice(5, 7), 16) / 255);
   const text = (s: string) => s.replace(/[^\x20-\x7e\xa0-\xff]/g, '?');
   page.drawText(text(`${project.name} · ${level.name}`), { x: 15 * pt, y: heightMm * pt - 18 * pt, size: 16, font: bold, color: color('#3a334c') });
-  page.drawText(`Prisma Arquitectura · Escala 1:${scale} · ${paper} horizontal · Medidas en metros`, { x: 15 * pt, y: heightMm * pt - 26 * pt, size: 9, font, color: color('#81758f') });
+  page.drawText(`Asteoria Atlas BETA · Escala 1:${scale} · ${paper} horizontal · Medidas en metros`, { x: 15 * pt, y: heightMm * pt - 26 * pt, size: 9, font, color: color('#81758f') });
   for (const room of project.rooms.filter(r => r.levelId === levelId)) {
     const p = point({ x: room.x, y: room.y + room.depth }); page.drawRectangle({ ...p, width: room.width * factor, height: room.depth * factor, color: color(room.color) });
     const label = point({ x: room.x + .25, y: room.y + room.depth - .45 }); page.drawText(text(`${room.name} · ${(room.width * room.depth).toFixed(2)} m²`), { ...label, size: 8, font, color: color('#52505b') });
   }
   for (const f of project.furniture.filter(f => f.levelId === levelId)) {
-    const a = f.rotation * Math.PI / 180;
-    const corners = [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([sx, sy]) => { const x = sx * f.width / 2, y = sy * f.depth / 2; return { x: f.x + Math.cos(a) * x - Math.sin(a) * y, y: f.y + Math.sin(a) * x + Math.cos(a) * y }; });
+    const corners = footprint(project,f);
     const path = corners.map((p, i) => `${i ? 'L' : 'M'}${p.x} ${p.y}`).join(' ') + ' Z'; page.drawSvgPath(path, { x: x0, y: top, scale: factor, color: color(f.color), borderColor: color('#897d73'), borderWidth: .01 });
   }
   for (const wall of resolvedWalls(project, levelId)) {
@@ -39,5 +39,5 @@ export async function scaledPdf(project: Project, levelId: string, scale: number
   const barX = 15 * pt, barY = 14 * pt; page.drawLine({ start: { x: barX, y: barY }, end: { x: barX + factor, y: barY }, thickness: 1, color: color('#776287') });
   page.drawText('0', { x: barX, y: barY - 11, font, size: 8 }); page.drawText('1 m', { x: barX + factor - 12, y: barY - 11, font, size: 8 });
   page.drawText('Imprimir al 100%, sin ajustar a la página. La barra permite verificar la escala.', { x: barX + factor + 22, y: barY, size: 8, font, color: color('#857b8b') });
-  doc.setTitle(project.name); doc.setCreator('Prisma Arquitectura 0.2'); return doc.save();
+  doc.setTitle(project.name); doc.setCreator('Asteoria Atlas 0.3 BETA'); return doc.save();
 }

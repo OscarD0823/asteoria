@@ -1,7 +1,7 @@
 import type { Project } from './model';
 export type History = { past: Project[]; present: Project; future: Project[] };
 export function editHistory(history: History, project: Project): History {
-  if (JSON.stringify(history.present) === JSON.stringify(project)) return history;
+  if (history.present === project) return history;
   return { past: [...history.past.slice(-79), history.present], present: project, future: [] };
 }
 export function undoHistory(h: History): History {

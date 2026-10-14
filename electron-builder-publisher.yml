@@ -1,10 +1,10 @@
 appId: com.oscard.prismapublisher
-productName: Prisma Publisher
+productName: Asteoria Canvas
 directories:
   output: release-publisher
 extraMetadata:
-  name: prisma-publisher
-  version: 0.3.3
+  name: asteoria-publisher
+  version: 1.0.0
   prismaProduct: publisher
 files:
   - dist-publisher/**/*
@@ -27,4 +27,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Prisma-Publisher-${version}-Windows-Setup.exe
+  artifactName: Asteoria-Canvas-${version}-Windows-Setup.exe

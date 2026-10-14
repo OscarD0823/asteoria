@@ -1,10 +1,10 @@
 appId: com.oscard.prismawriter
-productName: Prisma Writer
+productName: Asteoria Scribe
 directories:
   output: release-writer
 extraMetadata:
-  name: prisma-writer
-  version: 1.6.5
+  name: asteoria-writer
+  version: 2.0.0
   prismaProduct: writer
 files:
   - dist-writer/**/*
@@ -27,4 +27,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Prisma-Writer-${version}-Windows-Setup.exe
+  artifactName: Asteoria-Scribe-${version}-Windows-Setup.exe

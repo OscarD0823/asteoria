@@ -1,7 +1,8 @@
 {
+  "name": "ASTEORIA",
   "product": "prisma",
-  "name": "Prisma",
-  "website": "https://oscard0823.github.io/prisma/",
-  "sourceRepository": "OscarD0823/prisma-pdf",
+  "channel": "beta",
+  "website": "https://oscard0823.github.io/asteoria/",
+  "sourceRepository": "OscarD0823/asteoria",
   "sourceRef": "main"
 }

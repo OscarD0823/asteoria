@@ -7,7 +7,7 @@ export type ReleaseInfo = {
 };
 import { distributionProduct as product } from "./product";
 export const updateUrl = product.website + "version.json";
-export const releaseBase = "https://github.com/OscarD0823/prisma-pdf/releases/";
+export const releaseBase = product.repository+"/releases/";
 export function newerVersion(candidate: string, current: string): boolean {
   if (
     !/^\d{1,4}\.\d{1,4}\.\d{1,4}$/.test(candidate) ||

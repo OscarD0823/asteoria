@@ -1,30 +1,38 @@
 {
   "schemaVersion": 1,
-  "root": "OscarD0823/prisma",
+  "root": "OscarD0823/asteoria",
   "apps": {
     "pdf": {
-      "repository": "OscarD0823/prisma-pdf",
-      "commit": "6168c9bdfcfe1fdb2a776c43aac460e16def808f"
+      "repository": "OscarD0823/asteoria-folio",
+      "commit": "f4248b2165799ee0edf10f79a66a4b0f7e3d62c9"
     },
     "writer": {
-      "repository": "OscarD0823/prisma-writer",
-      "commit": "6f034e1596812bdf48046a405a93e0315b9d907f"
+      "repository": "OscarD0823/asteoria-scribe",
+      "commit": "82f4652e6688985befa8bd04c165f07a25bfad8e"
     },
     "sheets": {
-      "repository": "OscarD0823/prisma-sheets",
-      "commit": "cf1d6aa397e933a6f3fcc4ff0a8422539e79112d"
+      "repository": "OscarD0823/asteoria-orbit",
+      "commit": "d0a3ae2d9183bd4e4e40991d66499fc5902bceaf"
     },
     "slides": {
-      "repository": "OscarD0823/prisma-slides",
-      "commit": "bc9bd04bcc36deb3745210b5031e0c6d26f37724"
+      "repository": "OscarD0823/asteoria-nova",
+      "commit": "887cf8387211ceeec45db01418d4fa7e0580e08d"
     },
     "data": {
-      "repository": "OscarD0823/prisma-data",
-      "commit": "ad0f104a9c9692ba40fe699fde611864d3292c74"
+      "repository": "OscarD0823/asteoria-nexus",
+      "commit": "e3f2fbb2b2f37adc50510b6666f28f4dd8e81a35"
     },
     "publisher": {
-      "repository": "OscarD0823/prisma-publisher",
-      "commit": "55cbfd078488a98cc13788e88e67b16810c67b84"
+      "repository": "OscarD0823/asteoria-canvas",
+      "commit": "f214273b9050aa685f282ab7801fed738e077d5f"
+    },
+    "architecture": {
+      "repository": "OscarD0823/asteoria-atlas",
+      "commit": "ab2f39bc6d12b3bd650a7651dd3dad5a3e5e3daf"
+    },
+    "stories": {
+      "repository": "OscarD0823/asteoria-lore",
+      "commit": "f48fc8fae9e16f5ec6df91bee6969bd8a7820ffe"
     }
   }
 }

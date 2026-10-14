@@ -157,6 +157,11 @@
     "upstream-types.d.ts": "core",
     "publication-templates.ts": "publisher",
     "device-fonts.ts": "core",
-    "font-collection.ts": "core"
+    "font-collection.ts": "core",
+    "stories-export.ts": "stories",
+    "stories-model.ts": "stories",
+    "stories-storage.ts": "stories",
+    "stories.css": "stories",
+    "Stories.tsx": "stories"
   }
 }
