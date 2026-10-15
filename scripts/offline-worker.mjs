@@ -12,17 +12,29 @@ const MANIFEST=new URL('__prisma_resource_hashes__',self.registration.scope).hre
 const ALLOWED=new Set(FILES.map(name=>new URL(name,self.registration.scope).href));
 const pending=new Map(), observers=new Set();
 let download=null, failure='';
+async function complete(response){
+  // Finish reading before Cache.put: a dropped stream must not leave a partial
+  // offline runtime. Fetch already decodes HTTP compression.
+  const bytes=await response.arrayBuffer(),headers=new Headers(response.headers);
+  headers.delete('content-encoding');headers.delete('content-length');
+  return new Response(bytes,{status:response.status,statusText:response.statusText,headers});
+}
 async function resource(name, prior=[]){
   const url=new URL(name,self.registration.scope).href,cache=await caches.open(CACHE);
-  const found=await cache.match(url);if(found)return found;
+  const found=await cache.match(url);if(found)try{return await complete(found);}catch{}
   if(pending.has(name))return (await pending.get(name)).clone();
   const task=(async()=>{
     for(const previous of prior)if(previous.hashes[name]===RESOURCES[name]){
-      const response=await previous.cache.match(url);if(response){await cache.put(url,response.clone());return response;}
+      const response=await previous.cache.match(url);if(response)try{const ready=await complete(response);await cache.put(url,ready.clone());return ready;}catch(error){if(error?.name==='QuotaExceededError')throw error;}
     }
-    const response=await fetch(new Request(url,{cache:'reload',credentials:'same-origin'}));
-    if(!response.ok)throw new Error('No se pudo descargar '+name);
-    await cache.put(url,response.clone());return response;
+    for(let attempt=0;attempt<2;attempt++)try{
+      const response=await fetch(new Request(url,{cache:'reload',credentials:'same-origin'}));
+      if(!response.ok)throw new Error('No se pudo descargar '+name);
+      const ready=await complete(response);await cache.put(url,ready.clone());return ready;
+    }catch(error){
+      if(error?.name==='QuotaExceededError')throw error;
+      if(attempt===1)throw new Error('No se pudo guardar '+name+' para usar sin conexión. Revisa la conexión y reintenta.');
+    }
   })();
   pending.set(name,task);
   try{return (await task).clone();}finally{pending.delete(name);}

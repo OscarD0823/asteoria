@@ -6,7 +6,7 @@ import { requiredResources, bootResources } from "../scripts/offline-resources.m
 function harness() {
   const scope = "https://example.org/prisma/", stores = new Map<string, Map<string, Response>>();
   const events: Record<string, Function> = {}, downloads: string[] = [];
-  let offline = false, quota = false, unavailable = "", activated = 0;
+  let offline = false, quota = false, unavailable = "", activated = 0, interrupted = false;
   const caches = {
     keys: async () => [...stores.keys()], delete: async (key: string) => stores.delete(key),
     open: async (key: string) => {
@@ -16,6 +16,7 @@ function harness() {
         match: async (url: string) => stores.get(key)?.get(url)?.clone(),
         put: async (url: string, value: Response) => {
           if (quota && (url.endsWith("extra.ttf") || url.endsWith('.data'))) throw new DOMException("full", "QuotaExceededError");
+          if(interrupted&&url.endsWith('.data')){interrupted=false;throw new TypeError('Cache.put() encountered a network error');}
           stores.get(key)!.set(url, value.clone());
         },
       };
@@ -23,7 +24,7 @@ function harness() {
   };
   const resources = { "index.html": "one", "fonts/Carlito/Regular.ttf": "base", "fonts/extra.ttf": "extra" };
   const load = (version = "one", hashes: Record<string,string> = resources) => vm.runInNewContext(offlineWorker(hashes, version, requiredResources(Object.keys(hashes))), {
-    URL, Request, Response, Map, Set, JSON, Promise, caches, AbortController, setTimeout, clearTimeout,
+    URL, Request, Response, Headers, Map, Set, JSON, Promise, caches, AbortController, setTimeout, clearTimeout,
     fetch: async (request: Request) => {
       downloads.push(request.url);
       if (offline) throw new Error("offline");
@@ -53,7 +54,7 @@ function harness() {
   };
   return { scope, stores, downloads, load, install, message, request, events,
     setOffline: (value: boolean) => { offline = value; }, setQuota: (value: boolean) => { quota = value; },
-    setUnavailable: (value: string) => { unavailable = value; }, activations: () => activated };
+    setUnavailable: (value: string) => { unavailable = value; }, interruptOnce:()=>{interrupted=true;}, activations: () => activated };
 }
 test("unused fonts cannot block installation; on-demand fonts work offline and survive an unchanged upgrade", async () => {
   const h = harness(); h.load(); h.setUnavailable("extra.ttf"); await h.install();
@@ -132,4 +133,12 @@ test('audio setup downloads the complete app and local runtime, resumes after qu
  assert.ok(await h.request('lore-audio/neural/piper_phonemize.data'));
  assert.ok(await h.request('lore-audio/neural/runtime/ort.wasm'));
  assert.ok(await h.request('lore-audio/sound.ogg'));
+});
+
+test('an interrupted runtime cache write is retried before reporting audio ready', async()=>{
+ const h=harness();h.load('retry',{'index.html':'html','lore-audio/neural/piper-module.js':'js','lore-audio/neural/piper_phonemize.data':'data'});
+ await h.install();h.interruptOnce();const result=(await h.message('prisma-cache-audio')).at(-1);
+ assert.equal(result.ready,true);assert.equal(result.error,'');
+ assert.equal(h.downloads.filter(url=>url.endsWith('.data')).length,2);
+ h.setOffline(true);assert.ok(await h.request('lore-audio/neural/piper_phonemize.data'));
 });

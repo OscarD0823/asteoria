@@ -20,6 +20,11 @@ En EXE/APK los recursos y dos modelos españoles están incluidos desde el prime
 inicio. Otros modelos requieren una primera descarga. Cambiar a una voz o idioma
 nuevos puede requerir preparar de nuevo; la generación no utiliza un servidor TTS.
 
+La biblioteca completa de voces se puede descargar desde el apartado adicional.
+La opción automática española utiliza Daniela y SHarvard, incluidos en EXE/APK.
+Los recursos públicos se leen completos antes de guardarse; las descargas
+interrumpidas se reintentan una vez y señalan el archivo pendiente si fallan.
+
 La página recuerda una actualización aunque se active antes de abrir un editor.
 «Actualizar» guarda el proyecto antes de recargar. Una actualización no fuerza
 la recarga de un manuscrito abierto. Al volver a primer plano o recuperar conexión,

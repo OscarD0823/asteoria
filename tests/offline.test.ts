@@ -26,6 +26,7 @@ test("updates reuse identical app resources, replace changed files and never cac
     URL,
     Request,
     Response,
+    Headers,
     Set,
     JSON,
     Promise,
