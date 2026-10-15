@@ -163,6 +163,13 @@
     "stories-storage.ts": "stories",
     "stories.css": "stories",
     "Stories.tsx": "stories",
-    "audio-offline.ts": "stories"
+    "audio-offline.ts": "stories",
+    "lore-artwork.ts": "stories",
+    "lore-image-export.ts": "stories",
+    "dialogue-detection.ts": "stories",
+    "BackdropPicker.tsx": "stories",
+    "LoreGuide.tsx": "stories",
+    "LoreProofing.tsx": "stories",
+    "LoreVisualPanels.tsx": "stories"
   }
 }

@@ -28,6 +28,7 @@ const suiteFeatures=Object.fromEntries(Object.keys(products).map(kind=>[kind,[
 for(const features of Object.values(suiteFeatures))features.unshift('Abre documentos desde el Explorador, Android y la web instalada compatible; conserva el guardado local');
 for(const target of ['stories','prisma'])suiteFeatures[target].unshift('Audiolibros neuronales locales: 19 voces en 10 idiomas, detección automática, diálogos por personaje, 264 efectos y exportación WAV/ZIP');
 for(const target of ['stories','prisma'])suiteFeatures[target].unshift('Preparación verificada del audiolibro sin conexión: aplicación, motor, efectos y voces de los capítulos; actualización web corregida');
+for(const target of ['stories','prisma'])suiteFeatures[target].unshift('Lore: guía para escritores, exportación de novela o capítulos, escudos y fondos propios, árbol y fichas PNG/SVG, corrector local de toda la novela');
 const release = 'https://github.com/OscarD0823/'+products[kind].siteSlug+'/releases/';
 writeFileSync(
   "public/version.json",

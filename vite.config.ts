@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import products from "./products.json";
 import {resolve} from 'node:path';
-import {realpathSync} from 'node:fs';
+import {realpathSync,readFileSync} from 'node:fs';
 import {activeEntry,moduleAliases} from './scripts/workspace-core.mjs';
 import {provenancePlugin} from './scripts/build-provenance.mjs';
 const architectureStandalone = process.env.VITE_ARCHITECTURE_STANDALONE === '1';
@@ -39,7 +39,7 @@ export default defineConfig({
   ],
   base: "./",
   server: {fs:{allow:[process.cwd(),...Object.values(moduleAliases(process.cwd())).map(dir=>realpathSync(dir)),realpathSync('node_modules')]},watch: {ignored: ["**/dist/**", "**/dist-*/**", "**/release*/**", "**/qa/**", "**/android/**", "**/.prisma/architecture-source/**"]}},
-  optimizeDeps: { entries: ["index.html"] },
+  optimizeDeps: { entries: ["index.html"],include:['hunspell-asm'],esbuildOptions:{plugins:[{name:'prisma-proofing-development-interop',setup(build){build.onLoad({filter:/(?:hunspell-asm|emscripten-wasm-loader)[/\\].*\.js$/},args=>{const code=readFileSync(args.path,'utf8'),contents=code.replace("import * as nanoid from 'nanoid';","import nanoid from 'nanoid';").replace("import * as runtime from './lib/node/hunspell';","import runtime from './lib/node/hunspell';").replace("import * as unixify from 'unixify';","import unixify from 'unixify';");return{contents,loader:'js'};});}}]} },
   worker: { format: "es", plugins:()=>[proofingInterop()] },
   build: { chunkSizeWarningLimit: 1800, ...(architectureStandalone ? {rollupOptions:{input:resolve('arquitectura.html')}} : {}) },
 });
