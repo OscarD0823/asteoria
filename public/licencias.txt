@@ -1,4 +1,4 @@
-Asteoria Folio 7.0.2 BETA / Asteoria Scribe 2.0.2 BETA / Asteoria Orbit 1.0.2 BETA / Asteoria Nova 1.0.2 BETA / Asteoria Nexus 1.0.2 BETA / Asteoria Canvas 1.0.2 BETA / Asteoria Atlas 0.3.2 BETA / Asteoria Lore 1.2.0 BETA / ASTEORIA 2.2.0 BETA
+Asteoria Folio 7.0.2 BETA / Asteoria Scribe 2.0.2 BETA / Asteoria Orbit 1.0.2 BETA / Asteoria Nova 1.0.2 BETA / Asteoria Nexus 1.0.2 BETA / Asteoria Canvas 1.0.2 BETA / Asteoria Atlas 0.3.2 BETA / Asteoria Lore 1.2.1 BETA / ASTEORIA 2.2.1 BETA
 Copyright (C) 2026 OscarD0823 y colaboradores.
 Software libre: AGPL-3.0-or-later. Sin garantía. Licencia completa: ./LICENSE.txt
 Código propio de esta compilación: ./prisma-pdf-source.tar.gz

@@ -162,6 +162,7 @@
     "stories-model.ts": "stories",
     "stories-storage.ts": "stories",
     "stories.css": "stories",
-    "Stories.tsx": "stories"
+    "Stories.tsx": "stories",
+    "audio-offline.ts": "stories"
   }
 }

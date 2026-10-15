@@ -45,13 +45,13 @@
     },
     "stories": {
       "name": "Asteoria Lore",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria-lore"
     },
     "prisma": {
       "name": "ASTEORIA",
-      "version": "2.2.0",
+      "version": "2.2.1",
       "channel": "beta",
       "sourceRepository": "OscarD0823/asteoria"
     }

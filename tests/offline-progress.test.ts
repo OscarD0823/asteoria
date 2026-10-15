@@ -15,7 +15,7 @@ function harness() {
         keys: async () => [...stores.get(key)!.keys()].map(url => new Request(url)),
         match: async (url: string) => stores.get(key)?.get(url)?.clone(),
         put: async (url: string, value: Response) => {
-          if (quota && url.endsWith("extra.ttf")) throw new DOMException("full", "QuotaExceededError");
+          if (quota && (url.endsWith("extra.ttf") || url.endsWith('.data'))) throw new DOMException("full", "QuotaExceededError");
           stores.get(key)!.set(url, value.clone());
         },
       };
@@ -119,4 +119,17 @@ test('reopening gets fresh online HTML, keeps a coherent offline shell and survi
   assert.equal(await (await h.request('', true))?.text(), 'saved shell');
   h.setOffline(false); h.setUnavailable('index.html');
   assert.equal(await (await h.request('index.html', true))?.text(), 'saved shell');
+});
+
+test('audio setup downloads the complete app and local runtime, resumes after quota errors and survives offline', async()=>{
+ const h=harness();h.load('audio',{'index.html':'html','assets/voice-worker.js':'worker','lore-audio/neural/piper-module.js':'piper','lore-audio/neural/piper_phonemize.data':'data','lore-audio/neural/runtime/ort.wasm':'wasm','lore-audio/catalog.json':'catalog','lore-audio/sound.ogg':'effect','lore-audio/neural/models/not-for-web.onnx':'huge','lore-audio/neural/model-cards/card.md':'card'});
+ await h.install();h.setQuota(true);
+ const failed=(await h.message('prisma-cache-audio')).at(-1);assert.equal(failed.ready,false);assert.match(failed.error,/espacio/);
+ h.setQuota(false);const ready=(await h.message('prisma-cache-audio')).at(-1);
+ assert.equal(ready.ready,true);assert.equal(ready.cached,ready.total);
+ assert(!h.downloads.some(url=>url.endsWith('.onnx')||url.endsWith('.md')));
+ h.setOffline(true);assert.equal((await h.message('prisma-audio-status')).at(-1).ready,true);
+ assert.ok(await h.request('lore-audio/neural/piper_phonemize.data'));
+ assert.ok(await h.request('lore-audio/neural/runtime/ort.wasm'));
+ assert.ok(await h.request('lore-audio/sound.ogg'));
 });

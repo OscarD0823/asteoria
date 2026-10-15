@@ -5,6 +5,7 @@ export function offlineWorker(resources, version, required = Object.keys(resourc
 const RESOURCES=${JSON.stringify(resources)};
 const FILES=Object.keys(RESOURCES), REQUIRED=${JSON.stringify(required)};
 const BOOT=${JSON.stringify(bootResources(Object.keys(resources)))};
+const AUDIO=[...new Set([...BOOT,...FILES.filter(name=>name.startsWith('lore-audio/')&&!['models/','model-cards/','licenses/'].some(dir=>name.startsWith('lore-audio/neural/'+dir)))])];
 const PREFIX='prisma-code-'+encodeURIComponent(self.registration.scope)+'-';
 const CACHE=PREFIX+'${version}';
 const MANIFEST=new URL('__prisma_resource_hashes__',self.registration.scope).href;
@@ -52,6 +53,24 @@ self.addEventListener('install',event=>event.waitUntil((async()=>{
   await self.skipWaiting();
 })()));
 self.addEventListener('message',event=>{
+  if(['prisma-cache-audio','prisma-audio-status'].includes(event.data?.type)){
+    const port=event.ports?.[0];if(!port)return;
+    event.waitUntil((async()=>{
+      const cache=await caches.open(CACHE);
+      const report=async(error='')=>{
+        const present=new Set((await cache.keys()).map(request=>request.url));
+        const cached=AUDIO.filter(name=>present.has(new URL(name,self.registration.scope).href)).length;
+        port.postMessage({type:'prisma-audio-offline',ready:cached===AUDIO.length&&FILES.includes('lore-audio/neural/piper-module.js'),cached,total:AUDIO.length,error});
+      };
+      try{
+        if(!FILES.includes('lore-audio/neural/piper-module.js'))throw Error('Esta distribución no incluye el estudio de audio.');
+        if(event.data.type==='prisma-cache-audio'){
+          const prior=await previousCaches();
+          for(let i=0;i<AUDIO.length;i+=4){await Promise.all(AUDIO.slice(i,i+4).map(name=>resource(name,prior)));await report();}
+        }else await report();
+      }catch(error){await report(error?.name==='QuotaExceededError'?'No hay espacio para preparar el audio sin conexión. Libera espacio y reintenta.':error?.message??'No se completó la preparación del audio.');}
+    })());return;
+  }
   if(!['prisma-offline-status','prisma-cache-all'].includes(event.data?.type))return;
   const port=event.ports?.[0];if(!port)return;
   if(event.data.type==='prisma-offline-status'){event.waitUntil(status().then(state=>port.postMessage(state)));return;}
