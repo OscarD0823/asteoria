@@ -58,7 +58,7 @@
   "prisma": {
     "name": "Auralis",
     "siteSlug": "auralis",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "Una nueva luz para tus ideas",
     "channel": "beta"
   }
