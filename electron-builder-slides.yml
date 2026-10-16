@@ -1,12 +1,12 @@
 appId: com.oscard.prismaslides
-productName: Asteoria Nova
+productName: Auralis Nova
 directories:
   output: release-slides
 extraMetadata:
   name: asteoria-slides
-  version: 1.0.2
+  version: 2.0.0
   prismaProduct: slides
-fileAssociations: [{"ext":"pptx","mimeType":"application/vnd.openxmlformats-officedocument.presentationml.presentation","name":"Asteoria Nova · .pptx","role":"Editor"},{"ext":"pptm","mimeType":"application/vnd.ms-powerpoint.presentation.macroEnabled.12","name":"Asteoria Nova · .pptm","role":"Editor"}]
+fileAssociations: [{"ext":"pptx","mimeType":"application/vnd.openxmlformats-officedocument.presentationml.presentation","name":"Auralis Nova · .pptx","role":"Editor"},{"ext":"pptm","mimeType":"application/vnd.ms-powerpoint.presentation.macroEnabled.12","name":"Auralis Nova · .pptm","role":"Editor"}]
 files:
   - dist-slides/**/*
   - desktop/**/*
@@ -29,4 +29,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Asteoria-Nova-${version}-Windows-Setup.exe
+  artifactName: Auralis-Nova-${version}-Windows-Setup.exe

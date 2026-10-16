@@ -8,7 +8,7 @@ import {saveBook, loadBook} from '@prisma/sheets/sheets-storage';
 import {saveOfficeFile} from '@prisma/core/office-storage';
 import {resourceBase} from '@prisma/core/resource-base';
 
-test("ASTEORIA hosts each editor while standalone identities ignore hub routing",()=>{
+test("Auralis hosts each editor while standalone identities ignore hub routing",()=>{
   const ids=new Set<string>();
   for(const editor of editorKinds){
     assert.deepEqual(resolveProducts('prisma','?editor='+editor),{distribution:'prisma',active:editor});
@@ -16,7 +16,7 @@ test("ASTEORIA hosts each editor while standalone identities ignore hub routing"
     ids.add(productInfo(editor).nativeId);
   }
   ids.add(productInfo('prisma').nativeId);assert.equal(ids.size,9);
-  assert.equal(productInfo('prisma').name,"ASTEORIA");assert.equal(productInfo('prisma').assetName,"ASTEORIA");
+  assert.equal(productInfo('prisma').name,"Auralis");assert.equal(productInfo('prisma').assetName,"Auralis");
   assert.equal(resolveProducts('prisma','?editor=__proto__').active,'prisma');
   assert.equal(resolveProducts('__proto__').distribution,'pdf');
 });

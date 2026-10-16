@@ -8,8 +8,8 @@ android {
         applicationId "com.oscard.prismapdf"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 70002
-        versionName "7.0.2"
+        versionCode 80000
+        versionName "8.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -22,74 +22,74 @@ android {
         pdf {
             dimension 'product'
             applicationId 'com.oscard.prismapdf'
-            versionCode 70002
-            versionName '7.0.2'
-            resValue 'string', 'app_name', 'Asteoria Folio'
-            resValue 'string', 'title_activity_main', 'Asteoria Folio'
+            versionCode 80000
+            versionName '8.0.0'
+            resValue 'string', 'app_name', 'Auralis Folio'
+            resValue 'string', 'title_activity_main', 'Auralis Folio'
         }
         writer {
             dimension 'product'
             applicationId 'com.oscard.prismawriter'
-            versionCode 20002
-            versionName '2.0.2'
-            resValue 'string', 'app_name', 'Asteoria Scribe'
-            resValue 'string', 'title_activity_main', 'Asteoria Scribe'
+            versionCode 30000
+            versionName '3.0.0'
+            resValue 'string', 'app_name', 'Auralis Scribe'
+            resValue 'string', 'title_activity_main', 'Auralis Scribe'
         }
         sheets {
             dimension 'product'
             applicationId 'com.oscard.prismasheets'
-            versionCode 10002
-            versionName '1.0.2'
-            resValue 'string', 'app_name', 'Asteoria Orbit'
-            resValue 'string', 'title_activity_main', 'Asteoria Orbit'
+            versionCode 20000
+            versionName '2.0.0'
+            resValue 'string', 'app_name', 'Auralis Orbit'
+            resValue 'string', 'title_activity_main', 'Auralis Orbit'
         }
         slides {
             dimension 'product'
             applicationId 'com.oscard.prismaslides'
-            versionCode 10002
-            versionName '1.0.2'
-            resValue 'string', 'app_name', 'Asteoria Nova'
-            resValue 'string', 'title_activity_main', 'Asteoria Nova'
+            versionCode 20000
+            versionName '2.0.0'
+            resValue 'string', 'app_name', 'Auralis Nova'
+            resValue 'string', 'title_activity_main', 'Auralis Nova'
         }
         data {
             dimension 'product'
             applicationId 'com.oscard.prismadata'
-            versionCode 10002
-            versionName '1.0.2'
-            resValue 'string', 'app_name', 'Asteoria Nexus'
-            resValue 'string', 'title_activity_main', 'Asteoria Nexus'
+            versionCode 20000
+            versionName '2.0.0'
+            resValue 'string', 'app_name', 'Auralis Nexus'
+            resValue 'string', 'title_activity_main', 'Auralis Nexus'
         }
         publisher {
             dimension 'product'
             applicationId 'com.oscard.prismapublisher'
-            versionCode 10002
-            versionName '1.0.2'
-            resValue 'string', 'app_name', 'Asteoria Canvas'
-            resValue 'string', 'title_activity_main', 'Asteoria Canvas'
+            versionCode 20000
+            versionName '2.0.0'
+            resValue 'string', 'app_name', 'Auralis Canvas'
+            resValue 'string', 'title_activity_main', 'Auralis Canvas'
         }
         architecture {
             dimension 'product'
             applicationId 'com.oscard.prismaarquitectura'
-            versionCode 302
-            versionName '0.3.2'
-            resValue 'string', 'app_name', 'Asteoria Atlas'
-            resValue 'string', 'title_activity_main', 'Asteoria Atlas'
+            versionCode 400
+            versionName '0.4.0'
+            resValue 'string', 'app_name', 'Auralis Atlas'
+            resValue 'string', 'title_activity_main', 'Auralis Atlas'
         }
         stories {
             dimension 'product'
             applicationId 'com.oscard.asteorialore'
-            versionCode 10300
-            versionName '1.3.0'
-            resValue 'string', 'app_name', 'Asteoria Lore'
-            resValue 'string', 'title_activity_main', 'Asteoria Lore'
+            versionCode 20000
+            versionName '2.0.0'
+            resValue 'string', 'app_name', 'Auralis Lore'
+            resValue 'string', 'title_activity_main', 'Auralis Lore'
         }
         prisma {
             dimension 'product'
             applicationId 'com.oscard.prisma'
-            versionCode 20300
-            versionName '2.3.0'
-            resValue 'string', 'app_name', 'ASTEORIA'
-            resValue 'string', 'title_activity_main', 'ASTEORIA'
+            versionCode 30000
+            versionName '3.0.0'
+            resValue 'string', 'app_name', 'Auralis'
+            resValue 'string', 'title_activity_main', 'Auralis'
         }
     }
     signingConfigs {

@@ -1,8 +1,8 @@
 {
-  "name": "ASTEORIA",
+  "name": "Auralis",
   "product": "prisma",
   "channel": "beta",
-  "website": "https://oscard0823.github.io/asteoria/",
-  "sourceRepository": "OscarD0823/asteoria",
+  "website": "https://oscard0823.github.io/auralis/",
+  "sourceRepository": "OscarD0823/auralis",
   "sourceRef": "main"
 }

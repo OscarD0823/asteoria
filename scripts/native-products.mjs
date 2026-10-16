@@ -9,7 +9,7 @@ for(const [kind,info] of Object.entries(products)){
  const generated=fs.readFileSync(config,'utf8');
  fs.writeFileSync(config,generated.replace('files:\n','fileAssociations: '+JSON.stringify(associations(kind))+'\nfiles:\n').replace('  - products.json\n','  - products.json\n  - file-formats.json\n'));
  const mimeTypes=[...new Set(associations(kind).map(a=>a.mimeType))];
- if(associations(kind).some(a=>a.mimeType.startsWith('application/x-asteoria')))mimeTypes.push('application/octet-stream');
+ if(associations(kind).some(a=>/^application\/x-(?:asteoria|auralis)/.test(a.mimeType)))mimeTypes.push('application/octet-stream');
  const filters=['VIEW','EDIT','SEND'].map(action=>`<intent-filter><action android:name="android.intent.action.${action}"/><category android:name="android.intent.category.DEFAULT"/>${action!=='SEND'?'<data android:scheme="content"/>':''}${mimeTypes.map(mime=>`<data android:mimeType="${mime}"/>`).join('')}</intent-filter>`).join('\n');
  fs.mkdirSync('android/app/src/'+kind,{recursive:true});
  fs.writeFileSync('android/app/src/'+kind+'/AndroidManifest.xml',`<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"><application><activity android:name=".MainActivity">${filters}</activity></application></manifest>\n`);

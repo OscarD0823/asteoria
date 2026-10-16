@@ -1,12 +1,12 @@
 appId: com.oscard.prismaarquitectura
-productName: Asteoria Atlas
+productName: Auralis Atlas
 directories:
   output: release-architecture
 extraMetadata:
   name: asteoria-architecture
-  version: 0.3.2
+  version: 0.4.0
   prismaProduct: architecture
-fileAssociations: [{"ext":"atlas","mimeType":"application/x-asteoria-atlas","name":"Asteoria Atlas · .atlas","role":"Editor"},{"ext":"prisma-arquitectura","mimeType":"application/x-asteoria-atlas","name":"Asteoria Atlas · .prisma-arquitectura","role":"Editor"}]
+fileAssociations: [{"ext":"auralis-atlas","mimeType":"application/x-auralis-atlas","name":"Auralis Atlas · .auralis-atlas","role":"Editor"},{"ext":"atlas","mimeType":"application/x-asteoria-atlas","name":"Auralis Atlas · .atlas","role":"Editor"},{"ext":"prisma-arquitectura","mimeType":"application/x-asteoria-atlas","name":"Auralis Atlas · .prisma-arquitectura","role":"Editor"}]
 files:
   - dist-architecture/**/*
   - desktop/**/*
@@ -29,4 +29,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Asteoria-Atlas-${version}-Windows-Setup.exe
+  artifactName: Auralis-Atlas-${version}-Windows-Setup.exe

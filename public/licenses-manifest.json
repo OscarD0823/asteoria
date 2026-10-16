@@ -2,58 +2,58 @@
   "schemaVersion": 1,
   "products": {
     "pdf": {
-      "name": "Asteoria Folio",
-      "version": "7.0.2",
+      "name": "Auralis Folio",
+      "version": "8.0.0",
       "channel": "beta",
-      "sourceRepository": "OscarD0823/asteoria-folio"
+      "sourceRepository": "OscarD0823/auralis-folio"
     },
     "writer": {
-      "name": "Asteoria Scribe",
-      "version": "2.0.2",
+      "name": "Auralis Scribe",
+      "version": "3.0.0",
       "channel": "beta",
-      "sourceRepository": "OscarD0823/asteoria-scribe"
+      "sourceRepository": "OscarD0823/auralis-scribe"
     },
     "sheets": {
-      "name": "Asteoria Orbit",
-      "version": "1.0.2",
+      "name": "Auralis Orbit",
+      "version": "2.0.0",
       "channel": "beta",
-      "sourceRepository": "OscarD0823/asteoria-orbit"
+      "sourceRepository": "OscarD0823/auralis-orbit"
     },
     "slides": {
-      "name": "Asteoria Nova",
-      "version": "1.0.2",
+      "name": "Auralis Nova",
+      "version": "2.0.0",
       "channel": "beta",
-      "sourceRepository": "OscarD0823/asteoria-nova"
+      "sourceRepository": "OscarD0823/auralis-nova"
     },
     "data": {
-      "name": "Asteoria Nexus",
-      "version": "1.0.2",
+      "name": "Auralis Nexus",
+      "version": "2.0.0",
       "channel": "beta",
-      "sourceRepository": "OscarD0823/asteoria-nexus"
+      "sourceRepository": "OscarD0823/auralis-nexus"
     },
     "publisher": {
-      "name": "Asteoria Canvas",
-      "version": "1.0.2",
+      "name": "Auralis Canvas",
+      "version": "2.0.0",
       "channel": "beta",
-      "sourceRepository": "OscarD0823/asteoria-canvas"
+      "sourceRepository": "OscarD0823/auralis-canvas"
     },
     "architecture": {
-      "name": "Asteoria Atlas",
-      "version": "0.3.2",
+      "name": "Auralis Atlas",
+      "version": "0.4.0",
       "channel": "beta",
-      "sourceRepository": "OscarD0823/asteoria-atlas"
+      "sourceRepository": "OscarD0823/auralis-atlas"
     },
     "stories": {
-      "name": "Asteoria Lore",
-      "version": "1.2.1",
+      "name": "Auralis Lore",
+      "version": "2.0.0",
       "channel": "beta",
-      "sourceRepository": "OscarD0823/asteoria-lore"
+      "sourceRepository": "OscarD0823/auralis-lore"
     },
     "prisma": {
-      "name": "ASTEORIA",
-      "version": "2.2.1",
+      "name": "Auralis",
+      "version": "3.0.0",
       "channel": "beta",
-      "sourceRepository": "OscarD0823/asteoria"
+      "sourceRepository": "OscarD0823/auralis"
     }
   },
   "scope": "Exact installed inventory. Direct runtime and tooling are distinguished; installed transitive packages are not proof that each one ships in every application.",

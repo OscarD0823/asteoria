@@ -31,8 +31,8 @@ export default defineConfig({
         const kind=process.env.VITE_PRODUCT as keyof typeof products;
         const canonical='https://oscard0823.github.io/'+(products[kind]??products.pdf).siteSlug+'/';
         html=html.replace('<head>','<head>\n    <link rel="canonical" href="'+canonical+'" />');
-        html=html.replace(/<title>[\s\S]*?<\/title>/,'<title>'+(products[kind]??products.pdf).name+' · BETA · Un universo para crear</title>');
-        html=html.replaceAll('Asteoria Folio',(products[kind]??products.pdf).name);
+        html=html.replace(/<title>[\s\S]*?<\/title>/,'<title>'+(products[kind]??products.pdf).name+' · BETA · Una nueva luz para tus ideas</title>');
+        html=html.replaceAll('Auralis Folio',(products[kind]??products.pdf).name).replaceAll('Auralis Folio',(products[kind]??products.pdf).name);
         return html;
       },
     },

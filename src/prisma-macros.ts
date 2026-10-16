@@ -7,7 +7,7 @@ export const macroLimits={bytes:100000,steps:5000,nesting:12,repeats:1000,text:1
 const scalar=(v:unknown):v is MacroValue=>v===null||['string','number','boolean'].includes(typeof v);
 export function readPrismaMacro(text:string){
  if(text.length>macroLimits.bytes)throw Error('La macro supera 100.000 caracteres.');
- const macro=JSON.parse(text);if(!macro||macro.version!==1||!Array.isArray(macro.steps)||typeof macro.name!=='string')throw Error("Usa una macro ASTEORIA con version: 1, name y steps.");
+ const macro=JSON.parse(text);if(!macro||macro.version!==1||!Array.isArray(macro.steps)||typeof macro.name!=='string')throw Error("Usa una macro Auralis con version: 1, name y steps.");
  const inspect=(value:unknown,depth=0)=>{if(depth>40)throw Error('La macro contiene demasiados niveles.');if(value&&typeof value==='object')for(const [key,child] of Object.entries(value)){if(['__proto__','constructor','prototype'].includes(key))throw Error('Nombre no permitido: '+key);inspect(child,depth+1);}else if(typeof value==='number'&&!Number.isFinite(value))throw Error('Número no válido.');};inspect(macro);return macro;
 }
 export function planPrismaMacro(text:string,snapshot:MacroSnapshot,allowed:string[]):MacroPlan{
@@ -41,5 +41,5 @@ export function planPrismaMacro(text:string,snapshot:MacroSnapshot,allowed:strin
 }
 export function macroExample(kind:string){
  const steps=kind==='sheets'?[{repeat:5,as:'i',steps:[{op:'setCell',args:{sheet:'Hoja1',cell:{concat:['A',{var:'i'}]},value:{multiply:[{var:'i'},10]}}}]},{log:'Se prepararon cinco valores.'}]:kind==='slides'||kind==='publisher'?[{op:'replaceText',args:{find:'idea',replace:'proyecto'}},{log:'Se preparó el reemplazo de texto.'}]:kind==='data'?[{op:'sql',args:{query:'SELECT name FROM sqlite_master WHERE type = \'table\''}}]:[{op:'replaceText',args:{find:'documento',replace:'trabajo'}},{log:'Se preparó el reemplazo en el documento.'}];
- return JSON.stringify({version:1,name:"Mi primera macro ASTEORIA",steps},null,2);
+ return JSON.stringify({version:1,name:"Mi primera macro Auralis",steps},null,2);
 }

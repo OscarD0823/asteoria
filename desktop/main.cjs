@@ -26,7 +26,7 @@ protocol.registerSchemesAsPrivileged([
 let window;
 const products=require('../products.json');const productKind=require('../package.json').prismaProduct||'pdf';
 const productInfo=products[productKind]||products.pdf;app.setName(productInfo.name);
-const legacyNames={pdf:'Prisma PDF',writer:'Prisma Writer',sheets:'Prisma Sheets',slides:'Prisma Slides',data:'Prisma Data',publisher:'Prisma Publisher',prisma:'Prisma',architecture:'PrismaArquitectura'};
+const legacyNames={pdf:'Prisma PDF',writer:'Prisma Writer',sheets:'Prisma Sheets',slides:'Prisma Slides',data:'Prisma Data',publisher:'Prisma Publisher',prisma:'Prisma',architecture:'PrismaArquitectura',stories:'Asteoria Lore'};
 if(legacyNames[productKind])app.setPath('userData',path.join(app.getPath('appData'),legacyNames[productKind]));
 const appScheme=productKind==='architecture'?'prisma-architecture':'prisma';
 const appOrigin=appScheme+'://app/';
@@ -178,7 +178,7 @@ app.whenReady().then(() => {
   });
   let localFontsAllowed=false;
   let fontPermissionRequest;
-  const requestFontAccess=()=>fontPermissionRequest??=(dialog.showMessageBox(window,{type:'question',title:'Fuentes del dispositivo',message:'¿Permitir que ASTEORIA muestre tus fuentes instaladas?',detail:'Los archivos de las fuentes seleccionadas se usarán localmente. No se envían a un servidor.',buttons:['Permitir','Cancelar'],defaultId:1,cancelId:1}).then(result=>{localFontsAllowed=result.response===0;return localFontsAllowed;}).catch(()=>false).finally(()=>{fontPermissionRequest=undefined;}));
+  const requestFontAccess=()=>fontPermissionRequest??=(dialog.showMessageBox(window,{type:'question',title:'Fuentes del dispositivo',message:'¿Permitir que Auralis muestre tus fuentes instaladas?',detail:'Los archivos de las fuentes seleccionadas se usarán localmente. No se envían a un servidor.',buttons:['Permitir','Cancelar'],defaultId:1,cancelId:1}).then(result=>{localFontsAllowed=result.response===0;return localFontsAllowed;}).catch(()=>false).finally(()=>{fontPermissionRequest=undefined;}));
   ipcMain.handle('prisma-fonts-authorize',event=>{
     validEngineOrigin(event);
     if(event.senderFrame!==window?.webContents.mainFrame)throw Error('La lectura de fuentes solo se permite desde el editor.');

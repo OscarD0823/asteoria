@@ -1,12 +1,12 @@
 appId: com.oscard.prismawriter
-productName: Asteoria Scribe
+productName: Auralis Scribe
 directories:
   output: release-writer
 extraMetadata:
   name: asteoria-writer
-  version: 2.0.2
+  version: 3.0.0
   prismaProduct: writer
-fileAssociations: [{"ext":"docx","mimeType":"application/vnd.openxmlformats-officedocument.wordprocessingml.document","name":"Asteoria Scribe · .docx","role":"Editor"},{"ext":"docm","mimeType":"application/vnd.ms-word.document.macroEnabled.12","name":"Asteoria Scribe · .docm","role":"Editor"},{"ext":"txt","mimeType":"text/plain","name":"Asteoria Scribe · .txt","role":"Editor"},{"ext":"prisma","mimeType":"application/x-asteoria-scribe","name":"Asteoria Scribe · .prisma","role":"Editor"}]
+fileAssociations: [{"ext":"auralis","mimeType":"application/x-auralis-scribe","name":"Auralis Scribe · .auralis","role":"Editor"},{"ext":"docx","mimeType":"application/vnd.openxmlformats-officedocument.wordprocessingml.document","name":"Auralis Scribe · .docx","role":"Editor"},{"ext":"docm","mimeType":"application/vnd.ms-word.document.macroEnabled.12","name":"Auralis Scribe · .docm","role":"Editor"},{"ext":"txt","mimeType":"text/plain","name":"Auralis Scribe · .txt","role":"Editor"},{"ext":"prisma","mimeType":"application/x-asteoria-scribe","name":"Auralis Scribe · .prisma","role":"Editor"}]
 files:
   - dist-writer/**/*
   - desktop/**/*
@@ -29,4 +29,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Asteoria-Scribe-${version}-Windows-Setup.exe
+  artifactName: Auralis-Scribe-${version}-Windows-Setup.exe

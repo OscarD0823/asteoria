@@ -1,3 +1,4 @@
+import {useLocalAutosave} from './useLocalAutosave';
 import {TemplateGallery} from './TemplateGallery';
 import {createFlowTemplate} from '@prisma/writer/flow-templates';
 import {creationTemplate} from './template-catalog';
@@ -363,18 +364,9 @@ export default function Studio() {
       .catch(() => setSaved("Guardado local no disponible"))
       .finally(() => setReady(true));
   }, []);
-  useEffect(() => {
-    if (home || !ready || (!workspace.pages.length && !workspace.flow)) return;
-    const timer = setTimeout(() => {
-      void saveSession(workspace)
-        .then(() => {
-          setSaved("Guardado en este dispositivo");
-          setLast(workspace);
-        })
-        .catch(() => setSaved("Sin espacio: guarda una copia .prisma"));
-    }, 900);
-    return () => clearTimeout(timer);
-  }, [workspace, home, ready]);
+  const autosave=useLocalAutosave({enabled:!home&&ready&&!!(workspace.pages.length||workspace.flow),revision:workspace,save:async()=>{const snapshot=state.current;await saveSession(snapshot);setLast(snapshot);},onError:fail});
+  useEffect(()=>{if(autosave.status==='pending'||autosave.status==='saving')setSaved('Guardando automáticamente…');else if(autosave.status==='saved')setSaved('Autoguardado local · '+new Date(autosave.savedAt!).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'}));else if(autosave.status==='error')setSaved('No se pudo guardar: descarga una copia de seguridad');},[autosave.status,autosave.savedAt]);
+
   useEffect(() => {
     if (home || !stage.current) return;
     const o = new ResizeObserver((es) =>
@@ -534,6 +526,7 @@ export default function Studio() {
     };
   }, [dialog]);
   async function enter(next: Workspace) {
+    if(!home)await autosave.flush();
     await clearPdfCache();
     flowJob.current++;
     state.current = next;
@@ -599,15 +592,15 @@ export default function Studio() {
           );
           return;
         }
-        if (/\.prisma$/i.test(f.name)) {
+        if (/\.(?:prisma|auralis)$/i.test(f.name)) {
           if (append || files.length > 1)
-            throw new Error("Abre un solo proyecto .prisma.");
+            throw new Error("Abre un solo proyecto .auralis.");
           next = await readProject(new Uint8Array(await f.arrayBuffer()));
           break;
         }
         if (!/\.pdf$/i.test(f.name) && f.type !== "application/pdf")
           throw new Error(
-            "Selecciona un PDF, DOCX, TXT o un proyecto .prisma.",
+            "Selecciona un PDF, DOCX, TXT o un proyecto .auralis.",
           );
         total += f.size;
         if (total > 100 * 1024 * 1024)
@@ -657,7 +650,7 @@ export default function Studio() {
     try {
       await download(
         projectBytes(state.current),
-        safeName(state.current.name) + ".prisma",
+        safeName(state.current.name) + ".auralis",
         "application/json",
       );
       inform("Copia editable guardada con el documento y sus cambios.");
@@ -1656,7 +1649,7 @@ export default function Studio() {
         ref={openInput}
         hidden
         type="file"
-        accept=".pdf,.docx,.docm,.txt,.prisma,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.prisma.project+json,application/json,application/octet-stream"
+        accept=".pdf,.docx,.docm,.txt,.auralis,.prisma,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.prisma.project+json,application/json,application/octet-stream"
         multiple
         onChange={(e) => void openFiles(e.target.files)}
       />
@@ -1689,7 +1682,7 @@ export default function Studio() {
             <a href="#" className="brand" onClick={(e) => e.preventDefault()}>
               <img src={product.logo} alt={product.name} />
               <span>
-                ASTEORIA <b>{product.writer ? "Scribe" : "Folio"}</b>
+                Auralis <b>{product.writer ? "Scribe" : "Folio"}</b>
               </span>
             </a>
             <div>
@@ -1753,7 +1746,7 @@ export default function Studio() {
                 <div className="floating-doc">
                   <div className="doc-brand">
                     <img src={product.logo} />
-                    <span>ASTEORIA STUDIO</span>
+                    <span>Auralis STUDIO</span>
                     <span>01</span>
                   </div>
                   <div className="art-pill">IDEAS QUE TOMAN FORMA</div>
@@ -1897,7 +1890,7 @@ export default function Studio() {
                   <p>
                     Guarda un proyecto desde el editor para verlo aquí.
                     <small>
-                      También puedes llevarte una copia .prisma y abrirla en
+                      También puedes llevarte una copia .auralis y abrirla en
                       otro dispositivo.
                     </small>
                   </p>
@@ -1918,8 +1911,8 @@ export default function Studio() {
               Código abierto
               <ArrowRight size={13} />
             </a>
-            <a href="https://oscard0823.github.io/asteoria-orbit/">
-              Abrir Asteoria Orbit <ArrowRight size={13} />
+            <a href="https://oscard0823.github.io/auralis-orbit/">
+              Abrir Auralis Orbit <ArrowRight size={13} />
             </a>
           </footer>
         </>
@@ -1930,11 +1923,12 @@ export default function Studio() {
               <Button
                 title="Volver al inicio"
                 onClick={() => {
-                  void saveSession(state.current).catch(fail);
-                  setLast(state.current);
-                  setHome(true);
-                  clear();
-                  void refresh();
+                  void autosave.flush().then(()=>{
+                    setLast(state.current);
+                    setHome(true);
+                    clear();
+                    void refresh();
+                  }).catch(fail);
                 }}
               >
                 <img src={product.logo} alt={product.name} />
@@ -3094,7 +3088,7 @@ export default function Studio() {
                 <h2 id="dialog-title">Tu documento, listo.</h2>
                 <p>
                   Exporta tus cambios en el formato que necesites. La copia
-                  .prisma conserva el proyecto para continuar editándolo.
+                  .auralis conserva el proyecto para continuar editándolo.
                 </p>
                 <label className="field">
                   Formato
@@ -3167,7 +3161,7 @@ export default function Studio() {
                 <div className="modal-actions">
                   <Button onClick={() => void portable()}>
                     <Save size={16} />
-                    Copia editable .prisma
+                    Copia editable .auralis
                   </Button>
                   <Button className="primary" onClick={() => void exportPdf()}>
                     <Download size={16} />

@@ -89,7 +89,7 @@ const encode = (bytes: Uint8Array) => {
 export function projectBytes(workspace: Workspace): Uint8Array {
   return new TextEncoder().encode(
     JSON.stringify({
-      format: "prisma-pdf",
+      format: "auralis-project",
       version: 3,
       workspace: {
         ...pruneSources(workspace),
@@ -110,8 +110,8 @@ export async function readProject(bytes: Uint8Array): Promise<Workspace> {
   } catch {
     throw new Error("El archivo de proyecto no es válido.");
   }
-  if (input?.format !== "prisma-pdf" || input?.version !== 3)
-    throw new Error("Selecciona un proyecto .prisma de Asteoria Folio.");
+  if (!["auralis-project","prisma-pdf"].includes(input?.format) || input?.version !== 3)
+    throw new Error("Selecciona un proyecto .auralis o una copia anterior .prisma.");
   const w = input.workspace as Workspace;
   if (
     !w ||

@@ -18,7 +18,7 @@ export function parseDictionaryXml(xml:string){
  if(!entries.length)throw new Error('No se encontraron entradas ODict, XDXF o XML con entry/form/orth y def.');return mergeDictionary([],entries);
 }
 const escape=(value:string)=>value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&apos;');
-export const exportOdictXml=(entries:DictionaryEntry[])=>'<?xml version="1.0" encoding="UTF-8"?>\n<dictionary name="ASTEORIA">'+entries.map(entry=>`<entry term="${escape(entry.term)}"><ety><sense><definition value="${escape(entry.definition)}"/></sense></ety></entry>`).join('\n')+'</dictionary>';
+export const exportOdictXml=(entries:DictionaryEntry[])=>"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<dictionary name=\"Auralis\">"+entries.map(entry=>`<entry term="${escape(entry.term)}"><ety><sense><definition value="${escape(entry.definition)}"/></sense></ety></entry>`).join('\n')+'</dictionary>';
 export async function parseDictionaryFiles(files:File[]){
  if(!files.length||files.reduce((n,file)=>n+file.size,0)>dictionaryLimits.input)throw new Error('Selecciona archivos de hasta 80 MB en total.');
  if(files.length===1&&!/\.ifo$/i.test(files[0].name)){const file=files[0],content=await file.text();if(/\.(xml|xdxf|tei)$/i.test(file.name))return parseDictionaryXml(content);if(/\.json$/i.test(file.name)){const data=JSON.parse(content);return mergeDictionary([],Array.isArray(data)?data:data.entries??[]);}if(/\.(txt|tsv)$/i.test(file.name))return mergeDictionary([],content.split(/\r?\n/).filter(Boolean).map(line=>{const [term,...definition]=line.split('\t');return {term,definition:definition.join('\t')};}));throw new Error('Importa XML, XDXF, TEI, JSON, TSV, TXT o los archivos de un StarDict.');}

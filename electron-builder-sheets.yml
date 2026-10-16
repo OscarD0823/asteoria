@@ -1,12 +1,12 @@
 appId: com.oscard.prismasheets
-productName: Asteoria Orbit
+productName: Auralis Orbit
 directories:
   output: release-sheets
 extraMetadata:
   name: asteoria-sheets
-  version: 1.0.2
+  version: 2.0.0
   prismaProduct: sheets
-fileAssociations: [{"ext":"xlsx","mimeType":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","name":"Asteoria Orbit · .xlsx","role":"Editor"},{"ext":"xlsm","mimeType":"application/vnd.ms-excel.sheet.macroEnabled.12","name":"Asteoria Orbit · .xlsm","role":"Editor"},{"ext":"csv","mimeType":"text/csv","name":"Asteoria Orbit · .csv","role":"Editor"},{"ext":"tsv","mimeType":"text/tab-separated-values","name":"Asteoria Orbit · .tsv","role":"Editor"}]
+fileAssociations: [{"ext":"xlsx","mimeType":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","name":"Auralis Orbit · .xlsx","role":"Editor"},{"ext":"xlsm","mimeType":"application/vnd.ms-excel.sheet.macroEnabled.12","name":"Auralis Orbit · .xlsm","role":"Editor"},{"ext":"csv","mimeType":"text/csv","name":"Auralis Orbit · .csv","role":"Editor"},{"ext":"tsv","mimeType":"text/tab-separated-values","name":"Auralis Orbit · .tsv","role":"Editor"}]
 files:
   - dist-sheets/**/*
   - desktop/**/*
@@ -29,4 +29,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Asteoria-Orbit-${version}-Windows-Setup.exe
+  artifactName: Auralis-Orbit-${version}-Windows-Setup.exe

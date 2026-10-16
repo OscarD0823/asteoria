@@ -21,7 +21,8 @@ const appVersion=products[kind].version;
 const releaseTag = 'v'+appVersion;
 const assetName=products[kind].name.replaceAll(' ','-');
 const suiteFeatures=Object.fromEntries(Object.keys(products).map(kind=>[kind,[
- 'ASTEORIA BETA: un universo para crear con identidad y nombres propios',
+ 'Auralis BETA: nueva identidad, iconos y formatos propios; lectura de proyectos anteriores',
+ 'Autoguardado local y recuperación al reabrir; conserva una copia descargada como respaldo',
  'Motor local propio para conservar documentos, libros y presentaciones; exportación TXT y CSV',
  'Iconos renovados y fuentes reales del dispositivo'
 ]]));
@@ -60,7 +61,7 @@ writeFileSync(
             "Aplicación instalable y biblioteca completa de fuentes con favoritas",
             "Editor local de hojas XLSX y CSV",
             "Fórmulas, formatos y varias hojas",
-            "Tablas para Asteoria Scribe, exportación PDF e impresión",
+            "Tablas para Auralis Scribe, exportación PDF e impresión",
             "Guardado local y aviso de funciones incompatibles",
           ]
         : [

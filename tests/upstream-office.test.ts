@@ -13,7 +13,7 @@ async function original(){
  parts['customXml/unknown.xml']=strToU8('<datos>Conservar exactamente</datos>');
  return zipSync(parts);
 }
-test("ASTEORIA keeps an unedited DOCX byte identical and unknown parts through a text edit",async()=>{
+test("Auralis keeps an unedited DOCX byte identical and unknown parts through a text edit",async()=>{
  const bytes=await original(),{flow}=await importOfficeDocx(bytes);
  for(const node of flow.content.content??[])node.attrs={...node.attrs,page:1,indexLevel:1,indexLeader:'dots'};
  assert.deepEqual(await preserveOfficeDocx(flow),bytes);

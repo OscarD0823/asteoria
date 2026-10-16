@@ -1,12 +1,12 @@
 appId: com.oscard.asteorialore
-productName: Asteoria Lore
+productName: Auralis Lore
 directories:
   output: release-stories
 extraMetadata:
   name: asteoria-stories
-  version: 1.3.0
+  version: 2.0.0
   prismaProduct: stories
-fileAssociations: [{"ext":"lore","mimeType":"application/x-asteoria-lore","name":"Asteoria Lore · .lore","role":"Editor"}]
+fileAssociations: [{"ext":"auralis-lore","mimeType":"application/x-auralis-lore","name":"Auralis Lore · .auralis-lore","role":"Editor"},{"ext":"lore","mimeType":"application/x-asteoria-lore","name":"Auralis Lore · .lore","role":"Editor"}]
 files:
   - dist-stories/**/*
   - desktop/**/*
@@ -29,4 +29,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Asteoria-Lore-${version}-Windows-Setup.exe
+  artifactName: Auralis-Lore-${version}-Windows-Setup.exe

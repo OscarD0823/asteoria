@@ -4,6 +4,7 @@ import {takeLaunch, storeLaunch, type Launch} from './prisma-launch';
 import {isEditorKind, type EditorKind} from './product-core';
 import {creationTemplate} from './template-catalog';
 import {registerFileOpener} from './file-launch';
+import {flushAutosaves} from './autosave-registry';
 type Handlers = {template?: (id:string)=>Promise<unknown>; save: () => Promise<unknown>; file: (file: File) => Promise<unknown>; recent: (id: string) => Promise<unknown>; error: (error: unknown) => void};
 let saver: (() => Promise<unknown>) | undefined;
 let navigating = false;
@@ -17,7 +18,7 @@ export function usePrismaNavigation(handlers: Handlers, ready = true) {
     if (token && !consumed.current) {
       consumed.current = true;
       void takeLaunch(token, product.kind).then(async launch => {
-        if (!launch) throw Error("El archivo pendiente ya no está disponible. Vuelve a abrirlo desde ASTEORIA.");
+        if (!launch) throw Error("El archivo pendiente ya no está disponible. Vuelve a abrirlo desde Auralis.");
         if (launch.action === 'file' && launch.file) await current.current.file(launch.file);
         else if (launch.action === 'recent' && launch.id) await current.current.recent(launch.id);
         else if (launch.action === 'template' && launch.id && current.current.template) await current.current.template(launch.id);
@@ -33,6 +34,7 @@ export async function navigatePrisma(editor?: EditorKind, launch?: Launch) {
     if (isEditorKind(product.kind)) {
       if (!saver) throw Error('Espera a que termine de abrir el editor.');
       await saver();
+      await flushAutosaves();
     }
     if(launch?.action==='template'){if(!launch.id)throw Error('Elige una plantilla.');creationTemplate(launch.editor,launch.id);}
     const token = launch ? await storeLaunch(launch) : undefined;
@@ -40,5 +42,5 @@ export async function navigatePrisma(editor?: EditorKind, launch?: Launch) {
     if (editor) url.searchParams.set('editor', editor);
     if (token) url.searchParams.set('launch', token);
     location.assign(url.href);
-  } catch (error) { navigating = false; throw error; }
+  } finally { navigating = false; }
 }

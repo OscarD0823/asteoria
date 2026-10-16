@@ -1,12 +1,13 @@
 {
-  "version": "7.0.2",
+  "version": "8.0.0",
   "channel": "beta",
-  "releaseUrl": "https://github.com/OscarD0823/asteoria-folio/releases/tag/v7.0.2",
-  "androidUrl": "https://github.com/OscarD0823/asteoria-folio/releases/download/v7.0.2/Asteoria-Folio-7.0.2-Android.apk",
-  "windowsUrl": "https://github.com/OscarD0823/asteoria-folio/releases/download/v7.0.2/Asteoria-Folio-7.0.2-Windows-Setup.exe",
+  "releaseUrl": "https://github.com/OscarD0823/auralis-folio/releases/tag/v8.0.0",
+  "androidUrl": "https://github.com/OscarD0823/auralis-folio/releases/download/v8.0.0/Auralis-Folio-8.0.0-Android.apk",
+  "windowsUrl": "https://github.com/OscarD0823/auralis-folio/releases/download/v8.0.0/Auralis-Folio-8.0.0-Windows-Setup.exe",
   "features": [
     "Abre documentos desde el Explorador, Android y la web instalada compatible; conserva el guardado local",
-    "ASTEORIA BETA: un universo para crear con identidad y nombres propios",
+    "Auralis BETA: nueva identidad, iconos y formatos propios; lectura de proyectos anteriores",
+    "Autoguardado local y recuperación al reabrir; conserva una copia descargada como respaldo",
     "Motor local propio para conservar documentos, libros y presentaciones; exportación TXT y CSV",
     "Iconos renovados y fuentes reales del dispositivo"
   ]

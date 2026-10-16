@@ -1,6 +1,6 @@
 {
-  "name": "asteoria-workspace",
-  "version": "7.0.2",
+  "name": "auralis-workspace",
+  "version": "8.0.0",
   "license": "AGPL-3.0-or-later",
   "private": true,
   "type": "module",
@@ -106,5 +106,5 @@
   },
   "main": "desktop/main.cjs",
   "author": "OscarD0823",
-  "description": "Entorno común y suite ASTEORIA BETA para web, Android y Windows"
+  "description": "Entorno común y aplicaciones Auralis BETA para web, Android y Windows"
 }

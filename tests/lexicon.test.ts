@@ -12,7 +12,7 @@ test("dictionary lookup ignores accents while spelling entries retain distinct a
   assert.deepEqual(parseLexicon(exportLexicon(entries), "copia.json"), entries);
 });
 test("lexicon validates the complete import before saving and merges duplicates without discarding definitions", async () => {
-  const original = [lexiconEntry({ term: "ASTEORIA", definition: "Editor", spelling: true })];
+  const original = [lexiconEntry({ term: "Auralis", definition: "Editor", spelling: true })];
   await saveLexicon(original);
   assert.throws(() => parseLexicon('[{"term":"válida"},{"term":42}]', "mal.json"));
   assert.throws(() => parseLexicon('{"entries":[]}', "mal.json"));
@@ -20,8 +20,8 @@ test("lexicon validates the complete import before saving and merges duplicates 
   assert.throws(() => parseLexicon("x".repeat(2 * 1024 * 1024 + 1), "demasiado.txt"));
   assert.throws(() => mergeLexicon([], Array.from({ length: 5001 }, (_, i) => lexiconEntry({ term: `Término ${i}`, spelling: false }))));
   assert.deepEqual(await loadLexicon(), original);
-  const next = mergeLexicon(original, [lexiconEntry("ASTEORIA"), lexiconEntry({ term: "etiqueta", definition: "<script>alert(1)</script>" })]);
-  assert.equal(next.find(entry => termKey(entry.term) === "asteoria")?.definition, "Editor");
+  const next = mergeLexicon(original, [lexiconEntry("Auralis"), lexiconEntry({ term: "etiqueta", definition: "<script>alert(1)</script>" })]);
+  assert.equal(next.find(entry => termKey(entry.term) === "auralis")?.definition, "Editor");
   await saveLexicon(next);
   assert.deepEqual(await loadLexicon(), next);
   assert.equal(next.find(entry => entry.term === "etiqueta")?.definition, "<script>alert(1)</script>");

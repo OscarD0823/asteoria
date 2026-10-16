@@ -1,4 +1,4 @@
-name: Publicar ASTEORIA BETA
+name: Publicar Auralis BETA
 on:
   push:
     branches: [main]

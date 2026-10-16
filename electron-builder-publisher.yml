@@ -1,12 +1,12 @@
 appId: com.oscard.prismapublisher
-productName: Asteoria Canvas
+productName: Auralis Canvas
 directories:
   output: release-publisher
 extraMetadata:
   name: asteoria-publisher
-  version: 1.0.2
+  version: 2.0.0
   prismaProduct: publisher
-fileAssociations: [{"ext":"prismapub","mimeType":"application/x-asteoria-canvas","name":"Asteoria Canvas · .prismapub","role":"Editor"}]
+fileAssociations: [{"ext":"auralis-canvas","mimeType":"application/x-auralis-canvas","name":"Auralis Canvas · .auralis-canvas","role":"Editor"},{"ext":"prismapub","mimeType":"application/x-asteoria-canvas","name":"Auralis Canvas · .prismapub","role":"Editor"},{"ext":"pptx","mimeType":"application/vnd.openxmlformats-officedocument.presentationml.presentation","name":"Auralis Canvas · .pptx","role":"Editor"}]
 files:
   - dist-publisher/**/*
   - desktop/**/*
@@ -29,4 +29,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Asteoria-Canvas-${version}-Windows-Setup.exe
+  artifactName: Auralis-Canvas-${version}-Windows-Setup.exe

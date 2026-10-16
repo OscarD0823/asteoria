@@ -1,65 +1,65 @@
 {
   "pdf": {
-    "name": "Asteoria Folio",
-    "siteSlug": "asteoria-folio",
-    "version": "7.0.2",
+    "name": "Auralis Folio",
+    "siteSlug": "auralis-folio",
+    "version": "8.0.0",
     "description": "Editor PDF local y privado",
     "channel": "beta"
   },
   "writer": {
-    "name": "Asteoria Scribe",
-    "siteSlug": "asteoria-scribe",
-    "version": "2.0.2",
+    "name": "Auralis Scribe",
+    "siteSlug": "auralis-scribe",
+    "version": "3.0.0",
     "description": "Documentos, escritura y trabajos académicos",
     "channel": "beta"
   },
   "sheets": {
-    "name": "Asteoria Orbit",
-    "siteSlug": "asteoria-orbit",
-    "version": "1.0.2",
+    "name": "Auralis Orbit",
+    "siteSlug": "auralis-orbit",
+    "version": "2.0.0",
     "description": "Hojas de cálculo, fórmulas y datos",
     "channel": "beta"
   },
   "slides": {
-    "name": "Asteoria Nova",
-    "siteSlug": "asteoria-nova",
-    "version": "1.0.2",
+    "name": "Auralis Nova",
+    "siteSlug": "auralis-nova",
+    "version": "2.0.0",
     "description": "Presentaciones para compartir tus ideas",
     "channel": "beta"
   },
   "data": {
-    "name": "Asteoria Nexus",
-    "siteSlug": "asteoria-nexus",
-    "version": "1.0.2",
+    "name": "Auralis Nexus",
+    "siteSlug": "auralis-nexus",
+    "version": "2.0.0",
     "description": "Bases de datos, tablas y consultas locales",
     "channel": "beta"
   },
   "publisher": {
-    "name": "Asteoria Canvas",
-    "siteSlug": "asteoria-canvas",
-    "version": "1.0.2",
+    "name": "Auralis Canvas",
+    "siteSlug": "auralis-canvas",
+    "version": "2.0.0",
     "description": "Diseño editorial y publicaciones",
     "channel": "beta"
   },
   "architecture": {
-    "name": "Asteoria Atlas",
-    "siteSlug": "asteoria-atlas",
-    "version": "0.3.2",
+    "name": "Auralis Atlas",
+    "siteSlug": "auralis-atlas",
+    "version": "0.4.0",
     "description": "CAD, arquitectura y espacios en 3D",
     "channel": "beta"
   },
   "stories": {
-    "name": "Asteoria Lore",
-    "siteSlug": "asteoria-lore",
-    "version": "1.3.0",
+    "name": "Auralis Lore",
+    "siteSlug": "auralis-lore",
+    "version": "2.0.0",
     "description": "Historias, personajes, familias y audiolibros locales",
     "channel": "beta"
   },
   "prisma": {
-    "name": "ASTEORIA",
-    "siteSlug": "asteoria",
-    "version": "2.3.0",
-    "description": "Un universo para crear",
+    "name": "Auralis",
+    "siteSlug": "auralis",
+    "version": "3.0.0",
+    "description": "Una nueva luz para tus ideas",
     "channel": "beta"
   }
 }

@@ -1,0 +1,86 @@
+{
+  "prisma": {
+    "name": "Auralis",
+    "color": "#8BF1D2",
+    "second": "#ACACFF",
+    "deep": "#152C46"
+  },
+  "pdf": {
+    "name": "Auralis Folio",
+    "color": "#FFD795",
+    "second": "#F29AB4",
+    "deep": "#432744"
+  },
+  "writer": {
+    "name": "Auralis Scribe",
+    "color": "#9BF1DE",
+    "second": "#9EC7FF",
+    "deep": "#143D46"
+  },
+  "sheets": {
+    "name": "Auralis Orbit",
+    "color": "#B4F39C",
+    "second": "#6BE5CD",
+    "deep": "#183D3D"
+  },
+  "slides": {
+    "name": "Auralis Nova",
+    "color": "#FFC3A4",
+    "second": "#E3A8F3",
+    "deep": "#422A55"
+  },
+  "data": {
+    "name": "Auralis Nexus",
+    "color": "#9DDFFF",
+    "second": "#B2AFFA",
+    "deep": "#243855"
+  },
+  "publisher": {
+    "name": "Auralis Canvas",
+    "color": "#F4B7E8",
+    "second": "#8CE3E2",
+    "deep": "#3B3159"
+  },
+  "architecture": {
+    "name": "Auralis Atlas",
+    "color": "#FFD7A0",
+    "second": "#9ACFE9",
+    "deep": "#32384D"
+  },
+  "stories": {
+    "name": "Auralis Lore",
+    "color": "#D9BEFF",
+    "second": "#F6D693",
+    "deep": "#382D58"
+  },
+  "snowrunner": {
+    "name": "Auralis SnowRunner Studio",
+    "color": "#B1DEFF",
+    "second": "#83E9DF",
+    "deep": "#23364D"
+  },
+  "roadcraft": {
+    "name": "Auralis RoadCraft Studio",
+    "color": "#FFDA8D",
+    "second": "#F0AE83",
+    "deep": "#40373B"
+  },
+  "phantom": {
+    "name": "Auralis Caja Fantasma",
+    "color": "#A2F2DD",
+    "second": "#C1ACFF",
+    "deep": "#1D3B4B"
+  },
+  "lankdea": {
+    "name": "Auralis Lankdea",
+    "color": "#D6B7FF",
+    "second": "#F2D79E",
+    "deep": "#3C2C53"
+  },
+  "fortuna": {
+    "name": "Auralis Fortuna Real",
+    "color": "#F8E3A5",
+    "second": "#F7A9BD",
+    "deep": "#442C48"
+  }
+}

@@ -1,12 +1,12 @@
 appId: com.oscard.prismapdf
-productName: Asteoria Folio
+productName: Auralis Folio
 directories:
   output: release
 extraMetadata:
   name: asteoria-pdf
-  version: 7.0.2
+  version: 8.0.0
   prismaProduct: pdf
-fileAssociations: [{"ext":"pdf","mimeType":"application/pdf","name":"Asteoria Folio · .pdf","role":"Editor"},{"ext":"prisma","mimeType":"application/x-asteoria-folio","name":"Asteoria Folio · .prisma","role":"Editor"}]
+fileAssociations: [{"ext":"auralis","mimeType":"application/x-auralis-folio","name":"Auralis Folio · .auralis","role":"Editor"},{"ext":"pdf","mimeType":"application/pdf","name":"Auralis Folio · .pdf","role":"Editor"},{"ext":"prisma","mimeType":"application/x-asteoria-folio","name":"Auralis Folio · .prisma","role":"Editor"}]
 files:
   - dist/**/*
   - desktop/**/*
@@ -29,4 +29,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  artifactName: Asteoria-Folio-${version}-Windows-Setup.exe
+  artifactName: Auralis-Folio-${version}-Windows-Setup.exe

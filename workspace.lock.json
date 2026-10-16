@@ -1,38 +1,38 @@
 {
   "schemaVersion": 1,
-  "root": "OscarD0823/asteoria",
+  "root": "OscarD0823/auralis",
   "apps": {
     "pdf": {
-      "repository": "OscarD0823/asteoria-folio",
-      "commit": "48f7b7aaac499350ea4935ab53ea40b26525fdcf"
+      "repository": "OscarD0823/auralis-folio",
+      "commit": "8710809e548209d7f337521d1aca8077ec333ece"
     },
     "writer": {
-      "repository": "OscarD0823/asteoria-scribe",
-      "commit": "60d1563a32a7bf1c0d6cd3c6af0ec4c0493d043f"
+      "repository": "OscarD0823/auralis-scribe",
+      "commit": "073c77a22c6fb51c063104379934fbe130e4e0b3"
     },
     "sheets": {
-      "repository": "OscarD0823/asteoria-orbit",
-      "commit": "1ff41fb5437b9e508ecf7833206aa02948d470a1"
+      "repository": "OscarD0823/auralis-orbit",
+      "commit": "e3b349d64c01cca2d4810eeffee2da3f7fd6de87"
     },
     "slides": {
-      "repository": "OscarD0823/asteoria-nova",
-      "commit": "2dd16363c35468b735eb54e4ff3ed962dfd9e267"
+      "repository": "OscarD0823/auralis-nova",
+      "commit": "656ac13d71633b349c236c2c587b2bb754fccd87"
     },
     "data": {
-      "repository": "OscarD0823/asteoria-nexus",
-      "commit": "74cee1926b2b78f416bcc3f4eace9bbc6304cff0"
+      "repository": "OscarD0823/auralis-nexus",
+      "commit": "5c6ed365b40ec78e14e66c3d96ce02e0b8b35d6e"
     },
     "publisher": {
-      "repository": "OscarD0823/asteoria-canvas",
-      "commit": "01926f9276d62a674bb03c639d1852a07ac5d38d"
+      "repository": "OscarD0823/auralis-canvas",
+      "commit": "dfa2e949e385f6e8dedeb19b2857791d61b9978c"
     },
     "architecture": {
-      "repository": "OscarD0823/asteoria-atlas",
-      "commit": "c38eaa5756b2e8232ea83346d18ea3af50a2b58e"
+      "repository": "OscarD0823/auralis-atlas",
+      "commit": "73d631bbb7827d221ef5bb35df6d49fe5e26dae9"
     },
     "stories": {
-      "repository": "OscarD0823/asteoria-lore",
-      "commit": "ed20f4480d1eff5d0a188d3d3c5b738cd41863b3"
+      "repository": "OscarD0823/auralis-lore",
+      "commit": "c9e153edd61bb7263546537127ae439a89b870b5"
     }
   }
 }

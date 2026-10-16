@@ -1,5 +1,6 @@
 import type { Workspace } from "@prisma/pdf/pdf";
 import { product } from "./product";
+import {durableTransaction} from './idb-durability';
 const DB = product.writer ? "prisma-writer-local-v1" : "prisma-pdf-local-v2";
 let queue: Promise<void> = Promise.resolve();
 let generation = 0;
@@ -52,7 +53,7 @@ export function saveSession(workspace: Workspace): Promise<void> {
       try {
         if (expected !== generation) return;
         await new Promise<void>((resolve, reject) => {
-          const tx = db.transaction("session", "readwrite");
+          const tx = durableTransaction(db,"session");
           tx.objectStore("session").put(
             {
               version: 2,
@@ -96,7 +97,7 @@ export function clearSession(): Promise<void> {
       const db = await openDatabase();
       try {
         await new Promise<void>((resolve, reject) => {
-          const tx = db.transaction("session", "readwrite");
+          const tx = durableTransaction(db,"session");
           tx.objectStore("session").clear();
           tx.oncomplete = () => resolve();
           tx.onerror = () => reject(tx.error);
@@ -121,7 +122,7 @@ export async function saveProject(workspace: Workspace): Promise<string> {
   const db = await openDatabase();
   try {
     await new Promise<void>((resolve, reject) => {
-      const tx = db.transaction(["projects", "projectIndex"], "readwrite");
+      const tx = durableTransaction(db,["projects", "projectIndex"]);
       const metadata: ProjectSummary = {
         id,
         name: workspace.name,
